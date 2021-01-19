@@ -1,0 +1,39 @@
+img[data-action="zoom"] {
+  cursor: pointer;
+  cursor: -webkit-zoom-in;
+  cursor: zoom-in;
+}
+.zoom-img,
+.zoom-img-wrap {
+  position: relative;
+  z-index: 666;
+  transition: -webkit-transform 300ms cubic-bezier(.2,0,.2,1);
+  transition: transform 300ms cubic-bezier(.2,0,.2,1);
+  transition: transform 300ms cubic-bezier(.2,0,.2,1), -webkit-transform 300ms cubic-bezier(.2,0,.2,1);
+}
+.zoom-overlay {
+  z-index: 420;
+  background: #fff;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 300ms;
+}
+.zoom-overlay-open .zoom-overlay {
+  opacity: 1;
+}
+.zoom-overlay-open {
+  cursor: pointer;
+  cursor: -webkit-zoom-out;
+  cursor: zoom-out;
+}
+.zoom-overlay-transitioning {
+  cursor: default;
+}
+.zoom-overlay-open.zoom-overlay-transitioning .zoom-overlay{
+  opacity: 0;
+}

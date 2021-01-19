@@ -1,0 +1,283 @@
+<!doctype html><html><head><title>Counter 例子详解 · SOFAStack</title><meta charset=utf-8><meta http-equiv=x-ua-compatible content="IE=edge,chrome=1"><meta name=viewport content="width=device-width,minimum-scale=1"><meta name=description content="SOFAStack is a Scalable Open Financial Architecture for building cloud native applications"><meta name=generator content="Hugo 0.80.0"><link rel="shortcut icon" href=https://gw.alipayobjects.com/os/q/cms/images/jqu9346l/4ba95631-2489-4885-881f-bc7f8d787d5e_w64_h61.png type=image/png><link href=https://unpkg.com/purecss@1.0.0/build/base-min.css rel=stylesheet><link href=/css/main.css rel=stylesheet><link href=/css/zoom-image.css rel=stylesheet><script src=/js/iconfont.js></script><script src=/js/highlight.pack.js></script><script>hljs.initHighlightingOnLoad();</script><script>window.SITE_LANGUAGE="zh"</script><script src=/js/app.js></script><script type=application/javascript>var doNotTrack=false;if(!doNotTrack){(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');ga('create','UA-142131411-1','auto');ga('send','pageview');}</script></head><body><header class=ss-header><nav class=navbar role=navigation aria-label="main navigation"><div class=navbar-brand><a class=logo-link href=/><img class=logo src=/img/logo.png></a><div class=-show-mobile><a id=mobile-menu-icon><svg class="icon" aria-hidden="true"><use xlink:href="#icon-menu"/></svg></a><nav id=mobile-menu><div id=js-menu-search-mobile class=navbar-search-mobile><input class=input placeholder=请输入要搜索的关键词><svg class="icon" aria-hidden="true"><use xlink:href="#icon-search"/></svg></div><a href=/projects/><span>项目</span><svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"/></svg></a>
+<a href=/guides/><span>指南</span><svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"/></svg></a>
+<a href=/blog/><span>博客</span><svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"/></svg></a>
+<a href=/activities/><span>活动</span><svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"/></svg></a>
+<a href=/community/><span>社区</span><svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"/></svg></a>
+<a href=/awesome/><span>Awesome SOFA</span><svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"/></svg></a>
+<a href=/en/projects/sofa-jraft/counter-example/><span>English</span><svg class="icon" aria-hidden="true"><use xlink:href="#icon-transfer"/></svg></a></nav></div></div><div class="navbar-menu -hidden-mobile"><div class=navbar-start><a class=navbar-item href=/projects/>项目</a>
+<a class=navbar-item href=/guides/>指南</a>
+<a class=navbar-item href=/blog/>博客</a>
+<a class=navbar-item href=/activities/>活动</a>
+<a class=navbar-item href=/community/>社区</a>
+<a class=navbar-item href=/awesome/>Awesome SOFA</a></div><div class=navbar-end><div class=navbar-item><div id=js-menu-search class=navbar-search><input class=input placeholder=请输入要搜索的关键词><svg class="icon" aria-hidden="true"><use xlink:href="#icon-search"/></svg></div></div><div class=navbar-item><a class=translation href=/en/projects/sofa-jraft/counter-example/>En</a></div></div></div></nav></header><div class=ss-layout-container><aside class="ss-layout-aside -left ss-card -soft-hidden"><div id=js-drawer class=ss-toc><div id=js-drawer-handle class=drawer-handle><svg class="icon icon-menu" aria-hidden="true"><use xlink:href="#icon-menu"/></svg><svg class="icon icon-close" aria-hidden="true"><use xlink:href="#icon-close"/></svg></div><div class=drawer-body><div class=header title="SOFAJRaft 是一个基于 RAFT 一致性算法的生产级高性能 Java 实现，支持 MULTI-RAFT-GROUP，适用于高负载低延迟的场景。">SOFAJRaft<div class="ss-toc-list-card -hidden-mobile"><svg class="icon -hidden-mobile" aria-hidden="true"><use xlink:href="#icon-menu1"/></svg><div class=ss-tooltip><div class=toc-list><h4 class=title>主要项目</h4><ul class=list><li class=item><a href=/projects/sofa-boot/overview>SOFABoot</a></li><li class=item><a href=/projects/sofa-rpc/overview>SOFARPC</a></li><li class=item><a href=/projects/sofa-tracer/overview>SOFATracer</a></li><li class=item><a href=/projects/sofa-lookout/overview>SOFALookout</a></li><li class=item><a href=/projects/sofa-registry/overview>SOFARegistry</a></li></ul></div><div class=toc-list><h4 class=title>孵化项目</h4><ul class=list><li class=item><a href=/projects/sofa-mesh/overview>SOFAMesh</a></li><li class=item><a href=/projects/sofa-dashboard/overview>SOFADashboard</a></li></ul></div><div class=toc-list><h4 class=title>工具项目</h4><ul class=list><li class=item><a href=/projects/sofa-bolt/overview>SOFABolt</a></li><li class=item><a href=/projects/sofa-jraft/overview>SOFAJRaft</a></li><li class=item><a href=/projects/sofa-acts/overview>SOFAActs</a></li><li class=item><a href=https://www.sofastack.tech/projects/sofa-boot/sofa-ark-readme/>SOFAArk</a></li></ul></div><div class=toc-list><h4 class=title>生态项目</h4><ul class=list><li class=item><a href=https://mosn.io>MOSN</a></li><li class=item><a href=https://occlum.io>Occlum</a></li><li class=item><a href=https://seata.io>Seata</a></li></ul></div></div></div></div><div class=body><ul class=leaf-section><li class=item><div class=link><a title="SOFAJRaft 介绍" href=/projects/sofa-jraft/overview>SOFAJRaft 介绍</a></div></li><li class=item><div class=link><a title=核心引擎设计 href=/projects/sofa-jraft/engine-architecture>核心引擎设计</a></div></li><li class=item><div class=link><a title="Jepsen 验证" href=/projects/sofa-jraft/jepson-test>Jepsen 验证</a></div></li><li class=item><div class=link><svg class="icon arrow" aria-hidden="true"><use xlink:href="#icon-arrow"/></svg><a title=用户指南>用户指南</a></div><ul class=leaf-section><li class=item><div class=link><a title="JRaft 用户指南" href=/projects/sofa-jraft/jraft-user-guide>JRaft 用户指南</a></div></li><li class=item><div class=link><a title="JRaft RheaKV 用户指南" href=/projects/sofa-jraft/jraft-rheakv-user-guide>JRaft RheaKV 用户指南</a></div></li><li class=item><div class="link -current"><a title="Counter 例子详解" href=/projects/sofa-jraft/counter-example>Counter 例子详解</a></div></li></ul></li><li class=item><div class=link><a title="Maven 依赖说明" href=/projects/sofa-jraft/maven-dependency>Maven 依赖说明</a></div></li><li class=item><div class=link><a title=版本发行日志 href=/projects/sofa-jraft/release-log>版本发行日志</a></div></li><li class=item><div class=link><a title="Benchmark 数据" href=/projects/sofa-jraft/benchmark-performance>Benchmark 数据</a></div></li><li class=item><div class=link><a title=用户案例 href=/projects/sofa-jraft/user-stories>用户案例</a></div></li><li class=item><div class=link><a title="Road map" href=/projects/sofa-jraft/road-map>Road map</a></div></li><li class=item><div class=link><svg class="icon arrow" aria-hidden="true"><use xlink:href="#icon-arrow"/></svg><a title=扩展资料>扩展资料</a></div><ul class=leaf-section><li class=item><div class=link><a title="Raft 算法解读" href=/projects/sofa-jraft/raft-introduction>Raft 算法解读</a></div></li><li class=item><div class=link><a title="分布式一致性 - Raft 与 JRaft" href=/projects/sofa-jraft/consistency-raft-jraft>分布式一致性 - Raft 与 JRaft</a></div></li></ul></li><li class=item><div class=link><svg class="icon arrow" aria-hidden="true"><use xlink:href="#icon-arrow"/></svg><a title=其他>其他</a></div><ul class=leaf-section><li class=item><div class=link><a title="如何参与 SOFAJRaft 代码贡献" href=/projects/sofa-jraft/how-to-contribute-code-to-sofajraft>如何参与 SOFAJRaft 代码贡献</a></div></li></ul></li></ul></div></div></div></aside><main class="ss-layout-main -card"><div class=ss-meta><div class=container><h1 class=title>Counter 例子详解</h1><a class="edit-button -hidden-mobile" href=https://github.com/sofastack/sofastack.tech/edit/master/content/zh/projects/sofa-jraft/counter-example/index.md>编辑</a></div><div class=meta>更新时间: 2021-01-19</div></div><article class=typo><pre><code>&lt;span style=&quot;color:#66d9ef&quot;&gt;private&lt;/span&gt; &lt;span style=&quot;color:#66d9ef&quot;&gt;static&lt;/span&gt; &lt;span style=&quot;color:#66d9ef&quot;&gt;final&lt;/span&gt; &lt;span style=&quot;color:#66d9ef&quot;&gt;long&lt;/span&gt; serialVersionUID &lt;span style=&quot;color:#f92672&quot;&gt;=&lt;/span&gt; &lt;span style=&quot;color:#f92672&quot;&gt;-&lt;/span&gt;5623664785560971849L&lt;span style=&quot;color:#f92672&quot;&gt;;&lt;/span&gt;
+
+&lt;span style=&quot;color:#66d9ef&quot;&gt;private&lt;/span&gt; &lt;span style=&quot;color:#66d9ef&quot;&gt;long&lt;/span&gt;              delta&lt;span style=&quot;color:#f92672&quot;&gt;;&lt;/span&gt;
+
+&lt;span style=&quot;color:#66d9ef&quot;&gt;public&lt;/span&gt; &lt;span style=&quot;color:#66d9ef&quot;&gt;long&lt;/span&gt; &lt;span style=&quot;color:#a6e22e&quot;&gt;getDelta&lt;/span&gt;&lt;span style=&quot;color:#f92672&quot;&gt;()&lt;/span&gt; &lt;span style=&quot;color:#f92672&quot;&gt;{&lt;/span&gt;
+    &lt;span style=&quot;color:#66d9ef&quot;&gt;return&lt;/span&gt; &lt;span style=&quot;color:#66d9ef&quot;&gt;this&lt;/span&gt;&lt;span style=&quot;color:#f92672&quot;&gt;.&lt;/span&gt;&lt;span style=&quot;color:#a6e22e&quot;&gt;delta&lt;/span&gt;&lt;span style=&quot;color:#f92672&quot;&gt;;&lt;/span&gt;
+&lt;span style=&quot;color:#f92672&quot;&gt;}&lt;/span&gt;
+
+&lt;span style=&quot;color:#66d9ef&quot;&gt;public&lt;/span&gt; &lt;span style=&quot;color:#66d9ef&quot;&gt;void&lt;/span&gt; &lt;span style=&quot;color:#a6e22e&quot;&gt;setDelta&lt;/span&gt;&lt;span style=&quot;color:#f92672&quot;&gt;(&lt;/span&gt;&lt;span style=&quot;color:#66d9ef&quot;&gt;long&lt;/span&gt; delta&lt;span style=&quot;color:#f92672&quot;&gt;)&lt;/span&gt; &lt;span style=&quot;color:#f92672&quot;&gt;{&lt;/span&gt;
+    &lt;span style=&quot;color:#66d9ef&quot;&gt;this&lt;/span&gt;&lt;span style=&quot;color:#f92672&quot;&gt;.&lt;/span&gt;&lt;span style=&quot;color:#a6e22e&quot;&gt;delta&lt;/span&gt; &lt;span style=&quot;color:#f92672&quot;&gt;=&lt;/span&gt; delta&lt;span style=&quot;color:#f92672&quot;&gt;;&lt;/span&gt;
+&lt;span style=&quot;color:#f92672&quot;&gt;}&lt;/span&gt;
+</code></pre><p>}</p><pre><code>&lt;span style=&quot;color:#66d9ef&quot;&gt;public&lt;/span&gt; &lt;span style=&quot;color:#a6e22e&quot;&gt;GetValueRequest&lt;/span&gt;&lt;span style=&quot;color:#f92672&quot;&gt;()&lt;/span&gt; &lt;span style=&quot;color:#f92672&quot;&gt;{&lt;/span&gt;
+    &lt;span style=&quot;color:#66d9ef&quot;&gt;super&lt;/span&gt;&lt;span style=&quot;color:#f92672&quot;&gt;();&lt;/span&gt;
+&lt;span style=&quot;color:#f92672&quot;&gt;}&lt;/span&gt;
+</code></pre><p>}
+应答结果 ValueResponse，包括：</p><pre><code>&lt;span style=&quot;color:#66d9ef&quot;&gt;private&lt;/span&gt; &lt;span style=&quot;color:#66d9ef&quot;&gt;static&lt;/span&gt; &lt;span style=&quot;color:#66d9ef&quot;&gt;final&lt;/span&gt; &lt;span style=&quot;color:#66d9ef&quot;&gt;long&lt;/span&gt; serialVersionUID &lt;span style=&quot;color:#f92672&quot;&gt;=&lt;/span&gt; &lt;span style=&quot;color:#f92672&quot;&gt;-&lt;/span&gt;4220017686727146773L&lt;span style=&quot;color:#f92672&quot;&gt;;&lt;/span&gt;
+
+&lt;span style=&quot;color:#66d9ef&quot;&gt;private&lt;/span&gt; &lt;span style=&quot;color:#66d9ef&quot;&gt;long&lt;/span&gt;              value&lt;span style=&quot;color:#f92672&quot;&gt;;&lt;/span&gt;
+&lt;span style=&quot;color:#66d9ef&quot;&gt;private&lt;/span&gt; &lt;span style=&quot;color:#66d9ef&quot;&gt;boolean&lt;/span&gt;           success&lt;span style=&quot;color:#f92672&quot;&gt;;&lt;/span&gt;
+&lt;span style=&quot;color:#75715e&quot;&gt;/**
+</code></pre><p>* redirect peer id */
+private String redirect;</p><pre><code>&lt;span style=&quot;color:#66d9ef&quot;&gt;private&lt;/span&gt; String            errorMsg&lt;span style=&quot;color:#f92672&quot;&gt;;&lt;/span&gt;
+
+&lt;span style=&quot;color:#66d9ef&quot;&gt;public&lt;/span&gt; String &lt;span style=&quot;color:#a6e22e&quot;&gt;getErrorMsg&lt;/span&gt;&lt;span style=&quot;color:#f92672&quot;&gt;()&lt;/span&gt; &lt;span style=&quot;color:#f92672&quot;&gt;{&lt;/span&gt;
+    &lt;span style=&quot;color:#66d9ef&quot;&gt;return&lt;/span&gt; &lt;span style=&quot;color:#66d9ef&quot;&gt;this&lt;/span&gt;&lt;span style=&quot;color:#f92672&quot;&gt;.&lt;/span&gt;&lt;span style=&quot;color:#a6e22e&quot;&gt;errorMsg&lt;/span&gt;&lt;span style=&quot;color:#f92672&quot;&gt;;&lt;/span&gt;
+&lt;span style=&quot;color:#f92672&quot;&gt;}&lt;/span&gt;
+
+&lt;span style=&quot;color:#66d9ef&quot;&gt;public&lt;/span&gt; &lt;span style=&quot;color:#66d9ef&quot;&gt;void&lt;/span&gt; &lt;span style=&quot;color:#a6e22e&quot;&gt;setErrorMsg&lt;/span&gt;&lt;span style=&quot;color:#f92672&quot;&gt;(&lt;/span&gt;String errorMsg&lt;span style=&quot;color:#f92672&quot;&gt;)&lt;/span&gt; &lt;span style=&quot;color:#f92672&quot;&gt;{&lt;/span&gt;
+    &lt;span style=&quot;color:#66d9ef&quot;&gt;this&lt;/span&gt;&lt;span style=&quot;color:#f92672&quot;&gt;.&lt;/span&gt;&lt;span style=&quot;color:#a6e22e&quot;&gt;errorMsg&lt;/span&gt; &lt;span style=&quot;color:#f92672&quot;&gt;=&lt;/span&gt; errorMsg&lt;span style=&quot;color:#f92672&quot;&gt;;&lt;/span&gt;
+&lt;span style=&quot;color:#f92672&quot;&gt;}&lt;/span&gt;
+&lt;span style=&quot;color:#f92672&quot;&gt;......&lt;/span&gt;
+</code></pre><p>}</p><pre><code>&lt;span style=&quot;color:#a6e22e&quot;&gt;@Override&lt;/span&gt;
+&lt;span style=&quot;color:#66d9ef&quot;&gt;public&lt;/span&gt; &lt;span style=&quot;color:#66d9ef&quot;&gt;void&lt;/span&gt; &lt;span style=&quot;color:#a6e22e&quot;&gt;run&lt;/span&gt;&lt;span style=&quot;color:#f92672&quot;&gt;(&lt;/span&gt;Status status&lt;span style=&quot;color:#f92672&quot;&gt;)&lt;/span&gt; &lt;span style=&quot;color:#f92672&quot;&gt;{&lt;/span&gt;
+    &lt;span style=&quot;color:#75715e&quot;&gt;// 返回应答给客户端
+</code></pre><p>if (this.done != null) {
+done.run(status);
+}
+}</p><pre><code>&lt;span style=&quot;color:#66d9ef&quot;&gt;public&lt;/span&gt; IncrementAndGetRequest &lt;span style=&quot;color:#a6e22e&quot;&gt;getRequest&lt;/span&gt;&lt;span style=&quot;color:#f92672&quot;&gt;()&lt;/span&gt; &lt;span style=&quot;color:#f92672&quot;&gt;{&lt;/span&gt;
+    &lt;span style=&quot;color:#66d9ef&quot;&gt;return&lt;/span&gt; &lt;span style=&quot;color:#66d9ef&quot;&gt;this&lt;/span&gt;&lt;span style=&quot;color:#f92672&quot;&gt;.&lt;/span&gt;&lt;span style=&quot;color:#a6e22e&quot;&gt;request&lt;/span&gt;&lt;span style=&quot;color:#f92672&quot;&gt;;&lt;/span&gt;
+&lt;span style=&quot;color:#f92672&quot;&gt;}&lt;/span&gt;
+
+&lt;span style=&quot;color:#66d9ef&quot;&gt;public&lt;/span&gt; &lt;span style=&quot;color:#66d9ef&quot;&gt;void&lt;/span&gt; &lt;span style=&quot;color:#a6e22e&quot;&gt;setRequest&lt;/span&gt;&lt;span style=&quot;color:#f92672&quot;&gt;(&lt;/span&gt;IncrementAndGetRequest request&lt;span style=&quot;color:#f92672&quot;&gt;)&lt;/span&gt; &lt;span style=&quot;color:#f92672&quot;&gt;{&lt;/span&gt;
+    &lt;span style=&quot;color:#66d9ef&quot;&gt;this&lt;/span&gt;&lt;span style=&quot;color:#f92672&quot;&gt;.&lt;/span&gt;&lt;span style=&quot;color:#a6e22e&quot;&gt;request&lt;/span&gt; &lt;span style=&quot;color:#f92672&quot;&gt;=&lt;/span&gt; request&lt;span style=&quot;color:#f92672&quot;&gt;;&lt;/span&gt;
+&lt;span style=&quot;color:#f92672&quot;&gt;}&lt;/span&gt;
+
+&lt;span style=&quot;color:#66d9ef&quot;&gt;public&lt;/span&gt; ValueResponse &lt;span style=&quot;color:#a6e22e&quot;&gt;getResponse&lt;/span&gt;&lt;span style=&quot;color:#f92672&quot;&gt;()&lt;/span&gt; &lt;span style=&quot;color:#f92672&quot;&gt;{&lt;/span&gt;
+    &lt;span style=&quot;color:#66d9ef&quot;&gt;return&lt;/span&gt; &lt;span style=&quot;color:#66d9ef&quot;&gt;this&lt;/span&gt;&lt;span style=&quot;color:#f92672&quot;&gt;.&lt;/span&gt;&lt;span style=&quot;color:#a6e22e&quot;&gt;response&lt;/span&gt;&lt;span style=&quot;color:#f92672&quot;&gt;;&lt;/span&gt;
+&lt;span style=&quot;color:#f92672&quot;&gt;}&lt;/span&gt;
+</code></pre><p>}
+服务端</p><pre><code>        IncrementAndAddClosure closure &lt;span style=&quot;color:#f92672&quot;&gt;=&lt;/span&gt; &lt;span style=&quot;color:#66d9ef&quot;&gt;null&lt;/span&gt;&lt;span style=&quot;color:#f92672&quot;&gt;;&lt;/span&gt;
+        &lt;span style=&quot;color:#75715e&quot;&gt;// done 回调不为null，必须在应用日志后调用，如果不为 null，说明当前是leader。
+</code></pre><p>if (iter.done() != null) {
+// 当前是leader，可以直接从 IncrementAndAddClosure 中获取 delta，避免反序列化 closure = (IncrementAndAddClosure) iter.done();
+delta = closure.getRequest().getDelta();
+} else {
+// 其他节点应用此日志，需要反序列化 IncrementAndGetRequest，获取 delta ByteBuffer data = iter.getData();
+try {
+IncrementAndGetRequest request = Codecs.getSerializer(Codecs.Hessian2).decode(data.array(),
+IncrementAndGetRequest.class.getName());
+delta = request.getDelta();
+} catch (CodecException e) {
+LOG.error("Fail to decode IncrementAndGetRequest", e);
+}
+}
+long prev = this.value.get();
+// 更新状态机 long updated = value.addAndGet(delta);
+// 更新后，确保调用 done，返回应答给客户端。 if (closure != null) {
+closure.getResponse().setValue(updated);
+closure.getResponse().setSuccess(true);
+closure.run(Status.OK());
+}
+LOG.info("Added value={} by delta={} at logIndex={}", prev, delta, iter.getIndex());
+iter.next();
+}
+}
+CounterServer</p><pre><code>&lt;span style=&quot;color:#66d9ef&quot;&gt;public&lt;/span&gt; &lt;span style=&quot;color:#a6e22e&quot;&gt;CounterServer&lt;/span&gt;&lt;span style=&quot;color:#f92672&quot;&gt;(&lt;/span&gt;String dataPath&lt;span style=&quot;color:#f92672&quot;&gt;,&lt;/span&gt; String groupId&lt;span style=&quot;color:#f92672&quot;&gt;,&lt;/span&gt; PeerId serverId&lt;span style=&quot;color:#f92672&quot;&gt;,&lt;/span&gt; NodeOptions nodeOptions&lt;span style=&quot;color:#f92672&quot;&gt;)&lt;/span&gt; &lt;span style=&quot;color:#66d9ef&quot;&gt;throws&lt;/span&gt; IOException &lt;span style=&quot;color:#f92672&quot;&gt;{&lt;/span&gt;
+    &lt;span style=&quot;color:#75715e&quot;&gt;// 初始化路径
+</code></pre><p>FileUtils.forceMkdir(new File(dataPath));
+// 初始化全局定时器 TimerManager.init(50);</p><pre><code>    &lt;span style=&quot;color:#75715e&quot;&gt;// 这里让 raft RPC 和业务 RPC 使用同一个 RPC server, 通常也可以分开.
+</code></pre><p>RpcServer rpcServer = new RpcServer(serverId.getPort());
+RaftRpcServerFactory.addRaftRequestProcessors(rpcServer);
+// 注册业务处理器 rpcServer.registerUserProcessor(new GetValueRequestProcessor(this));
+rpcServer.registerUserProcessor(new IncrementAndGetRequestProcessor(this));
+// 初始化状态机 this.fsm = new CounterStateMachine();
+// 设置状态机到启动参数 nodeOptions.setFsm(this.fsm);
+// 设置存储路径 // 日志, 必须 nodeOptions.setLogUri(dataPath + File.separator + "log");
+// 元信息, 必须 nodeOptions.setRaftMetaUri(dataPath + File.separator + "raft_meta");
+// snapshot, 可选, 一般都推荐 nodeOptions.setSnapshotUri(dataPath + File.separator + "snapshot");
+// 初始化 raft group 服务框架 this.raftGroupService = new RaftGroupService(groupId, serverId, nodeOptions, rpcServer);
+// 启动 this.node = this.raftGroupService.start();
+}</p><pre><code>&lt;span style=&quot;color:#66d9ef&quot;&gt;public&lt;/span&gt; CounterStateMachine &lt;span style=&quot;color:#a6e22e&quot;&gt;getFsm&lt;/span&gt;&lt;span style=&quot;color:#f92672&quot;&gt;()&lt;/span&gt; &lt;span style=&quot;color:#f92672&quot;&gt;{&lt;/span&gt;
+    &lt;span style=&quot;color:#66d9ef&quot;&gt;return&lt;/span&gt; &lt;span style=&quot;color:#66d9ef&quot;&gt;this&lt;/span&gt;&lt;span style=&quot;color:#f92672&quot;&gt;.&lt;/span&gt;&lt;span style=&quot;color:#a6e22e&quot;&gt;fsm&lt;/span&gt;&lt;span style=&quot;color:#f92672&quot;&gt;;&lt;/span&gt;
+&lt;span style=&quot;color:#f92672&quot;&gt;}&lt;/span&gt;
+
+&lt;span style=&quot;color:#66d9ef&quot;&gt;public&lt;/span&gt; Node &lt;span style=&quot;color:#a6e22e&quot;&gt;getNode&lt;/span&gt;&lt;span style=&quot;color:#f92672&quot;&gt;()&lt;/span&gt; &lt;span style=&quot;color:#f92672&quot;&gt;{&lt;/span&gt;
+    &lt;span style=&quot;color:#66d9ef&quot;&gt;return&lt;/span&gt; &lt;span style=&quot;color:#66d9ef&quot;&gt;this&lt;/span&gt;&lt;span style=&quot;color:#f92672&quot;&gt;.&lt;/span&gt;&lt;span style=&quot;color:#a6e22e&quot;&gt;node&lt;/span&gt;&lt;span style=&quot;color:#f92672&quot;&gt;;&lt;/span&gt;
+&lt;span style=&quot;color:#f92672&quot;&gt;}&lt;/span&gt;
+
+&lt;span style=&quot;color:#66d9ef&quot;&gt;public&lt;/span&gt; RaftGroupService &lt;span style=&quot;color:#a6e22e&quot;&gt;RaftGroupService&lt;/span&gt;&lt;span style=&quot;color:#f92672&quot;&gt;()&lt;/span&gt; &lt;span style=&quot;color:#f92672&quot;&gt;{&lt;/span&gt;
+    &lt;span style=&quot;color:#66d9ef&quot;&gt;return&lt;/span&gt; &lt;span style=&quot;color:#66d9ef&quot;&gt;this&lt;/span&gt;&lt;span style=&quot;color:#f92672&quot;&gt;.&lt;/span&gt;&lt;span style=&quot;color:#a6e22e&quot;&gt;raftGroupService&lt;/span&gt;&lt;span style=&quot;color:#f92672&quot;&gt;;&lt;/span&gt;
+&lt;span style=&quot;color:#f92672&quot;&gt;}&lt;/span&gt;
+
+&lt;span style=&quot;color:#75715e&quot;&gt;/**
+</code></pre><p>* 生成重定向请求 */
+public ValueResponse redirect() {
+ValueResponse response = new ValueResponse();
+response.setSuccess(false);
+if (node != null) {
+PeerId leader = node.getLeaderId();
+if (leader != null) {
+response.setRedirect(leader.toString());
+}
+}</p><pre><code>    &lt;span style=&quot;color:#66d9ef&quot;&gt;return&lt;/span&gt; response&lt;span style=&quot;color:#f92672&quot;&gt;;&lt;/span&gt;
+&lt;span style=&quot;color:#f92672&quot;&gt;}&lt;/span&gt;
+
+&lt;span style=&quot;color:#66d9ef&quot;&gt;public&lt;/span&gt; &lt;span style=&quot;color:#66d9ef&quot;&gt;static&lt;/span&gt; &lt;span style=&quot;color:#66d9ef&quot;&gt;void&lt;/span&gt; &lt;span style=&quot;color:#a6e22e&quot;&gt;main&lt;/span&gt;&lt;span style=&quot;color:#f92672&quot;&gt;(&lt;/span&gt;String&lt;span style=&quot;color:#f92672&quot;&gt;[]&lt;/span&gt; args&lt;span style=&quot;color:#f92672&quot;&gt;)&lt;/span&gt; &lt;span style=&quot;color:#66d9ef&quot;&gt;throws&lt;/span&gt; IOException &lt;span style=&quot;color:#f92672&quot;&gt;{&lt;/span&gt;
+    &lt;span style=&quot;color:#66d9ef&quot;&gt;if&lt;/span&gt; &lt;span style=&quot;color:#f92672&quot;&gt;(&lt;/span&gt;args&lt;span style=&quot;color:#f92672&quot;&gt;.&lt;/span&gt;&lt;span style=&quot;color:#a6e22e&quot;&gt;length&lt;/span&gt; &lt;span style=&quot;color:#f92672&quot;&gt;!=&lt;/span&gt; 4&lt;span style=&quot;color:#f92672&quot;&gt;)&lt;/span&gt; &lt;span style=&quot;color:#f92672&quot;&gt;{&lt;/span&gt;
+        System&lt;span style=&quot;color:#f92672&quot;&gt;.&lt;/span&gt;&lt;span style=&quot;color:#a6e22e&quot;&gt;out&lt;/span&gt;
+            &lt;span style=&quot;color:#f92672&quot;&gt;.&lt;/span&gt;&lt;span style=&quot;color:#a6e22e&quot;&gt;println&lt;/span&gt;&lt;span style=&quot;color:#f92672&quot;&gt;(&lt;/span&gt;&lt;span style=&quot;color:#e6db74&quot;&gt;&amp;#34;Useage : java com.alipay.jraft.example.counter.CounterServer {dataPath} {groupId} {serverId} {initConf}&amp;#34;&lt;/span&gt;&lt;span style=&quot;color:#f92672&quot;&gt;);&lt;/span&gt;
+        System&lt;span style=&quot;color:#f92672&quot;&gt;.&lt;/span&gt;&lt;span style=&quot;color:#a6e22e&quot;&gt;out&lt;/span&gt;
+            &lt;span style=&quot;color:#f92672&quot;&gt;.&lt;/span&gt;&lt;span style=&quot;color:#a6e22e&quot;&gt;println&lt;/span&gt;&lt;span style=&quot;color:#f92672&quot;&gt;(&lt;/span&gt;&lt;span style=&quot;color:#e6db74&quot;&gt;&amp;#34;Example: java com.alipay.jraft.example.counter.CounterServer /tmp/server1 counter 127.0.0.1:8081 127.0.0.1:8081,127.0.0.1:8082,127.0.0.1:8083&amp;#34;&lt;/span&gt;&lt;span style=&quot;color:#f92672&quot;&gt;);&lt;/span&gt;
+        System&lt;span style=&quot;color:#f92672&quot;&gt;.&lt;/span&gt;&lt;span style=&quot;color:#a6e22e&quot;&gt;exit&lt;/span&gt;&lt;span style=&quot;color:#f92672&quot;&gt;(&lt;/span&gt;1&lt;span style=&quot;color:#f92672&quot;&gt;);&lt;/span&gt;
+    &lt;span style=&quot;color:#f92672&quot;&gt;}&lt;/span&gt;
+    String dataPath &lt;span style=&quot;color:#f92672&quot;&gt;=&lt;/span&gt; args&lt;span style=&quot;color:#f92672&quot;&gt;[&lt;/span&gt;0&lt;span style=&quot;color:#f92672&quot;&gt;];&lt;/span&gt;
+    String groupId &lt;span style=&quot;color:#f92672&quot;&gt;=&lt;/span&gt; args&lt;span style=&quot;color:#f92672&quot;&gt;[&lt;/span&gt;1&lt;span style=&quot;color:#f92672&quot;&gt;];&lt;/span&gt;
+    String serverIdStr &lt;span style=&quot;color:#f92672&quot;&gt;=&lt;/span&gt; args&lt;span style=&quot;color:#f92672&quot;&gt;[&lt;/span&gt;2&lt;span style=&quot;color:#f92672&quot;&gt;];&lt;/span&gt;
+    String initConfStr &lt;span style=&quot;color:#f92672&quot;&gt;=&lt;/span&gt; args&lt;span style=&quot;color:#f92672&quot;&gt;[&lt;/span&gt;3&lt;span style=&quot;color:#f92672&quot;&gt;];&lt;/span&gt;
+
+    NodeOptions nodeOptions &lt;span style=&quot;color:#f92672&quot;&gt;=&lt;/span&gt; &lt;span style=&quot;color:#66d9ef&quot;&gt;new&lt;/span&gt; NodeOptions&lt;span style=&quot;color:#f92672&quot;&gt;();&lt;/span&gt;
+    &lt;span style=&quot;color:#75715e&quot;&gt;// 为了测试, 调整 snapshot 间隔等参数
+</code></pre><p>nodeOptions.setElectionTimeoutMs(5000);
+nodeOptions.setDisableCli(false);
+nodeOptions.setSnapshotIntervalSecs(30);
+// 解析参数 PeerId serverId = new PeerId();
+if (!serverId.parse(serverIdStr)) {
+throw new IllegalArgumentException("Fail to parse serverId:" + serverIdStr);
+}
+Configuration initConf = new Configuration();
+if (!initConf.parse(initConfStr)) {
+throw new IllegalArgumentException("Fail to parse initConf:" + initConfStr);
+}
+// 设置初始集群配置 nodeOptions.setInitialConf(initConf);</p><pre><code>    &lt;span style=&quot;color:#75715e&quot;&gt;// 启动
+</code></pre><p>CounterServer counterServer = new CounterServer(dataPath, groupId, serverId, nodeOptions);
+System.out.println("Started counter server at port:"
++ counterServer.getNode().getNodeId().getPeerId().getPort());
+}
+}
+启动三个节点的参数类似：</p><pre><code>&lt;span style=&quot;color:#66d9ef&quot;&gt;private&lt;/span&gt; CounterServer       counterServer&lt;span style=&quot;color:#f92672&quot;&gt;;&lt;/span&gt;
+
+&lt;span style=&quot;color:#66d9ef&quot;&gt;public&lt;/span&gt; &lt;span style=&quot;color:#a6e22e&quot;&gt;IncrementAndGetRequestProcessor&lt;/span&gt;&lt;span style=&quot;color:#f92672&quot;&gt;(&lt;/span&gt;CounterServer counterServer&lt;span style=&quot;color:#f92672&quot;&gt;)&lt;/span&gt; &lt;span style=&quot;color:#f92672&quot;&gt;{&lt;/span&gt;
+    &lt;span style=&quot;color:#66d9ef&quot;&gt;super&lt;/span&gt;&lt;span style=&quot;color:#f92672&quot;&gt;();&lt;/span&gt;
+    &lt;span style=&quot;color:#66d9ef&quot;&gt;this&lt;/span&gt;&lt;span style=&quot;color:#f92672&quot;&gt;.&lt;/span&gt;&lt;span style=&quot;color:#a6e22e&quot;&gt;counterServer&lt;/span&gt; &lt;span style=&quot;color:#f92672&quot;&gt;=&lt;/span&gt; counterServer&lt;span style=&quot;color:#f92672&quot;&gt;;&lt;/span&gt;
+&lt;span style=&quot;color:#f92672&quot;&gt;}&lt;/span&gt;
+
+&lt;span style=&quot;color:#a6e22e&quot;&gt;@Override&lt;/span&gt;
+&lt;span style=&quot;color:#66d9ef&quot;&gt;public&lt;/span&gt; &lt;span style=&quot;color:#66d9ef&quot;&gt;void&lt;/span&gt; &lt;span style=&quot;color:#a6e22e&quot;&gt;handleRequest&lt;/span&gt;&lt;span style=&quot;color:#f92672&quot;&gt;(&lt;/span&gt;BizContext bizCtx&lt;span style=&quot;color:#f92672&quot;&gt;,&lt;/span&gt; AsyncContext asyncCtx&lt;span style=&quot;color:#f92672&quot;&gt;,&lt;/span&gt; IncrementAndGetRequest request&lt;span style=&quot;color:#f92672&quot;&gt;)&lt;/span&gt; &lt;span style=&quot;color:#f92672&quot;&gt;{&lt;/span&gt;
+</code></pre><p>　　　　　// 非leader，生成跳转请求 if (!counterServer.getFsm().isLeader()) {
+asyncCtx.sendResponse(counterServer.redirect());
+return;
+}</p><pre><code>    &lt;span style=&quot;color:#75715e&quot;&gt;// 构建应答回调
+</code></pre><p>ValueResponse response = new ValueResponse();
+IncrementAndAddClosure closure = new IncrementAndAddClosure(counterServer, request, response, new Closure() {</p><pre><code>        &lt;span style=&quot;color:#a6e22e&quot;&gt;@Override&lt;/span&gt;
+        &lt;span style=&quot;color:#66d9ef&quot;&gt;public&lt;/span&gt; &lt;span style=&quot;color:#66d9ef&quot;&gt;void&lt;/span&gt; &lt;span style=&quot;color:#a6e22e&quot;&gt;run&lt;/span&gt;&lt;span style=&quot;color:#f92672&quot;&gt;(&lt;/span&gt;Status status&lt;span style=&quot;color:#f92672&quot;&gt;)&lt;/span&gt; &lt;span style=&quot;color:#f92672&quot;&gt;{&lt;/span&gt;
+            &lt;span style=&quot;color:#75715e&quot;&gt;// 提交后处理
+</code></pre><p>if (!status.isOk()) {
+// 提交失败，返回错误信息 response.setErrorMsg(status.getErrorMsg());
+response.setSuccess(false);
+}
+// 成功，返回ValueResponse应答 asyncCtx.sendResponse(response);</p><pre><code>        &lt;span style=&quot;color:#f92672&quot;&gt;}&lt;/span&gt;
+    &lt;span style=&quot;color:#f92672&quot;&gt;});&lt;/span&gt;
+
+    &lt;span style=&quot;color:#66d9ef&quot;&gt;try&lt;/span&gt; &lt;span style=&quot;color:#f92672&quot;&gt;{&lt;/span&gt;
+        &lt;span style=&quot;color:#75715e&quot;&gt;// 构建提交任务
+</code></pre><p>Task task = new Task();
+task.setDone(closure); // 设置回调 // 填充数据，将请求用 hessian２序列化到 data　字段 task.setData(ByteBuffer.wrap(Codecs.getSerializer(Codecs.Hessian2).encode(request)));</p><pre><code>        &lt;span style=&quot;color:#75715e&quot;&gt;// 提交到 raft group
+</code></pre><p>counterServer.getNode().apply(task);
+} catch (CodecException e) {
+// 处理序列化异常 LOG.error("Fail to encode IncrementAndGetRequest", e);
+ValueResponse responseObject = response;
+responseObject.setSuccess(false);
+responseObject.setErrorMsg(e.getMessage());
+asyncCtx.sendResponse(responseObject);
+}
+}</p><pre><code>&lt;span style=&quot;color:#a6e22e&quot;&gt;@Override&lt;/span&gt;
+&lt;span style=&quot;color:#66d9ef&quot;&gt;public&lt;/span&gt; String &lt;span style=&quot;color:#a6e22e&quot;&gt;interest&lt;/span&gt;&lt;span style=&quot;color:#f92672&quot;&gt;()&lt;/span&gt; &lt;span style=&quot;color:#f92672&quot;&gt;{&lt;/span&gt;
+    &lt;span style=&quot;color:#66d9ef&quot;&gt;return&lt;/span&gt; IncrementAndGetRequest&lt;span style=&quot;color:#f92672&quot;&gt;.&lt;/span&gt;&lt;span style=&quot;color:#a6e22e&quot;&gt;class&lt;/span&gt;&lt;span style=&quot;color:#f92672&quot;&gt;.&lt;/span&gt;&lt;span style=&quot;color:#a6e22e&quot;&gt;getName&lt;/span&gt;&lt;span style=&quot;color:#f92672&quot;&gt;();&lt;/span&gt;
+&lt;span style=&quot;color:#f92672&quot;&gt;}&lt;/span&gt;
+</code></pre><p>}</p><p>客户端</p><pre><code>    Configuration conf &lt;span style=&quot;color:#f92672&quot;&gt;=&lt;/span&gt; &lt;span style=&quot;color:#66d9ef&quot;&gt;new&lt;/span&gt; Configuration&lt;span style=&quot;color:#f92672&quot;&gt;();&lt;/span&gt;
+    &lt;span style=&quot;color:#66d9ef&quot;&gt;if&lt;/span&gt; &lt;span style=&quot;color:#f92672&quot;&gt;(!&lt;/span&gt;conf&lt;span style=&quot;color:#f92672&quot;&gt;.&lt;/span&gt;&lt;span style=&quot;color:#a6e22e&quot;&gt;parse&lt;/span&gt;&lt;span style=&quot;color:#f92672&quot;&gt;(&lt;/span&gt;confStr&lt;span style=&quot;color:#f92672&quot;&gt;))&lt;/span&gt; &lt;span style=&quot;color:#f92672&quot;&gt;{&lt;/span&gt;
+        &lt;span style=&quot;color:#66d9ef&quot;&gt;throw&lt;/span&gt; &lt;span style=&quot;color:#66d9ef&quot;&gt;new&lt;/span&gt; IllegalArgumentException&lt;span style=&quot;color:#f92672&quot;&gt;(&lt;/span&gt;&lt;span style=&quot;color:#e6db74&quot;&gt;&amp;#34;Fail to parse conf:&amp;#34;&lt;/span&gt; &lt;span style=&quot;color:#f92672&quot;&gt;+&lt;/span&gt; confStr&lt;span style=&quot;color:#f92672&quot;&gt;);&lt;/span&gt;
+    &lt;span style=&quot;color:#f92672&quot;&gt;}&lt;/span&gt;
+    &lt;span style=&quot;color:#75715e&quot;&gt;// 更新raft group配置
+</code></pre><p>RouteTable.getInstance().updateConfiguration(groupId, conf);</p><p>接下来初始化 RPC 客户端并更新路由表:</p><p>if (!RouteTable.getInstance().refreshLeader(cliClientService, groupId, 1000).isOk()) {
+throw new IllegalStateException("Refresh leader failed");
+}</p><p>获取 leader 后发送请求：</p><pre><code>        &lt;span style=&quot;color:#a6e22e&quot;&gt;@Override&lt;/span&gt;
+        &lt;span style=&quot;color:#66d9ef&quot;&gt;public&lt;/span&gt; &lt;span style=&quot;color:#66d9ef&quot;&gt;void&lt;/span&gt; &lt;span style=&quot;color:#a6e22e&quot;&gt;onResponse&lt;/span&gt;&lt;span style=&quot;color:#f92672&quot;&gt;(&lt;/span&gt;Object result&lt;span style=&quot;color:#f92672&quot;&gt;)&lt;/span&gt; &lt;span style=&quot;color:#f92672&quot;&gt;{&lt;/span&gt;
+            latch&lt;span style=&quot;color:#f92672&quot;&gt;.&lt;/span&gt;&lt;span style=&quot;color:#a6e22e&quot;&gt;countDown&lt;/span&gt;&lt;span style=&quot;color:#f92672&quot;&gt;();&lt;/span&gt;
+            System&lt;span style=&quot;color:#f92672&quot;&gt;.&lt;/span&gt;&lt;span style=&quot;color:#a6e22e&quot;&gt;out&lt;/span&gt;&lt;span style=&quot;color:#f92672&quot;&gt;.&lt;/span&gt;&lt;span style=&quot;color:#a6e22e&quot;&gt;println&lt;/span&gt;&lt;span style=&quot;color:#f92672&quot;&gt;(&lt;/span&gt;&lt;span style=&quot;color:#e6db74&quot;&gt;&amp;#34;incrementAndGet result:&amp;#34;&lt;/span&gt; &lt;span style=&quot;color:#f92672&quot;&gt;+&lt;/span&gt; result&lt;span style=&quot;color:#f92672&quot;&gt;);&lt;/span&gt;
+        &lt;span style=&quot;color:#f92672&quot;&gt;}&lt;/span&gt;
+
+        &lt;span style=&quot;color:#a6e22e&quot;&gt;@Override&lt;/span&gt;
+        &lt;span style=&quot;color:#66d9ef&quot;&gt;public&lt;/span&gt; &lt;span style=&quot;color:#66d9ef&quot;&gt;void&lt;/span&gt; &lt;span style=&quot;color:#a6e22e&quot;&gt;onException&lt;/span&gt;&lt;span style=&quot;color:#f92672&quot;&gt;(&lt;/span&gt;Throwable e&lt;span style=&quot;color:#f92672&quot;&gt;)&lt;/span&gt; &lt;span style=&quot;color:#f92672&quot;&gt;{&lt;/span&gt;
+            e&lt;span style=&quot;color:#f92672&quot;&gt;.&lt;/span&gt;&lt;span style=&quot;color:#a6e22e&quot;&gt;printStackTrace&lt;/span&gt;&lt;span style=&quot;color:#f92672&quot;&gt;();&lt;/span&gt;
+            latch&lt;span style=&quot;color:#f92672&quot;&gt;.&lt;/span&gt;&lt;span style=&quot;color:#a6e22e&quot;&gt;countDown&lt;/span&gt;&lt;span style=&quot;color:#f92672&quot;&gt;();&lt;/span&gt;
+
+        &lt;span style=&quot;color:#f92672&quot;&gt;}&lt;/span&gt;
+
+        &lt;span style=&quot;color:#a6e22e&quot;&gt;@Override&lt;/span&gt;
+        &lt;span style=&quot;color:#66d9ef&quot;&gt;public&lt;/span&gt; Executor &lt;span style=&quot;color:#a6e22e&quot;&gt;getExecutor&lt;/span&gt;&lt;span style=&quot;color:#f92672&quot;&gt;()&lt;/span&gt; &lt;span style=&quot;color:#f92672&quot;&gt;{&lt;/span&gt;
+            &lt;span style=&quot;color:#66d9ef&quot;&gt;return&lt;/span&gt; &lt;span style=&quot;color:#66d9ef&quot;&gt;null&lt;/span&gt;&lt;span style=&quot;color:#f92672&quot;&gt;;&lt;/span&gt;
+        &lt;span style=&quot;color:#f92672&quot;&gt;}&lt;/span&gt;
+    &lt;span style=&quot;color:#f92672&quot;&gt;},&lt;/span&gt; 5000&lt;span style=&quot;color:#f92672&quot;&gt;);&lt;/span&gt;
+</code></pre><p>}</p><p>Snapshot 实现</p><pre><code>&lt;span style=&quot;color:#66d9ef&quot;&gt;public&lt;/span&gt; &lt;span style=&quot;color:#a6e22e&quot;&gt;CounterSnapshotFile&lt;/span&gt;&lt;span style=&quot;color:#f92672&quot;&gt;(&lt;/span&gt;String path&lt;span style=&quot;color:#f92672&quot;&gt;)&lt;/span&gt; &lt;span style=&quot;color:#f92672&quot;&gt;{&lt;/span&gt;
+    &lt;span style=&quot;color:#66d9ef&quot;&gt;super&lt;/span&gt;&lt;span style=&quot;color:#f92672&quot;&gt;();&lt;/span&gt;
+    &lt;span style=&quot;color:#66d9ef&quot;&gt;this&lt;/span&gt;&lt;span style=&quot;color:#f92672&quot;&gt;.&lt;/span&gt;&lt;span style=&quot;color:#a6e22e&quot;&gt;path&lt;/span&gt; &lt;span style=&quot;color:#f92672&quot;&gt;=&lt;/span&gt; path&lt;span style=&quot;color:#f92672&quot;&gt;;&lt;/span&gt;
+&lt;span style=&quot;color:#f92672&quot;&gt;}&lt;/span&gt;
+
+&lt;span style=&quot;color:#66d9ef&quot;&gt;public&lt;/span&gt; String &lt;span style=&quot;color:#a6e22e&quot;&gt;getPath&lt;/span&gt;&lt;span style=&quot;color:#f92672&quot;&gt;()&lt;/span&gt; &lt;span style=&quot;color:#f92672&quot;&gt;{&lt;/span&gt;
+    &lt;span style=&quot;color:#66d9ef&quot;&gt;return&lt;/span&gt; &lt;span style=&quot;color:#66d9ef&quot;&gt;this&lt;/span&gt;&lt;span style=&quot;color:#f92672&quot;&gt;.&lt;/span&gt;&lt;span style=&quot;color:#a6e22e&quot;&gt;path&lt;/span&gt;&lt;span style=&quot;color:#f92672&quot;&gt;;&lt;/span&gt;
+&lt;span style=&quot;color:#f92672&quot;&gt;}&lt;/span&gt;
+
+&lt;span style=&quot;color:#75715e&quot;&gt;/**
+</code></pre><p>* Save value to snapshot file. * @param value * @return */
+public boolean save(long value) {
+try {
+FileUtils.writeStringToFile(new File(path), String.valueOf(value));
+return true;
+} catch (IOException e) {
+LOG.error("Fail to save snapshot", e);
+return false;
+}
+}</p><pre><code>&lt;span style=&quot;color:#66d9ef&quot;&gt;public&lt;/span&gt; &lt;span style=&quot;color:#66d9ef&quot;&gt;long&lt;/span&gt; &lt;span style=&quot;color:#a6e22e&quot;&gt;load&lt;/span&gt;&lt;span style=&quot;color:#f92672&quot;&gt;()&lt;/span&gt; &lt;span style=&quot;color:#66d9ef&quot;&gt;throws&lt;/span&gt; IOException &lt;span style=&quot;color:#f92672&quot;&gt;{&lt;/span&gt;
+    String s &lt;span style=&quot;color:#f92672&quot;&gt;=&lt;/span&gt; FileUtils&lt;span style=&quot;color:#f92672&quot;&gt;.&lt;/span&gt;&lt;span style=&quot;color:#a6e22e&quot;&gt;readFileToString&lt;/span&gt;&lt;span style=&quot;color:#f92672&quot;&gt;(&lt;/span&gt;&lt;span style=&quot;color:#66d9ef&quot;&gt;new&lt;/span&gt; File&lt;span style=&quot;color:#f92672&quot;&gt;(&lt;/span&gt;path&lt;span style=&quot;color:#f92672&quot;&gt;));&lt;/span&gt;
+    &lt;span style=&quot;color:#66d9ef&quot;&gt;if&lt;/span&gt; &lt;span style=&quot;color:#f92672&quot;&gt;(!&lt;/span&gt;StringUtils&lt;span style=&quot;color:#f92672&quot;&gt;.&lt;/span&gt;&lt;span style=&quot;color:#a6e22e&quot;&gt;isBlank&lt;/span&gt;&lt;span style=&quot;color:#f92672&quot;&gt;(&lt;/span&gt;s&lt;span style=&quot;color:#f92672&quot;&gt;))&lt;/span&gt; &lt;span style=&quot;color:#f92672&quot;&gt;{&lt;/span&gt;
+        &lt;span style=&quot;color:#66d9ef&quot;&gt;return&lt;/span&gt; Long&lt;span style=&quot;color:#f92672&quot;&gt;.&lt;/span&gt;&lt;span style=&quot;color:#a6e22e&quot;&gt;parseLong&lt;/span&gt;&lt;span style=&quot;color:#f92672&quot;&gt;(&lt;/span&gt;s&lt;span style=&quot;color:#f92672&quot;&gt;);&lt;/span&gt;
+    &lt;span style=&quot;color:#f92672&quot;&gt;}&lt;/span&gt;
+    &lt;span style=&quot;color:#66d9ef&quot;&gt;throw&lt;/span&gt; &lt;span style=&quot;color:#66d9ef&quot;&gt;new&lt;/span&gt; IOException&lt;span style=&quot;color:#f92672&quot;&gt;(&lt;/span&gt;&lt;span style=&quot;color:#e6db74&quot;&gt;&amp;#34;Fail to load snapshot from &amp;#34;&lt;/span&gt; &lt;span style=&quot;color:#f92672&quot;&gt;+&lt;/span&gt; path &lt;span style=&quot;color:#f92672&quot;&gt;+&lt;/span&gt; &lt;span style=&quot;color:#e6db74&quot;&gt;&amp;#34;,content: &amp;#34;&lt;/span&gt; &lt;span style=&quot;color:#f92672&quot;&gt;+&lt;/span&gt; s&lt;span style=&quot;color:#f92672&quot;&gt;);&lt;/span&gt;
+&lt;span style=&quot;color:#f92672&quot;&gt;}&lt;/span&gt;
+</code></pre><p>}
+保存到指定的 path 。</p><pre><code>&lt;span style=&quot;color:#f92672&quot;&gt;}&lt;/span&gt;
+
+  &lt;span style=&quot;color:#66d9ef&quot;&gt;public&lt;/span&gt; &lt;span style=&quot;color:#66d9ef&quot;&gt;void&lt;/span&gt; &lt;span style=&quot;color:#a6e22e&quot;&gt;onSnapshotSave&lt;/span&gt;&lt;span style=&quot;color:#f92672&quot;&gt;(&lt;/span&gt;&lt;span style=&quot;color:#66d9ef&quot;&gt;final&lt;/span&gt; SnapshotWriter writer&lt;span style=&quot;color:#f92672&quot;&gt;,&lt;/span&gt; &lt;span style=&quot;color:#66d9ef&quot;&gt;final&lt;/span&gt; Closure done&lt;span style=&quot;color:#f92672&quot;&gt;)&lt;/span&gt; &lt;span style=&quot;color:#f92672&quot;&gt;{&lt;/span&gt;
+    &lt;span style=&quot;color:#75715e&quot;&gt;// 获取此刻状态机状态
+</code></pre><p>       final long currVal = this.value.get();
+// 异步保存，避免阻塞状态机 Utils.runInThread(new Runnable() {</p><pre><code>        &lt;span style=&quot;color:#a6e22e&quot;&gt;@Override&lt;/span&gt;
+        &lt;span style=&quot;color:#66d9ef&quot;&gt;public&lt;/span&gt; &lt;span style=&quot;color:#66d9ef&quot;&gt;void&lt;/span&gt; &lt;span style=&quot;color:#a6e22e&quot;&gt;run&lt;/span&gt;&lt;span style=&quot;color:#f92672&quot;&gt;()&lt;/span&gt; &lt;span style=&quot;color:#f92672&quot;&gt;{&lt;/span&gt;
+            CounterSnapshotFile snapshot &lt;span style=&quot;color:#f92672&quot;&gt;=&lt;/span&gt; &lt;span style=&quot;color:#66d9ef&quot;&gt;new&lt;/span&gt; CounterSnapshotFile&lt;span style=&quot;color:#f92672&quot;&gt;(&lt;/span&gt;writer&lt;span style=&quot;color:#f92672&quot;&gt;.&lt;/span&gt;&lt;span style=&quot;color:#a6e22e&quot;&gt;getPath&lt;/span&gt;&lt;span style=&quot;color:#f92672&quot;&gt;()&lt;/span&gt; &lt;span style=&quot;color:#f92672&quot;&gt;+&lt;/span&gt; File&lt;span style=&quot;color:#f92672&quot;&gt;.&lt;/span&gt;&lt;span style=&quot;color:#a6e22e&quot;&gt;separator&lt;/span&gt; &lt;span style=&quot;color:#f92672&quot;&gt;+&lt;/span&gt; &lt;span style=&quot;color:#e6db74&quot;&gt;&amp;#34;data&amp;#34;&lt;/span&gt;&lt;span style=&quot;color:#f92672&quot;&gt;);&lt;/span&gt;
+            &lt;span style=&quot;color:#66d9ef&quot;&gt;if&lt;/span&gt; &lt;span style=&quot;color:#f92672&quot;&gt;(&lt;/span&gt;snapshot&lt;span style=&quot;color:#f92672&quot;&gt;.&lt;/span&gt;&lt;span style=&quot;color:#a6e22e&quot;&gt;save&lt;/span&gt;&lt;span style=&quot;color:#f92672&quot;&gt;(&lt;/span&gt;currVal&lt;span style=&quot;color:#f92672&quot;&gt;))&lt;/span&gt; &lt;span style=&quot;color:#f92672&quot;&gt;{&lt;/span&gt;
+                &lt;span style=&quot;color:#66d9ef&quot;&gt;if&lt;/span&gt; &lt;span style=&quot;color:#f92672&quot;&gt;(&lt;/span&gt;writer&lt;span style=&quot;color:#f92672&quot;&gt;.&lt;/span&gt;&lt;span style=&quot;color:#a6e22e&quot;&gt;addFile&lt;/span&gt;&lt;span style=&quot;color:#f92672&quot;&gt;(&lt;/span&gt;&lt;span style=&quot;color:#e6db74&quot;&gt;&amp;#34;data&amp;#34;&lt;/span&gt;&lt;span style=&quot;color:#f92672&quot;&gt;))&lt;/span&gt; &lt;span style=&quot;color:#f92672&quot;&gt;{&lt;/span&gt;
+                    done&lt;span style=&quot;color:#f92672&quot;&gt;.&lt;/span&gt;&lt;span style=&quot;color:#a6e22e&quot;&gt;run&lt;/span&gt;&lt;span style=&quot;color:#f92672&quot;&gt;(&lt;/span&gt;Status&lt;span style=&quot;color:#f92672&quot;&gt;.&lt;/span&gt;&lt;span style=&quot;color:#a6e22e&quot;&gt;OK&lt;/span&gt;&lt;span style=&quot;color:#f92672&quot;&gt;());&lt;/span&gt;
+                &lt;span style=&quot;color:#f92672&quot;&gt;}&lt;/span&gt; &lt;span style=&quot;color:#66d9ef&quot;&gt;else&lt;/span&gt; &lt;span style=&quot;color:#f92672&quot;&gt;{&lt;/span&gt;
+                    done&lt;span style=&quot;color:#f92672&quot;&gt;.&lt;/span&gt;&lt;span style=&quot;color:#a6e22e&quot;&gt;run&lt;/span&gt;&lt;span style=&quot;color:#f92672&quot;&gt;(&lt;/span&gt;&lt;span style=&quot;color:#66d9ef&quot;&gt;new&lt;/span&gt; Status&lt;span style=&quot;color:#f92672&quot;&gt;(&lt;/span&gt;RaftError&lt;span style=&quot;color:#f92672&quot;&gt;.&lt;/span&gt;&lt;span style=&quot;color:#a6e22e&quot;&gt;EIO&lt;/span&gt;&lt;span style=&quot;color:#f92672&quot;&gt;,&lt;/span&gt; &lt;span style=&quot;color:#e6db74&quot;&gt;&amp;#34;Fail to add file to writer&amp;#34;&lt;/span&gt;&lt;span style=&quot;color:#f92672&quot;&gt;));&lt;/span&gt;
+                &lt;span style=&quot;color:#f92672&quot;&gt;}&lt;/span&gt;
+            &lt;span style=&quot;color:#f92672&quot;&gt;}&lt;/span&gt; &lt;span style=&quot;color:#66d9ef&quot;&gt;else&lt;/span&gt; &lt;span style=&quot;color:#f92672&quot;&gt;{&lt;/span&gt;
+                done&lt;span style=&quot;color:#f92672&quot;&gt;.&lt;/span&gt;&lt;span style=&quot;color:#a6e22e&quot;&gt;run&lt;/span&gt;&lt;span style=&quot;color:#f92672&quot;&gt;(&lt;/span&gt;&lt;span style=&quot;color:#66d9ef&quot;&gt;new&lt;/span&gt; Status&lt;span style=&quot;color:#f92672&quot;&gt;(&lt;/span&gt;RaftError&lt;span style=&quot;color:#f92672&quot;&gt;.&lt;/span&gt;&lt;span style=&quot;color:#a6e22e&quot;&gt;EIO&lt;/span&gt;&lt;span style=&quot;color:#f92672&quot;&gt;,&lt;/span&gt; &lt;span style=&quot;color:#e6db74&quot;&gt;&amp;#34;Fail to save counter snapshot %s&amp;#34;&lt;/span&gt;&lt;span style=&quot;color:#f92672&quot;&gt;,&lt;/span&gt; snapshot&lt;span style=&quot;color:#f92672&quot;&gt;.&lt;/span&gt;&lt;span style=&quot;color:#a6e22e&quot;&gt;getPath&lt;/span&gt;&lt;span style=&quot;color:#f92672&quot;&gt;()));&lt;/span&gt;
+            &lt;span style=&quot;color:#f92672&quot;&gt;}&lt;/span&gt;
+        &lt;span style=&quot;color:#f92672&quot;&gt;}&lt;/span&gt;
+    &lt;span style=&quot;color:#f92672&quot;&gt;});&lt;/span&gt;
+&lt;span style=&quot;color:#f92672&quot;&gt;}&lt;/span&gt;
+</code></pre><p>snapshot 的间隔可以通过 NodeOptions 的 snapshotIntervalSecs 控制，默认一个小时。</p></article></main></div><footer class=ss-footer><div class=container><div class=links><div class=cate><h2 class=cate-title>资源</h2><a class=link href=https://github.com/sofastack>Github</a>
+<a class=link href=https://gitee.com/sofastack/>Gitee</a>
+<a class=link href=https://github.com/sofastack-guides>示例</a></div><div class=cate><h2 class=cate-title>社交媒体</h2><a class=link href=https://zhuanlan.zhihu.com/sofastack>知乎专栏</a>
+<a class=link href=https://weibo.com/sofastack>新浪微博</a>
+<a class=link href=https://twitter.com/sofastack_io>Twitter</a></div><div class=cate><h2 class=cate-title>参与进来</h2><a class=link href=https://github.com/sofastack/sofastack.tech/issues/new>反馈</a>
+<a class=link href=https://github.com/sofastack/community>社区</a>
+<a class=link href=https://github.com/sofastack/sofastack.tech/wiki>Wiki</a>
+<a class=link href=mailto:sofa@alipay.cloud.com>Email</a>
+<a class=link href=/hr/>加入我们</a></div><div class=cate><h2 class=cate-title>蚂蚁金服开源项目</h2><a class=link href=https://ant.design/>Ant Design</a>
+<a class=link href=https://eggjs.org/>Egg</a>
+<a class=link href=https://sqlflow.org>SQLFlow</a>
+<a class=link href=https://tech.antfin.com/open-source>更多</a></div></div><div class=qrcode><div><img class=qrcode-img src=/img/qrcode/qrcode_1.png><p class=qrcode-desc>微信公众号</p></div><div><img class=qrcode-img src=/img/qrcode/qrcode_2.png><p class=qrcode-desc>钉钉群</p></div></div></div><div class=copyright><p>© 2019 - 2020 The SOFAStack Authors
+<a href=http://beian.miit.gov.cn/>浙 ICP 备 16045294 号-3</a></p></div></footer></body></html>

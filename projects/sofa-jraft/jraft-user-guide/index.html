@@ -1,0 +1,141 @@
+<!doctype html><html><head><title>JRaft 用户指南 · SOFAStack</title><meta charset=utf-8><meta http-equiv=x-ua-compatible content="IE=edge,chrome=1"><meta name=viewport content="width=device-width,minimum-scale=1"><meta name=description content="SOFAStack is a Scalable Open Financial Architecture for building cloud native applications"><meta name=generator content="Hugo 0.80.0"><link rel="shortcut icon" href=https://gw.alipayobjects.com/os/q/cms/images/jqu9346l/4ba95631-2489-4885-881f-bc7f8d787d5e_w64_h61.png type=image/png><link href=https://unpkg.com/purecss@1.0.0/build/base-min.css rel=stylesheet><link href=/css/main.css rel=stylesheet><link href=/css/zoom-image.css rel=stylesheet><script src=/js/iconfont.js></script><script src=/js/highlight.pack.js></script><script>hljs.initHighlightingOnLoad();</script><script>window.SITE_LANGUAGE="zh"</script><script src=/js/app.js></script><script type=application/javascript>var doNotTrack=false;if(!doNotTrack){(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');ga('create','UA-142131411-1','auto');ga('send','pageview');}</script></head><body><header class=ss-header><nav class=navbar role=navigation aria-label="main navigation"><div class=navbar-brand><a class=logo-link href=/><img class=logo src=/img/logo.png></a><div class=-show-mobile><a id=mobile-menu-icon><svg class="icon" aria-hidden="true"><use xlink:href="#icon-menu"/></svg></a><nav id=mobile-menu><div id=js-menu-search-mobile class=navbar-search-mobile><input class=input placeholder=请输入要搜索的关键词><svg class="icon" aria-hidden="true"><use xlink:href="#icon-search"/></svg></div><a href=/projects/><span>项目</span><svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"/></svg></a>
+<a href=/guides/><span>指南</span><svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"/></svg></a>
+<a href=/blog/><span>博客</span><svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"/></svg></a>
+<a href=/activities/><span>活动</span><svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"/></svg></a>
+<a href=/community/><span>社区</span><svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"/></svg></a>
+<a href=/awesome/><span>Awesome SOFA</span><svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"/></svg></a>
+<a href=/en/projects/sofa-jraft/jraft-user-guide/><span>English</span><svg class="icon" aria-hidden="true"><use xlink:href="#icon-transfer"/></svg></a></nav></div></div><div class="navbar-menu -hidden-mobile"><div class=navbar-start><a class=navbar-item href=/projects/>项目</a>
+<a class=navbar-item href=/guides/>指南</a>
+<a class=navbar-item href=/blog/>博客</a>
+<a class=navbar-item href=/activities/>活动</a>
+<a class=navbar-item href=/community/>社区</a>
+<a class=navbar-item href=/awesome/>Awesome SOFA</a></div><div class=navbar-end><div class=navbar-item><div id=js-menu-search class=navbar-search><input class=input placeholder=请输入要搜索的关键词><svg class="icon" aria-hidden="true"><use xlink:href="#icon-search"/></svg></div></div><div class=navbar-item><a class=translation href=/en/projects/sofa-jraft/jraft-user-guide/>En</a></div></div></div></nav></header><div class=ss-layout-container><aside class="ss-layout-aside -left ss-card -soft-hidden"><div id=js-drawer class=ss-toc><div id=js-drawer-handle class=drawer-handle><svg class="icon icon-menu" aria-hidden="true"><use xlink:href="#icon-menu"/></svg><svg class="icon icon-close" aria-hidden="true"><use xlink:href="#icon-close"/></svg></div><div class=drawer-body><div class=header title="SOFAJRaft 是一个基于 RAFT 一致性算法的生产级高性能 Java 实现，支持 MULTI-RAFT-GROUP，适用于高负载低延迟的场景。">SOFAJRaft<div class="ss-toc-list-card -hidden-mobile"><svg class="icon -hidden-mobile" aria-hidden="true"><use xlink:href="#icon-menu1"/></svg><div class=ss-tooltip><div class=toc-list><h4 class=title>主要项目</h4><ul class=list><li class=item><a href=/projects/sofa-boot/overview>SOFABoot</a></li><li class=item><a href=/projects/sofa-rpc/overview>SOFARPC</a></li><li class=item><a href=/projects/sofa-tracer/overview>SOFATracer</a></li><li class=item><a href=/projects/sofa-lookout/overview>SOFALookout</a></li><li class=item><a href=/projects/sofa-registry/overview>SOFARegistry</a></li></ul></div><div class=toc-list><h4 class=title>孵化项目</h4><ul class=list><li class=item><a href=/projects/sofa-mesh/overview>SOFAMesh</a></li><li class=item><a href=/projects/sofa-dashboard/overview>SOFADashboard</a></li></ul></div><div class=toc-list><h4 class=title>工具项目</h4><ul class=list><li class=item><a href=/projects/sofa-bolt/overview>SOFABolt</a></li><li class=item><a href=/projects/sofa-jraft/overview>SOFAJRaft</a></li><li class=item><a href=/projects/sofa-acts/overview>SOFAActs</a></li><li class=item><a href=https://www.sofastack.tech/projects/sofa-boot/sofa-ark-readme/>SOFAArk</a></li></ul></div><div class=toc-list><h4 class=title>生态项目</h4><ul class=list><li class=item><a href=https://mosn.io>MOSN</a></li><li class=item><a href=https://occlum.io>Occlum</a></li><li class=item><a href=https://seata.io>Seata</a></li></ul></div></div></div></div><div class=body><ul class=leaf-section><li class=item><div class=link><a title="SOFAJRaft 介绍" href=/projects/sofa-jraft/overview>SOFAJRaft 介绍</a></div></li><li class=item><div class=link><a title=核心引擎设计 href=/projects/sofa-jraft/engine-architecture>核心引擎设计</a></div></li><li class=item><div class=link><a title="Jepsen 验证" href=/projects/sofa-jraft/jepson-test>Jepsen 验证</a></div></li><li class=item><div class=link><svg class="icon arrow" aria-hidden="true"><use xlink:href="#icon-arrow"/></svg><a title=用户指南>用户指南</a></div><ul class=leaf-section><li class=item><div class="link -current"><a title="JRaft 用户指南" href=/projects/sofa-jraft/jraft-user-guide>JRaft 用户指南</a></div></li><li class=item><div class=link><a title="JRaft RheaKV 用户指南" href=/projects/sofa-jraft/jraft-rheakv-user-guide>JRaft RheaKV 用户指南</a></div></li><li class=item><div class=link><a title="Counter 例子详解" href=/projects/sofa-jraft/counter-example>Counter 例子详解</a></div></li></ul></li><li class=item><div class=link><a title="Maven 依赖说明" href=/projects/sofa-jraft/maven-dependency>Maven 依赖说明</a></div></li><li class=item><div class=link><a title=版本发行日志 href=/projects/sofa-jraft/release-log>版本发行日志</a></div></li><li class=item><div class=link><a title="Benchmark 数据" href=/projects/sofa-jraft/benchmark-performance>Benchmark 数据</a></div></li><li class=item><div class=link><a title=用户案例 href=/projects/sofa-jraft/user-stories>用户案例</a></div></li><li class=item><div class=link><a title="Road map" href=/projects/sofa-jraft/road-map>Road map</a></div></li><li class=item><div class=link><svg class="icon arrow" aria-hidden="true"><use xlink:href="#icon-arrow"/></svg><a title=扩展资料>扩展资料</a></div><ul class=leaf-section><li class=item><div class=link><a title="Raft 算法解读" href=/projects/sofa-jraft/raft-introduction>Raft 算法解读</a></div></li><li class=item><div class=link><a title="分布式一致性 - Raft 与 JRaft" href=/projects/sofa-jraft/consistency-raft-jraft>分布式一致性 - Raft 与 JRaft</a></div></li></ul></li><li class=item><div class=link><svg class="icon arrow" aria-hidden="true"><use xlink:href="#icon-arrow"/></svg><a title=其他>其他</a></div><ul class=leaf-section><li class=item><div class=link><a title="如何参与 SOFAJRaft 代码贡献" href=/projects/sofa-jraft/how-to-contribute-code-to-sofajraft>如何参与 SOFAJRaft 代码贡献</a></div></li></ul></li></ul></div></div></div></aside><main class="ss-layout-main -card"><div class=ss-meta><div class=container><h1 class=title>JRaft 用户指南</h1><a class="edit-button -hidden-mobile" href=https://github.com/sofastack/sofastack.tech/edit/master/content/zh/projects/sofa-jraft/jraft-user-guide/index.md>编辑</a></div><div class=meta>更新时间: 2021-01-19</div></div><article class=typo><pre><code>&lt;span style=&quot;color:#75715e&quot;&gt;/**
+</code></pre><p>* Called when task is done.    * * @param status the task status. */
+void run(Status status);
+}</p><p>结果通过 Status 告知，Status#isOk() 告诉你成功还是失败，错误码和错误信息可以通过另外两个方法获取：</p><pre><code>&lt;span style=&quot;color:#75715e&quot;&gt;/**
+</code></pre><p>* Called when task is committed to majority peers of the RAFT group but before it is applied to state machine. * * &lt;strong>Note: user implementation should not block this method and throw any exceptions.&lt;/strong> */
+void onCommitted();
+}</p><p>当 jraft 发现 task 的 done 是 TaskClosure 的时候，会在 RAFT 日志提交到 RAFT group 之后（并复制到多数节点），应用到状态机之前调用 onCommitted 方法。</p><p>  @Override
+public void onLeaderStart(long term) {
+//保存 leader term this.leaderTerm.set(term);
+super.onLeaderStart(term);
+}</p><p>}
+3.3 Raft 节点 Node</p><p>// 自动 Snapshot 间隔时间，默认一个小时 private int snapshotIntervalSecs = 3600;</p><p>// 当节点是从一个空白状态启动（snapshot和log存储都为空），那么他会使用这个初始配置作为 raft group // 的配置启动，否则会从存储中加载已有配置。 private Configuration initialConf = new Configuration();</p><p>// 最核心的，属于本 raft 节点的应用状态机实例。 private StateMachine fsm;</p><p>// Raft 节点的日志存储路径，必须有 private String logUri;
+// Raft 节点的元信息存储路径，必须有 private String raftMetaUri;
+// Raft 节点的 snapshot 存储路径，可选，不提供就关闭了 snapshot 功能。 private String snapshotUri;
+// 是否关闭 Cli 服务，参见 4.2 节，默认不关闭
+ private boolean       disableCli = false;
+// 内部定时线程池大小，默认按照 cpu 个数计算，需要根据应用实际情况适当调节。 private int timerPoolSize = Utils.cpus() <em>3 > 20 ? 20 : Utils.cpus()</em> 3;
+// Raft 内部实现的一些配置信息，特别是性能相关，参见第6节。 private RaftOptions raftOptions = new RaftOptions();
+NodeOptions 最重要的就是设置三个存储的路径，以及应用状态机实例，如果是第一次启动，还需要设置 initialConf 初始配置节点列表。</p><p>// RpcServer stop
+bolt.server.ssl.enable = false
+bolt.server.ssl.clientAuth = false</p><p>// RpcClient stop
+bolt.client.ssl.enable = false
+其中服务端 SSL keystore 文件 bolt.pfx 和客户端 SSL keystore 文件 cbolt.pfx 按照以下步骤生成：</p><p>keytool -export -alias securebolt -keystore bolt.pfx -storepass sfbolt -file bolt.cer</p><p>// 使用 node 提交任务
+Task task = &mldr;.
+node.apply(task);
+在 start 方法里会帮助你执行 3 和 4 两个步骤，并返回创建的 Node 实例。</p><pre><code>    &lt;span style=&quot;color:#a6e22e&quot;&gt;@Override&lt;/span&gt;
+    &lt;span style=&quot;color:#66d9ef&quot;&gt;public&lt;/span&gt; &lt;span style=&quot;color:#66d9ef&quot;&gt;void&lt;/span&gt; &lt;span style=&quot;color:#a6e22e&quot;&gt;run&lt;/span&gt;&lt;span style=&quot;color:#f92672&quot;&gt;(&lt;/span&gt;Status status&lt;span style=&quot;color:#f92672&quot;&gt;,&lt;/span&gt; &lt;span style=&quot;color:#66d9ef&quot;&gt;long&lt;/span&gt; index&lt;span style=&quot;color:#f92672&quot;&gt;,&lt;/span&gt; &lt;span style=&quot;color:#66d9ef&quot;&gt;byte&lt;/span&gt;&lt;span style=&quot;color:#f92672&quot;&gt;[]&lt;/span&gt; reqCtx&lt;span style=&quot;color:#f92672&quot;&gt;)&lt;/span&gt; &lt;span style=&quot;color:#f92672&quot;&gt;{&lt;/span&gt;
+        &lt;span style=&quot;color:#66d9ef&quot;&gt;if&lt;/span&gt; &lt;span style=&quot;color:#f92672&quot;&gt;(&lt;/span&gt;status&lt;span style=&quot;color:#f92672&quot;&gt;.&lt;/span&gt;&lt;span style=&quot;color:#a6e22e&quot;&gt;isOk&lt;/span&gt;&lt;span style=&quot;color:#f92672&quot;&gt;())&lt;/span&gt; &lt;span style=&quot;color:#f92672&quot;&gt;{&lt;/span&gt;
+            &lt;span style=&quot;color:#66d9ef&quot;&gt;try&lt;/span&gt; &lt;span style=&quot;color:#f92672&quot;&gt;{&lt;/span&gt;
+                &lt;span style=&quot;color:#75715e&quot;&gt;// ReadIndexClosure 回调成功，可以从状态机读取最新数据返回
+</code></pre><p>                       // 如果你的状态实现有版本概念，可以根据传入的日志 index 编号做读取。 asyncContext.sendResponse(new ValueCommand(fsm.getValue(key)));
+} catch (final KeyNotFoundException e) {
+asyncContext.sendResponse(GetCommandProcessor.createKeyNotFoundResponse());
+}
+} else {
+// 特定情况下，比如发生选举，该读请求将失败 asyncContext.sendResponse(new BooleanCommand(false, status.getErrorMsg()));
+}
+}
+});
+}</p><p>使用 Node#readIndex(byte [] requestContext, ReadIndexClosure done) 发起线性一致读请求，当可以安全读取的时候， 传入的 closure 将被调用，正常情况下可以从状态机中读取数据返回给客户端， jraft 将保证读取的线性一致性。其中 requestContext 提供给用户作为请求的附加上下文，可以在 closure 里再次拿到继续处理。</p><p>// 将指标定期 30 秒间隔输出到 console
+ConsoleReporter reporter = ConsoleReporter.forRegistry(node.getNodeMetrics().getMetricRegistry())
+.convertRatesTo(TimeUnit.SECONDS)
+.convertDurationsTo(TimeUnit.MILLISECONDS)
+.build();
+reporter.start(30, TimeUnit.SECONDS);</p><p>Reporter 也可以选择输出到 log4j 等日志库或者 tsdb 时序数据库等，具体见 metrics 类库文档。</p><p>&mldr;&mldr;</p><p>&ndash; Timers &mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;-
+append-logs
+count = 4
+mean rate = 44.24 calls/second
+1-minute rate = 0.00 calls/second
+5-minute rate = 0.00 calls/second
+15-minute rate = 0.00 calls/second
+min = 0.00 milliseconds
+max = 3.00 milliseconds
+mean = 1.25 milliseconds
+stddev = 1.09 milliseconds
+median = 1.00 milliseconds
+75% &lt;= 3.00 milliseconds
+95% &lt;= 3.00 milliseconds
+98% &lt;= 3.00 milliseconds
+99% &lt;= 3.00 milliseconds
+99.9% &lt;= 3.00 milliseconds
+指标含义如下：(所有指标都包含min/max/avg/p95/p99等)</p><pre><code>&lt;span style=&quot;color:#75715e&quot;&gt;/** ReadIndex 请求级别，默认 ReadOnlySafe，具体含义参见线性一致读章节*/&lt;/span&gt;
+</code></pre><p>   private ReadOnlyOption readOnlyOptions = ReadOnlyOption.ReadOnlySafe;
+对于重度吞吐量的应用，需要适当调整缓冲区大小、批次大小等参数，以实际测试性能为准。</p><pre><code>String &lt;span style=&quot;color:#a6e22e&quot;&gt;name&lt;/span&gt;&lt;span style=&quot;color:#f92672&quot;&gt;()&lt;/span&gt; &lt;span style=&quot;color:#66d9ef&quot;&gt;default&lt;/span&gt; &lt;span style=&quot;color:#e6db74&quot;&gt;&amp;#34;&amp;#34;&lt;/span&gt;&lt;span style=&quot;color:#f92672&quot;&gt;;&lt;/span&gt;
+
+&lt;span style=&quot;color:#66d9ef&quot;&gt;int&lt;/span&gt; &lt;span style=&quot;color:#a6e22e&quot;&gt;priority&lt;/span&gt;&lt;span style=&quot;color:#f92672&quot;&gt;()&lt;/span&gt; &lt;span style=&quot;color:#66d9ef&quot;&gt;default&lt;/span&gt; 0&lt;span style=&quot;color:#f92672&quot;&gt;;&lt;/span&gt;
+</code></pre><p>}</p><p>&ndash; rheakv &ndash; Timers &mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;-
+rhea-db-timer_BATCH_PUT
+count = 2
+mean rate = 0.10 calls/second
+1-minute rate = 0.31 calls/second
+5-minute rate = 0.38 calls/second
+15-minute rate = 0.39 calls/second
+min = 0.06 milliseconds
+max = 2.12 milliseconds
+mean = 1.09 milliseconds
+stddev = 1.03 milliseconds
+median = 2.12 milliseconds
+75% &lt;= 2.12 milliseconds
+95% &lt;= 2.12 milliseconds
+98% &lt;= 2.12 milliseconds
+99% &lt;= 2.12 milliseconds
+99.9% &lt;= 2.12 milliseconds
+rhea-db-timer_PUT
+count = 10
+mean rate = 0.87 calls/second
+1-minute rate = 1.84 calls/second
+5-minute rate = 1.97 calls/second
+15-minute rate = 1.99 calls/second
+min = 0.01 milliseconds
+max = 0.58 milliseconds
+mean = 0.09 milliseconds
+stddev = 0.17 milliseconds
+median = 0.03 milliseconds
+75% &lt;= 0.04 milliseconds
+95% &lt;= 0.58 milliseconds
+98% &lt;= 0.58 milliseconds
+99% &lt;= 0.58 milliseconds
+99.9% &lt;= 0.58 milliseconds
+rhea-rpc-request-timer_-1
+count = 0
+mean rate = 0.00 calls/second
+1-minute rate = 0.00 calls/second
+5-minute rate = 0.00 calls/second
+15-minute rate = 0.00 calls/second
+min = 0.00 milliseconds
+max = 0.00 milliseconds
+mean = 0.00 milliseconds
+stddev = 0.00 milliseconds
+median = 0.00 milliseconds
+75% &lt;= 0.00 milliseconds
+95% &lt;= 0.00 milliseconds
+98% &lt;= 0.00 milliseconds
+99% &lt;= 0.00 milliseconds
+99.9% &lt;= 0.00 milliseconds</p><p>&mldr;</p><p>12. Rocksdb 配置更改</p><p>StorageOptionsFactory.registerRocksDBTableFormatConfig(RocksDBLogStorage.class, conf);
+13. 只读成员（Learner）</p><pre><code>&lt;span style=&quot;color:#75715e&quot;&gt;// 移除只读节点
+</code></pre><p>Status removeLearners(final String groupId, final Configuration conf, final List&lt;PeerId> learners);</p><pre><code>&lt;span style=&quot;color:#75715e&quot;&gt;// 重新设置所有只读节点
+</code></pre><p>Status resetLearners(final String groupId, final Configuration conf, final List&lt;PeerId> learners);</p></article></main></div><footer class=ss-footer><div class=container><div class=links><div class=cate><h2 class=cate-title>资源</h2><a class=link href=https://github.com/sofastack>Github</a>
+<a class=link href=https://gitee.com/sofastack/>Gitee</a>
+<a class=link href=https://github.com/sofastack-guides>示例</a></div><div class=cate><h2 class=cate-title>社交媒体</h2><a class=link href=https://zhuanlan.zhihu.com/sofastack>知乎专栏</a>
+<a class=link href=https://weibo.com/sofastack>新浪微博</a>
+<a class=link href=https://twitter.com/sofastack_io>Twitter</a></div><div class=cate><h2 class=cate-title>参与进来</h2><a class=link href=https://github.com/sofastack/sofastack.tech/issues/new>反馈</a>
+<a class=link href=https://github.com/sofastack/community>社区</a>
+<a class=link href=https://github.com/sofastack/sofastack.tech/wiki>Wiki</a>
+<a class=link href=mailto:sofa@alipay.cloud.com>Email</a>
+<a class=link href=/hr/>加入我们</a></div><div class=cate><h2 class=cate-title>蚂蚁金服开源项目</h2><a class=link href=https://ant.design/>Ant Design</a>
+<a class=link href=https://eggjs.org/>Egg</a>
+<a class=link href=https://sqlflow.org>SQLFlow</a>
+<a class=link href=https://tech.antfin.com/open-source>更多</a></div></div><div class=qrcode><div><img class=qrcode-img src=/img/qrcode/qrcode_1.png><p class=qrcode-desc>微信公众号</p></div><div><img class=qrcode-img src=/img/qrcode/qrcode_2.png><p class=qrcode-desc>钉钉群</p></div></div></div><div class=copyright><p>© 2019 - 2020 The SOFAStack Authors
+<a href=http://beian.miit.gov.cn/>浙 ICP 备 16045294 号-3</a></p></div></footer></body></html>

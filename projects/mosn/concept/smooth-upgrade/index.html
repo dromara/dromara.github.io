@@ -1,0 +1,100 @@
+<!doctype html><html><head><title>MOSN 平滑升级原理解析 · SOFAStack</title><meta charset=utf-8><meta http-equiv=x-ua-compatible content="IE=edge,chrome=1"><meta name=viewport content="width=device-width,minimum-scale=1"><meta name=description content="SOFAStack is a Scalable Open Financial Architecture for building cloud native applications"><meta name=generator content="Hugo 0.80.0"><link rel="shortcut icon" href=https://gw.alipayobjects.com/os/q/cms/images/jqu9346l/4ba95631-2489-4885-881f-bc7f8d787d5e_w64_h61.png type=image/png><link href=https://unpkg.com/purecss@1.0.0/build/base-min.css rel=stylesheet><link href=/css/main.css rel=stylesheet><link href=/css/zoom-image.css rel=stylesheet><script src=/js/iconfont.js></script><script src=/js/highlight.pack.js></script><script>hljs.initHighlightingOnLoad();</script><script>window.SITE_LANGUAGE="zh"</script><script src=/js/app.js></script><script type=application/javascript>var doNotTrack=false;if(!doNotTrack){(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');ga('create','UA-142131411-1','auto');ga('send','pageview');}</script></head><body><header class=ss-header><nav class=navbar role=navigation aria-label="main navigation"><div class=navbar-brand><a class=logo-link href=/><img class=logo src=/img/logo.png></a><div class=-show-mobile><a id=mobile-menu-icon><svg class="icon" aria-hidden="true"><use xlink:href="#icon-menu"/></svg></a><nav id=mobile-menu><div id=js-menu-search-mobile class=navbar-search-mobile><input class=input placeholder=请输入要搜索的关键词><svg class="icon" aria-hidden="true"><use xlink:href="#icon-search"/></svg></div><a href=/projects/><span>项目</span><svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"/></svg></a>
+<a href=/guides/><span>指南</span><svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"/></svg></a>
+<a href=/blog/><span>博客</span><svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"/></svg></a>
+<a href=/activities/><span>活动</span><svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"/></svg></a>
+<a href=/community/><span>社区</span><svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"/></svg></a>
+<a href=/awesome/><span>Awesome SOFA</span><svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"/></svg></a></nav></div></div><div class="navbar-menu -hidden-mobile"><div class=navbar-start><a class=navbar-item href=/projects/>项目</a>
+<a class=navbar-item href=/guides/>指南</a>
+<a class=navbar-item href=/blog/>博客</a>
+<a class=navbar-item href=/activities/>活动</a>
+<a class=navbar-item href=/community/>社区</a>
+<a class=navbar-item href=/awesome/>Awesome SOFA</a></div><div class=navbar-end><div class=navbar-item><div id=js-menu-search class=navbar-search><input class=input placeholder=请输入要搜索的关键词><svg class="icon" aria-hidden="true"><use xlink:href="#icon-search"/></svg></div></div><div class=navbar-item></div></div></div></nav></header><div class=ss-layout-container><aside class="ss-layout-aside -left ss-card -soft-hidden"><div id=js-drawer class=ss-toc><div id=js-drawer-handle class=drawer-handle><svg class="icon icon-menu" aria-hidden="true"><use xlink:href="#icon-menu"/></svg><svg class="icon icon-close" aria-hidden="true"><use xlink:href="#icon-close"/></svg></div><div class=drawer-body><div class=header title="MOSN 是一款使用 Go 语言开发的云原生网络代理。">MOSN<div class="ss-toc-list-card -hidden-mobile"><svg class="icon -hidden-mobile" aria-hidden="true"><use xlink:href="#icon-menu1"/></svg><div class=ss-tooltip><div class=toc-list><h4 class=title>主要项目</h4><ul class=list><li class=item><a href=/projects/sofa-boot/overview>SOFABoot</a></li><li class=item><a href=/projects/sofa-rpc/overview>SOFARPC</a></li><li class=item><a href=/projects/sofa-tracer/overview>SOFATracer</a></li><li class=item><a href=/projects/sofa-lookout/overview>SOFALookout</a></li><li class=item><a href=/projects/sofa-registry/overview>SOFARegistry</a></li></ul></div><div class=toc-list><h4 class=title>孵化项目</h4><ul class=list><li class=item><a href=/projects/sofa-mesh/overview>SOFAMesh</a></li><li class=item><a href=/projects/sofa-dashboard/overview>SOFADashboard</a></li></ul></div><div class=toc-list><h4 class=title>工具项目</h4><ul class=list><li class=item><a href=/projects/sofa-bolt/overview>SOFABolt</a></li><li class=item><a href=/projects/sofa-jraft/overview>SOFAJRaft</a></li><li class=item><a href=/projects/sofa-acts/overview>SOFAActs</a></li><li class=item><a href=https://www.sofastack.tech/projects/sofa-boot/sofa-ark-readme/>SOFAArk</a></li></ul></div><div class=toc-list><h4 class=title>生态项目</h4><ul class=list><li class=item><a href=https://mosn.io>MOSN</a></li><li class=item><a href=https://occlum.io>Occlum</a></li><li class=item><a href=https://seata.io>Seata</a></li></ul></div></div></div></div><div class=body><ul class=leaf-section></ul></div></div></div></aside><main class="ss-layout-main -card"><div class=ss-meta><div class=container><h1 class=title>MOSN 平滑升级原理解析</h1><a class="edit-button -hidden-mobile" href=https://github.com/sofastack/sofastack.tech/edit/master/content/zh/projects/mosn/concept/smooth-upgrade/index.md>编辑</a></div><div class=meta>更新时间: 2021-01-19</div></div><article class=typo><pre><code>&lt;span style=&quot;color:#66d9ef&quot;&gt;for&lt;/span&gt; {
+    &lt;span style=&quot;color:#a6e22e&quot;&gt;uc&lt;/span&gt;, &lt;span style=&quot;color:#a6e22e&quot;&gt;err&lt;/span&gt; &lt;span style=&quot;color:#f92672&quot;&gt;:=&lt;/span&gt; &lt;span style=&quot;color:#a6e22e&quot;&gt;ul&lt;/span&gt;.&lt;span style=&quot;color:#a6e22e&quot;&gt;AcceptUnix&lt;/span&gt;()
+    &lt;span style=&quot;color:#a6e22e&quot;&gt;_&lt;/span&gt;, &lt;span style=&quot;color:#a6e22e&quot;&gt;err&lt;/span&gt; = &lt;span style=&quot;color:#a6e22e&quot;&gt;uc&lt;/span&gt;.&lt;span style=&quot;color:#a6e22e&quot;&gt;Write&lt;/span&gt;([]&lt;span style=&quot;color:#66d9ef&quot;&gt;byte&lt;/span&gt;{&lt;span style=&quot;color:#ae81ff&quot;&gt;0&lt;/span&gt;})
+    &lt;span style=&quot;color:#a6e22e&quot;&gt;reconfigure&lt;/span&gt;(&lt;span style=&quot;color:#66d9ef&quot;&gt;false&lt;/span&gt;)
+}
+</code></pre><p>}
+触发平滑升级流程的两种方式最终都是启动一个新的 MOSN 进程，然后调用GetInheritListeners()，通过 isReconfigure() 函数来判断本机是否存在一个老的 MOSN（就是判断是否存在 reconfig.sock 监听），如果存在一个老的 MOSN，就进入迁移流程，反之就是正常的启动流程。</p><pre><code>&lt;span style=&quot;color:#a6e22e&quot;&gt;l&lt;/span&gt;, &lt;span style=&quot;color:#a6e22e&quot;&gt;err&lt;/span&gt; &lt;span style=&quot;color:#f92672&quot;&gt;:=&lt;/span&gt; &lt;span style=&quot;color:#a6e22e&quot;&gt;net&lt;/span&gt;.&lt;span style=&quot;color:#a6e22e&quot;&gt;Listen&lt;/span&gt;(&lt;span style=&quot;color:#e6db74&quot;&gt;&amp;#34;unix&amp;#34;&lt;/span&gt;, &lt;span style=&quot;color:#a6e22e&quot;&gt;types&lt;/span&gt;.&lt;span style=&quot;color:#a6e22e&quot;&gt;TransferListenDomainSocket&lt;/span&gt;)
+&lt;span style=&quot;color:#a6e22e&quot;&gt;uc&lt;/span&gt;, &lt;span style=&quot;color:#a6e22e&quot;&gt;err&lt;/span&gt; &lt;span style=&quot;color:#f92672&quot;&gt;:=&lt;/span&gt; &lt;span style=&quot;color:#a6e22e&quot;&gt;ul&lt;/span&gt;.&lt;span style=&quot;color:#a6e22e&quot;&gt;AcceptUnix&lt;/span&gt;()
+&lt;span style=&quot;color:#a6e22e&quot;&gt;_&lt;/span&gt;, &lt;span style=&quot;color:#a6e22e&quot;&gt;oobn&lt;/span&gt;, &lt;span style=&quot;color:#a6e22e&quot;&gt;_&lt;/span&gt;, &lt;span style=&quot;color:#a6e22e&quot;&gt;_&lt;/span&gt;, &lt;span style=&quot;color:#a6e22e&quot;&gt;err&lt;/span&gt; &lt;span style=&quot;color:#f92672&quot;&gt;:=&lt;/span&gt; &lt;span style=&quot;color:#a6e22e&quot;&gt;uc&lt;/span&gt;.&lt;span style=&quot;color:#a6e22e&quot;&gt;ReadMsgUnix&lt;/span&gt;(&lt;span style=&quot;color:#a6e22e&quot;&gt;buf&lt;/span&gt;, &lt;span style=&quot;color:#a6e22e&quot;&gt;oob&lt;/span&gt;)
+&lt;span style=&quot;color:#a6e22e&quot;&gt;file&lt;/span&gt; &lt;span style=&quot;color:#f92672&quot;&gt;:=&lt;/span&gt; &lt;span style=&quot;color:#a6e22e&quot;&gt;os&lt;/span&gt;.&lt;span style=&quot;color:#a6e22e&quot;&gt;NewFile&lt;/span&gt;(&lt;span style=&quot;color:#a6e22e&quot;&gt;fd&lt;/span&gt;, &lt;span style=&quot;color:#e6db74&quot;&gt;&amp;#34;&amp;#34;&lt;/span&gt;)
+&lt;span style=&quot;color:#a6e22e&quot;&gt;fileListener&lt;/span&gt;, &lt;span style=&quot;color:#a6e22e&quot;&gt;err&lt;/span&gt; &lt;span style=&quot;color:#f92672&quot;&gt;:=&lt;/span&gt; &lt;span style=&quot;color:#a6e22e&quot;&gt;net&lt;/span&gt;.&lt;span style=&quot;color:#a6e22e&quot;&gt;FileListener&lt;/span&gt;(&lt;span style=&quot;color:#a6e22e&quot;&gt;file&lt;/span&gt;)
+&lt;span style=&quot;color:#66d9ef&quot;&gt;return&lt;/span&gt; &lt;span style=&quot;color:#a6e22e&quot;&gt;listeners&lt;/span&gt;, &lt;span style=&quot;color:#a6e22e&quot;&gt;uc&lt;/span&gt;, &lt;span style=&quot;color:#66d9ef&quot;&gt;nil&lt;/span&gt;
+</code></pre><p>}
+如果进入迁移流程，新的 MOSN 将监听一个新的 Domain Socket（listen.sock），用于老的 MOSN 传递 listen FD 到新的 MOSN。FD 的传递使用了sendMsg 和 recvMsg。在收到 listen FD 之后，调用 net.FileListener() 函数生产一个 Listener。此时，新老 MOSN 都同时拥有了相同的 Listen 套接字。</p><pre><code>&lt;span style=&quot;color:#a6e22e&quot;&gt;os&lt;/span&gt;.&lt;span style=&quot;color:#a6e22e&quot;&gt;Exit&lt;/span&gt;(&lt;span style=&quot;color:#ae81ff&quot;&gt;0&lt;/span&gt;)
+</code></pre><p>}
+在 Listen FD 迁移之后，New MOSN 通过配置启动，然后在最后启动一个协程运行TransferServer()，将监听一个新的 DomainSocket（conn.sock），用于后续接收 Old MOSN 的长连接迁移。迁移的函数是 transferHandler()</p><pre><code>&lt;span style=&quot;color:#a6e22e&quot;&gt;utils&lt;/span&gt;.&lt;span style=&quot;color:#a6e22e&quot;&gt;GoWithRecover&lt;/span&gt;(&lt;span style=&quot;color:#66d9ef&quot;&gt;func&lt;/span&gt;() {
+    &lt;span style=&quot;color:#66d9ef&quot;&gt;for&lt;/span&gt; {
+        &lt;span style=&quot;color:#a6e22e&quot;&gt;c&lt;/span&gt;, &lt;span style=&quot;color:#a6e22e&quot;&gt;err&lt;/span&gt; &lt;span style=&quot;color:#f92672&quot;&gt;:=&lt;/span&gt; &lt;span style=&quot;color:#a6e22e&quot;&gt;l&lt;/span&gt;.&lt;span style=&quot;color:#a6e22e&quot;&gt;Accept&lt;/span&gt;()
+        &lt;span style=&quot;color:#66d9ef&quot;&gt;go&lt;/span&gt; &lt;span style=&quot;color:#a6e22e&quot;&gt;transferHandler&lt;/span&gt;(&lt;span style=&quot;color:#a6e22e&quot;&gt;c&lt;/span&gt;, &lt;span style=&quot;color:#a6e22e&quot;&gt;handler&lt;/span&gt;, &lt;span style=&quot;color:#f92672&quot;&gt;&amp;amp;&lt;/span&gt;&lt;span style=&quot;color:#a6e22e&quot;&gt;transferMap&lt;/span&gt;)
+
+    }
+}, &lt;span style=&quot;color:#66d9ef&quot;&gt;nil&lt;/span&gt;)
+</code></pre><p>}
+Old MOSN 将通过 transferRead() 和 transferWrite() 进入最后的长链接迁移流程，下面主要分析这块内容。</p><pre><code>&lt;span style=&quot;color:#a6e22e&quot;&gt;file&lt;/span&gt;, &lt;span style=&quot;color:#a6e22e&quot;&gt;tlsConn&lt;/span&gt;, &lt;span style=&quot;color:#a6e22e&quot;&gt;err&lt;/span&gt; &lt;span style=&quot;color:#f92672&quot;&gt;:=&lt;/span&gt; &lt;span style=&quot;color:#a6e22e&quot;&gt;transferGetFile&lt;/span&gt;(&lt;span style=&quot;color:#a6e22e&quot;&gt;c&lt;/span&gt;)
+
+&lt;span style=&quot;color:#a6e22e&quot;&gt;uc&lt;/span&gt; &lt;span style=&quot;color:#f92672&quot;&gt;:=&lt;/span&gt; &lt;span style=&quot;color:#a6e22e&quot;&gt;unixConn&lt;/span&gt;.(&lt;span style=&quot;color:#f92672&quot;&gt;*&lt;/span&gt;&lt;span style=&quot;color:#a6e22e&quot;&gt;net&lt;/span&gt;.&lt;span style=&quot;color:#a6e22e&quot;&gt;UnixConn&lt;/span&gt;)
+
+&lt;span style=&quot;color:#75715e&quot;&gt;// send type and TCP FD
+</code></pre><p>err = transferSendType(uc, file)</p><pre><code>&lt;span style=&quot;color:#75715e&quot;&gt;// send header + buffer + TLS
+</code></pre><p>err = transferReadSendData(uc, tlsConn, c.readBuffer, log.DefaultLogger)</p><pre><code>&lt;span style=&quot;color:#75715e&quot;&gt;// recv ID
+</code></pre><p>id := transferRecvID(uc)
+return id, nil
+}
+我们构造了一个简单的读迁移协议, 主要包括了 TCP 原始数据长度，TLS 数据长度，TCP 原始数据，TLS 数据。</p><pre><code>&lt;span style=&quot;color:#66d9ef&quot;&gt;if&lt;/span&gt; &lt;span style=&quot;color:#a6e22e&quot;&gt;conn&lt;/span&gt; &lt;span style=&quot;color:#f92672&quot;&gt;!=&lt;/span&gt; &lt;span style=&quot;color:#66d9ef&quot;&gt;nil&lt;/span&gt; {
+    &lt;span style=&quot;color:#75715e&quot;&gt;// transfer read
+</code></pre><p>// recv header + buffer dataBuf, tlsBuf, err := transferReadRecvData(uc)
+if err != nil {
+log.DefaultLogger.Errorf("[network] [transfer] [handler] transferRecvData error :%v", err)
+return
+}
+connection := transferNewConn(conn, dataBuf, tlsBuf, handler, transferMap)
+if connection != nil {
+transferSendID(uc, connection.id)
+} else {
+transferSendID(uc, transferErr)
+}
+} else {
+// transfer write // recv header + buffer id, buf, err := transferWriteRecvData(uc)
+if err != nil {
+log.DefaultLogger.Errorf("[network] [transfer] [handler] transferRecvData error :%v", err)
+}
+connection := transferFindConnection(transferMap, uint64(id))
+if connection == nil {
+log.DefaultLogger.Errorf("[network] [transfer] [handler] transferFindConnection failed, id = %d", id)
+return
+}
+err = transferWriteBuffer(connection, buf)
+if err != nil {
+log.DefaultLogger.Errorf("[network] [transfer] [handler] transferWriteBuffer error :%v", err)
+return
+}
+}
+}
+此后，Old MOSN 不再读取该 TCP1 连接上的数据，全部由 New MOSN 来读取 TCP1 上的数据并处理，对于新的请求，整个迁移过程就已经完成。</p><pre><code>&lt;span style=&quot;color:#a6e22e&quot;&gt;unixConn&lt;/span&gt;, &lt;span style=&quot;color:#a6e22e&quot;&gt;err&lt;/span&gt; &lt;span style=&quot;color:#f92672&quot;&gt;:=&lt;/span&gt; &lt;span style=&quot;color:#a6e22e&quot;&gt;net&lt;/span&gt;.&lt;span style=&quot;color:#a6e22e&quot;&gt;Dial&lt;/span&gt;(&lt;span style=&quot;color:#e6db74&quot;&gt;&amp;#34;unix&amp;#34;&lt;/span&gt;, &lt;span style=&quot;color:#a6e22e&quot;&gt;types&lt;/span&gt;.&lt;span style=&quot;color:#a6e22e&quot;&gt;TransferConnDomainSocket&lt;/span&gt;)
+
+&lt;span style=&quot;color:#a6e22e&quot;&gt;uc&lt;/span&gt; &lt;span style=&quot;color:#f92672&quot;&gt;:=&lt;/span&gt; &lt;span style=&quot;color:#a6e22e&quot;&gt;unixConn&lt;/span&gt;.(&lt;span style=&quot;color:#f92672&quot;&gt;*&lt;/span&gt;&lt;span style=&quot;color:#a6e22e&quot;&gt;net&lt;/span&gt;.&lt;span style=&quot;color:#a6e22e&quot;&gt;UnixConn&lt;/span&gt;)
+&lt;span style=&quot;color:#a6e22e&quot;&gt;err&lt;/span&gt; = &lt;span style=&quot;color:#a6e22e&quot;&gt;transferSendType&lt;/span&gt;(&lt;span style=&quot;color:#a6e22e&quot;&gt;uc&lt;/span&gt;, &lt;span style=&quot;color:#66d9ef&quot;&gt;nil&lt;/span&gt;)
+
+&lt;span style=&quot;color:#75715e&quot;&gt;// build net.Buffers to IoBuffer
+</code></pre><p>buf := transferBuildIoBuffer(c)
+// send header + buffer err = transferWriteSendData(uc, int(id), buf)
+if err != nil {
+log.DefaultLogger.Errorf("[network] [transfer] [write] transferWrite failed: %v", err)
+return err
+}
+return nil
+}
+我们构造了一个简单的写迁移协议, 主要包括了TCP原始数据长度, connection ID，TCP原始数据。</p></article></main></div><footer class=ss-footer><div class=container><div class=links><div class=cate><h2 class=cate-title>资源</h2><a class=link href=https://github.com/sofastack>Github</a>
+<a class=link href=https://gitee.com/sofastack/>Gitee</a>
+<a class=link href=https://github.com/sofastack-guides>示例</a></div><div class=cate><h2 class=cate-title>社交媒体</h2><a class=link href=https://zhuanlan.zhihu.com/sofastack>知乎专栏</a>
+<a class=link href=https://weibo.com/sofastack>新浪微博</a>
+<a class=link href=https://twitter.com/sofastack_io>Twitter</a></div><div class=cate><h2 class=cate-title>参与进来</h2><a class=link href=https://github.com/sofastack/sofastack.tech/issues/new>反馈</a>
+<a class=link href=https://github.com/sofastack/community>社区</a>
+<a class=link href=https://github.com/sofastack/sofastack.tech/wiki>Wiki</a>
+<a class=link href=mailto:sofa@alipay.cloud.com>Email</a>
+<a class=link href=/hr/>加入我们</a></div><div class=cate><h2 class=cate-title>蚂蚁金服开源项目</h2><a class=link href=https://ant.design/>Ant Design</a>
+<a class=link href=https://eggjs.org/>Egg</a>
+<a class=link href=https://sqlflow.org>SQLFlow</a>
+<a class=link href=https://tech.antfin.com/open-source>更多</a></div></div><div class=qrcode><div><img class=qrcode-img src=/img/qrcode/qrcode_1.png><p class=qrcode-desc>微信公众号</p></div><div><img class=qrcode-img src=/img/qrcode/qrcode_2.png><p class=qrcode-desc>钉钉群</p></div></div></div><div class=copyright><p>© 2019 - 2020 The SOFAStack Authors
+<a href=http://beian.miit.gov.cn/>浙 ICP 备 16045294 号-3</a></p></div></footer></body></html>

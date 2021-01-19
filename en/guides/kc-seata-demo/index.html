@@ -1,0 +1,225 @@
+<!doctype html><html><head><title>Seata distributed transaction practice · SOFAStack</title><meta charset=utf-8><meta http-equiv=x-ua-compatible content="IE=edge,chrome=1"><meta name=viewport content="width=device-width,minimum-scale=1"><meta name=description content="SOFAStack is a Scalable Open Financial Architecture for building cloud native applications"><meta name=generator content="Hugo 0.80.0"><link rel="shortcut icon" href=https://gw.alipayobjects.com/os/q/cms/images/jqu9346l/4ba95631-2489-4885-881f-bc7f8d787d5e_w64_h61.png type=image/png><link href=https://unpkg.com/purecss@1.0.0/build/base-min.css rel=stylesheet><link href=/css/main.css rel=stylesheet><link href=/css/zoom-image.css rel=stylesheet><script src=/js/iconfont.js></script><script src=/js/highlight.pack.js></script><script>hljs.initHighlightingOnLoad();</script><script>window.SITE_LANGUAGE="en"</script><script src=/js/app.js></script><script type=application/javascript>var doNotTrack=false;if(!doNotTrack){(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');ga('create','UA-142131411-1','auto');ga('send','pageview');}</script></head><body><header class=ss-header><nav class=navbar role=navigation aria-label="main navigation"><div class=navbar-brand><a class=logo-link href=/en/><img class=logo src=/img/logo.png></a><div class=-show-mobile><a id=mobile-menu-icon><svg class="icon" aria-hidden="true"><use xlink:href="#icon-menu"/></svg></a><nav id=mobile-menu><div id=js-menu-search-mobile class=navbar-search-mobile><input class=input placeholder=Search><svg class="icon" aria-hidden="true"><use xlink:href="#icon-search"/></svg></div><a href=/en/projects/><span>Projects</span><svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"/></svg></a>
+<a href=/en/guides/><span>Guides</span><svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"/></svg></a>
+<a href=/en/blog/><span>Blog</span><svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"/></svg></a>
+<a href=/en/activities/><span>Activity</span><svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"/></svg></a>
+<a href=/awesome/><span>Awesome SOFA</span><svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"/></svg></a>
+<a href=/guides/kc-seata-demo/><span>中文</span><svg class="icon" aria-hidden="true"><use xlink:href="#icon-transfer"/></svg></a></nav></div></div><div class="navbar-menu -hidden-mobile"><div class=navbar-start><a class=navbar-item href=/en/projects/>Projects</a>
+<a class=navbar-item href=/en/guides/>Guides</a>
+<a class=navbar-item href=/en/blog/>Blog</a>
+<a class=navbar-item href=/en/activities/>Activity</a>
+<a class=navbar-item href=/awesome/>Awesome SOFA</a></div><div class=navbar-end><div class=navbar-item><div id=js-menu-search class=navbar-search><input class=input placeholder=Search><svg class="icon" aria-hidden="true"><use xlink:href="#icon-search"/></svg></div></div><div class=navbar-item><a class=translation href=/guides/kc-seata-demo/>中</a></div></div></div></nav></header><div class=ss-layout-container><main class="ss-layout-main -card"><div class=ss-meta><h1 class=title>Seata distributed transaction practice</h1><div class=meta></div></div><article class=typo><pre><code>    &lt;span style=&quot;color:#f92672&quot;&gt;&amp;lt;dependency&amp;gt;&lt;/span&gt;
+        &lt;span style=&quot;color:#f92672&quot;&gt;&amp;lt;groupId&amp;gt;&lt;/span&gt;io.seata&lt;span style=&quot;color:#f92672&quot;&gt;&amp;lt;/groupId&amp;gt;&lt;/span&gt;
+        &lt;span style=&quot;color:#f92672&quot;&gt;&amp;lt;artifactId&amp;gt;&lt;/span&gt;seata-all&lt;span style=&quot;color:#f92672&quot;&gt;&amp;lt;/artifactId&amp;gt;&lt;/span&gt;
+        &lt;span style=&quot;color:#f92672&quot;&gt;&amp;lt;version&amp;gt;&lt;/span&gt;${seata.version}&lt;span style=&quot;color:#f92672&quot;&gt;&amp;lt;/version&amp;gt;&lt;/span&gt;
+    &lt;span style=&quot;color:#f92672&quot;&gt;&amp;lt;/dependency&amp;gt;&lt;/span&gt;
+
+    &lt;span style=&quot;color:#f92672&quot;&gt;&amp;lt;dependency&amp;gt;&lt;/span&gt;
+        &lt;span style=&quot;color:#f92672&quot;&gt;&amp;lt;groupId&amp;gt;&lt;/span&gt;io.seata&lt;span style=&quot;color:#f92672&quot;&gt;&amp;lt;/groupId&amp;gt;&lt;/span&gt;
+        &lt;span style=&quot;color:#f92672&quot;&gt;&amp;lt;artifactId&amp;gt;&lt;/span&gt;seata-server&lt;span style=&quot;color:#f92672&quot;&gt;&amp;lt;/artifactId&amp;gt;&lt;/span&gt;
+        &lt;span style=&quot;color:#f92672&quot;&gt;&amp;lt;version&amp;gt;&lt;/span&gt;${seata.version}&lt;span style=&quot;color:#f92672&quot;&gt;&amp;lt;/version&amp;gt;&lt;/span&gt;
+        &lt;span style=&quot;color:#f92672&quot;&gt;&amp;lt;exclusions&amp;gt;&lt;/span&gt;
+            &lt;span style=&quot;color:#f92672&quot;&gt;&amp;lt;exclusion&amp;gt;&lt;/span&gt;
+                &lt;span style=&quot;color:#f92672&quot;&gt;&amp;lt;groupId&amp;gt;&lt;/span&gt;javax.servlet&lt;span style=&quot;color:#f92672&quot;&gt;&amp;lt;/groupId&amp;gt;&lt;/span&gt;
+                &lt;span style=&quot;color:#f92672&quot;&gt;&amp;lt;artifactId&amp;gt;&lt;/span&gt;servlet-api&lt;span style=&quot;color:#f92672&quot;&gt;&amp;lt;/artifactId&amp;gt;&lt;/span&gt;
+            &lt;span style=&quot;color:#f92672&quot;&gt;&amp;lt;/exclusion&amp;gt;&lt;/span&gt;
+        &lt;span style=&quot;color:#f92672&quot;&gt;&amp;lt;/exclusions&amp;gt;&lt;/span&gt;
+    &lt;span style=&quot;color:#f92672&quot;&gt;&amp;lt;/dependency&amp;gt;&lt;/span&gt;
+
+    &lt;span style=&quot;color:#f92672&quot;&gt;&amp;lt;dependency&amp;gt;&lt;/span&gt;
+        &lt;span style=&quot;color:#f92672&quot;&gt;&amp;lt;groupId&amp;gt;&lt;/span&gt;io.netty&lt;span style=&quot;color:#f92672&quot;&gt;&amp;lt;/groupId&amp;gt;&lt;/span&gt;
+        &lt;span style=&quot;color:#f92672&quot;&gt;&amp;lt;artifactId&amp;gt;&lt;/span&gt;netty-all&lt;span style=&quot;color:#f92672&quot;&gt;&amp;lt;/artifactId&amp;gt;&lt;/span&gt;
+        &lt;span style=&quot;color:#f92672&quot;&gt;&amp;lt;version&amp;gt;&lt;/span&gt;${netty4.version}&lt;span style=&quot;color:#f92672&quot;&gt;&amp;lt;/version&amp;gt;&lt;/span&gt;
+    &lt;span style=&quot;color:#f92672&quot;&gt;&amp;lt;/dependency&amp;gt;&lt;/span&gt;
+&lt;span style=&quot;color:#f92672&quot;&gt;&amp;lt;/dependencies&amp;gt;&lt;/span&gt;
+</code></pre><p>&lt;/dependencyManagement>
+Introduce the following dependencies into the POM file of the stock-mng project (seata-demo-at/stock-mng/pom.xml):</p><pre><code>&lt;span style=&quot;color:#f92672&quot;&gt;&amp;lt;dependency&amp;gt;&lt;/span&gt;
+    &lt;span style=&quot;color:#f92672&quot;&gt;&amp;lt;groupId&amp;gt;&lt;/span&gt;io.netty&lt;span style=&quot;color:#f92672&quot;&gt;&amp;lt;/groupId&amp;gt;&lt;/span&gt;
+    &lt;span style=&quot;color:#f92672&quot;&gt;&amp;lt;artifactId&amp;gt;&lt;/span&gt;netty-all&lt;span style=&quot;color:#f92672&quot;&gt;&amp;lt;/artifactId&amp;gt;&lt;/span&gt;
+&lt;span style=&quot;color:#f92672&quot;&gt;&amp;lt;/dependency&amp;gt;&lt;/span&gt;
+</code></pre><p>&lt;dependencies>
+Introduce the following dependencies into the POM file of the balance-mng-impl project (seata-demo-at/balance-mng/balance-mng-impl/pom.xml):</p><pre><code>&lt;span style=&quot;color:#f92672&quot;&gt;&amp;lt;dependency&amp;gt;&lt;/span&gt;
+    &lt;span style=&quot;color:#f92672&quot;&gt;&amp;lt;groupId&amp;gt;&lt;/span&gt;io.seata&lt;span style=&quot;color:#f92672&quot;&gt;&amp;lt;/groupId&amp;gt;&lt;/span&gt;
+    &lt;span style=&quot;color:#f92672&quot;&gt;&amp;lt;artifactId&amp;gt;&lt;/span&gt;seata-server&lt;span style=&quot;color:#f92672&quot;&gt;&amp;lt;/artifactId&amp;gt;&lt;/span&gt;
+&lt;span style=&quot;color:#f92672&quot;&gt;&amp;lt;/dependency&amp;gt;&lt;/span&gt;
+
+&lt;span style=&quot;color:#f92672&quot;&gt;&amp;lt;dependency&amp;gt;&lt;/span&gt;
+    &lt;span style=&quot;color:#f92672&quot;&gt;&amp;lt;groupId&amp;gt;&lt;/span&gt;io.netty&lt;span style=&quot;color:#f92672&quot;&gt;&amp;lt;/groupId&amp;gt;&lt;/span&gt;
+    &lt;span style=&quot;color:#f92672&quot;&gt;&amp;lt;artifactId&amp;gt;&lt;/span&gt;netty-all&lt;span style=&quot;color:#f92672&quot;&gt;&amp;lt;/artifactId&amp;gt;&lt;/span&gt;
+&lt;span style=&quot;color:#f92672&quot;&gt;&amp;lt;/dependency&amp;gt;&lt;/span&gt;
+</code></pre><p>&lt;dependencies>
+2. Use Seata’s DataSourceProxy to proxy actual data source and configure GlobalTransactionScanner to scan @GlobalTransaction annotation</p><p>@Configuration
+public static class DataSourceConfig {</p><pre><code>&lt;span style=&quot;color:#a6e22e&quot;&gt;@Bean&lt;/span&gt;
+&lt;span style=&quot;color:#a6e22e&quot;&gt;@Primary&lt;/span&gt;
+&lt;span style=&quot;color:#a6e22e&quot;&gt;@ConfigurationProperties&lt;/span&gt;&lt;span style=&quot;color:#f92672&quot;&gt;(&lt;/span&gt;prefix &lt;span style=&quot;color:#f92672&quot;&gt;=&lt;/span&gt; &lt;span style=&quot;color:#e6db74&quot;&gt;&amp;#34;spring.datasource.hikari&amp;#34;&lt;/span&gt;&lt;span style=&quot;color:#f92672&quot;&gt;)&lt;/span&gt;
+&lt;span style=&quot;color:#66d9ef&quot;&gt;public&lt;/span&gt; DataSource &lt;span style=&quot;color:#a6e22e&quot;&gt;dataSource&lt;/span&gt;&lt;span style=&quot;color:#f92672&quot;&gt;(&lt;/span&gt;DataSourceProperties properties&lt;span style=&quot;color:#f92672&quot;&gt;)&lt;/span&gt; &lt;span style=&quot;color:#f92672&quot;&gt;{&lt;/span&gt;
+    HikariDataSource dataSource &lt;span style=&quot;color:#f92672&quot;&gt;=&lt;/span&gt; createDataSource&lt;span style=&quot;color:#f92672&quot;&gt;(&lt;/span&gt;properties&lt;span style=&quot;color:#f92672&quot;&gt;,&lt;/span&gt; HikariDataSource&lt;span style=&quot;color:#f92672&quot;&gt;.&lt;/span&gt;&lt;span style=&quot;color:#a6e22e&quot;&gt;class&lt;/span&gt;&lt;span style=&quot;color:#f92672&quot;&gt;);&lt;/span&gt;
+    &lt;span style=&quot;color:#66d9ef&quot;&gt;if&lt;/span&gt; &lt;span style=&quot;color:#f92672&quot;&gt;(&lt;/span&gt;StringUtils&lt;span style=&quot;color:#f92672&quot;&gt;.&lt;/span&gt;&lt;span style=&quot;color:#a6e22e&quot;&gt;hasText&lt;/span&gt;&lt;span style=&quot;color:#f92672&quot;&gt;(&lt;/span&gt;properties&lt;span style=&quot;color:#f92672&quot;&gt;.&lt;/span&gt;&lt;span style=&quot;color:#a6e22e&quot;&gt;getName&lt;/span&gt;&lt;span style=&quot;color:#f92672&quot;&gt;()))&lt;/span&gt; &lt;span style=&quot;color:#f92672&quot;&gt;{&lt;/span&gt;
+        dataSource&lt;span style=&quot;color:#f92672&quot;&gt;.&lt;/span&gt;&lt;span style=&quot;color:#a6e22e&quot;&gt;setPoolName&lt;/span&gt;&lt;span style=&quot;color:#f92672&quot;&gt;(&lt;/span&gt;properties&lt;span style=&quot;color:#f92672&quot;&gt;.&lt;/span&gt;&lt;span style=&quot;color:#a6e22e&quot;&gt;getName&lt;/span&gt;&lt;span style=&quot;color:#f92672&quot;&gt;());&lt;/span&gt;
+    &lt;span style=&quot;color:#f92672&quot;&gt;}&lt;/span&gt;
+    &lt;span style=&quot;color:#66d9ef&quot;&gt;return&lt;/span&gt; &lt;span style=&quot;color:#66d9ef&quot;&gt;new&lt;/span&gt; DataSourceProxy&lt;span style=&quot;color:#f92672&quot;&gt;(&lt;/span&gt;dataSource&lt;span style=&quot;color:#f92672&quot;&gt;);&lt;/span&gt;
+&lt;span style=&quot;color:#f92672&quot;&gt;}&lt;/span&gt;
+
+&lt;span style=&quot;color:#a6e22e&quot;&gt;@SuppressWarnings&lt;/span&gt;&lt;span style=&quot;color:#f92672&quot;&gt;(&lt;/span&gt;&lt;span style=&quot;color:#e6db74&quot;&gt;&amp;#34;unchecked&amp;#34;&lt;/span&gt;&lt;span style=&quot;color:#f92672&quot;&gt;)&lt;/span&gt;
+&lt;span style=&quot;color:#66d9ef&quot;&gt;protected&lt;/span&gt; &lt;span style=&quot;color:#66d9ef&quot;&gt;static&lt;/span&gt; &lt;span style=&quot;color:#f92672&quot;&gt;&amp;lt;&lt;/span&gt;T&lt;span style=&quot;color:#f92672&quot;&gt;&amp;gt;&lt;/span&gt; T &lt;span style=&quot;color:#a6e22e&quot;&gt;createDataSource&lt;/span&gt;&lt;span style=&quot;color:#f92672&quot;&gt;(&lt;/span&gt;DataSourceProperties properties&lt;span style=&quot;color:#f92672&quot;&gt;,&lt;/span&gt;
+                                        Class&lt;span style=&quot;color:#f92672&quot;&gt;&amp;lt;?&lt;/span&gt; &lt;span style=&quot;color:#66d9ef&quot;&gt;extends&lt;/span&gt; DataSource&lt;span style=&quot;color:#f92672&quot;&gt;&amp;gt;&lt;/span&gt; type&lt;span style=&quot;color:#f92672&quot;&gt;)&lt;/span&gt; &lt;span style=&quot;color:#f92672&quot;&gt;{&lt;/span&gt;
+    &lt;span style=&quot;color:#66d9ef&quot;&gt;return&lt;/span&gt; &lt;span style=&quot;color:#f92672&quot;&gt;(&lt;/span&gt;T&lt;span style=&quot;color:#f92672&quot;&gt;)&lt;/span&gt; properties&lt;span style=&quot;color:#f92672&quot;&gt;.&lt;/span&gt;&lt;span style=&quot;color:#a6e22e&quot;&gt;initializeDataSourceBuilder&lt;/span&gt;&lt;span style=&quot;color:#f92672&quot;&gt;().&lt;/span&gt;&lt;span style=&quot;color:#a6e22e&quot;&gt;type&lt;/span&gt;&lt;span style=&quot;color:#f92672&quot;&gt;(&lt;/span&gt;type&lt;span style=&quot;color:#f92672&quot;&gt;).&lt;/span&gt;&lt;span style=&quot;color:#a6e22e&quot;&gt;build&lt;/span&gt;&lt;span style=&quot;color:#f92672&quot;&gt;();&lt;/span&gt;
+&lt;span style=&quot;color:#f92672&quot;&gt;}&lt;/span&gt;
+
+&lt;span style=&quot;color:#a6e22e&quot;&gt;@Bean&lt;/span&gt;
+&lt;span style=&quot;color:#a6e22e&quot;&gt;@Primary&lt;/span&gt;
+&lt;span style=&quot;color:#66d9ef&quot;&gt;public&lt;/span&gt; GlobalTransactionScanner &lt;span style=&quot;color:#a6e22e&quot;&gt;globalTransactionScanner&lt;/span&gt;&lt;span style=&quot;color:#f92672&quot;&gt;(){&lt;/span&gt;
+    &lt;span style=&quot;color:#66d9ef&quot;&gt;return&lt;/span&gt; &lt;span style=&quot;color:#66d9ef&quot;&gt;new&lt;/span&gt; GlobalTransactionScanner&lt;span style=&quot;color:#f92672&quot;&gt;(&lt;/span&gt;&lt;span style=&quot;color:#e6db74&quot;&gt;&amp;#34;kc-balance-mng&amp;#34;&lt;/span&gt;&lt;span style=&quot;color:#f92672&quot;&gt;,&lt;/span&gt; &lt;span style=&quot;color:#e6db74&quot;&gt;&amp;#34;my_test_tx_group&amp;#34;&lt;/span&gt;&lt;span style=&quot;color:#f92672&quot;&gt;);&lt;/span&gt;
+&lt;span style=&quot;color:#f92672&quot;&gt;}&lt;/span&gt;
+</code></pre><p>}
+Note that the above dataSource method returns the data source of the DataSourceProxy.</p><p>@Override
+@GlobalTransactional(timeoutMills = 300000, name = "kc-book-store-tx")
+public Success purchase(String body) {
+&mldr;
+}
+4. Configure Seata server</p><pre><code>startSeatServer&lt;span style=&quot;color:#f92672&quot;&gt;();&lt;/span&gt;
+
+SpringApplication&lt;span style=&quot;color:#f92672&quot;&gt;.&lt;/span&gt;&lt;span style=&quot;color:#a6e22e&quot;&gt;run&lt;/span&gt;&lt;span style=&quot;color:#f92672&quot;&gt;(&lt;/span&gt;BalanceMngApplication&lt;span style=&quot;color:#f92672&quot;&gt;.&lt;/span&gt;&lt;span style=&quot;color:#a6e22e&quot;&gt;class&lt;/span&gt;&lt;span style=&quot;color:#f92672&quot;&gt;,&lt;/span&gt; args&lt;span style=&quot;color:#f92672&quot;&gt;);&lt;/span&gt;
+</code></pre><p>}</p><p>/** * The seata server. */
+static Server server = null;</p><p>private static void startSeatServer(){</p><pre><code>&lt;span style=&quot;color:#66d9ef&quot;&gt;new&lt;/span&gt; Thread&lt;span style=&quot;color:#f92672&quot;&gt;(&lt;/span&gt;&lt;span style=&quot;color:#66d9ef&quot;&gt;new&lt;/span&gt; Runnable&lt;span style=&quot;color:#f92672&quot;&gt;()&lt;/span&gt; &lt;span style=&quot;color:#f92672&quot;&gt;{&lt;/span&gt;
+
+    &lt;span style=&quot;color:#66d9ef&quot;&gt;public&lt;/span&gt; &lt;span style=&quot;color:#66d9ef&quot;&gt;void&lt;/span&gt; &lt;span style=&quot;color:#a6e22e&quot;&gt;run&lt;/span&gt;&lt;span style=&quot;color:#f92672&quot;&gt;()&lt;/span&gt; &lt;span style=&quot;color:#f92672&quot;&gt;{&lt;/span&gt;
+        server &lt;span style=&quot;color:#f92672&quot;&gt;=&lt;/span&gt; &lt;span style=&quot;color:#66d9ef&quot;&gt;new&lt;/span&gt; Server&lt;span style=&quot;color:#f92672&quot;&gt;();&lt;/span&gt;
+        &lt;span style=&quot;color:#66d9ef&quot;&gt;try&lt;/span&gt; &lt;span style=&quot;color:#f92672&quot;&gt;{&lt;/span&gt;
+            server&lt;span style=&quot;color:#f92672&quot;&gt;.&lt;/span&gt;&lt;span style=&quot;color:#a6e22e&quot;&gt;main&lt;/span&gt;&lt;span style=&quot;color:#f92672&quot;&gt;(&lt;/span&gt;&lt;span style=&quot;color:#66d9ef&quot;&gt;new&lt;/span&gt; String&lt;span style=&quot;color:#f92672&quot;&gt;[]&lt;/span&gt; &lt;span style=&quot;color:#f92672&quot;&gt;{&lt;/span&gt;&lt;span style=&quot;color:#e6db74&quot;&gt;&amp;#34;8091&amp;#34;&lt;/span&gt;&lt;span style=&quot;color:#f92672&quot;&gt;,&lt;/span&gt; StoreMode&lt;span style=&quot;color:#f92672&quot;&gt;.&lt;/span&gt;&lt;span style=&quot;color:#a6e22e&quot;&gt;FILE&lt;/span&gt;&lt;span style=&quot;color:#f92672&quot;&gt;.&lt;/span&gt;&lt;span style=&quot;color:#a6e22e&quot;&gt;name&lt;/span&gt;&lt;span style=&quot;color:#f92672&quot;&gt;(),&lt;/span&gt; &lt;span style=&quot;color:#e6db74&quot;&gt;&amp;#34;127.0.0.1&amp;#34;&lt;/span&gt;&lt;span style=&quot;color:#f92672&quot;&gt;});&lt;/span&gt;
+        &lt;span style=&quot;color:#f92672&quot;&gt;}&lt;/span&gt; &lt;span style=&quot;color:#66d9ef&quot;&gt;catch&lt;/span&gt; &lt;span style=&quot;color:#f92672&quot;&gt;(&lt;/span&gt;IOException e&lt;span style=&quot;color:#f92672&quot;&gt;)&lt;/span&gt; &lt;span style=&quot;color:#f92672&quot;&gt;{&lt;/span&gt;
+            &lt;span style=&quot;color:#66d9ef&quot;&gt;throw&lt;/span&gt; &lt;span style=&quot;color:#66d9ef&quot;&gt;new&lt;/span&gt; RuntimeException&lt;span style=&quot;color:#f92672&quot;&gt;(&lt;/span&gt;e&lt;span style=&quot;color:#f92672&quot;&gt;);&lt;/span&gt;
+        &lt;span style=&quot;color:#f92672&quot;&gt;}&lt;/span&gt;
+    &lt;span style=&quot;color:#f92672&quot;&gt;}&lt;/span&gt;
+&lt;span style=&quot;color:#f92672&quot;&gt;}).&lt;/span&gt;&lt;span style=&quot;color:#a6e22e&quot;&gt;start&lt;/span&gt;&lt;span style=&quot;color:#f92672&quot;&gt;();&lt;/span&gt;
+</code></pre><p>}
+&mldr;
+The Seata server in demo uses local file as storage. Copy the following two files to the /src/main/resources directory in the balance-mng-bootstrap and stock-mng projects:</p><p>## transaction log store
+store {
+## store mode: file、db
+mode = "file"</p><p>## file store
+file {
+dir = "file_store/seata"
+}
+}
+File name: registry.conf</p><p>nacos {
+serverAddr = "localhost"
+namespace = "public"
+cluster = "default"
+}
+eureka {
+serviceUrl = "http://localhost:1001/eureka"
+application = "default"
+weight = "1"
+}
+redis {
+serverAddr = "localhost:6379"
+db = "0"
+}
+zk {
+cluster = "default"
+serverAddr = "127.0.0.1:2181"
+session.timeout = 6000
+connect.timeout = 2000
+}
+file {
+name = "file.conf"
+}
+}</p><p>config {
+# file、nacos 、apollo、zk
+type = "file"</p><p>nacos {
+serverAddr = "localhost"
+namespace = "public"
+cluster = "default"
+}
+apollo {
+app.id = "fescar-server"
+apollo.meta = "http://192.168.1.204:8801"
+}
+zk {
+serverAddr = "127.0.0.1:2181"
+session.timeout = 6000
+connect.timeout = 2000
+}
+file {
+name = "file.conf"
+}
+}
+5. Create undo_log table</p><p>6. Start Seata server, stock-mng and balance-mng applications</p><p></p><p>boolean minusBalanceCommit(BusinessActionContext context);</p><p>boolean minusBalanceRollback(BusinessActionContext context);</p><p></p><p>@Update("update balance_tb set freezed = freezed - #{amount} where user_name = #{userName}")
+int minusBalanceCommit(@Param("userName") String userName, @Param("amount") BigDecimal amount);</p><p>@Update("update balance_tb set balance = balance + #{amount}, freezed = freezed - #{amount} where user_name = #{userName}")
+int minusBalanceRollback(@Param("userName") String userName, @Param("amount") BigDecimal amount);</p><p></p><p></p><p>@Override
+public boolean minusBalancePrepare(BusinessActionContext context, String userName, BigDecimal amount) {
+LOGGER.info("minus balance prepare begin &mldr;");
+LOGGER.info("minus balance prepare SQL: update balance_tb set balance = balance - {}, freezed = freezed + {} where user_name = {}", amount, amount, userName);</p><pre><code>&lt;span style=&quot;color:#66d9ef&quot;&gt;int&lt;/span&gt; effect &lt;span style=&quot;color:#f92672&quot;&gt;=&lt;/span&gt; balanceMngMapper&lt;span style=&quot;color:#f92672&quot;&gt;.&lt;/span&gt;&lt;span style=&quot;color:#a6e22e&quot;&gt;minusBalancePrepare&lt;/span&gt;&lt;span style=&quot;color:#f92672&quot;&gt;(&lt;/span&gt;userName&lt;span style=&quot;color:#f92672&quot;&gt;,&lt;/span&gt; amount&lt;span style=&quot;color:#f92672&quot;&gt;);&lt;/span&gt;
+LOGGER&lt;span style=&quot;color:#f92672&quot;&gt;.&lt;/span&gt;&lt;span style=&quot;color:#a6e22e&quot;&gt;info&lt;/span&gt;&lt;span style=&quot;color:#f92672&quot;&gt;(&lt;/span&gt;&lt;span style=&quot;color:#e6db74&quot;&gt;&amp;#34;minus balance prepare end&amp;#34;&lt;/span&gt;&lt;span style=&quot;color:#f92672&quot;&gt;);&lt;/span&gt;
+&lt;span style=&quot;color:#66d9ef&quot;&gt;return&lt;/span&gt; &lt;span style=&quot;color:#f92672&quot;&gt;(&lt;/span&gt;effect &lt;span style=&quot;color:#f92672&quot;&gt;&amp;gt;&lt;/span&gt; 0&lt;span style=&quot;color:#f92672&quot;&gt;);&lt;/span&gt;
+</code></pre><p>}</p><p>@Override
+public boolean minusBalanceCommit(BusinessActionContext context) {</p><pre><code>&lt;span style=&quot;color:#75715e&quot;&gt;//Transcation ID
+</code></pre><p>final String xid = context.getXid();</p><pre><code>&lt;span style=&quot;color:#66d9ef&quot;&gt;final&lt;/span&gt; String userName &lt;span style=&quot;color:#f92672&quot;&gt;=&lt;/span&gt; String&lt;span style=&quot;color:#f92672&quot;&gt;.&lt;/span&gt;&lt;span style=&quot;color:#a6e22e&quot;&gt;valueOf&lt;/span&gt;&lt;span style=&quot;color:#f92672&quot;&gt;(&lt;/span&gt;context&lt;span style=&quot;color:#f92672&quot;&gt;.&lt;/span&gt;&lt;span style=&quot;color:#a6e22e&quot;&gt;getActionContext&lt;/span&gt;&lt;span style=&quot;color:#f92672&quot;&gt;(&lt;/span&gt;&lt;span style=&quot;color:#e6db74&quot;&gt;&amp;#34;userName&amp;#34;&lt;/span&gt;&lt;span style=&quot;color:#f92672&quot;&gt;));&lt;/span&gt;
+
+&lt;span style=&quot;color:#66d9ef&quot;&gt;final&lt;/span&gt; BigDecimal amount &lt;span style=&quot;color:#f92672&quot;&gt;=&lt;/span&gt; &lt;span style=&quot;color:#66d9ef&quot;&gt;new&lt;/span&gt; BigDecimal&lt;span style=&quot;color:#f92672&quot;&gt;(&lt;/span&gt;String&lt;span style=&quot;color:#f92672&quot;&gt;.&lt;/span&gt;&lt;span style=&quot;color:#a6e22e&quot;&gt;valueOf&lt;/span&gt;&lt;span style=&quot;color:#f92672&quot;&gt;(&lt;/span&gt;context&lt;span style=&quot;color:#f92672&quot;&gt;.&lt;/span&gt;&lt;span style=&quot;color:#a6e22e&quot;&gt;getActionContext&lt;/span&gt;&lt;span style=&quot;color:#f92672&quot;&gt;(&lt;/span&gt;&lt;span style=&quot;color:#e6db74&quot;&gt;&amp;#34;amount&amp;#34;&lt;/span&gt;&lt;span style=&quot;color:#f92672&quot;&gt;)));&lt;/span&gt;
+
+LOGGER&lt;span style=&quot;color:#f92672&quot;&gt;.&lt;/span&gt;&lt;span style=&quot;color:#a6e22e&quot;&gt;info&lt;/span&gt;&lt;span style=&quot;color:#f92672&quot;&gt;(&lt;/span&gt;&lt;span style=&quot;color:#e6db74&quot;&gt;&amp;#34;minus balance commit begin ... xid: &amp;#34;&lt;/span&gt; &lt;span style=&quot;color:#f92672&quot;&gt;+&lt;/span&gt; xid&lt;span style=&quot;color:#f92672&quot;&gt;);&lt;/span&gt;
+LOGGER&lt;span style=&quot;color:#f92672&quot;&gt;.&lt;/span&gt;&lt;span style=&quot;color:#a6e22e&quot;&gt;info&lt;/span&gt;&lt;span style=&quot;color:#f92672&quot;&gt;(&lt;/span&gt;&lt;span style=&quot;color:#e6db74&quot;&gt;&amp;#34;minus balance commit SQL: update balance_tb set freezed = freezed - {}  where user_name = {}&amp;#34;&lt;/span&gt;&lt;span style=&quot;color:#f92672&quot;&gt;,&lt;/span&gt; amount&lt;span style=&quot;color:#f92672&quot;&gt;,&lt;/span&gt; userName&lt;span style=&quot;color:#f92672&quot;&gt;);&lt;/span&gt;
+
+&lt;span style=&quot;color:#66d9ef&quot;&gt;int&lt;/span&gt; effect &lt;span style=&quot;color:#f92672&quot;&gt;=&lt;/span&gt; balanceMngMapper&lt;span style=&quot;color:#f92672&quot;&gt;.&lt;/span&gt;&lt;span style=&quot;color:#a6e22e&quot;&gt;minusBalanceCommit&lt;/span&gt;&lt;span style=&quot;color:#f92672&quot;&gt;(&lt;/span&gt;userName&lt;span style=&quot;color:#f92672&quot;&gt;,&lt;/span&gt; amount&lt;span style=&quot;color:#f92672&quot;&gt;);&lt;/span&gt;
+LOGGER&lt;span style=&quot;color:#f92672&quot;&gt;.&lt;/span&gt;&lt;span style=&quot;color:#a6e22e&quot;&gt;info&lt;/span&gt;&lt;span style=&quot;color:#f92672&quot;&gt;(&lt;/span&gt;&lt;span style=&quot;color:#e6db74&quot;&gt;&amp;#34;minus balance commit end&amp;#34;&lt;/span&gt;&lt;span style=&quot;color:#f92672&quot;&gt;);&lt;/span&gt;
+&lt;span style=&quot;color:#66d9ef&quot;&gt;return&lt;/span&gt; &lt;span style=&quot;color:#f92672&quot;&gt;(&lt;/span&gt;effect &lt;span style=&quot;color:#f92672&quot;&gt;&amp;gt;&lt;/span&gt; 0&lt;span style=&quot;color:#f92672&quot;&gt;);&lt;/span&gt;
+</code></pre><p>}</p><p>@Override
+public boolean minusBalanceRollback(BusinessActionContext context) {
+//Transcation ID final String xid = context.getXid();</p><pre><code>&lt;span style=&quot;color:#66d9ef&quot;&gt;final&lt;/span&gt; String userName &lt;span style=&quot;color:#f92672&quot;&gt;=&lt;/span&gt; String&lt;span style=&quot;color:#f92672&quot;&gt;.&lt;/span&gt;&lt;span style=&quot;color:#a6e22e&quot;&gt;valueOf&lt;/span&gt;&lt;span style=&quot;color:#f92672&quot;&gt;(&lt;/span&gt;context&lt;span style=&quot;color:#f92672&quot;&gt;.&lt;/span&gt;&lt;span style=&quot;color:#a6e22e&quot;&gt;getActionContext&lt;/span&gt;&lt;span style=&quot;color:#f92672&quot;&gt;(&lt;/span&gt;&lt;span style=&quot;color:#e6db74&quot;&gt;&amp;#34;userName&amp;#34;&lt;/span&gt;&lt;span style=&quot;color:#f92672&quot;&gt;));&lt;/span&gt;
+
+&lt;span style=&quot;color:#66d9ef&quot;&gt;final&lt;/span&gt; BigDecimal amount &lt;span style=&quot;color:#f92672&quot;&gt;=&lt;/span&gt; &lt;span style=&quot;color:#66d9ef&quot;&gt;new&lt;/span&gt; BigDecimal&lt;span style=&quot;color:#f92672&quot;&gt;(&lt;/span&gt;String&lt;span style=&quot;color:#f92672&quot;&gt;.&lt;/span&gt;&lt;span style=&quot;color:#a6e22e&quot;&gt;valueOf&lt;/span&gt;&lt;span style=&quot;color:#f92672&quot;&gt;(&lt;/span&gt;context&lt;span style=&quot;color:#f92672&quot;&gt;.&lt;/span&gt;&lt;span style=&quot;color:#a6e22e&quot;&gt;getActionContext&lt;/span&gt;&lt;span style=&quot;color:#f92672&quot;&gt;(&lt;/span&gt;&lt;span style=&quot;color:#e6db74&quot;&gt;&amp;#34;amount&amp;#34;&lt;/span&gt;&lt;span style=&quot;color:#f92672&quot;&gt;)));&lt;/span&gt;
+
+LOGGER&lt;span style=&quot;color:#f92672&quot;&gt;.&lt;/span&gt;&lt;span style=&quot;color:#a6e22e&quot;&gt;info&lt;/span&gt;&lt;span style=&quot;color:#f92672&quot;&gt;(&lt;/span&gt;&lt;span style=&quot;color:#e6db74&quot;&gt;&amp;#34;minus balance rollback begin ... xid: &amp;#34;&lt;/span&gt; &lt;span style=&quot;color:#f92672&quot;&gt;+&lt;/span&gt; xid&lt;span style=&quot;color:#f92672&quot;&gt;);&lt;/span&gt;
+LOGGER&lt;span style=&quot;color:#f92672&quot;&gt;.&lt;/span&gt;&lt;span style=&quot;color:#a6e22e&quot;&gt;info&lt;/span&gt;&lt;span style=&quot;color:#f92672&quot;&gt;(&lt;/span&gt;&lt;span style=&quot;color:#e6db74&quot;&gt;&amp;#34;minus balance rollback SQL: update balance_tb set balance = balance + {}, freezed = freezed - {}  where user_name = {}&amp;#34;&lt;/span&gt;&lt;span style=&quot;color:#f92672&quot;&gt;,&lt;/span&gt; amount&lt;span style=&quot;color:#f92672&quot;&gt;,&lt;/span&gt; amount&lt;span style=&quot;color:#f92672&quot;&gt;,&lt;/span&gt; userName&lt;span style=&quot;color:#f92672&quot;&gt;);&lt;/span&gt;
+
+&lt;span style=&quot;color:#66d9ef&quot;&gt;int&lt;/span&gt; effect &lt;span style=&quot;color:#f92672&quot;&gt;=&lt;/span&gt; balanceMngMapper&lt;span style=&quot;color:#f92672&quot;&gt;.&lt;/span&gt;&lt;span style=&quot;color:#a6e22e&quot;&gt;minusBalanceRollback&lt;/span&gt;&lt;span style=&quot;color:#f92672&quot;&gt;(&lt;/span&gt;userName&lt;span style=&quot;color:#f92672&quot;&gt;,&lt;/span&gt; amount&lt;span style=&quot;color:#f92672&quot;&gt;);&lt;/span&gt;
+LOGGER&lt;span style=&quot;color:#f92672&quot;&gt;.&lt;/span&gt;&lt;span style=&quot;color:#a6e22e&quot;&gt;info&lt;/span&gt;&lt;span style=&quot;color:#f92672&quot;&gt;(&lt;/span&gt;&lt;span style=&quot;color:#e6db74&quot;&gt;&amp;#34;minus balance rollback end&amp;#34;&lt;/span&gt;&lt;span style=&quot;color:#f92672&quot;&gt;);&lt;/span&gt;
+&lt;span style=&quot;color:#66d9ef&quot;&gt;return&lt;/span&gt; &lt;span style=&quot;color:#f92672&quot;&gt;(&lt;/span&gt;effect &lt;span style=&quot;color:#f92672&quot;&gt;&amp;gt;&lt;/span&gt; 0&lt;span style=&quot;color:#f92672&quot;&gt;);&lt;/span&gt;
+</code></pre><p>}</p><p>3、Cancel the DataSourceProxy using AT mode</p><pre><code>&lt;span style=&quot;color:#75715e&quot;&gt;//@Bean
+</code></pre><p>//@Primary //@ConfigurationProperties(prefix = "spring.datasource.hikari") //public DataSource dataSource(DataSourceProperties properties) { // HikariDataSource dataSource = createDataSource(properties, HikariDataSource.class); // if (StringUtils.hasText(properties.getName())) { // dataSource.setPoolName(properties.getName()); // } // return new DataSourceProxy(dataSource); //} // //@SuppressWarnings("unchecked") //protected static &lt;T> T createDataSource(DataSourceProperties properties, // Class&lt;? extends DataSource> type) { // return (T) properties.initializeDataSourceBuilder().type(type).build(); //}
+@Bean
+@Primary
+public GlobalTransactionScanner globalTransactionScanner(){
+return new GlobalTransactionScanner("kc-balance-mng", "my_test_tx_group");
+}
+}</p><p>4、Change BookStoreControllerImpl purchase method to the BalanceMngFacade.minusBalancePrepare method:</p><pre><code>JSONObject obj &lt;span style=&quot;color:#f92672&quot;&gt;=&lt;/span&gt; JSON&lt;span style=&quot;color:#f92672&quot;&gt;.&lt;/span&gt;&lt;span style=&quot;color:#a6e22e&quot;&gt;parseObject&lt;/span&gt;&lt;span style=&quot;color:#f92672&quot;&gt;(&lt;/span&gt;body&lt;span style=&quot;color:#f92672&quot;&gt;);&lt;/span&gt;
+String userName &lt;span style=&quot;color:#f92672&quot;&gt;=&lt;/span&gt; obj&lt;span style=&quot;color:#f92672&quot;&gt;.&lt;/span&gt;&lt;span style=&quot;color:#a6e22e&quot;&gt;getString&lt;/span&gt;&lt;span style=&quot;color:#f92672&quot;&gt;(&lt;/span&gt;&lt;span style=&quot;color:#e6db74&quot;&gt;&amp;#34;userName&amp;#34;&lt;/span&gt;&lt;span style=&quot;color:#f92672&quot;&gt;);&lt;/span&gt;
+String productCode &lt;span style=&quot;color:#f92672&quot;&gt;=&lt;/span&gt; obj&lt;span style=&quot;color:#f92672&quot;&gt;.&lt;/span&gt;&lt;span style=&quot;color:#a6e22e&quot;&gt;getString&lt;/span&gt;&lt;span style=&quot;color:#f92672&quot;&gt;(&lt;/span&gt;&lt;span style=&quot;color:#e6db74&quot;&gt;&amp;#34;productCode&amp;#34;&lt;/span&gt;&lt;span style=&quot;color:#f92672&quot;&gt;);&lt;/span&gt;
+&lt;span style=&quot;color:#66d9ef&quot;&gt;int&lt;/span&gt; count &lt;span style=&quot;color:#f92672&quot;&gt;=&lt;/span&gt; obj&lt;span style=&quot;color:#f92672&quot;&gt;.&lt;/span&gt;&lt;span style=&quot;color:#a6e22e&quot;&gt;getInteger&lt;/span&gt;&lt;span style=&quot;color:#f92672&quot;&gt;(&lt;/span&gt;&lt;span style=&quot;color:#e6db74&quot;&gt;&amp;#34;count&amp;#34;&lt;/span&gt;&lt;span style=&quot;color:#f92672&quot;&gt;);&lt;/span&gt;
+
+BigDecimal productPrice &lt;span style=&quot;color:#f92672&quot;&gt;=&lt;/span&gt; stockMngFacade&lt;span style=&quot;color:#f92672&quot;&gt;.&lt;/span&gt;&lt;span style=&quot;color:#a6e22e&quot;&gt;queryProductPrice&lt;/span&gt;&lt;span style=&quot;color:#f92672&quot;&gt;(&lt;/span&gt;productCode&lt;span style=&quot;color:#f92672&quot;&gt;,&lt;/span&gt; userName&lt;span style=&quot;color:#f92672&quot;&gt;);&lt;/span&gt;
+&lt;span style=&quot;color:#66d9ef&quot;&gt;if&lt;/span&gt; &lt;span style=&quot;color:#f92672&quot;&gt;(&lt;/span&gt;productPrice &lt;span style=&quot;color:#f92672&quot;&gt;==&lt;/span&gt; &lt;span style=&quot;color:#66d9ef&quot;&gt;null&lt;/span&gt;&lt;span style=&quot;color:#f92672&quot;&gt;)&lt;/span&gt; &lt;span style=&quot;color:#f92672&quot;&gt;{&lt;/span&gt;
+    &lt;span style=&quot;color:#66d9ef&quot;&gt;throw&lt;/span&gt; &lt;span style=&quot;color:#66d9ef&quot;&gt;new&lt;/span&gt; RuntimeException&lt;span style=&quot;color:#f92672&quot;&gt;(&lt;/span&gt;&lt;span style=&quot;color:#e6db74&quot;&gt;&amp;#34;product code does not exist&amp;#34;&lt;/span&gt;&lt;span style=&quot;color:#f92672&quot;&gt;);&lt;/span&gt;
+&lt;span style=&quot;color:#f92672&quot;&gt;}&lt;/span&gt;
+&lt;span style=&quot;color:#66d9ef&quot;&gt;if&lt;/span&gt; &lt;span style=&quot;color:#f92672&quot;&gt;(&lt;/span&gt;count &lt;span style=&quot;color:#f92672&quot;&gt;&amp;lt;=&lt;/span&gt; 0&lt;span style=&quot;color:#f92672&quot;&gt;)&lt;/span&gt; &lt;span style=&quot;color:#f92672&quot;&gt;{&lt;/span&gt;
+    &lt;span style=&quot;color:#66d9ef&quot;&gt;throw&lt;/span&gt; &lt;span style=&quot;color:#66d9ef&quot;&gt;new&lt;/span&gt; RuntimeException&lt;span style=&quot;color:#f92672&quot;&gt;(&lt;/span&gt;&lt;span style=&quot;color:#e6db74&quot;&gt;&amp;#34;purchase count should not be negative&amp;#34;&lt;/span&gt;&lt;span style=&quot;color:#f92672&quot;&gt;);&lt;/span&gt;
+&lt;span style=&quot;color:#f92672&quot;&gt;}&lt;/span&gt;
+LOGGER&lt;span style=&quot;color:#f92672&quot;&gt;.&lt;/span&gt;&lt;span style=&quot;color:#a6e22e&quot;&gt;info&lt;/span&gt;&lt;span style=&quot;color:#f92672&quot;&gt;(&lt;/span&gt;&lt;span style=&quot;color:#e6db74&quot;&gt;&amp;#34;purchase begin ... XID:&amp;#34;&lt;/span&gt; &lt;span style=&quot;color:#f92672&quot;&gt;+&lt;/span&gt; RootContext&lt;span style=&quot;color:#f92672&quot;&gt;.&lt;/span&gt;&lt;span style=&quot;color:#a6e22e&quot;&gt;getXID&lt;/span&gt;&lt;span style=&quot;color:#f92672&quot;&gt;());&lt;/span&gt;
+stockMngFacade&lt;span style=&quot;color:#f92672&quot;&gt;.&lt;/span&gt;&lt;span style=&quot;color:#a6e22e&quot;&gt;createOrder&lt;/span&gt;&lt;span style=&quot;color:#f92672&quot;&gt;(&lt;/span&gt;userName&lt;span style=&quot;color:#f92672&quot;&gt;,&lt;/span&gt; productCode&lt;span style=&quot;color:#f92672&quot;&gt;,&lt;/span&gt; count&lt;span style=&quot;color:#f92672&quot;&gt;);&lt;/span&gt;
+stockMngFacade&lt;span style=&quot;color:#f92672&quot;&gt;.&lt;/span&gt;&lt;span style=&quot;color:#a6e22e&quot;&gt;minusStockCount&lt;/span&gt;&lt;span style=&quot;color:#f92672&quot;&gt;(&lt;/span&gt;userName&lt;span style=&quot;color:#f92672&quot;&gt;,&lt;/span&gt; productCode&lt;span style=&quot;color:#f92672&quot;&gt;,&lt;/span&gt; count&lt;span style=&quot;color:#f92672&quot;&gt;);&lt;/span&gt;
+balanceMngFacade&lt;span style=&quot;color:#f92672&quot;&gt;.&lt;/span&gt;&lt;span style=&quot;color:#a6e22e&quot;&gt;minusBalancePrepare&lt;/span&gt;&lt;span style=&quot;color:#f92672&quot;&gt;(&lt;/span&gt;&lt;span style=&quot;color:#66d9ef&quot;&gt;null&lt;/span&gt;&lt;span style=&quot;color:#f92672&quot;&gt;,&lt;/span&gt; userName&lt;span style=&quot;color:#f92672&quot;&gt;,&lt;/span&gt; productPrice&lt;span style=&quot;color:#f92672&quot;&gt;.&lt;/span&gt;&lt;span style=&quot;color:#a6e22e&quot;&gt;multiply&lt;/span&gt;&lt;span style=&quot;color:#f92672&quot;&gt;(&lt;/span&gt;&lt;span style=&quot;color:#66d9ef&quot;&gt;new&lt;/span&gt; BigDecimal&lt;span style=&quot;color:#f92672&quot;&gt;(&lt;/span&gt;count&lt;span style=&quot;color:#f92672&quot;&gt;)));&lt;/span&gt;
+LOGGER&lt;span style=&quot;color:#f92672&quot;&gt;.&lt;/span&gt;&lt;span style=&quot;color:#a6e22e&quot;&gt;info&lt;/span&gt;&lt;span style=&quot;color:#f92672&quot;&gt;(&lt;/span&gt;&lt;span style=&quot;color:#e6db74&quot;&gt;&amp;#34;purchase end&amp;#34;&lt;/span&gt;&lt;span style=&quot;color:#f92672&quot;&gt;);&lt;/span&gt;
+Success success &lt;span style=&quot;color:#f92672&quot;&gt;=&lt;/span&gt; &lt;span style=&quot;color:#66d9ef&quot;&gt;new&lt;/span&gt; Success&lt;span style=&quot;color:#f92672&quot;&gt;();&lt;/span&gt;
+success&lt;span style=&quot;color:#f92672&quot;&gt;.&lt;/span&gt;&lt;span style=&quot;color:#a6e22e&quot;&gt;setSuccess&lt;/span&gt;&lt;span style=&quot;color:#f92672&quot;&gt;(&lt;/span&gt;&lt;span style=&quot;color:#e6db74&quot;&gt;&amp;#34;true&amp;#34;&lt;/span&gt;&lt;span style=&quot;color:#f92672&quot;&gt;);&lt;/span&gt;
+&lt;span style=&quot;color:#66d9ef&quot;&gt;return&lt;/span&gt; success&lt;span style=&quot;color:#f92672&quot;&gt;;&lt;/span&gt;
+</code></pre><p>}</p><p>5. Introduce BalanceMngFacade interface that StockMngImpl depends on using XML</p><pre><code>&lt;span style=&quot;color:#f92672&quot;&gt;&amp;lt;sofa:reference&lt;/span&gt; &lt;span style=&quot;color:#a6e22e&quot;&gt;id=&lt;/span&gt;&lt;span style=&quot;color:#e6db74&quot;&gt;&amp;#34;balanceMngFacade&amp;#34;&lt;/span&gt; &lt;span style=&quot;color:#a6e22e&quot;&gt;interface=&lt;/span&gt;&lt;span style=&quot;color:#e6db74&quot;&gt;&amp;#34;io.sofastack.balance.manage.facade.BalanceMngFacade&amp;#34;&lt;/span&gt; &lt;span style=&quot;color:#a6e22e&quot;&gt;unique-id=&lt;/span&gt;&lt;span style=&quot;color:#e6db74&quot;&gt;&amp;#34;${service.unique.id}&amp;#34;&lt;/span&gt;&lt;span style=&quot;color:#f92672&quot;&gt;&amp;gt;&lt;/span&gt;
+    &lt;span style=&quot;color:#f92672&quot;&gt;&amp;lt;sofa:binding.bolt&lt;/span&gt; &lt;span style=&quot;color:#f92672&quot;&gt;/&amp;gt;&lt;/span&gt;
+&lt;span style=&quot;color:#f92672&quot;&gt;&amp;lt;/sofa:reference&amp;gt;&lt;/span&gt;
+</code></pre><p>&lt;/beans></p><p></p><p></p><p>6. Start Seata server, stock-mng and balance-mng applications:</p></article><nav class=ss-pagination-next><a class=link-prev href=/en/guides/kc-sofastack-dynamic-demo/><span class=text>Prev:</span>
+<span class=text>SOFABoot dynamic module practice</span></a>
+<a class=link-next href=/en/guides/kc-cloud-mesh-demo/><span class=text>Next:</span>
+<span class=text>Put Service Mesh into practice with CloudMesh</span></a></nav></main><aside class=ss-layout-aside><div class=ss-card><h2 class=card-title>Get the Code</h2><div id=js-code class=ss-aside-code><div class=button-group><button class=button>HTTPS</button>
+<button class=button>SSH</button></div><div class=input-group><input class=input value=https://github.com/sofastack-guides/kc-seata-demo spellcheck=false>
+<span class=addon><svg class="icon copy" aria-hidden="true"><use xlink:href="#icon-copy"/></svg><svg class="icon tick" aria-hidden="true"><use xlink:href="#icon-ictick"/></svg></span></div><a class="button download" href=https://github.com/sofastack-guides/kc-seata-demo/archive/master.zip>Download</a></div></div><div class=ss-card><h2 class=card-title>Project</h2><div class=ss-aside-project><a class=link href=https://github.com/seata/seata>Seata</a></div></div><div class="ss-card ss-aside-toc"><h2 class=card-title>Table of contents</h2><nav id=TableOfContents><ul><li><a href=#at-mode>AT mode</a><ul><li></li></ul></li><li><a href=#tcc-mode>TCC mode</a><ul><li></li></ul></li></ul></nav></div></aside></div><footer class=ss-footer><div class=container><div class=links><div class=cate><h2 class=cate-title>Resources</h2><a class=link href=https://github.com/sofastack>Github</a>
+<a class=link href=https://gitee.com/sofastack/>Gitee</a>
+<a class=link href=https://github.com/sofastack-guides>Samples</a></div><div class=cate><h2 class=cate-title>Social Media</h2><a class=link href=https://zhuanlan.zhihu.com/sofastack>Zhihu</a>
+<a class=link href=https://weibo.com/sofastack>Weibo</a>
+<a class=link href=https://twitter.com/sofastack_io>Twitter</a></div><div class=cate><h2 class=cate-title>Get Involved</h2><a class=link href=https://github.com/sofastack/sofastack.tech/issues>Feedback</a>
+<a class=link href=https://github.com/sofastack/community>Community</a>
+<a class=link href=https://github.com/sofastack/sofastack.tech/wiki>Wiki</a>
+<a class=link href=mailto:sofa@alipay.cloud.com>Email</a></div><div class=cate><h2 class=cate-title>Ant Financial Open Source</h2><a class=link href=https://ant.design/>Ant Design</a>
+<a class=link href=https://eggjs.org/>Egg</a>
+<a class=link href=https://sqlflow.org>SQLFlow</a>
+<a class=link href=https://tech.antfin.com/open-source>More</a></div></div><div class=qrcode><div><img class=qrcode-img src=/img/qrcode/qrcode_1.png><p class=qrcode-desc>Wechat Official Account</p></div><div><img class=qrcode-img src=/img/qrcode/qrcode_2.png><p class=qrcode-desc>DingTalk Group</p></div></div></div><div class=copyright><p>© 2019 - 2020 The SOFAStack Authors
+<a href=http://beian.miit.gov.cn/>浙 ICP 备 16045294 号-3</a></p></div></footer></body></html>
