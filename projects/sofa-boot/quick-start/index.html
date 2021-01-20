@@ -1,4 +1,4 @@
-<!doctype html><html><head><title>快速开始 · SOFAStack</title><meta charset=utf-8><meta http-equiv=x-ua-compatible content="IE=edge,chrome=1"><meta name=viewport content="width=device-width,minimum-scale=1"><meta name=description content="SOFAStack is a Scalable Open Financial Architecture for building cloud native applications"><meta name=generator content="Hugo 0.80.0"><link rel="shortcut icon" href=https://gw.alipayobjects.com/os/q/cms/images/jqu9346l/4ba95631-2489-4885-881f-bc7f8d787d5e_w64_h61.png type=image/png><link href=https://unpkg.com/purecss@1.0.0/build/base-min.css rel=stylesheet><link href=/css/main.css rel=stylesheet><link href=/css/zoom-image.css rel=stylesheet><script src=/js/iconfont.js></script><script src=/js/highlight.pack.js></script><script>hljs.initHighlightingOnLoad();</script><script>window.SITE_LANGUAGE="zh"</script><script src=/js/app.js></script><script type=application/javascript>var doNotTrack=false;if(!doNotTrack){(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');ga('create','UA-142131411-1','auto');ga('send','pageview');}</script></head><body><header class=ss-header><nav class=navbar role=navigation aria-label="main navigation"><div class=navbar-brand><a class=logo-link href=/><img class=logo src=/img/logo.png></a><div class=-show-mobile><a id=mobile-menu-icon><svg class="icon" aria-hidden="true"><use xlink:href="#icon-menu"/></svg></a><nav id=mobile-menu><div id=js-menu-search-mobile class=navbar-search-mobile><input class=input placeholder=请输入要搜索的关键词><svg class="icon" aria-hidden="true"><use xlink:href="#icon-search"/></svg></div><a href=/projects/><span>项目</span><svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"/></svg></a>
+<!doctype html><html><head><title>快速开始 · SOFAStack</title><meta charset=utf-8><meta http-equiv=x-ua-compatible content="IE=edge,chrome=1"><meta name=viewport content="width=device-width,minimum-scale=1"><meta name=description content="SOFAStack is a Scalable Open Financial Architecture for building cloud native applications"><meta name=generator content="Hugo 0.55.5"><link rel="shortcut icon" href=https://gw.alipayobjects.com/os/q/cms/images/jqu9346l/4ba95631-2489-4885-881f-bc7f8d787d5e_w64_h61.png type=image/png><link href=https://unpkg.com/purecss@1.0.0/build/base-min.css rel=stylesheet><link href=/css/main.css rel=stylesheet><link href=/css/zoom-image.css rel=stylesheet><script src=/js/iconfont.js></script><script src=/js/highlight.pack.js></script><script>hljs.initHighlightingOnLoad();</script><script>window.SITE_LANGUAGE="zh"</script><script src=/js/app.js></script><script type=application/javascript>var doNotTrack=false;if(!doNotTrack){(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');ga('create','UA-142131411-1','auto');ga('send','pageview');}</script></head><body><header class=ss-header><nav class=navbar role=navigation aria-label="main navigation"><div class=navbar-brand><a class=logo-link href=/><img class=logo src=/img/logo.png></a><div class=-show-mobile><a id=mobile-menu-icon><svg class="icon" aria-hidden="true"><use xlink:href="#icon-menu"/></svg></a><nav id=mobile-menu><div id=js-menu-search-mobile class=navbar-search-mobile><input class=input placeholder=请输入要搜索的关键词><svg class="icon" aria-hidden="true"><use xlink:href="#icon-search"/></svg></div><a href=/projects/><span>项目</span><svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"/></svg></a>
 <a href=/guides/><span>指南</span><svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"/></svg></a>
 <a href=/blog/><span>博客</span><svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"/></svg></a>
 <a href=/activities/><span>活动</span><svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"/></svg></a>
@@ -9,64 +9,202 @@
 <a class=navbar-item href=/blog/>博客</a>
 <a class=navbar-item href=/activities/>活动</a>
 <a class=navbar-item href=/community/>社区</a>
-<a class=navbar-item href=/awesome/>Awesome SOFA</a></div><div class=navbar-end><div class=navbar-item><div id=js-menu-search class=navbar-search><input class=input placeholder=请输入要搜索的关键词><svg class="icon" aria-hidden="true"><use xlink:href="#icon-search"/></svg></div></div><div class=navbar-item><a class=translation href=/en/projects/sofa-boot/quick-start/>En</a></div></div></div></nav></header><div class=ss-layout-container><aside class="ss-layout-aside -left ss-card -soft-hidden"><div id=js-drawer class=ss-toc><div id=js-drawer-handle class=drawer-handle><svg class="icon icon-menu" aria-hidden="true"><use xlink:href="#icon-menu"/></svg><svg class="icon icon-close" aria-hidden="true"><use xlink:href="#icon-close"/></svg></div><div class=drawer-body><div class=header title="SOFABoot 基于 Spring Boot 的研发框架，在其基础上提供了诸如 Readiness Check，类隔离，日志空间隔离，Bean 异步初始化等能力。">SOFABoot<div class="ss-toc-list-card -hidden-mobile"><svg class="icon -hidden-mobile" aria-hidden="true"><use xlink:href="#icon-menu1"/></svg><div class=ss-tooltip><div class=toc-list><h4 class=title>主要项目</h4><ul class=list><li class=item><a href=/projects/sofa-boot/overview>SOFABoot</a></li><li class=item><a href=/projects/sofa-rpc/overview>SOFARPC</a></li><li class=item><a href=/projects/sofa-tracer/overview>SOFATracer</a></li><li class=item><a href=/projects/sofa-lookout/overview>SOFALookout</a></li><li class=item><a href=/projects/sofa-registry/overview>SOFARegistry</a></li></ul></div><div class=toc-list><h4 class=title>孵化项目</h4><ul class=list><li class=item><a href=/projects/sofa-mesh/overview>SOFAMesh</a></li><li class=item><a href=/projects/sofa-dashboard/overview>SOFADashboard</a></li></ul></div><div class=toc-list><h4 class=title>工具项目</h4><ul class=list><li class=item><a href=/projects/sofa-bolt/overview>SOFABolt</a></li><li class=item><a href=/projects/sofa-jraft/overview>SOFAJRaft</a></li><li class=item><a href=/projects/sofa-acts/overview>SOFAActs</a></li><li class=item><a href=https://www.sofastack.tech/projects/sofa-boot/sofa-ark-readme/>SOFAArk</a></li></ul></div><div class=toc-list><h4 class=title>生态项目</h4><ul class=list><li class=item><a href=https://mosn.io>MOSN</a></li><li class=item><a href=https://occlum.io>Occlum</a></li><li class=item><a href=https://seata.io>Seata</a></li></ul></div></div></div></div><div class=body><ul class=leaf-section><li class=item><div class=link><a title="SOFABoot 介绍" href=/projects/sofa-boot/overview>SOFABoot 介绍</a></div></li><li class=item><div class="link -current"><a title=快速开始 href=/projects/sofa-boot/quick-start>快速开始</a></div></li><li class=item><div class=link><a title=依赖管理 href=/projects/sofa-boot/dependency-management>依赖管理</a></div></li><li class=item><div class=link><a title=健康检查 href=/projects/sofa-boot/health-check>健康检查</a></div></li><li class=item><div class=link><a title=版本查看 href=/projects/sofa-boot/view-versions>版本查看</a></div></li><li class=item><div class=link><a title=启动加速 href=/projects/sofa-boot/speed-up-startup>启动加速</a></div></li><li class=item><div class=link><svg class="icon arrow" aria-hidden="true"><use xlink:href="#icon-arrow"/></svg><a title=模块隔离>模块隔离</a></div><ul class=leaf-section><li class=item><div class=link><a title=模块化开发概述 href=/projects/sofa-boot/modular-development>模块化开发概述</a></div></li><li class=item><div class=link><a title=模块配置 href=/projects/sofa-boot/sofaboot-module>模块配置</a></div></li><li class=item><div class=link><a title="JVM 服务发布与引用" href=/projects/sofa-boot/module-service>JVM 服务发布与引用</a></div></li><li class=item><div class=link><a title=模块并行化启动 href=/projects/sofa-boot/parallel-start>模块并行化启动</a></div></li><li class=item><div class=link><a title="Spring Bean 异步初始化" href=/projects/sofa-boot/bean-async-init>Spring Bean 异步初始化</a></div></li><li class=item><div class=link><a title="SOFABoot Profile" href=/projects/sofa-boot/sofaboot-profile>SOFABoot Profile</a></div></li><li class=item><div class=link><a title="SOFABoot 拓展点" href=/projects/sofa-boot/extension>SOFABoot 拓展点</a></div></li></ul></li><li class=item><div class=link><svg class="icon arrow" aria-hidden="true"><use xlink:href="#icon-arrow"/></svg><a title=类隔离>类隔离</a></div><ul class=leaf-section><li class=item><div class=link><a title="SOFAArk 介绍" href=/projects/sofa-boot/sofa-ark-readme>SOFAArk 介绍</a></div></li><li class=item><div class=link><svg class="icon arrow" aria-hidden="true"><use xlink:href="#icon-arrow"/></svg><a title=快速开始>快速开始</a></div><ul class=leaf-section><li class=item><div class=link><a title="如何打包 Ark Plugin" href=/projects/sofa-boot/sofa-ark-ark-plugin-demo>如何打包 Ark Plugin</a></div></li><li class=item><div class=link><a title="如何打包 Ark 包" href=/projects/sofa-boot/sofa-ark-ark-demo>如何打包 Ark 包</a></div></li></ul></li><li class=item><div class=link><svg class="icon arrow" aria-hidden="true"><use xlink:href="#icon-arrow"/></svg><a title=用户文档>用户文档</a></div><ul class=leaf-section><li class=item><div class=link><a title=基础术语 href=/projects/sofa-boot/sofa-ark-terminology>基础术语</a></div></li><li class=item><div class=link><a title="Ark 包" href=/projects/sofa-boot/sofa-ark-ark-jar>Ark 包</a></div></li><li class=item><div class=link><a title="Ark Plugin" href=/projects/sofa-boot/sofa-ark-ark-plugin>Ark Plugin</a></div></li><li class=item><div class=link><a title="Ark Biz" href=/projects/sofa-boot/sofa-ark-ark-biz>Ark Biz</a></div></li><li class=item><div class=link><a title="SOFAArk 配置" href=/projects/sofa-boot/sofa-ark-ark-config>SOFAArk 配置</a></div></li><li class=item><div class=link><a title="Ark Biz 生命周期" href=/projects/sofa-boot/sofa-ark-biz-lifecycle>Ark Biz 生命周期</a></div></li><li class=item><div class=link><a title="Zookeeper 配置" href=/projects/sofa-boot/sofa-ark-zk-config>Zookeeper 配置</a></div></li><li class=item><div class=link><a title="Ark 服务机制" href=/projects/sofa-boot/sofa-ark-ark-service>Ark 服务机制</a></div></li><li class=item><div class=link><a title="Ark 事件机制" href=/projects/sofa-boot/sofa-ark-ark-event>Ark 事件机制</a></div></li><li class=item><div class=link><a title="Ark 扩展机制" href=/projects/sofa-boot/sofa-ark-ark-extension>Ark 扩展机制</a></div></li><li class=item><div class=link><a title="Ark 服务通信" href=/projects/sofa-boot/sofa-ark-ark-jvm>Ark 服务通信</a></div></li><li class=item><div class=link><a title="Telnet 指令" href=/projects/sofa-boot/sofa-ark-ark-telnet>Telnet 指令</a></div></li><li class=item><div class=link><a title="Ark 日志" href=/projects/sofa-boot/sofa-ark-ark-log>Ark 日志</a></div></li><li class=item><div class=link><a title="SOFABoot 使用类隔离" href=/projects/sofa-boot/classloader-isolation>SOFABoot 使用类隔离</a></div></li></ul></li><li class=item><div class=link><svg class="icon arrow" aria-hidden="true"><use xlink:href="#icon-arrow"/></svg><a title=开发文档>开发文档</a></div><ul class=leaf-section><li class=item><div class=link><a title="Ark 容器启动流程" href=/projects/sofa-boot/sofa-ark-startup>Ark 容器启动流程</a></div></li><li class=item><div class=link><a title="Ark 容器插件机制" href=/projects/sofa-boot/sofa-ark-plugin>Ark 容器插件机制</a></div></li><li class=item><div class=link><a title="Ark 容器类加载机制" href=/projects/sofa-boot/sofa-ark-classloader>Ark 容器类加载机制</a></div></li></ul></li><li class=item><div class=link><a title=发布说明 href=/projects/sofa-boot/sofa-ark-release>发布说明</a></div></li><li class=item><div class=link><a title=发展路线 href=/projects/sofa-boot/sofa-ark-roadmap>发展路线</a></div></li><li class=item><div class=link><a title=参与贡献 href=/projects/sofa-boot/sofa-ark-contribution>参与贡献</a></div></li></ul></li><li class=item><div class=link><svg class="icon arrow" aria-hidden="true"><use xlink:href="#icon-arrow"/></svg><a title=升级文档>升级文档</a></div><ul class=leaf-section><li class=item><div class=link><a title="SOFABoot 2.5.x 升级注意事项" href=/projects/sofa-boot/upgrade_2_5_x>SOFABoot 2.5.x 升级注意事项</a></div></li><li class=item><div class=link><a title="SOFABoot 3.0 升级注意事项" href=/projects/sofa-boot/upgrade_3_x>SOFABoot 3.0 升级注意事项</a></div></li></ul></li><li class=item><div class=link><a title=常见问题 href=/projects/sofa-boot/faq>常见问题</a></div></li><li class=item><div class=link><a title=版权声明 href=/projects/sofa-boot/notice>版权声明</a></div></li></ul></div></div></div></aside><main class="ss-layout-main -card"><div class=ss-meta><div class=container><h1 class=title>快速开始</h1><a class="edit-button -hidden-mobile" href=https://github.com/sofastack/sofastack.tech/edit/master/content/zh/projects/sofa-boot/quick-start/index.md>编辑</a></div><div class=meta>更新时间: 2021-01-19</div></div><article class=typo><p>&lt;dependency>
-&lt;groupId>org.springframework.boot&lt;/groupId>
-&lt;artifactId>spring-boot-starter-web&lt;/artifactId>
-&lt;/dependency>
-最后，在工程的 application.properties 文件下添加 SOFABoot 工程常用的参数配置，其中 spring.application.name 是必需的参数，用于标示当前应用的名称；logging path 用于指定日志的输出目录。</p><pre><code>&lt;span style=&quot;color:#a6e22e&quot;&gt;@Override&lt;/span&gt;
-&lt;span style=&quot;color:#66d9ef&quot;&gt;public&lt;/span&gt; String &lt;span style=&quot;color:#a6e22e&quot;&gt;message&lt;/span&gt;&lt;span style=&quot;color:#f92672&quot;&gt;()&lt;/span&gt; &lt;span style=&quot;color:#f92672&quot;&gt;{&lt;/span&gt;
-    System&lt;span style=&quot;color:#f92672&quot;&gt;.&lt;/span&gt;&lt;span style=&quot;color:#a6e22e&quot;&gt;out&lt;/span&gt;&lt;span style=&quot;color:#f92672&quot;&gt;.&lt;/span&gt;&lt;span style=&quot;color:#a6e22e&quot;&gt;println&lt;/span&gt;&lt;span style=&quot;color:#f92672&quot;&gt;(&lt;/span&gt;message&lt;span style=&quot;color:#f92672&quot;&gt;);&lt;/span&gt;
-    &lt;span style=&quot;color:#66d9ef&quot;&gt;return&lt;/span&gt; message&lt;span style=&quot;color:#f92672&quot;&gt;;&lt;/span&gt;
-&lt;span style=&quot;color:#f92672&quot;&gt;}&lt;/span&gt;
+<a class=navbar-item href=/awesome/>Awesome SOFA</a></div><div class=navbar-end><div class=navbar-item><div id=js-menu-search class=navbar-search><input class=input placeholder=请输入要搜索的关键词><svg class="icon" aria-hidden="true"><use xlink:href="#icon-search"/></svg></div></div><div class=navbar-item><a class=translation href=/en/projects/sofa-boot/quick-start/>En</a></div></div></div></nav></header><div class=ss-layout-container><aside class="ss-layout-aside -left ss-card -soft-hidden"><div id=js-drawer class=ss-toc><div id=js-drawer-handle class=drawer-handle><svg class="icon icon-menu" aria-hidden="true"><use xlink:href="#icon-menu"/></svg><svg class="icon icon-close" aria-hidden="true"><use xlink:href="#icon-close"/></svg></div><div class=drawer-body><div class=header title="SOFABoot 基于 Spring Boot 的研发框架，在其基础上提供了诸如 Readiness Check，类隔离，日志空间隔离，Bean 异步初始化等能力。">SOFABoot<div class="ss-toc-list-card -hidden-mobile"><svg class="icon -hidden-mobile" aria-hidden="true"><use xlink:href="#icon-menu1"/></svg><div class=ss-tooltip><div class=toc-list><h4 class=title>主要项目</h4><ul class=list><li class=item><a href=/projects/sofa-boot/overview>SOFABoot</a></li><li class=item><a href=/projects/sofa-rpc/overview>SOFARPC</a></li><li class=item><a href=/projects/sofa-tracer/overview>SOFATracer</a></li><li class=item><a href=/projects/sofa-lookout/overview>SOFALookout</a></li><li class=item><a href=/projects/sofa-registry/overview>SOFARegistry</a></li></ul></div><div class=toc-list><h4 class=title>孵化项目</h4><ul class=list><li class=item><a href=/projects/sofa-mesh/overview>SOFAMesh</a></li><li class=item><a href=/projects/sofa-dashboard/overview>SOFADashboard</a></li></ul></div><div class=toc-list><h4 class=title>工具项目</h4><ul class=list><li class=item><a href=/projects/sofa-bolt/overview>SOFABolt</a></li><li class=item><a href=/projects/sofa-jraft/overview>SOFAJRaft</a></li><li class=item><a href=/projects/sofa-acts/overview>SOFAActs</a></li><li class=item><a href=https://www.sofastack.tech/projects/sofa-boot/sofa-ark-readme/>SOFAArk</a></li></ul></div><div class=toc-list><h4 class=title>生态项目</h4><ul class=list><li class=item><a href=https://mosn.io>MOSN</a></li><li class=item><a href=https://occlum.io>Occlum</a></li><li class=item><a href=https://seata.io>Seata</a></li></ul></div></div></div></div><div class=body><ul class=leaf-section><li class=item><div class=link><a title="SOFABoot 介绍" href=/projects/sofa-boot/overview>SOFABoot 介绍</a></div></li><li class=item><div class="link -current"><a title=快速开始 href=/projects/sofa-boot/quick-start>快速开始</a></div></li><li class=item><div class=link><a title=依赖管理 href=/projects/sofa-boot/dependency-management>依赖管理</a></div></li><li class=item><div class=link><a title=健康检查 href=/projects/sofa-boot/health-check>健康检查</a></div></li><li class=item><div class=link><a title=版本查看 href=/projects/sofa-boot/view-versions>版本查看</a></div></li><li class=item><div class=link><a title=启动加速 href=/projects/sofa-boot/speed-up-startup>启动加速</a></div></li><li class=item><div class=link><svg class="icon arrow" aria-hidden="true"><use xlink:href="#icon-arrow"/></svg><a title=模块隔离>模块隔离</a></div><ul class=leaf-section><li class=item><div class=link><a title=模块化开发概述 href=/projects/sofa-boot/modular-development>模块化开发概述</a></div></li><li class=item><div class=link><a title=模块配置 href=/projects/sofa-boot/sofaboot-module>模块配置</a></div></li><li class=item><div class=link><a title="JVM 服务发布与引用" href=/projects/sofa-boot/module-service>JVM 服务发布与引用</a></div></li><li class=item><div class=link><a title=模块并行化启动 href=/projects/sofa-boot/parallel-start>模块并行化启动</a></div></li><li class=item><div class=link><a title="Spring Bean 异步初始化" href=/projects/sofa-boot/bean-async-init>Spring Bean 异步初始化</a></div></li><li class=item><div class=link><a title="SOFABoot Profile" href=/projects/sofa-boot/sofaboot-profile>SOFABoot Profile</a></div></li><li class=item><div class=link><a title="SOFABoot 拓展点" href=/projects/sofa-boot/extension>SOFABoot 拓展点</a></div></li></ul></li><li class=item><div class=link><svg class="icon arrow" aria-hidden="true"><use xlink:href="#icon-arrow"/></svg><a title=类隔离>类隔离</a></div><ul class=leaf-section><li class=item><div class=link><a title="SOFAArk 介绍" href=/projects/sofa-boot/sofa-ark-readme>SOFAArk 介绍</a></div></li><li class=item><div class=link><svg class="icon arrow" aria-hidden="true"><use xlink:href="#icon-arrow"/></svg><a title=快速开始>快速开始</a></div><ul class=leaf-section><li class=item><div class=link><a title="如何打包 Ark Plugin" href=/projects/sofa-boot/sofa-ark-ark-plugin-demo>如何打包 Ark Plugin</a></div></li><li class=item><div class=link><a title="如何打包 Ark 包" href=/projects/sofa-boot/sofa-ark-ark-demo>如何打包 Ark 包</a></div></li></ul></li><li class=item><div class=link><svg class="icon arrow" aria-hidden="true"><use xlink:href="#icon-arrow"/></svg><a title=用户文档>用户文档</a></div><ul class=leaf-section><li class=item><div class=link><a title=基础术语 href=/projects/sofa-boot/sofa-ark-terminology>基础术语</a></div></li><li class=item><div class=link><a title="Ark 包" href=/projects/sofa-boot/sofa-ark-ark-jar>Ark 包</a></div></li><li class=item><div class=link><a title="Ark Plugin" href=/projects/sofa-boot/sofa-ark-ark-plugin>Ark Plugin</a></div></li><li class=item><div class=link><a title="Ark Biz" href=/projects/sofa-boot/sofa-ark-ark-biz>Ark Biz</a></div></li><li class=item><div class=link><a title="SOFAArk 配置" href=/projects/sofa-boot/sofa-ark-ark-config>SOFAArk 配置</a></div></li><li class=item><div class=link><a title="Ark Biz 生命周期" href=/projects/sofa-boot/sofa-ark-biz-lifecycle>Ark Biz 生命周期</a></div></li><li class=item><div class=link><a title="Zookeeper 配置" href=/projects/sofa-boot/sofa-ark-zk-config>Zookeeper 配置</a></div></li><li class=item><div class=link><a title="Ark 服务机制" href=/projects/sofa-boot/sofa-ark-ark-service>Ark 服务机制</a></div></li><li class=item><div class=link><a title="Ark 事件机制" href=/projects/sofa-boot/sofa-ark-ark-event>Ark 事件机制</a></div></li><li class=item><div class=link><a title="Ark 扩展机制" href=/projects/sofa-boot/sofa-ark-ark-extension>Ark 扩展机制</a></div></li><li class=item><div class=link><a title="Ark 服务通信" href=/projects/sofa-boot/sofa-ark-ark-jvm>Ark 服务通信</a></div></li><li class=item><div class=link><a title="Telnet 指令" href=/projects/sofa-boot/sofa-ark-ark-telnet>Telnet 指令</a></div></li><li class=item><div class=link><a title="Ark 日志" href=/projects/sofa-boot/sofa-ark-ark-log>Ark 日志</a></div></li><li class=item><div class=link><a title="SOFABoot 使用类隔离" href=/projects/sofa-boot/classloader-isolation>SOFABoot 使用类隔离</a></div></li></ul></li><li class=item><div class=link><svg class="icon arrow" aria-hidden="true"><use xlink:href="#icon-arrow"/></svg><a title=开发文档>开发文档</a></div><ul class=leaf-section><li class=item><div class=link><a title="Ark 容器启动流程" href=/projects/sofa-boot/sofa-ark-startup>Ark 容器启动流程</a></div></li><li class=item><div class=link><a title="Ark 容器插件机制" href=/projects/sofa-boot/sofa-ark-plugin>Ark 容器插件机制</a></div></li><li class=item><div class=link><a title="Ark 容器类加载机制" href=/projects/sofa-boot/sofa-ark-classloader>Ark 容器类加载机制</a></div></li></ul></li><li class=item><div class=link><a title=发布说明 href=/projects/sofa-boot/sofa-ark-release>发布说明</a></div></li><li class=item><div class=link><a title=发展路线 href=/projects/sofa-boot/sofa-ark-roadmap>发展路线</a></div></li><li class=item><div class=link><a title=参与贡献 href=/projects/sofa-boot/sofa-ark-contribution>参与贡献</a></div></li></ul></li><li class=item><div class=link><svg class="icon arrow" aria-hidden="true"><use xlink:href="#icon-arrow"/></svg><a title=升级文档>升级文档</a></div><ul class=leaf-section><li class=item><div class=link><a title="SOFABoot 2.5.x 升级注意事项" href=/projects/sofa-boot/upgrade_2_5_x>SOFABoot 2.5.x 升级注意事项</a></div></li><li class=item><div class=link><a title="SOFABoot 3.0 升级注意事项" href=/projects/sofa-boot/upgrade_3_x>SOFABoot 3.0 升级注意事项</a></div></li></ul></li><li class=item><div class=link><a title=常见问题 href=/projects/sofa-boot/faq>常见问题</a></div></li><li class=item><div class=link><a title=版权声明 href=/projects/sofa-boot/notice>版权声明</a></div></li></ul></div></div></div></aside><main class="ss-layout-main -card"><div class=ss-meta><div class=container><h1 class=title>快速开始</h1><a class="edit-button -hidden-mobile" href=https://github.com/sofastack/sofastack.tech/edit/master/content/zh/projects/sofa-boot/quick-start/index.md>编辑</a></div><div class=meta>更新时间: 2021-01-20</div></div><article class=typo><p>在本文档中，将创建一个 Spring Boot 的工程，引入 SOFABoot 基础依赖，并且引入 SOFABoot 的健康检查扩展能力，演示如何快速上手 SOFABoot。</p><h2 id=环境准备>环境准备</h2><p>要使用 SOFABoot，需要先准备好基础环境，SOFABoot 依赖以下环境：
+- JDK7 或 JDK8
+- 需要采用 Apache Maven 3.2.5 或者以上的版本来编译</p><h2 id=创建工程>创建工程</h2><p>SOFABoot 是直接构建在 Spring Boot 之上，因此可以使用 <a href=http://start.spring.io/>Spring Boot 的工程生成工具</a> 来生成，在本文档中，我们需要添加一个 Web 的依赖，以便最后在浏览器中查看效果。</p><h2 id=引入-sofaboot>引入 SOFABoot</h2><p>在创建好一个 Spring Boot 的工程之后，接下来就需要引入 SOFABoot 的依赖，首先，需要将上文中生成的 Spring Boot 工程的 <code>zip</code> 包解压后，修改 maven 项目的配置文件 <code>pom.xml</code>，将</p><pre><code class=language-xml>&lt;parent&gt;
+    &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+    &lt;artifactId&gt;spring-boot-starter-parent&lt;/artifactId&gt;
+    &lt;version&gt;${spring.boot.version}&lt;/version&gt;
+    &lt;relativePath/&gt; 
+&lt;/parent&gt;
+</code></pre><p>替换为：</p><pre><code class=language-xml>&lt;parent&gt;
+    &lt;groupId&gt;com.alipay.sofa&lt;/groupId&gt;
+    &lt;artifactId&gt;sofaboot-dependencies&lt;/artifactId&gt;
+    &lt;version&gt;${sofa.boot.version}&lt;/version&gt;
+&lt;/parent&gt;
+</code></pre><p>这里的 <code>${sofa.boot.version}</code> 指定具体的 SOFABoot 版本，参考<a href=https://github.com/sofastack/sofa-boot/releases>发布历史</a>。 然后，添加 SOFABoot 健康检查扩展能力的依赖及 Web 依赖(方便查看健康检查结果)：</p><pre><code class=language-xml>&lt;dependency&gt;
+    &lt;groupId&gt;com.alipay.sofa&lt;/groupId&gt;
+    &lt;artifactId&gt;healthcheck-sofa-boot-starter&lt;/artifactId&gt;
+&lt;/dependency&gt;
 
-&lt;span style=&quot;color:#75715e&quot;&gt;// getters and setters
-</code></pre><p>}
-增加 META-INF/spring/service-provide.xml 文件，将 SampleJvmServiceImpl 发布为 JVM 服务:</p><p>&lt;sofa:service ref="sampleJvmService" interface="com.alipay.sofa.isle.sample.SampleJvmService">
-&lt;sofa:binding.jvm/>
-&lt;/sofa:service>
-Annotation 方式发布服务</p><pre><code>&lt;span style=&quot;color:#66d9ef&quot;&gt;public&lt;/span&gt; &lt;span style=&quot;color:#66d9ef&quot;&gt;void&lt;/span&gt; &lt;span style=&quot;color:#a6e22e&quot;&gt;init&lt;/span&gt;&lt;span style=&quot;color:#f92672&quot;&gt;()&lt;/span&gt; &lt;span style=&quot;color:#f92672&quot;&gt;{&lt;/span&gt;
-    ServiceClient serviceClient &lt;span style=&quot;color:#f92672&quot;&gt;=&lt;/span&gt; clientFactory&lt;span style=&quot;color:#f92672&quot;&gt;.&lt;/span&gt;&lt;span style=&quot;color:#a6e22e&quot;&gt;getClient&lt;/span&gt;&lt;span style=&quot;color:#f92672&quot;&gt;(&lt;/span&gt;ServiceClient&lt;span style=&quot;color:#f92672&quot;&gt;.&lt;/span&gt;&lt;span style=&quot;color:#a6e22e&quot;&gt;class&lt;/span&gt;&lt;span style=&quot;color:#f92672&quot;&gt;);&lt;/span&gt;
-    ServiceParam serviceParam &lt;span style=&quot;color:#f92672&quot;&gt;=&lt;/span&gt; &lt;span style=&quot;color:#66d9ef&quot;&gt;new&lt;/span&gt; ServiceParam&lt;span style=&quot;color:#f92672&quot;&gt;();&lt;/span&gt;
-    serviceParam&lt;span style=&quot;color:#f92672&quot;&gt;.&lt;/span&gt;&lt;span style=&quot;color:#a6e22e&quot;&gt;setInstance&lt;/span&gt;&lt;span style=&quot;color:#f92672&quot;&gt;(&lt;/span&gt;&lt;span style=&quot;color:#66d9ef&quot;&gt;new&lt;/span&gt; SampleJvmServiceImpl&lt;span style=&quot;color:#f92672&quot;&gt;(&lt;/span&gt;&lt;span style=&quot;color:#e6db74&quot;&gt;&amp;#34;Hello, jvm service service client implementation.&amp;#34;&lt;/span&gt;&lt;span style=&quot;color:#f92672&quot;&gt;));&lt;/span&gt;
-    serviceParam&lt;span style=&quot;color:#f92672&quot;&gt;.&lt;/span&gt;&lt;span style=&quot;color:#a6e22e&quot;&gt;setInterfaceType&lt;/span&gt;&lt;span style=&quot;color:#f92672&quot;&gt;(&lt;/span&gt;SampleJvmService&lt;span style=&quot;color:#f92672&quot;&gt;.&lt;/span&gt;&lt;span style=&quot;color:#a6e22e&quot;&gt;class&lt;/span&gt;&lt;span style=&quot;color:#f92672&quot;&gt;);&lt;/span&gt;
-    serviceParam&lt;span style=&quot;color:#f92672&quot;&gt;.&lt;/span&gt;&lt;span style=&quot;color:#a6e22e&quot;&gt;setUniqueId&lt;/span&gt;&lt;span style=&quot;color:#f92672&quot;&gt;(&lt;/span&gt;&lt;span style=&quot;color:#e6db74&quot;&gt;&amp;#34;serviceClientImpl&amp;#34;&lt;/span&gt;&lt;span style=&quot;color:#f92672&quot;&gt;);&lt;/span&gt;
-    serviceClient&lt;span style=&quot;color:#f92672&quot;&gt;.&lt;/span&gt;&lt;span style=&quot;color:#a6e22e&quot;&gt;service&lt;/span&gt;&lt;span style=&quot;color:#f92672&quot;&gt;(&lt;/span&gt;serviceParam&lt;span style=&quot;color:#f92672&quot;&gt;);&lt;/span&gt;
-&lt;span style=&quot;color:#f92672&quot;&gt;}&lt;/span&gt;
+&lt;dependency&gt;
+     &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+     &lt;artifactId&gt;spring-boot-starter-web&lt;/artifactId&gt;
+&lt;/dependency&gt;
+</code></pre><p>最后，在工程的 <code>application.properties</code> 文件下添加 SOFABoot 工程常用的参数配置，其中 <code>spring.application.name</code> 是必需的参数，用于标示当前应用的名称；<code>logging path</code> 用于指定日志的输出目录。</p><pre><code># Application Name
+spring.application.name=SOFABoot Demo
+# logging path
+logging.path=./logs
+</code></pre><h2 id=运行>运行</h2><p>可以将工程导入到 IDE 中运行生成的工程里面中的 <code>main</code> 方法（一般上在 XXXApplication 这个类中）启动应用，也可以直接在该工程的根目录下运行 <code>mvn spring-boot:run</code>，将会在控制台中看到启动打印的日志：</p><pre><code>2018-04-05 21:36:26.572  INFO ---- Initializing ProtocolHandler [&quot;http-nio-8080&quot;]
+2018-04-05 21:36:26.587  INFO ---- Starting ProtocolHandler [http-nio-8080]
+2018-04-05 21:36:26.608  INFO ---- Using a shared selector for servlet write/read
+2018-04-05 21:36:26.659  INFO ---- Tomcat started on port(s): 8080 (http)
+</code></pre><p>可以通过在浏览器中输入 <a href=http://localhost:8080/sofaboot/versions>http://localhost:8080/sofaboot/versions</a> 来查看当前 SOFABoot 中使用 Maven 插件生成的版本信息汇总，结果类似如下：</p><pre><code class=language-json>[
+  {
+    GroupId: &quot;com.alipay.sofa&quot;,
+    Doc-Url: &quot;https://github.com/sofastack/sofa-boot&quot;,
+    ArtifactId: &quot;infra-sofa-boot-starter&quot;,
+    Built-Time: &quot;2018-04-05T20:55:26+0800&quot;,
+    Commit-Time: &quot;2018-04-05T20:54:26+0800&quot;,
+    Commit-Id: &quot;049bf890bb468aafe6a3e07b77df45c831076996&quot;,
+    Version: &quot;2.4.4&quot;
+  }
+]
+</code></pre><p><strong>注: 在 SOFABoot 3.x 中调整了 endpoint 路径，sofaboot/versions 更改为 actuator/versions</strong></p><p>可以通过在浏览器中输入 <a href=http://localhost:8080/health/readiness>http://localhost:8080/health/readiness</a> 查看应用 Readiness Check 的状况，类似如下：</p><pre><code class=language-json>{
+  status: &quot;UP&quot;,
+  sofaBootComponentHealthCheckInfo: {
+    status: &quot;UP&quot;
+  },
+  springContextHealthCheckInfo: {
+    status: &quot;UP&quot;
+  },
+  DiskSpace: {
+    status: &quot;UP&quot;,
+    total: 250140434432,
+    free: 22845308928,
+    threshold: 10485760
+  }
+}
+</code></pre><p><strong>注: 在 SOFABoot 3.x 中调整了 endpoint 路径，health/readiness 更改为 actuator/readiness</strong></p><p><code>status: &quot;UP&quot;</code> 表示应用 Readiness Check 健康的。可以通过在浏览器中输入 <code>http://localhost:8080/health</code> 来查看应用的运行时健康状态（可能会随着时间发生变化）。</p><p><strong>注: 在 SOFABOOT 3.X 中调整了 endpoint 路径，/health 更改为 /actuator/health</strong></p><h2 id=查看日志>查看日志</h2><p>在上面的 <code>application.properties</code> 里面，我们配置的日志打印目录是 <code>./logs</code> 即当前应用的根目录（我们可以根据自己的实践需要配置），在当前工程的根目录下可以看到类似如下结构的日志文件：</p><pre><code>./logs
+├── health-check
+│   ├── sofaboot-common-default.log
+│   └── sofaboot-common-error.log
+├── infra
+│   ├── common-default.log
+│   └── common-error.log
+└── spring.log
+</code></pre><p>如果应用启动失败或者健康检查返回失败，可以通过相应的日志文件找到错误的原因，有些需要关注 <code>common-error.log</code> 日志。</p><h2 id=测试>测试</h2><p>我们知道，SpringBoot 官方提供了和 JUnit4 集成的 <code>SpringRunner</code>, 用于集成测试用例的编写； 在 SOFABoot 中，依然可以使用原生的 <code>SpringRunner</code>， 但是推荐使用 SOFABoot 自带的 <code>SofaBootRunner</code> 以及 <code>SofaJUnit4Runner</code> 编写集成测试和单元测试；应用需要额外引入如下 Starter:</p><pre><code class=language-xml>&lt;dependency&gt;
+    &lt;groupId&gt;com.alipay.sofa&lt;/groupId&gt;
+    &lt;artifactId&gt;test-sofa-boot-starter&lt;/artifactId&gt;
+&lt;/dependency&gt;
+</code></pre><p>需要注意的是，如果需要使用 SOFABoot 的<a href=../classloader-isolation>类隔离</a>的能力，则必须需要引入上述的依赖，并且使用 <code>SofaBootRunner</code> 和 <code>SofaJUnit4Runner</code> 来测试。</p><h2 id=模块化开发>模块化开发</h2><p>这部分将演示如何在 SOFABoot 环境下进行模块化开发，您可以直接在工程下找到本文档的<a href=https://github.com/sofastack-guides/sofa-boot-guides>示例代码</a>，项目一共包括四个模块：</p><pre><code class=language-text>.
+│
+├── service-facade 
+│ 
+├── service-provider
+│ 
+├── service-consumer
+│ 
+└── sofa-boot-run
+</code></pre><p>各个模块的作用如下：</p><ul><li>service-facade: 演示 JVM 服务发布与引用的 API 包；</li><li>service-provider: 演示 XML 方式、Annotation 方式、API 方式发布 JVM 服务；</li><li>service-consumer: 演示 XML 方式、Annotation 方式、API 方式引用 JVM 服务；</li><li>sofa-boot-run: 启动包含 SOFABoot 模块的 SOFA Boot 应用。</li></ul><p><strong>建议在学习该 Demo 之前，参考模块<a href=../modular-development>隔离文档</a></strong></p><h3 id=定义服务-api>定义服务 API</h3><p>service-facade 模块包含用于演示 JVM 服务发布与引用的 API :</p><pre><code class=language-java>public interface SampleJvmService {
+    String message();
+}
+</code></pre><h3 id=发布-jvm-服务>发布 JVM 服务</h3><p>service-provider 是一个 SOFABoot 模块，用于演示 XML 方式、Annotation 方式、API 方式发布 JVM 服务。</p><h4 id=定义-sofaboot-模块>定义 SOFABoot 模块</h4><p>为 service-provider 模块增加 sofa-module.properties 文件，将其定义为 SOFABoot 模块:</p><pre><code class=language-properties>Module-Name=com.alipay.sofa.service-provider
+</code></pre><h4 id=xml-方式发布服务>XML 方式发布服务</h4><p>实现 SampleJvmService 接口:</p><pre><code class=language-java>public class SampleJvmServiceImpl implements SampleJvmService {
+    private String message;
 
-&lt;span style=&quot;color:#a6e22e&quot;&gt;@Override&lt;/span&gt;
-&lt;span style=&quot;color:#66d9ef&quot;&gt;public&lt;/span&gt; &lt;span style=&quot;color:#66d9ef&quot;&gt;void&lt;/span&gt; &lt;span style=&quot;color:#a6e22e&quot;&gt;setClientFactory&lt;/span&gt;&lt;span style=&quot;color:#f92672&quot;&gt;(&lt;/span&gt;ClientFactory clientFactory&lt;span style=&quot;color:#f92672&quot;&gt;)&lt;/span&gt; &lt;span style=&quot;color:#f92672&quot;&gt;{&lt;/span&gt;
-    &lt;span style=&quot;color:#66d9ef&quot;&gt;this&lt;/span&gt;&lt;span style=&quot;color:#f92672&quot;&gt;.&lt;/span&gt;&lt;span style=&quot;color:#a6e22e&quot;&gt;clientFactory&lt;/span&gt; &lt;span style=&quot;color:#f92672&quot;&gt;=&lt;/span&gt; clientFactory&lt;span style=&quot;color:#f92672&quot;&gt;;&lt;/span&gt;
-&lt;span style=&quot;color:#f92672&quot;&gt;}&lt;/span&gt;
-</code></pre><p>}
-将 PublishServiceWithClient 配置为 Spring Bean，并设置 init-method ，使PublishServiceWithClient 在 Spring 刷新时发布服务:</p><pre><code>&lt;span style=&quot;color:#66d9ef&quot;&gt;public&lt;/span&gt; &lt;span style=&quot;color:#66d9ef&quot;&gt;void&lt;/span&gt; &lt;span style=&quot;color:#a6e22e&quot;&gt;init&lt;/span&gt;&lt;span style=&quot;color:#f92672&quot;&gt;()&lt;/span&gt; &lt;span style=&quot;color:#f92672&quot;&gt;{&lt;/span&gt;
-    ReferenceClient referenceClient &lt;span style=&quot;color:#f92672&quot;&gt;=&lt;/span&gt; clientFactory&lt;span style=&quot;color:#f92672&quot;&gt;.&lt;/span&gt;&lt;span style=&quot;color:#a6e22e&quot;&gt;getClient&lt;/span&gt;&lt;span style=&quot;color:#f92672&quot;&gt;(&lt;/span&gt;ReferenceClient&lt;span style=&quot;color:#f92672&quot;&gt;.&lt;/span&gt;&lt;span style=&quot;color:#a6e22e&quot;&gt;class&lt;/span&gt;&lt;span style=&quot;color:#f92672&quot;&gt;);&lt;/span&gt;
-    ReferenceParam&lt;span style=&quot;color:#f92672&quot;&gt;&amp;lt;&lt;/span&gt;SampleJvmService&lt;span style=&quot;color:#f92672&quot;&gt;&amp;gt;&lt;/span&gt; referenceParam &lt;span style=&quot;color:#f92672&quot;&gt;=&lt;/span&gt; &lt;span style=&quot;color:#66d9ef&quot;&gt;new&lt;/span&gt; ReferenceParam&lt;span style=&quot;color:#f92672&quot;&gt;&amp;lt;&amp;gt;();&lt;/span&gt;
-    referenceParam&lt;span style=&quot;color:#f92672&quot;&gt;.&lt;/span&gt;&lt;span style=&quot;color:#a6e22e&quot;&gt;setInterfaceType&lt;/span&gt;&lt;span style=&quot;color:#f92672&quot;&gt;(&lt;/span&gt;SampleJvmService&lt;span style=&quot;color:#f92672&quot;&gt;.&lt;/span&gt;&lt;span style=&quot;color:#a6e22e&quot;&gt;class&lt;/span&gt;&lt;span style=&quot;color:#f92672&quot;&gt;);&lt;/span&gt;
-    referenceParam&lt;span style=&quot;color:#f92672&quot;&gt;.&lt;/span&gt;&lt;span style=&quot;color:#a6e22e&quot;&gt;setUniqueId&lt;/span&gt;&lt;span style=&quot;color:#f92672&quot;&gt;(&lt;/span&gt;&lt;span style=&quot;color:#e6db74&quot;&gt;&amp;#34;serviceClientImpl&amp;#34;&lt;/span&gt;&lt;span style=&quot;color:#f92672&quot;&gt;);&lt;/span&gt;
-    SampleJvmService sampleJvmServiceClientImpl &lt;span style=&quot;color:#f92672&quot;&gt;=&lt;/span&gt; referenceClient&lt;span style=&quot;color:#f92672&quot;&gt;.&lt;/span&gt;&lt;span style=&quot;color:#a6e22e&quot;&gt;reference&lt;/span&gt;&lt;span style=&quot;color:#f92672&quot;&gt;(&lt;/span&gt;referenceParam&lt;span style=&quot;color:#f92672&quot;&gt;);&lt;/span&gt;
-    sampleJvmServiceClientImpl&lt;span style=&quot;color:#f92672&quot;&gt;.&lt;/span&gt;&lt;span style=&quot;color:#a6e22e&quot;&gt;message&lt;/span&gt;&lt;span style=&quot;color:#f92672&quot;&gt;();&lt;/span&gt;
-&lt;span style=&quot;color:#f92672&quot;&gt;}&lt;/span&gt;
+    @Override
+    public String message() {
+        System.out.println(message);
+        return message;
+    }
 
-&lt;span style=&quot;color:#a6e22e&quot;&gt;@Override&lt;/span&gt;
-&lt;span style=&quot;color:#66d9ef&quot;&gt;public&lt;/span&gt; &lt;span style=&quot;color:#66d9ef&quot;&gt;void&lt;/span&gt; &lt;span style=&quot;color:#a6e22e&quot;&gt;setClientFactory&lt;/span&gt;&lt;span style=&quot;color:#f92672&quot;&gt;(&lt;/span&gt;ClientFactory clientFactory&lt;span style=&quot;color:#f92672&quot;&gt;)&lt;/span&gt; &lt;span style=&quot;color:#f92672&quot;&gt;{&lt;/span&gt;
-    &lt;span style=&quot;color:#66d9ef&quot;&gt;this&lt;/span&gt;&lt;span style=&quot;color:#f92672&quot;&gt;.&lt;/span&gt;&lt;span style=&quot;color:#a6e22e&quot;&gt;clientFactory&lt;/span&gt; &lt;span style=&quot;color:#f92672&quot;&gt;=&lt;/span&gt; clientFactory&lt;span style=&quot;color:#f92672&quot;&gt;;&lt;/span&gt;
-&lt;span style=&quot;color:#f92672&quot;&gt;}&lt;/span&gt;
-</code></pre><p>}
-启动 SOFABoot 应用</p><pre><code>&lt;span style=&quot;color:#a6e22e&quot;&gt;@SofaReference&lt;/span&gt;&lt;span style=&quot;color:#f92672&quot;&gt;(&lt;/span&gt;uniqueId &lt;span style=&quot;color:#f92672&quot;&gt;=&lt;/span&gt; &lt;span style=&quot;color:#e6db74&quot;&gt;&amp;#34;annotationImpl&amp;#34;&lt;/span&gt;&lt;span style=&quot;color:#f92672&quot;&gt;)&lt;/span&gt;
-&lt;span style=&quot;color:#66d9ef&quot;&gt;private&lt;/span&gt; SampleJvmService sampleJvmServiceAnnotationImpl&lt;span style=&quot;color:#f92672&quot;&gt;;&lt;/span&gt;
+    // getters and setters
+}
+</code></pre><p>增加 META-INF/spring/service-provide.xml 文件，将 SampleJvmServiceImpl 发布为 JVM 服务:</p><pre><code class=language-xml>&lt;bean id=&quot;sampleJvmService&quot; class=&quot;com.alipay.sofa.isle.sample.SampleJvmServiceImpl&quot;&gt;
+    &lt;property name=&quot;message&quot; value=&quot;Hello, jvm service xml implementation.&quot;/&gt;
+&lt;/bean&gt;
 
-&lt;span style=&quot;color:#a6e22e&quot;&gt;@SofaReference&lt;/span&gt;&lt;span style=&quot;color:#f92672&quot;&gt;(&lt;/span&gt;uniqueId &lt;span style=&quot;color:#f92672&quot;&gt;=&lt;/span&gt; &lt;span style=&quot;color:#e6db74&quot;&gt;&amp;#34;serviceClientImpl&amp;#34;&lt;/span&gt;&lt;span style=&quot;color:#f92672&quot;&gt;)&lt;/span&gt;
-&lt;span style=&quot;color:#66d9ef&quot;&gt;private&lt;/span&gt; SampleJvmService sampleJvmServiceClientImpl&lt;span style=&quot;color:#f92672&quot;&gt;;&lt;/span&gt;
+&lt;sofa:service ref=&quot;sampleJvmService&quot; interface=&quot;com.alipay.sofa.isle.sample.SampleJvmService&quot;&gt;
+    &lt;sofa:binding.jvm/&gt;
+&lt;/sofa:service&gt;
+</code></pre><h4 id=annotation-方式发布服务>Annotation 方式发布服务</h4><p>实现 SampleJvmService 接口并增加 @SofaService 注解:</p><pre><code class=language-java>@SofaService(uniqueId = &quot;annotationImpl&quot;)
+public class SampleJvmServiceAnnotationImpl implements SampleJvmService {
+    @Override
+    public String message() {
+        String message = &quot;Hello, jvm service annotation implementation.&quot;;
+        System.out.println(message);
+        return message;
+    }
+}
+</code></pre><p>为了区分 XML 方式发布的 JVM 服务，注解上需要增加 uniqueId 属性。</p><p>将 SampleJvmServiceAnnotationImpl 配置成一个 Spring Bean，保证 @SofaService 注解生效:</p><pre><code class=language-xml>&lt;bean id=&quot;sampleJvmServiceAnnotation&quot; class=&quot;com.alipay.sofa.isle.sample.SampleJvmServiceAnnotationImpl&quot;/&gt;
+</code></pre><h4 id=api-方式发布服务>API 方式发布服务</h4><p>增加 PublishServiceWithClient 类，演示 API 方式发布服务:</p><pre><code class=language-java>public class PublishServiceWithClient implements ClientFactoryAware {
+    private ClientFactory clientFactory;
 
-&lt;span style=&quot;color:#a6e22e&quot;&gt;@Test&lt;/span&gt;
-&lt;span style=&quot;color:#66d9ef&quot;&gt;public&lt;/span&gt; &lt;span style=&quot;color:#66d9ef&quot;&gt;void&lt;/span&gt; &lt;span style=&quot;color:#a6e22e&quot;&gt;test&lt;/span&gt;&lt;span style=&quot;color:#f92672&quot;&gt;()&lt;/span&gt; &lt;span style=&quot;color:#f92672&quot;&gt;{&lt;/span&gt;
-    Assert&lt;span style=&quot;color:#f92672&quot;&gt;.&lt;/span&gt;&lt;span style=&quot;color:#a6e22e&quot;&gt;assertEquals&lt;/span&gt;&lt;span style=&quot;color:#f92672&quot;&gt;(&lt;/span&gt;&lt;span style=&quot;color:#e6db74&quot;&gt;&amp;#34;Hello, jvm service xml implementation.&amp;#34;&lt;/span&gt;&lt;span style=&quot;color:#f92672&quot;&gt;,&lt;/span&gt; sampleJvmService&lt;span style=&quot;color:#f92672&quot;&gt;.&lt;/span&gt;&lt;span style=&quot;color:#a6e22e&quot;&gt;message&lt;/span&gt;&lt;span style=&quot;color:#f92672&quot;&gt;());&lt;/span&gt;
-    Assert&lt;span style=&quot;color:#f92672&quot;&gt;.&lt;/span&gt;&lt;span style=&quot;color:#a6e22e&quot;&gt;assertEquals&lt;/span&gt;&lt;span style=&quot;color:#f92672&quot;&gt;(&lt;/span&gt;&lt;span style=&quot;color:#e6db74&quot;&gt;&amp;#34;Hello, jvm service annotation implementation.&amp;#34;&lt;/span&gt;&lt;span style=&quot;color:#f92672&quot;&gt;,&lt;/span&gt;
-        sampleJvmServiceAnnotationImpl&lt;span style=&quot;color:#f92672&quot;&gt;.&lt;/span&gt;&lt;span style=&quot;color:#a6e22e&quot;&gt;message&lt;/span&gt;&lt;span style=&quot;color:#f92672&quot;&gt;());&lt;/span&gt;
-    Assert&lt;span style=&quot;color:#f92672&quot;&gt;.&lt;/span&gt;&lt;span style=&quot;color:#a6e22e&quot;&gt;assertEquals&lt;/span&gt;&lt;span style=&quot;color:#f92672&quot;&gt;(&lt;/span&gt;&lt;span style=&quot;color:#e6db74&quot;&gt;&amp;#34;Hello, jvm service service client implementation.&amp;#34;&lt;/span&gt;&lt;span style=&quot;color:#f92672&quot;&gt;,&lt;/span&gt;
-        sampleJvmServiceClientImpl&lt;span style=&quot;color:#f92672&quot;&gt;.&lt;/span&gt;&lt;span style=&quot;color:#a6e22e&quot;&gt;message&lt;/span&gt;&lt;span style=&quot;color:#f92672&quot;&gt;());&lt;/span&gt;
-&lt;span style=&quot;color:#f92672&quot;&gt;}&lt;/span&gt;
-</code></pre><p>}</p></article></main></div><footer class=ss-footer><div class=container><div class=links><div class=cate><h2 class=cate-title>资源</h2><a class=link href=https://github.com/sofastack>Github</a>
+    public void init() {
+        ServiceClient serviceClient = clientFactory.getClient(ServiceClient.class);
+        ServiceParam serviceParam = new ServiceParam();
+        serviceParam.setInstance(new SampleJvmServiceImpl(&quot;Hello, jvm service service client implementation.&quot;));
+        serviceParam.setInterfaceType(SampleJvmService.class);
+        serviceParam.setUniqueId(&quot;serviceClientImpl&quot;);
+        serviceClient.service(serviceParam);
+    }
+
+    @Override
+    public void setClientFactory(ClientFactory clientFactory) {
+        this.clientFactory = clientFactory;
+    }
+}
+</code></pre><p>将 PublishServiceWithClient 配置为 Spring Bean，并设置 init-method ，使PublishServiceWithClient 在 Spring 刷新时发布服务:</p><pre><code class=language-xml>&lt;bean id=&quot;publishServiceWithClient&quot; class=&quot;com.alipay.sofa.isle.sample.PublishServiceWithClient&quot; init-method=&quot;init&quot;/&gt;
+</code></pre><h3 id=引用-jvm-服务>引用 JVM 服务</h3><p>service-consumer 是一个 SOFABoot 模块，用于演示 XML 方式、Annotation 方式、API 方式引用 JVM 服务。</p><h4 id=定义-sofaboot-模块-1>定义 SOFABoot 模块</h4><p>为 service-consumer 模块增加 sofa-module.properties 文件，将其定义为 SOFABoot 模块:</p><pre><code class=language-properties>Module-Name=com.alipay.sofa.service-consumer
+Require-Module=com.alipay.sofa.service-provider
+</code></pre><p>在 sofa-module.properties 文件中需要指定 Require-Module，保证 service-provider 模块在 service-consumer 模块之前刷新。</p><h4 id=xml-方式引用服务>XML 方式引用服务</h4><p>增加 META-INF/spring/service-consumer.xml 文件，引用 service-provider 模块发布的服务:</p><pre><code class=language-xml>&lt;sofa:reference id=&quot;sampleJvmService&quot; interface=&quot;com.alipay.sofa.isle.sample.SampleJvmService&quot;&gt;
+    &lt;sofa:binding.jvm/&gt;
+&lt;/sofa:service&gt;
+</code></pre><h4 id=annotation-方式引用服务>Annotation 方式引用服务</h4><p>定义 JvmServiceConsumer 类，并在其 sampleJvmServiceAnnotationImpl 属性上增加 @SofaReference 注解:</p><pre><code class=language-java>public class JvmServiceConsumer implements ClientFactoryAware {
+    @SofaReference(uniqueId = &quot;annotationImpl&quot;)
+    private SampleJvmService sampleJvmServiceAnnotationImpl;
+}
+</code></pre><p>将 JvmServiceConsumer 配置成一个 Spring Bean，保证 @SofaReference 注解生效:</p><pre><code class=language-xml>&lt;bean id=&quot;consumer&quot; class=&quot;com.alipay.sofa.isle.sample.JvmServiceConsumer&quot; init-method=&quot;init&quot; /&gt;
+</code></pre><h4 id=api-方式引用服务>API 方式引用服务</h4><p>JvmServiceConsumer 实现 ClientFactoryAware 接口，并在其 init 方法中引用 JVM 服务:</p><pre><code class=language-java>public class JvmServiceConsumer implements ClientFactoryAware {
+    private ClientFactory    clientFactory;
+
+    public void init() {
+        ReferenceClient referenceClient = clientFactory.getClient(ReferenceClient.class);
+        ReferenceParam&lt;SampleJvmService&gt; referenceParam = new ReferenceParam&lt;&gt;();
+        referenceParam.setInterfaceType(SampleJvmService.class);
+        referenceParam.setUniqueId(&quot;serviceClientImpl&quot;);
+        SampleJvmService sampleJvmServiceClientImpl = referenceClient.reference(referenceParam);
+        sampleJvmServiceClientImpl.message();
+    }
+
+    @Override
+    public void setClientFactory(ClientFactory clientFactory) {
+        this.clientFactory = clientFactory;
+    }
+}
+</code></pre><h3 id=启动-sofaboot-应用>启动 SOFABoot 应用</h3><p>将模块 parent 配置为 SOFABoot:</p><pre><code class=language-xml>&lt;parent&gt;
+    &lt;groupId&gt;com.alipay.sofa&lt;/groupId&gt;
+    &lt;artifactId&gt;sofaboot-dependencies&lt;/artifactId&gt;
+    &lt;version&gt;2.4.4&lt;/version&gt;
+&lt;/parent&gt;
+</code></pre><p>为模块增加 isle-sofa-boot-starter 及 service-provider 、 service-consumer 依赖:</p><pre><code class=language-xml>&lt;dependency&gt;
+    &lt;groupId&gt;com.alipay.sofa&lt;/groupId&gt;
+    &lt;artifactId&gt;isle-sofa-boot-starter&lt;/artifactId&gt;
+&lt;/dependency&gt;
+&lt;dependency&gt;
+    &lt;groupId&gt;com.alipay.sofa&lt;/groupId&gt;
+    &lt;artifactId&gt;service-provider&lt;/artifactId&gt;
+&lt;/dependency&gt;
+&lt;dependency&gt;
+    &lt;groupId&gt;com.alipay.sofa&lt;/groupId&gt;
+    &lt;artifactId&gt;service-consumer&lt;/artifactId&gt;
+&lt;/dependency&gt;
+</code></pre><p>启动 ApplicationRun 类，控制台将看到以下输出:</p><pre><code class=language-text>Hello, jvm service xml implementation.
+Hello, jvm service annotation implementation.
+Hello, jvm service service client implementation.
+</code></pre><h3 id=编写测试用例>编写测试用例</h3><p>SOFABoot 模块化测试方法与 Spring Boot 测试方法一致，只需在测试用例上增加 @SpringBootTest 注解及 @RunWith(SpringRunner.class) 注解即可。在测试用例中，还可以使用 @SofaReference 注解，对 SOFABoot 模块发布的服务进行测试：</p><pre><code class=language-java>@SpringBootTest
+@RunWith(SpringRunner.class)
+public class SofaBootWithModulesTest {
+    @SofaReference
+    private SampleJvmService sampleJvmService;
+
+    @SofaReference(uniqueId = &quot;annotationImpl&quot;)
+    private SampleJvmService sampleJvmServiceAnnotationImpl;
+
+    @SofaReference(uniqueId = &quot;serviceClientImpl&quot;)
+    private SampleJvmService sampleJvmServiceClientImpl;
+
+    @Test
+    public void test() {
+        Assert.assertEquals(&quot;Hello, jvm service xml implementation.&quot;, sampleJvmService.message());
+        Assert.assertEquals(&quot;Hello, jvm service annotation implementation.&quot;,
+            sampleJvmServiceAnnotationImpl.message());
+        Assert.assertEquals(&quot;Hello, jvm service service client implementation.&quot;,
+            sampleJvmServiceClientImpl.message());
+    }
+}
+</code></pre></article></main></div><footer class=ss-footer><div class=container><div class=links><div class=cate><h2 class=cate-title>资源</h2><a class=link href=https://github.com/sofastack>Github</a>
 <a class=link href=https://gitee.com/sofastack/>Gitee</a>
 <a class=link href=https://github.com/sofastack-guides>示例</a></div><div class=cate><h2 class=cate-title>社交媒体</h2><a class=link href=https://zhuanlan.zhihu.com/sofastack>知乎专栏</a>
 <a class=link href=https://weibo.com/sofastack>新浪微博</a>

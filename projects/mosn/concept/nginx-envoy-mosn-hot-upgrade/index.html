@@ -1,4 +1,4 @@
-<!doctype html><html><head><title>Nginx vs Envoy vs MOSN 平滑升级原理解析 · SOFAStack</title><meta charset=utf-8><meta http-equiv=x-ua-compatible content="IE=edge,chrome=1"><meta name=viewport content="width=device-width,minimum-scale=1"><meta name=description content="SOFAStack is a Scalable Open Financial Architecture for building cloud native applications"><meta name=generator content="Hugo 0.80.0"><link rel="shortcut icon" href=https://gw.alipayobjects.com/os/q/cms/images/jqu9346l/4ba95631-2489-4885-881f-bc7f8d787d5e_w64_h61.png type=image/png><link href=https://unpkg.com/purecss@1.0.0/build/base-min.css rel=stylesheet><link href=/css/main.css rel=stylesheet><link href=/css/zoom-image.css rel=stylesheet><script src=/js/iconfont.js></script><script src=/js/highlight.pack.js></script><script>hljs.initHighlightingOnLoad();</script><script>window.SITE_LANGUAGE="zh"</script><script src=/js/app.js></script><script type=application/javascript>var doNotTrack=false;if(!doNotTrack){(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');ga('create','UA-142131411-1','auto');ga('send','pageview');}</script></head><body><header class=ss-header><nav class=navbar role=navigation aria-label="main navigation"><div class=navbar-brand><a class=logo-link href=/><img class=logo src=/img/logo.png></a><div class=-show-mobile><a id=mobile-menu-icon><svg class="icon" aria-hidden="true"><use xlink:href="#icon-menu"/></svg></a><nav id=mobile-menu><div id=js-menu-search-mobile class=navbar-search-mobile><input class=input placeholder=请输入要搜索的关键词><svg class="icon" aria-hidden="true"><use xlink:href="#icon-search"/></svg></div><a href=/projects/><span>项目</span><svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"/></svg></a>
+<!doctype html><html><head><title>Nginx vs Envoy vs MOSN 平滑升级原理解析 · SOFAStack</title><meta charset=utf-8><meta http-equiv=x-ua-compatible content="IE=edge,chrome=1"><meta name=viewport content="width=device-width,minimum-scale=1"><meta name=description content="SOFAStack is a Scalable Open Financial Architecture for building cloud native applications"><meta name=generator content="Hugo 0.55.5"><link rel="shortcut icon" href=https://gw.alipayobjects.com/os/q/cms/images/jqu9346l/4ba95631-2489-4885-881f-bc7f8d787d5e_w64_h61.png type=image/png><link href=https://unpkg.com/purecss@1.0.0/build/base-min.css rel=stylesheet><link href=/css/main.css rel=stylesheet><link href=/css/zoom-image.css rel=stylesheet><script src=/js/iconfont.js></script><script src=/js/highlight.pack.js></script><script>hljs.initHighlightingOnLoad();</script><script>window.SITE_LANGUAGE="zh"</script><script src=/js/app.js></script><script type=application/javascript>var doNotTrack=false;if(!doNotTrack){(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');ga('create','UA-142131411-1','auto');ga('send','pageview');}</script></head><body><header class=ss-header><nav class=navbar role=navigation aria-label="main navigation"><div class=navbar-brand><a class=logo-link href=/><img class=logo src=/img/logo.png></a><div class=-show-mobile><a id=mobile-menu-icon><svg class="icon" aria-hidden="true"><use xlink:href="#icon-menu"/></svg></a><nav id=mobile-menu><div id=js-menu-search-mobile class=navbar-search-mobile><input class=input placeholder=请输入要搜索的关键词><svg class="icon" aria-hidden="true"><use xlink:href="#icon-search"/></svg></div><a href=/projects/><span>项目</span><svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"/></svg></a>
 <a href=/guides/><span>指南</span><svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"/></svg></a>
 <a href=/blog/><span>博客</span><svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"/></svg></a>
 <a href=/activities/><span>活动</span><svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"/></svg></a>
@@ -8,77 +8,111 @@
 <a class=navbar-item href=/blog/>博客</a>
 <a class=navbar-item href=/activities/>活动</a>
 <a class=navbar-item href=/community/>社区</a>
-<a class=navbar-item href=/awesome/>Awesome SOFA</a></div><div class=navbar-end><div class=navbar-item><div id=js-menu-search class=navbar-search><input class=input placeholder=请输入要搜索的关键词><svg class="icon" aria-hidden="true"><use xlink:href="#icon-search"/></svg></div></div><div class=navbar-item></div></div></div></nav></header><div class=ss-layout-container><aside class="ss-layout-aside -left ss-card -soft-hidden"><div id=js-drawer class=ss-toc><div id=js-drawer-handle class=drawer-handle><svg class="icon icon-menu" aria-hidden="true"><use xlink:href="#icon-menu"/></svg><svg class="icon icon-close" aria-hidden="true"><use xlink:href="#icon-close"/></svg></div><div class=drawer-body><div class=header title="MOSN 是一款使用 Go 语言开发的云原生网络代理。">MOSN<div class="ss-toc-list-card -hidden-mobile"><svg class="icon -hidden-mobile" aria-hidden="true"><use xlink:href="#icon-menu1"/></svg><div class=ss-tooltip><div class=toc-list><h4 class=title>主要项目</h4><ul class=list><li class=item><a href=/projects/sofa-boot/overview>SOFABoot</a></li><li class=item><a href=/projects/sofa-rpc/overview>SOFARPC</a></li><li class=item><a href=/projects/sofa-tracer/overview>SOFATracer</a></li><li class=item><a href=/projects/sofa-lookout/overview>SOFALookout</a></li><li class=item><a href=/projects/sofa-registry/overview>SOFARegistry</a></li></ul></div><div class=toc-list><h4 class=title>孵化项目</h4><ul class=list><li class=item><a href=/projects/sofa-mesh/overview>SOFAMesh</a></li><li class=item><a href=/projects/sofa-dashboard/overview>SOFADashboard</a></li></ul></div><div class=toc-list><h4 class=title>工具项目</h4><ul class=list><li class=item><a href=/projects/sofa-bolt/overview>SOFABolt</a></li><li class=item><a href=/projects/sofa-jraft/overview>SOFAJRaft</a></li><li class=item><a href=/projects/sofa-acts/overview>SOFAActs</a></li><li class=item><a href=https://www.sofastack.tech/projects/sofa-boot/sofa-ark-readme/>SOFAArk</a></li></ul></div><div class=toc-list><h4 class=title>生态项目</h4><ul class=list><li class=item><a href=https://mosn.io>MOSN</a></li><li class=item><a href=https://occlum.io>Occlum</a></li><li class=item><a href=https://seata.io>Seata</a></li></ul></div></div></div></div><div class=body><ul class=leaf-section></ul></div></div></div></aside><main class="ss-layout-main -card"><div class=ss-meta><div class=container><h1 class=title>Nginx vs Envoy vs MOSN 平滑升级原理解析</h1><a class="edit-button -hidden-mobile" href=https://github.com/sofastack/sofastack.tech/edit/master/content/zh/projects/mosn/concept/nginx-envoy-mosn-hot-upgrade/index.md>编辑</a></div><div class=meta>更新时间: 2021-01-19</div></div><article class=typo><pre><code>&lt;span style=&quot;color:#f92672&quot;&gt;n&lt;/span&gt; = &lt;span style=&quot;color:#ae81ff&quot;&gt;2&lt;/span&gt;;
-&lt;span style=&quot;color:#f92672&quot;&gt;env&lt;/span&gt; = &lt;span style=&quot;color:#e6db74&quot;&gt;ngx_set_environment(cycle,&lt;/span&gt; &lt;span style=&quot;color:#e6db74&quot;&gt;&amp;amp;n)&lt;/span&gt;;
-</code></pre><p>&mldr;
-env[n++] = var;
-env[n] = NULL;
-&mldr;
-ctx.envp = (char <em>const </em>) env;</p><pre><code>&lt;span style=&quot;color:#f92672&quot;&gt;ccf&lt;/span&gt; = &lt;span style=&quot;color:#e6db74&quot;&gt;(ngx_core_conf_t&lt;/span&gt; &lt;span style=&quot;color:#e6db74&quot;&gt;*)&lt;/span&gt; &lt;span style=&quot;color:#e6db74&quot;&gt;ngx_get_conf(cycle-&amp;gt;conf_ctx,&lt;/span&gt; &lt;span style=&quot;color:#e6db74&quot;&gt;ngx_core_module)&lt;/span&gt;;
+<a class=navbar-item href=/awesome/>Awesome SOFA</a></div><div class=navbar-end><div class=navbar-item><div id=js-menu-search class=navbar-search><input class=input placeholder=请输入要搜索的关键词><svg class="icon" aria-hidden="true"><use xlink:href="#icon-search"/></svg></div></div><div class=navbar-item></div></div></div></nav></header><div class=ss-layout-container><aside class="ss-layout-aside -left ss-card -soft-hidden"><div id=js-drawer class=ss-toc><div id=js-drawer-handle class=drawer-handle><svg class="icon icon-menu" aria-hidden="true"><use xlink:href="#icon-menu"/></svg><svg class="icon icon-close" aria-hidden="true"><use xlink:href="#icon-close"/></svg></div><div class=drawer-body><div class=header title="MOSN 是一款使用 Go 语言开发的云原生网络代理。">MOSN<div class="ss-toc-list-card -hidden-mobile"><svg class="icon -hidden-mobile" aria-hidden="true"><use xlink:href="#icon-menu1"/></svg><div class=ss-tooltip><div class=toc-list><h4 class=title>主要项目</h4><ul class=list><li class=item><a href=/projects/sofa-boot/overview>SOFABoot</a></li><li class=item><a href=/projects/sofa-rpc/overview>SOFARPC</a></li><li class=item><a href=/projects/sofa-tracer/overview>SOFATracer</a></li><li class=item><a href=/projects/sofa-lookout/overview>SOFALookout</a></li><li class=item><a href=/projects/sofa-registry/overview>SOFARegistry</a></li></ul></div><div class=toc-list><h4 class=title>孵化项目</h4><ul class=list><li class=item><a href=/projects/sofa-mesh/overview>SOFAMesh</a></li><li class=item><a href=/projects/sofa-dashboard/overview>SOFADashboard</a></li></ul></div><div class=toc-list><h4 class=title>工具项目</h4><ul class=list><li class=item><a href=/projects/sofa-bolt/overview>SOFABolt</a></li><li class=item><a href=/projects/sofa-jraft/overview>SOFAJRaft</a></li><li class=item><a href=/projects/sofa-acts/overview>SOFAActs</a></li><li class=item><a href=https://www.sofastack.tech/projects/sofa-boot/sofa-ark-readme/>SOFAArk</a></li></ul></div><div class=toc-list><h4 class=title>生态项目</h4><ul class=list><li class=item><a href=https://mosn.io>MOSN</a></li><li class=item><a href=https://occlum.io>Occlum</a></li><li class=item><a href=https://seata.io>Seata</a></li></ul></div></div></div></div><div class=body><ul class=leaf-section></ul></div></div></div></aside><main class="ss-layout-main -card"><div class=ss-meta><div class=container><h1 class=title>Nginx vs Envoy vs MOSN 平滑升级原理解析</h1><a class="edit-button -hidden-mobile" href=https://github.com/sofastack/sofastack.tech/edit/master/content/zh/projects/mosn/concept/nginx-envoy-mosn-hot-upgrade/index.md>编辑</a></div><div class=meta>更新时间: 2021-01-20</div></div><article class=typo><h2 id=前言>前言</h2><p>本文是对 Nginx、Envoy 及 MOSN 的平滑升级原理区别的分析，适合对 Nginx 实现原理比较感兴趣的同学阅读，需要具备一定的网络编程知识。</p><p><strong>平滑升级的本质就是 listener fd 的迁移</strong>，虽然 Nginx、Envoy、MOSN 都提供了平滑升级支持，但是鉴于它们进程模型的差异，反映在实现上还是有些区别的。这里来探讨下它们其中的区别，并着重介绍 Nginx 的实现。</p><h2 id=nginx>Nginx</h2><p>相信有很多人认为 Nginx 的 reload 操作就能完成平滑升级，其实这是个典型的理解错误。实际上 reload 操作仅仅是平滑重启，并没有真正的升级新的二进制文件，也就是说其运行的依然是老的二进制文件。</p><p>Nginx 自身也并没有提供平滑升级的命令选项，其只能靠手动触发信号来完成。具体正确的操作步骤可以参考这里：<a href=http://nginx.org/en/docs/control.html#upgrade>Upgrading Executable on the Fly</a>，这里只分析下其实现原理。</p><p><strong>Nginx 的平滑升级是通过 <code>fork</code> + <code>execve</code> 这种经典的处理方式来实现的</strong>。准备升级时，Old Master 进程收到信号然后 <code>fork</code> 出一个子进程，注意此时这个子进程运行的依然是老的镜像文件。紧接着这个子进程会通过 <code>execve</code> 调用执行新的二进制文件来替换掉自己，成为 New Master。</p><p>那么问题来了：New Master 启动时按理说会执行 <code>bind</code> + <code>listen</code> 等操作来初始化监听，而这时候 Old Master 还没有退出，端口未释放，执行 <code>execve</code> 时理论上应该会报：<code>Address already in use</code> 错误，但是实际上这里却没有任何问题，这是为什么？</p><p>因为 Nginx 在 <code>execve</code> 的时候压根就没有重新 <code>bind</code> + <code>listen</code>，而是直接把 listener fd 添加到 <code>epoll</code> 的事件表。因为这个 New Master 本来就是从 Old Master 继承而来，自然就继承了 Old Master 的 listener fd，但是这里依然有一个问题：该怎么通知 New Master 呢？</p><p><strong>环境变量</strong>。<code>execve</code> 在执行的时候可以传入环境变量。实际上 Old Master 在 <code>fork</code> 之前会将所有 listener fd 添加到 <code>NGINX</code> 环境变量：</p><pre><code class=language-nginx>ngx_pid_t
+ngx_exec_new_binary(ngx_cycle_t *cycle, char *const *argv)
+{
+...
+    ctx.path = argv[0];
+    ctx.name = &quot;new binary process&quot;;
+    ctx.argv = argv;
 
-&lt;span style=&quot;color:#f92672&quot;&gt;if&lt;/span&gt; &lt;span style=&quot;color:#e6db74&quot;&gt;(ngx_rename_file(ccf-&amp;gt;pid.data,&lt;/span&gt; &lt;span style=&quot;color:#e6db74&quot;&gt;ccf-&amp;gt;oldpid.data)&lt;/span&gt; == &lt;span style=&quot;color:#e6db74&quot;&gt;NGX_FILE_ERROR)&lt;/span&gt; {
-   &lt;span style=&quot;color:#f92672&quot;&gt;...&lt;/span&gt;
-    &lt;span style=&quot;color:#e6db74&quot;&gt;return&lt;/span&gt; &lt;span style=&quot;color:#e6db74&quot;&gt;NGX_INVALID_PID&lt;/span&gt;;
-}
+    n = 2;
+    env = ngx_set_environment(cycle, &amp;n);
+...
+    env[n++] = var;
+    env[n] = NULL;
+...
+    ctx.envp = (char *const *) env;
 
-&lt;span style=&quot;color:#f92672&quot;&gt;pid&lt;/span&gt; = &lt;span style=&quot;color:#e6db74&quot;&gt;ngx_execute(cycle,&lt;/span&gt; &lt;span style=&quot;color:#e6db74&quot;&gt;&amp;amp;ctx)&lt;/span&gt;;
+    ccf = (ngx_core_conf_t *) ngx_get_conf(cycle-&gt;conf_ctx, ngx_core_module);
 
-&lt;span style=&quot;color:#f92672&quot;&gt;return&lt;/span&gt; &lt;span style=&quot;color:#e6db74&quot;&gt;pid&lt;/span&gt;;
-</code></pre><p>}
-Nginx 在启动的时候，会解析 NGINX 环境变量：</p><pre><code>&lt;span style=&quot;color:#f92672&quot;&gt;for&lt;/span&gt; &lt;span style=&quot;color:#e6db74&quot;&gt;(p&lt;/span&gt; = &lt;span style=&quot;color:#e6db74&quot;&gt;inherited,&lt;/span&gt; &lt;span style=&quot;color:#e6db74&quot;&gt;v&lt;/span&gt; = &lt;span style=&quot;color:#e6db74&quot;&gt;p&lt;/span&gt;; &lt;span style=&quot;color:#f92672&quot;&gt;*p&lt;/span&gt;; &lt;span style=&quot;color:#f92672&quot;&gt;p++)&lt;/span&gt; {
-    &lt;span style=&quot;color:#f92672&quot;&gt;if&lt;/span&gt; &lt;span style=&quot;color:#e6db74&quot;&gt;(*p&lt;/span&gt; == &lt;span style=&quot;color:#e6db74&quot;&gt;&amp;#39;:&amp;#39;&lt;/span&gt; &lt;span style=&quot;color:#e6db74&quot;&gt;||&lt;/span&gt; &lt;span style=&quot;color:#e6db74&quot;&gt;*p&lt;/span&gt; == &lt;span style=&quot;color:#e6db74&quot;&gt;&amp;#39;&lt;/span&gt;;&lt;span style=&quot;color:#f92672&quot;&gt;&amp;#39;)&lt;/span&gt; {
-        &lt;span style=&quot;color:#f92672&quot;&gt;s&lt;/span&gt; = &lt;span style=&quot;color:#e6db74&quot;&gt;ngx_atoi(v,&lt;/span&gt; &lt;span style=&quot;color:#e6db74&quot;&gt;p&lt;/span&gt; &lt;span style=&quot;color:#e6db74&quot;&gt;-&lt;/span&gt; &lt;span style=&quot;color:#e6db74&quot;&gt;v)&lt;/span&gt;;
-        &lt;span style=&quot;color:#f92672&quot;&gt;...&lt;/span&gt;
-        &lt;span style=&quot;color:#e6db74&quot;&gt;v&lt;/span&gt; = &lt;span style=&quot;color:#e6db74&quot;&gt;p&lt;/span&gt; &lt;span style=&quot;color:#e6db74&quot;&gt;+&lt;/span&gt; &lt;span style=&quot;color:#ae81ff&quot;&gt;1&lt;/span&gt;;
-
-        &lt;span style=&quot;color:#f92672&quot;&gt;ls&lt;/span&gt; = &lt;span style=&quot;color:#e6db74&quot;&gt;ngx_array_push(&amp;amp;cycle-&amp;gt;listening)&lt;/span&gt;;
-        &lt;span style=&quot;color:#f92672&quot;&gt;if&lt;/span&gt; &lt;span style=&quot;color:#e6db74&quot;&gt;(ls&lt;/span&gt; == &lt;span style=&quot;color:#e6db74&quot;&gt;NULL)&lt;/span&gt; {
-            &lt;span style=&quot;color:#f92672&quot;&gt;return&lt;/span&gt; &lt;span style=&quot;color:#e6db74&quot;&gt;NGX_ERROR&lt;/span&gt;;
-        }
-
-        &lt;span style=&quot;color:#f92672&quot;&gt;ngx_memzero(ls,&lt;/span&gt; &lt;span style=&quot;color:#e6db74&quot;&gt;sizeof(ngx_listening_t))&lt;/span&gt;;
-
-        &lt;span style=&quot;color:#f92672&quot;&gt;ls-&amp;gt;fd&lt;/span&gt; = &lt;span style=&quot;color:#e6db74&quot;&gt;(ngx_socket_t)&lt;/span&gt; &lt;span style=&quot;color:#e6db74&quot;&gt;s&lt;/span&gt;;
+    if (ngx_rename_file(ccf-&gt;pid.data, ccf-&gt;oldpid.data) == NGX_FILE_ERROR) {
+       ...
+        return NGX_INVALID_PID;
     }
+
+    pid = ngx_execute(cycle, &amp;ctx);
+
+    return pid;
 }
-&lt;span style=&quot;color:#f92672&quot;&gt;...&lt;/span&gt;
-&lt;span style=&quot;color:#e6db74&quot;&gt;ngx_inherited&lt;/span&gt; = &lt;span style=&quot;color:#ae81ff&quot;&gt;1&lt;/span&gt;;
+</code></pre><p>Nginx 在启动的时候，会解析 <code>NGINX</code> 环境变量：</p><pre><code class=language-nginx>static ngx_int_t
+ngx_add_inherited_sockets(ngx_cycle_t *cycle)
+{
+...
+    inherited = (u_char *) getenv(NGINX_VAR);
+    if (inherited == NULL) {
+        return NGX_OK;
+    }
+    if (ngx_array_init(&amp;cycle-&gt;listening, cycle-&gt;pool, 10,
+                       sizeof(ngx_listening_t))
+        != NGX_OK)
+    {
+        return NGX_ERROR;
+    }
 
-&lt;span style=&quot;color:#f92672&quot;&gt;return&lt;/span&gt; &lt;span style=&quot;color:#e6db74&quot;&gt;ngx_set_inherited_sockets(cycle)&lt;/span&gt;;
-</code></pre><p>}
-一旦检测到是继承而来的 socket，那就说明已经打开了，不会再继续 bind + listen 了：</p><pre><code>&lt;span style=&quot;color:#e6db74&quot;&gt;for&lt;/span&gt; &lt;span style=&quot;color:#e6db74&quot;&gt;(tries&lt;/span&gt; = &lt;span style=&quot;color:#ae81ff&quot;&gt;5&lt;/span&gt;; &lt;span style=&quot;color:#f92672&quot;&gt;tries&lt;/span&gt;; &lt;span style=&quot;color:#f92672&quot;&gt;tries--)&lt;/span&gt; {
-    &lt;span style=&quot;color:#f92672&quot;&gt;failed&lt;/span&gt; = &lt;span style=&quot;color:#ae81ff&quot;&gt;0&lt;/span&gt;;
+    for (p = inherited, v = p; *p; p++) {
+        if (*p == ':' || *p == ';') {
+            s = ngx_atoi(v, p - v);
+            ...
+            v = p + 1;
 
-    &lt;span style=&quot;color:#f92672&quot;&gt;/*&lt;/span&gt; &lt;span style=&quot;color:#e6db74&quot;&gt;for&lt;/span&gt; &lt;span style=&quot;color:#e6db74&quot;&gt;each&lt;/span&gt; &lt;span style=&quot;color:#e6db74&quot;&gt;listening&lt;/span&gt; &lt;span style=&quot;color:#e6db74&quot;&gt;socket&lt;/span&gt; &lt;span style=&quot;color:#e6db74&quot;&gt;*/&lt;/span&gt;
+            ls = ngx_array_push(&amp;cycle-&gt;listening);
+            if (ls == NULL) {
+                return NGX_ERROR;
+            }
 
-    &lt;span style=&quot;color:#e6db74&quot;&gt;ls&lt;/span&gt; = &lt;span style=&quot;color:#e6db74&quot;&gt;cycle-&amp;gt;listening.elts&lt;/span&gt;;
-    &lt;span style=&quot;color:#f92672&quot;&gt;for&lt;/span&gt; &lt;span style=&quot;color:#e6db74&quot;&gt;(i&lt;/span&gt; = &lt;span style=&quot;color:#ae81ff&quot;&gt;0&lt;/span&gt;; &lt;span style=&quot;color:#f92672&quot;&gt;i&lt;/span&gt; &lt;span style=&quot;color:#e6db74&quot;&gt;&amp;lt;&lt;/span&gt; &lt;span style=&quot;color:#e6db74&quot;&gt;cycle-&amp;gt;listening.nelts&lt;/span&gt;; &lt;span style=&quot;color:#f92672&quot;&gt;i++)&lt;/span&gt; {
-    &lt;span style=&quot;color:#f92672&quot;&gt;...&lt;/span&gt;
-        &lt;span style=&quot;color:#e6db74&quot;&gt;if&lt;/span&gt; &lt;span style=&quot;color:#e6db74&quot;&gt;(ls[i].inherited)&lt;/span&gt; {
+            ngx_memzero(ls, sizeof(ngx_listening_t));
 
-            &lt;span style=&quot;color:#f92672&quot;&gt;/*&lt;/span&gt; &lt;span style=&quot;color:#e6db74&quot;&gt;TODO:&lt;/span&gt; &lt;span style=&quot;color:#e6db74&quot;&gt;close&lt;/span&gt; &lt;span style=&quot;color:#66d9ef&quot;&gt;on&lt;/span&gt; &lt;span style=&quot;color:#e6db74&quot;&gt;exit&lt;/span&gt; &lt;span style=&quot;color:#e6db74&quot;&gt;*/&lt;/span&gt;
-            &lt;span style=&quot;color:#e6db74&quot;&gt;/*&lt;/span&gt; &lt;span style=&quot;color:#e6db74&quot;&gt;TODO:&lt;/span&gt; &lt;span style=&quot;color:#e6db74&quot;&gt;nonblocking&lt;/span&gt; &lt;span style=&quot;color:#e6db74&quot;&gt;*/&lt;/span&gt;
-            &lt;span style=&quot;color:#e6db74&quot;&gt;/*&lt;/span&gt; &lt;span style=&quot;color:#e6db74&quot;&gt;TODO:&lt;/span&gt; &lt;span style=&quot;color:#e6db74&quot;&gt;deferred&lt;/span&gt; &lt;span style=&quot;color:#e6db74&quot;&gt;accept&lt;/span&gt; &lt;span style=&quot;color:#e6db74&quot;&gt;*/&lt;/span&gt;
-
-            &lt;span style=&quot;color:#e6db74&quot;&gt;continue&lt;/span&gt;;
+            ls-&gt;fd = (ngx_socket_t) s;
         }
-        &lt;span style=&quot;color:#f92672&quot;&gt;...&lt;/span&gt;
+    }
+    ...
+    ngx_inherited = 1;
 
-        &lt;span style=&quot;color:#e6db74&quot;&gt;ngx_log_debug2(NGX_LOG_DEBUG_CORE,&lt;/span&gt; &lt;span style=&quot;color:#e6db74&quot;&gt;log,&lt;/span&gt; &lt;span style=&quot;color:#ae81ff&quot;&gt;0&lt;/span&gt;&lt;span style=&quot;color:#e6db74&quot;&gt;,&lt;/span&gt;
-                       &lt;span style=&quot;color:#e6db74&quot;&gt;&amp;#34;bind()&lt;/span&gt; &lt;span style=&quot;color:#e6db74&quot;&gt;%V&lt;/span&gt; &lt;span style=&quot;color:#75715e&quot;&gt;#%d &amp;#34;, &amp;amp;ls[i].addr_text, s);
-</code></pre><p>if (bind(s, ls[i].sockaddr, ls[i].socklen) == -1) {
-&mldr;
+    return ngx_set_inherited_sockets(cycle);
 }
-&mldr;
-}
-}</p><pre><code>&lt;span style=&quot;color:#e6db74&quot;&gt;if&lt;/span&gt; &lt;span style=&quot;color:#e6db74&quot;&gt;(failed)&lt;/span&gt; {
-    &lt;span style=&quot;color:#f92672&quot;&gt;ngx_log_error(NGX_LOG_EMERG,&lt;/span&gt; &lt;span style=&quot;color:#e6db74&quot;&gt;log,&lt;/span&gt; &lt;span style=&quot;color:#ae81ff&quot;&gt;0&lt;/span&gt;&lt;span style=&quot;color:#e6db74&quot;&gt;,&lt;/span&gt; &lt;span style=&quot;color:#e6db74&quot;&gt;&amp;#34;still&lt;/span&gt; &lt;span style=&quot;color:#e6db74&quot;&gt;could&lt;/span&gt; &lt;span style=&quot;color:#e6db74&quot;&gt;not&lt;/span&gt; &lt;span style=&quot;color:#e6db74&quot;&gt;bind()&amp;#34;)&lt;/span&gt;;
-    &lt;span style=&quot;color:#f92672&quot;&gt;return&lt;/span&gt; &lt;span style=&quot;color:#e6db74&quot;&gt;NGX_ERROR&lt;/span&gt;;
-}
+</code></pre><p>一旦检测到是继承而来的 socket，那就说明已经打开了，不会再继续 <code>bind</code> + <code>listen</code> 了：</p><pre><code class=language-nginx>ngx_int_t
+ngx_open_listening_sockets(ngx_cycle_t *cycle)
+{
+    ...
+    /* TODO: configurable try number */
 
-&lt;span style=&quot;color:#f92672&quot;&gt;return&lt;/span&gt; &lt;span style=&quot;color:#e6db74&quot;&gt;NGX_OK&lt;/span&gt;;
-</code></pre><p>}
-Envoy</p></article></main></div><footer class=ss-footer><div class=container><div class=links><div class=cate><h2 class=cate-title>资源</h2><a class=link href=https://github.com/sofastack>Github</a>
+    for (tries = 5; tries; tries--) {
+        failed = 0;
+
+        /* for each listening socket */
+
+        ls = cycle-&gt;listening.elts;
+        for (i = 0; i &lt; cycle-&gt;listening.nelts; i++) {
+        ...
+            if (ls[i].inherited) {
+
+                /* TODO: close on exit */
+                /* TODO: nonblocking */
+                /* TODO: deferred accept */
+
+                continue;
+            }
+            ...
+
+            ngx_log_debug2(NGX_LOG_DEBUG_CORE, log, 0,
+                           &quot;bind() %V #%d &quot;, &amp;ls[i].addr_text, s);
+
+            if (bind(s, ls[i].sockaddr, ls[i].socklen) == -1) {
+                ...
+            }
+            ...
+        }
+    }
+
+    if (failed) {
+        ngx_log_error(NGX_LOG_EMERG, log, 0, &quot;still could not bind()&quot;);
+        return NGX_ERROR;
+    }
+
+    return NGX_OK;
+}
+</code></pre><h2 id=envoy>Envoy</h2><p>Envoy 使用的是单进程多线程模型，其局限就是无法通过环境变量来传递 listener fd。因此 Envoy 采用的是 UDS（unix domain sockets）方案。当 New Envoy 启动完成后，会通过 UDS 向 Old Envoy 请求 listener fd 副本，拿到 listener fd 之后开始接管新来的连接，并通知 Old Envoy 终止运行。</p><blockquote><p>file descriptor 是可以通过 <code>sendmsg/recvmsg</code> 来传递的。</p></blockquote><h2 id=mosn>MOSN</h2><p>MOSN 的方案和 Envoy 类似，都是通过 UDS 来传递 listener fd。但是其比 Envoy 更厉害的地方在于它可以把老的连接从 Old MOSN 上迁移到 New MOSN 上。<strong>也就是说把一个连接从进程 A 迁移到进程 B，而保持连接不断</strong>！！！厉不厉害？听起来很简单，但是实现起来却没那么容易，比如数据已经被拷贝到了应用层，但是还没有被处理，怎么办？这里面有很多细节需要处理。它子所以能做到这种层面，靠的也是内核的 <code>sendmsg/recvmsg</code> 技术。</p><blockquote><p>SCM_RIGHTS - Send or receive a set of open file descriptors from another process. The data portion contains an integer array of the file descriptors. The passed file descriptors behave as though they have been created with dup(2). <a href=http://linux.die.net/man/7/unix>http://linux.die.net/man/7/unix</a></p></blockquote><p>这里有一个 Go 实现的小 Demo: <a href=https://zhuanlan.zhihu.com/p/97340154>tcp链接迁移</a>。</p><h2 id=对比>对比</h2><p>Nginx 的实现是兼容性最强的，因为 Envoy 和 MOSN 都依赖 <code>sendmsg/recvmsg</code> 系统调用，需要内核 3.5+ 支持。MOSN 的难度最高，算得上是真正的无损升级，而 Nginx 和 Envoy 对于老的连接，仅仅是实现 graceful shutdown，严格来说是有损的。这对于 HTTP(通过 <code>Connection: close</code>) 和 gRPC(GoAway Frame) 协议支持很友好，但是遇到自定义的 TCP 协议就抓瞎了。如果遇到客户端没有处理 <code>close</code> 异常，很容易发生 socket fd 泄露问题。</p><p>本文作者 ms2008，转载自<a href=https://ms2008.github.io/2019/12/28/hot-upgrade/>Nginx vs Envoy vs Mosn 平滑升级原理解析</a>。</p></article></main></div><footer class=ss-footer><div class=container><div class=links><div class=cate><h2 class=cate-title>资源</h2><a class=link href=https://github.com/sofastack>Github</a>
 <a class=link href=https://gitee.com/sofastack/>Gitee</a>
 <a class=link href=https://github.com/sofastack-guides>示例</a></div><div class=cate><h2 class=cate-title>社交媒体</h2><a class=link href=https://zhuanlan.zhihu.com/sofastack>知乎专栏</a>
 <a class=link href=https://weibo.com/sofastack>新浪微博</a>

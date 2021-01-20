@@ -1,4 +1,4 @@
-<!doctype html><html><head><title>基于 Seata Saga 设计更有弹性的金融应用 · SOFAStack</title><meta charset=utf-8><meta http-equiv=x-ua-compatible content="IE=edge,chrome=1"><meta name=viewport content="width=device-width,minimum-scale=1"><meta name=description content="SOFAStack is a Scalable Open Financial Architecture for building cloud native applications"><meta name=generator content="Hugo 0.80.0"><link rel="shortcut icon" href=https://gw.alipayobjects.com/os/q/cms/images/jqu9346l/4ba95631-2489-4885-881f-bc7f8d787d5e_w64_h61.png type=image/png><link href=https://unpkg.com/purecss@1.0.0/build/base-min.css rel=stylesheet><link href=/css/main.css rel=stylesheet><link href=/css/zoom-image.css rel=stylesheet><script src=/js/iconfont.js></script><script src=/js/highlight.pack.js></script><script>hljs.initHighlightingOnLoad();</script><script>window.SITE_LANGUAGE="zh"</script><script src=/js/app.js></script><script type=application/javascript>var doNotTrack=false;if(!doNotTrack){(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');ga('create','UA-142131411-1','auto');ga('send','pageview');}</script></head><body><header class=ss-header><nav class=navbar role=navigation aria-label="main navigation"><div class=navbar-brand><a class=logo-link href=/><img class=logo src=/img/logo.png></a><div class=-show-mobile><a id=mobile-menu-icon><svg class="icon" aria-hidden="true"><use xlink:href="#icon-menu"/></svg></a><nav id=mobile-menu><div id=js-menu-search-mobile class=navbar-search-mobile><input class=input placeholder=请输入要搜索的关键词><svg class="icon" aria-hidden="true"><use xlink:href="#icon-search"/></svg></div><a href=/projects/><span>项目</span><svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"/></svg></a>
+<!doctype html><html><head><title>基于 Seata Saga 设计更有弹性的金融应用 · SOFAStack</title><meta charset=utf-8><meta http-equiv=x-ua-compatible content="IE=edge,chrome=1"><meta name=viewport content="width=device-width,minimum-scale=1"><meta name=description content="SOFAStack is a Scalable Open Financial Architecture for building cloud native applications"><meta name=generator content="Hugo 0.55.5"><link rel="shortcut icon" href=https://gw.alipayobjects.com/os/q/cms/images/jqu9346l/4ba95631-2489-4885-881f-bc7f8d787d5e_w64_h61.png type=image/png><link href=https://unpkg.com/purecss@1.0.0/build/base-min.css rel=stylesheet><link href=/css/main.css rel=stylesheet><link href=/css/zoom-image.css rel=stylesheet><script src=/js/iconfont.js></script><script src=/js/highlight.pack.js></script><script>hljs.initHighlightingOnLoad();</script><script>window.SITE_LANGUAGE="zh"</script><script src=/js/app.js></script><script type=application/javascript>var doNotTrack=false;if(!doNotTrack){(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');ga('create','UA-142131411-1','auto');ga('send','pageview');}</script></head><body><header class=ss-header><nav class=navbar role=navigation aria-label="main navigation"><div class=navbar-brand><a class=logo-link href=/><img class=logo src=/img/logo.png></a><div class=-show-mobile><a id=mobile-menu-icon><svg class="icon" aria-hidden="true"><use xlink:href="#icon-menu"/></svg></a><nav id=mobile-menu><div id=js-menu-search-mobile class=navbar-search-mobile><input class=input placeholder=请输入要搜索的关键词><svg class="icon" aria-hidden="true"><use xlink:href="#icon-search"/></svg></div><a href=/projects/><span>项目</span><svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"/></svg></a>
 <a href=/guides/><span>指南</span><svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"/></svg></a>
 <a href=/blog/><span>博客</span><svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"/></svg></a>
 <a href=/activities/><span>活动</span><svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"/></svg></a>
@@ -10,70 +10,231 @@
 <a class=navbar-item href=/community/>社区</a>
 <a class=navbar-item href=/awesome/>Awesome SOFA</a></div><div class=navbar-end><div class=navbar-item><div id=js-menu-search class=navbar-search><input class=input placeholder=请输入要搜索的关键词><svg class="icon" aria-hidden="true"><use xlink:href="#icon-search"/></svg></div></div><div class=navbar-item></div></div></div></nav></header><div class=ss-layout-container><main class="ss-layout-main -card"><div class=ss-meta><h1 class=title>基于 Seata Saga 设计更有弹性的金融应用</h1><div class=meta>2019-11-04 ·
 <a href=https://github.com/long187>屹远</a> ·
-<span class=tags><a class=tag href=/tags/seata/ rel=tag>#Seata</a></span></div></div><article class=typo><p>// delegate action
-from("direct:creditReservation")
-.saga()
-.propagation(SagaPropagation.SUPPORTS)
-.option("CreditId", body()) // mark the current body as needed in the compensating action .compensation("direct:creditRefund")
-.bean(creditService, "reserveCredit")
-.log("Credit ${header.amount} reserved. Custom Id used is ${body}");</p><p>// called only if the saga is cancelled
-from("direct:creditRefund")
-.transform(header("CreditId")) // retrieve the CreditId option from headers .bean(creditService, "refundCredit")
-.log("Credit for Custom Id ${body} refunded");
-XML DSL 示例：</p><p>private SagaDefinition&lt;CreateOrderSagaData> sagaDefinition =
-step()
-.withCompensation(this::reject)
-.step()
-.invokeParticipant(this::reserveCredit)
-.step()
-.invokeParticipant(this::approve)
-.build();</p><p>@Override
-public SagaDefinition&lt;CreateOrderSagaData> getSagaDefinition() {
-return this.sagaDefinition;
-}</p><p>private CommandWithDestination reserveCredit(CreateOrderSagaData data) {
-long orderId = data.getOrderId();
-Long customerId = data.getOrderDetails().getCustomerId();
-Money orderTotal = data.getOrderDetails().getOrderTotal();
-return send(new ReserveCreditCommand(customerId, orderId, orderTotal))
-.to("customerService")
-.build();</p><p>&mldr;
-Apache ServiceComb Saga</p><p>private static final Logger LOG = LoggerFactory.getLogger(MethodHandles.lookup().lookupClass());</p><p>@Autowired
-private IServiceB serviceB;</p><p>@Autowired
-private IServiceC serviceC;</p><p>@Override
-public String getServiceName() {
-return "servicea";
-}</p><p>@Override
-public String getTableName() {
-return "testa";
-}</p><p>@Override
-@SagaStart
-@Compensable(compensationMethod = "cancelRun")
-@Transactional(rollbackFor = Exception.class)
-public Object run(InvokeContext invokeContext) throws Exception {
-LOG.info("A.run called");
-doRunBusi();
-if (invokeContext.isInvokeB(getServiceName())) {
-serviceB.run(invokeContext);
+<span class=tags><a class=tag href=/tags/seata/ rel=tag>#Seata</a></span></div></div><article class=typo><p>Seata 意为：Simple Extensible Autonomous Transaction Architecture，是一套一站式分布式事务解决方案，提供了 AT、TCC、Saga 和 XA 事务模式，本文详解其中的 Saga 模式。
+项目地址：<a href=https://github.com/seata/seata>https://github.com/seata/seata</a></p><p>本文作者：屹远（陈龙），蚂蚁金服分布式事务核心研发 。</p><h2 id=金融分布式应用开发的痛点>金融分布式应用开发的痛点</h2><p>分布式系统有一个比较明显的问题就是，一个业务流程需要组合一组服务。这样的事情在微服务下就更为明显了，因为这需要业务上的一致性的保证。也就是说，如果一个步骤失败了，那么要么回滚到以前的服务调用，要么不断重试保证所有的步骤都成功。&mdash;《左耳听风-弹力设计之“补偿事务”》</p><p>而在金融领域微服务架构下的业务流程往往会更复杂，流程很长，比如一个互联网微贷业务流程调十几个服务很正常，再加上异常处理的流程那就更复杂了，做过金融业务开发的同学会很有体感。</p><p>所以在金融分布式应用开发过程中我们面临一些痛点：</p><ul><li><strong>业务一致性难以保障</strong></li></ul><p>我们接触到的大多数业务（比如在渠道层、产品层、集成层的系统），为了保障业务最终一致性，往往会采用“补偿”的方式来做，如果没有一个协调器来支持，开发难度是比较大的，每一步都要在 catch 里去处理前面所有的“回滚”操作，这将会形成“箭头形”的代码，可读性及维护性差。或者重试异常的操作，如果重试不成功可能要转异步重试，甚至最后转人工处理。这些都给开发人员带来极大的负担，开发效率低，且容易出错。</p><ul><li><strong>业务状态难以管理</strong></li></ul><p>业务实体很多、实体的状态也很多，往往做完一个业务活动后就将实体的状态更新到了数据库里，没有一个状态机来管理整个状态的变迁过程，不直观，容易出错，造成业务进入一个不正确的状态。</p><ul><li><strong>幂等性难以保障</strong></li></ul><p>服务的幂等性是分布式环境下的基本要求，为了保证服务的幂等性往往需要服务开发者逐个去设计，有用数据库唯一键实现的，有用分布式缓存实现的，没有一个统一的方案，开发人员负担大，也容易遗漏，从而造成资损。</p><ul><li><strong>业务监控运维难，缺乏统一的差错守护能力</strong></li></ul><p>业务的执行情况监控一般通过打印日志，再基于日志监控平台查看，大多数情况是没有问题的，但是如果业务出错，这些监控缺乏当时的业务上下文，对排查问题不友好，往往需要再去数据库里查。同时日志的打印也依赖于开发，容易遗漏。对于补偿事务往往需要有“差错守护触发补偿”、“工人触发补偿”操作，没有统一的差错守护和处理规范，这些都要开发者逐个开发，负担沉重。</p><h2 id=理论基础>理论基础</h2><p>一些场景下，我们对数据有强一致性的需求时，会采用在业务层上需要使用“两阶段提交”这样的分布式事务方案。而在另外一些场景下，我们并不需要这么强的一致性，那就只需要保证最终一致性就可以了。</p><p>例如蚂蚁金服目前在金融核心系统使用的就是 TCC 模式，金融核心系统的特点是一致性要求高（业务上的隔离性）、短流程、并发高。</p><p>而在很多金融核心以上的业务（比如在渠道层、产品层、集成层的系统），这些系统的特点是最终一致即可、流程多、流程长、还可能要调用其它公司的服务（如金融网络）。这是如果每个服务都开发 Try、Confirm、Cancel 三个方法成本高。如果事务中有其它公司的服务，也无法要求其它公司的服务也遵循 TCC 这种开发模式。同时流程长，事务边界太长会影响性能。</p><p>对于事务我们都知道 ACID，也很熟悉 CAP 理论最多只能满足其中两个，所以，为了提高性能，出现了 ACID 的一个变种 BASE。ACID 强调的是一致性（CAP 中的 C），而 BASE 强调的是可用性（CAP 中的 A）。我们知道，在很多情况下，我们是无法做到强一致性的 ACID 的。特别是我们需要跨多个系统的时候，而且这些系统还不是由一个公司所提供的。BASE 的系统倾向于设计出更加有弹力的系统，在短时间内，就算是有数据不同步的风险，我们也应该允许新的交易可以发生，而后面我们在业务上将可能出现问题的事务通过补偿的方式处理掉，以保证最终的一致性。</p><p>所以我们在实际开发中会进行取舍，对于更多的金融核心以上的业务系统可以采用补偿事务，补偿事务处理方面在30年前就提出了 Saga 理论，随着微服务的发展，近些年才逐步受到大家的关注。目前业界比较也公认 Saga 是作为长事务的解决方案。
+&gt; <a href=https://github.com/aphyr/dist-sagas/blob/master/sagas.pdf>https://github.com/aphyr/dist-sagas/blob/master/sagas.pdf</a>
+&gt; <a href=http://microservices.io/patterns/data/saga.html>http://microservices.io/patterns/data/saga.html</a></p><h2 id=社区和业界的方案>社区和业界的方案</h2><h3 id=apache-camel-saga>Apache Camel Saga</h3><p>Camel 是实现 EIP（Enterprise Integration Patterns）企业集成模式的一款开源产品，它基于事件驱动的架构，有着良好的性能和吞吐量，它在2.21版本新增加了 Saga EIP。</p><p>Saga EIP 提供了一种方式可以通过 camel route 定义一系列有关联关系的 Action，这些 Action 要么都执行成功，要么都回滚，Saga 可以协调任何通讯协议的分布式服务或本地服务，并达到全局的最终一致性。Saga 不要求整个处理在短时间内完成，因为它不占用任何数据库锁，它可以支持需要长时间处理的请求，从几秒到几天，Camel 的 Saga EIP 是基于 <a href=https://github.com/eclipse/microprofile-sandbox/tree/master/proposals/0009-LRA>Microprofile 的 LRA</a>（Long Running Action），同样也是支持协调任何通讯协议任何语言实现的分布式服务。</p><p>Saga 的实现不会对数据进行加锁，而是在给操作定义它的“补偿操作”，当正常流程执行出错的时候触发那些已经执行过的操作的“补偿操作”，将流程回滚掉。“补偿操作”可以在 Camel route 上用 Java 或 XML DSL（Definition Specific Language）来定义。</p><p>下面是一个 Java DSL 示例：</p><pre><code class=language-java>// action
+from(&quot;direct:reserveCredit&quot;)
+  .bean(idService, &quot;generateCustomId&quot;) // generate a custom Id and set it in the body
+  .to(&quot;direct:creditReservation&quot;)
+
+// delegate action
+from(&quot;direct:creditReservation&quot;)
+  .saga()
+  .propagation(SagaPropagation.SUPPORTS)
+  .option(&quot;CreditId&quot;, body()) // mark the current body as needed in the compensating action
+  .compensation(&quot;direct:creditRefund&quot;)
+    .bean(creditService, &quot;reserveCredit&quot;)
+    .log(&quot;Credit ${header.amount} reserved. Custom Id used is ${body}&quot;);
+
+// called only if the saga is cancelled
+from(&quot;direct:creditRefund&quot;)
+  .transform(header(&quot;CreditId&quot;)) // retrieve the CreditId option from headers
+  .bean(creditService, &quot;refundCredit&quot;)
+  .log(&quot;Credit for Custom Id ${body} refunded&quot;);
+</code></pre><p>XML DSL 示例：</p><pre><code class=language-xml>&lt;route&gt;
+  &lt;from uri=&quot;direct:start&quot;/&gt;
+  &lt;saga&gt;
+    &lt;compensation uri=&quot;direct:compensation&quot; /&gt;
+    &lt;completion uri=&quot;direct:completion&quot; /&gt;
+    &lt;option optionName=&quot;myOptionKey&quot;&gt;
+      &lt;constant&gt;myOptionValue&lt;/constant&gt;
+    &lt;/option&gt;
+    &lt;option optionName=&quot;myOptionKey2&quot;&gt;
+      &lt;constant&gt;myOptionValue2&lt;/constant&gt;
+    &lt;/option&gt;
+  &lt;/saga&gt;
+  &lt;to uri=&quot;direct:action1&quot; /&gt;
+  &lt;to uri=&quot;direct:action2&quot; /&gt;
+&lt;/route&gt;
+</code></pre><h3 id=eventuate-tram-saga>Eventuate Tram Saga</h3><p><a href=https://github.com/eventuate-tram/eventuate-tram-sagas>Eventuate Tram Saga</a> 框架是使用 JDBC / JPA 的 Java 微服务的一个 Saga 框架。它也和 Camel Saga 一样采用了 Java DSL 来定义补偿操作：</p><pre><code class=language-java>public class CreateOrderSaga implements SimpleSaga&lt;CreateOrderSagaData&gt; {
+
+  private SagaDefinition&lt;CreateOrderSagaData&gt; sagaDefinition =
+          step()
+            .withCompensation(this::reject)
+          .step()
+            .invokeParticipant(this::reserveCredit)
+          .step()
+            .invokeParticipant(this::approve)
+          .build();
+
+
+  @Override
+  public SagaDefinition&lt;CreateOrderSagaData&gt; getSagaDefinition() {
+    return this.sagaDefinition;
+  }
+
+
+  private CommandWithDestination reserveCredit(CreateOrderSagaData data) {
+    long orderId = data.getOrderId();
+    Long customerId = data.getOrderDetails().getCustomerId();
+    Money orderTotal = data.getOrderDetails().getOrderTotal();
+    return send(new ReserveCreditCommand(customerId, orderId, orderTotal))
+            .to(&quot;customerService&quot;)
+            .build();
+
+...
+</code></pre><h3 id=apache-servicecomb-saga>Apache ServiceComb Saga</h3><p><a href=https://github.com/apache/incubator-servicecomb-saga>ServiceComb Saga</a>也是一个微服务应用的数据最终一致性解决方案。相对于 <a href=http://design.inf.usi.ch/sites/default/files/biblio/rest-tcc.pdf>TCC</a> 而言，在 try 阶段，Saga 会直接提交事务，后续 rollback 阶段则通过反向的补偿操作来完成。与前面两种不同是它是采用 Java 注解+拦截器的方式来进行“补偿”服务的定义。</p><h4 id=架构>架构：</h4><p>Saga 是由 <strong>alpha</strong> 和 <strong>omega </strong>组成，其中：</p><ul><li><p>alpha 充当协调者的角色，主要负责对事务进行管理和协调；</p></li><li><p>omega 是微服务中内嵌的一个 agent，负责对网络请求进行拦截并向 alpha 上报事务事件；</p></li></ul><p>下图展示了 alpha，omega 以及微服务三者的关系：
+<img src=https://cdn.nlark.com/lark/0/2018/png/65674/1532326931798-2fa9190d-4562-46f5-bb4e-ae48221126fd.png alt="alpha，omega 以及微服务三者关系"></p><h4 id=使用示例>使用示例：</h4><pre><code class=language-java>public class ServiceA extends AbsService implements IServiceA {
+
+  private static final Logger LOG = LoggerFactory.getLogger(MethodHandles.lookup().lookupClass());
+
+  @Autowired
+  private IServiceB serviceB;
+
+  @Autowired
+  private IServiceC serviceC;
+
+  @Override
+  public String getServiceName() {
+    return &quot;servicea&quot;;
+  }
+
+  @Override
+  public String getTableName() {
+    return &quot;testa&quot;;
+  }
+
+  @Override
+  @SagaStart
+  @Compensable(compensationMethod = &quot;cancelRun&quot;)
+  @Transactional(rollbackFor = Exception.class)
+  public Object run(InvokeContext invokeContext) throws Exception {
+    LOG.info(&quot;A.run called&quot;);
+    doRunBusi();
+    if (invokeContext.isInvokeB(getServiceName())) {
+      serviceB.run(invokeContext);
+    }
+    if (invokeContext.isInvokeC(getServiceName())) {
+      serviceC.run(invokeContext);
+    }
+    if (invokeContext.isException(getServiceName())) {
+      LOG.info(&quot;A.run exception&quot;);
+      throw new Exception(&quot;A.run exception&quot;);
+    }
+    return null;
+  }
+
+  public void cancelRun(InvokeContext invokeContext) {
+    LOG.info(&quot;A.cancel called&quot;);
+    doCancelBusi();
+  }
+</code></pre><h3 id=蚂蚁金服的实践>蚂蚁金服的实践</h3><p>蚂蚁金服内部大规模在使用 TCC 模式分布式事务，主要用于金融核心等对一致性要求高、性能要求高的场景。在更上层的业务系统因为流程多流程长，开发 TCC 成本比较高，大都会权衡采用 Saga 模式来到达业务最终一致性，由于历史的原因不同的 BU 有自己的一套“补偿”事务的方案，基本上是两种：</p><ul><li>一种是当一个服务在失败时需要“重试”或“补偿”时，在执行服务前在数据库插入一条记录，记录状态，当异常时通过定时任务去查询数据库记录并进行“重试”或“补偿”，当业务流程执行成功则删除记录；</li><li>另一种是设计一个状态机引擎和简单的 DSL，编排业务流程和记录业务状态，状态机引擎可以定义“补偿服务”，当异常时由状态机引擎反向调用“补偿服务”进行回滚，同时还会有一个“差错守护”平台，监控那些执行失败或补偿失败的业务流水，并不断进行“补偿”或“重试”；</li></ul><h3 id=方案对比>方案对比</h3><p>社区和业界的解决方案一般是两种，一种基本状态机或流程引擎通过 DSL 方式编排流程程和补偿定义，一种是基于 Java 注解+拦截器实现补偿，那么这两种方案有什么优缺点呢？</p><p><img src=https://cdn.nlark.com/yuque/0/2019/png/226702/1572864063139-d817c8aa-dff4-4cd7-92bb-6dcf44b03af1.png alt=两种方式优缺点></p><h2 id=seata-saga-的方案>Seata Saga 的方案</h2><p>Seata Saga 的简介可以看一下<a href=http://seata.io/zh-cn/docs/user/saga.html>《Seata Saga 官网文档》</a>。</p><p>Seata Saga 采用了状态机+DSL 方案来实现，原因有以下几个：</p><ul><li>状态机+DSL 方案在实际生产中应用更广泛；</li><li>可以使用 Actor 模型或 SEDA 架构等异步处理引擎来执行，提高整体吞吐量；</li><li>通常在核心系统以上层的业务系统会伴随有“服务编排”的需求，而服务编排又有事务最终一致性要求，两者很难分割开，状态机+DSL 方案可以同时满足这两个需求；</li><li>由于 Saga 模式在理论上是不保证隔离性的，在极端情况下可能由于脏写无法完成回滚操作，比如举一个极端的例子, 分布式事务内先给用户 A 充值，然后给用户 B 扣减余额，如果在给A用户充值成功，在事务提交以前，A 用户把线消费掉了，如果事务发生回滚，这时则没有办法进行补偿了，有些业务场景可以允许让业务最终成功，在回滚不了的情况下可以继续重试完成后面的流程，状态机+DSL的方案可以实现“向前”恢复上下文继续执行的能力, 让业务最终执行成功，达到最终一致性的目的。</li></ul><blockquote><p>在不保证隔离性的情况下：业务流程设计时要遵循“宁可长款, 不可短款”的原则，长款意思是客户少了线机构多了钱，以机构信誉可以给客户退款，反之则是短款，少的线可能追不回来了。所以在业务流程设计上一定是先扣款。</p></blockquote><h3 id=状态定义语言-seata-state-language>状态定义语言(Seata State Language)</h3><ol><li>通过状态图来定义服务调用的流程并生成 json 状态语言定义文件；</li><li>状态图中一个节点可以是调用一个服务，节点可以配置它的补偿节点；</li><li><p>状态图 json 由状态机引擎驱动执行，当出现异常时状态引擎反向执行已成功节点对应的补偿节点将事务回滚；
+&gt; 注意: 异常发生时是否进行补偿也可由用户自定义决定</p></li><li><p>可以实现服务编排需求，支持单项选择、并发、异步、子状态机、参数转换、参数映射、服务执行状态判断、异常捕获等功能；</p></li></ol><p>假设有一个业务流程要调两个服务，先调库存扣减（InventoryService），再调余额扣减（BalanceService），保证在一个分布式内要么同时成功，要么同时回滚。两个参与者服务都有一个 reduce 方法，表示库存扣减或余额扣减，还有一个 compensateReduce 方法，表示补偿扣减操作。以 InventoryService 为例看一下它的接口定义：</p><pre><code class=language-java>public interface InventoryService {
+
+    /**
+     * reduce
+     * @param businessKey
+     * @param amount
+     * @param params
+     * @return
+     */
+    boolean reduce(String businessKey, BigDecimal amount, Map&lt;String, Object&gt; params);
+
+    /**
+     * compensateReduce
+     * @param businessKey
+     * @param params
+     * @return
+     */
+    boolean compensateReduce(String businessKey, Map&lt;String, Object&gt; params);
 }
-if (invokeContext.isInvokeC(getServiceName())) {
-serviceC.run(invokeContext);
+</code></pre><p>这个业务流程对应的状态图：</p><p><img src=https://intranetproxy.alipay.com/skylark/lark/0/2019/png/65674/1572599395878-f4449295-7412-43c6-81b6-14df61938894.png alt=业务流程对应状态图></p><p>对应的 JSON：</p><pre><code class=language-json>{
+    &quot;Name&quot;: &quot;reduceInventoryAndBalance&quot;,
+    &quot;Comment&quot;: &quot;reduce inventory then reduce balance in a transaction&quot;,
+    &quot;StartState&quot;: &quot;ReduceInventory&quot;,
+    &quot;Version&quot;: &quot;0.0.1&quot;,
+    &quot;States&quot;: {
+        &quot;ReduceInventory&quot;: {
+            &quot;Type&quot;: &quot;ServiceTask&quot;,
+            &quot;ServiceName&quot;: &quot;inventoryAction&quot;,
+            &quot;ServiceMethod&quot;: &quot;reduce&quot;,
+            &quot;CompensateState&quot;: &quot;CompensateReduceInventory&quot;,
+            &quot;Next&quot;: &quot;ChoiceState&quot;,
+            &quot;Input&quot;: [
+                &quot;$.[businessKey]&quot;,
+                &quot;$.[count]&quot;
+            ],
+            &quot;Output&quot;: {
+                &quot;reduceInventoryResult&quot;: &quot;$.#root&quot;
+            },
+            &quot;Status&quot;: {
+                &quot;#root == true&quot;: &quot;SU&quot;,
+                &quot;#root == false&quot;: &quot;FA&quot;,
+                &quot;$Exception{java.lang.Throwable}&quot;: &quot;UN&quot;
+            }
+        },
+        &quot;ChoiceState&quot;:{
+            &quot;Type&quot;: &quot;Choice&quot;,
+            &quot;Choices&quot;:[
+                {
+                    &quot;Expression&quot;:&quot;[reduceInventoryResult] == true&quot;,
+                    &quot;Next&quot;:&quot;ReduceBalance&quot;
+                }
+            ],
+            &quot;Default&quot;:&quot;Fail&quot;
+        },
+        &quot;ReduceBalance&quot;: {
+            &quot;Type&quot;: &quot;ServiceTask&quot;,
+            &quot;ServiceName&quot;: &quot;balanceAction&quot;,
+            &quot;ServiceMethod&quot;: &quot;reduce&quot;,
+            &quot;CompensateState&quot;: &quot;CompensateReduceBalance&quot;,
+            &quot;Input&quot;: [
+                &quot;$.[businessKey]&quot;,
+                &quot;$.[amount]&quot;,
+                {
+                    &quot;throwException&quot; : &quot;$.[mockReduceBalanceFail]&quot;
+                }
+            ],
+            &quot;Output&quot;: {
+                &quot;compensateReduceBalanceResult&quot;: &quot;$.#root&quot;
+            },
+            &quot;Status&quot;: {
+                &quot;#root == true&quot;: &quot;SU&quot;,
+                &quot;#root == false&quot;: &quot;FA&quot;,
+                &quot;$Exception{java.lang.Throwable}&quot;: &quot;UN&quot;
+            },
+            &quot;Catch&quot;: [
+                {
+                    &quot;Exceptions&quot;: [
+                        &quot;java.lang.Throwable&quot;
+                    ],
+                    &quot;Next&quot;: &quot;CompensationTrigger&quot;
+                }
+            ],
+            &quot;Next&quot;: &quot;Succeed&quot;
+        },
+        &quot;CompensateReduceInventory&quot;: {
+            &quot;Type&quot;: &quot;ServiceTask&quot;,
+            &quot;ServiceName&quot;: &quot;inventoryAction&quot;,
+            &quot;ServiceMethod&quot;: &quot;compensateReduce&quot;,
+            &quot;Input&quot;: [
+                &quot;$.[businessKey]&quot;
+            ]
+        },
+        &quot;CompensateReduceBalance&quot;: {
+            &quot;Type&quot;: &quot;ServiceTask&quot;,
+            &quot;ServiceName&quot;: &quot;balanceAction&quot;,
+            &quot;ServiceMethod&quot;: &quot;compensateReduce&quot;,
+            &quot;Input&quot;: [
+                &quot;$.[businessKey]&quot;
+            ]
+        },
+        &quot;CompensationTrigger&quot;: {
+            &quot;Type&quot;: &quot;CompensationTrigger&quot;,
+            &quot;Next&quot;: &quot;Fail&quot;
+        },
+        &quot;Succeed&quot;: {
+            &quot;Type&quot;:&quot;Succeed&quot;
+        },
+        &quot;Fail&quot;: {
+            &quot;Type&quot;:&quot;Fail&quot;,
+            &quot;ErrorCode&quot;: &quot;PURCHASE_FAILED&quot;,
+            &quot;Message&quot;: &quot;purchase failed&quot;
+        }
+    }
 }
-if (invokeContext.isException(getServiceName())) {
-LOG.info("A.run exception");
-throw new Exception("A.run exception");
-}
-return null;
-}</p><p>public void cancelRun(InvokeContext invokeContext) {
-LOG.info("A.cancel called");
-doCancelBusi();
-}
-蚂蚁金服的实践</p><pre><code>&lt;span style=&quot;color:#75715e&quot;&gt;/**
-</code></pre><p>* reduce * @param businessKey * @param amount * @param params * @return */
-boolean reduce(String businessKey, BigDecimal amount, Map&lt;String, Object> params);</p><pre><code>&lt;span style=&quot;color:#75715e&quot;&gt;/**
-</code></pre><p>* compensateReduce * @param businessKey * @param params * @return */
-boolean compensateReduce(String businessKey, Map&lt;String, Object> params);
-}
-这个业务流程对应的状态图：</p></article><div class=-show-mobile><nav class=ss-pagination-next><a class=link-prev href=/blog/sofa-weekly-20191101/><span class=text>上一篇:</span>
+</code></pre><p>状态语言在一定程度上参考了 <a href=https://docs.aws.amazon.com/zh_cn/step-functions/latest/dg/tutorial-creating-lambda-state-machine.html>AWS Step Functions</a>。</p><h4 id=状态机-属性简介>&ldquo;状态机&rdquo; 属性简介</h4><ul><li>Name: 表示状态机的名称，必须唯一；</li><li>Comment: 状态机的描述；</li><li>Version: 状态机定义版本；</li><li>StartState: 启动时运行的第一个&rdquo;状态&rdquo;；</li><li>States: 状态列表，是一个 map 结构，key 是&rdquo;状态&rdquo;的名称，在状态机内必须唯一；</li></ul><h4 id=状态-属性简介>&ldquo;状态&rdquo; 属性简介</h4><ul><li>Type：&rdquo;状态&rdquo; 的类型，比如有：<ul><li>ServiceTask: 执行调用服务任务；</li><li>Choice: 单条件选择路由；</li><li>CompensationTrigger: 触发补偿流程；</li><li>Succeed: 状态机正常结束；</li><li>Fail: 状态机异常结束；</li><li>SubStateMachine: 调用子状态机；</li></ul></li><li>ServiceName: 服务名称，通常是服务的beanId；</li><li>ServiceMethod: 服务方法名称；</li><li>CompensateState: 该&rdquo;状态&rdquo;的补偿&rdquo;状态&rdquo;；</li><li>Input: 调用服务的输入参数列表，是一个数组，对应于服务方法的参数列表， $.表示使用表达式从状态机上下文中取参数，表达使用的 <a href=https://docs.spring.io/spring/docs/4.3.10.RELEASE/spring-framework-reference/html/expressions.html>SpringEL</a>， 如果是常量直接写值即可；</li><li>Output: 将服务返回的参数赋值到状态机上下文中，是一个 map 结构，key 为放入到状态机上文时的 key（状态机上下文也是一个 map），value 中 $. 是表示 SpringEL 表达式，表示从服务的返回参数中取值，#root 表示服务的整个返回参数；</li><li>Status: 服务执行状态映射，框架定义了三个状态，SU 成功、FA 失败、UN 未知，我们需要把服务执行的状态映射成这三个状态，帮助框架判断整个事务的一致性，是一个 map 结构，key 是条件表达式，一般是取服务的返回值或抛出的异常进行判断，默认是 SpringEL 表达式判断服务返回参数，带 $Exception{开头表示判断异常类型，value 是当这个条件表达式成立时则将服务执行状态映射成这个值；</li><li>Catch: 捕获到异常后的路由；</li><li>Next: 服务执行完成后下一个执行的&rdquo;状态&rdquo;；</li><li>Choices: Choice 类型的&rdquo;状态&rdquo;里, 可选的分支列表, 分支中的 Expression 为 SpringEL 表达式，Next 为当表达式成立时执行的下一个&rdquo;状态&rdquo;；</li><li>ErrorCode: Fail 类型&rdquo;状态&rdquo;的错误码；</li><li>Message: Fail 类型&rdquo;状态&rdquo;的错误信息；</li></ul><p>更多详细的状态语言解释请看<a href=http://seata.io/zh-cn/docs/user/saga.html>《Seata Saga 官网文档》</a>。</p><h3 id=状态机引擎原理>状态机引擎原理</h3><p><img src=https://intranetproxy.alipay.com/skylark/lark/0/2019/png/65674/1571379068261-005d6269-5d12-4ac0-96ab-032e0f70a086.png alt=Saga状态机原理></p><ul><li>图中的状态图是先执行 stateA, 再执行 stataB，然后执行 stateC；</li><li>&ldquo;状态&rdquo;的执行是基于事件驱动的模型，stataA 执行完成后，会产生路由消息放入 EventQueue，事件消费端从 EventQueue 取出消息，执行 stateB；</li><li>在整个状态机启动时会调用 Seata Server 开启分布式事务，并生产 xid, 然后记录&rdquo;状态机实例&rdquo;启动事件到本地数据库；</li><li>当执行到一个&rdquo;状态&rdquo;时会调用 Seata Server 注册分支事务，并生产 branchId, 然后记录&rdquo;状态实例&rdquo;开始执行事件到本地数据库；</li><li>当一个&rdquo;状态&rdquo;执行完成后会记录&rdquo;状态实例&rdquo;执行结束事件到本地数据库, 然后调用 Seata Server 上报分支事务的状态；</li><li>当整个状态机执行完成，会记录&rdquo;状态机实例&rdquo;执行完成事件到本地数据库, 然后调用 Seata Server 提交或回滚分布式事务；</li></ul><h3 id=状态机引擎设计>状态机引擎设计</h3><p><img src=https://intranetproxy.alipay.com/skylark/lark/0/2019/png/65674/1571379152888-a1f1d72a-684b-44c9-9883-a37bc3e6c065.png alt="Saga engine"></p><p>状态机引擎的设计主要分成三层, 上层依赖下层，从下往上分别是：</p><ul><li><p>Eventing 层：</p><ul><li>实现事件驱动架构, 可以压入事件, 并由消费端消费事件, 本层不关心事件是什么消费端执行什么，由上层实现；</li></ul></li><li><p>ProcessController 层：</p><ul><li>由于上层的 Eventing 驱动一个“空”流程执行的执行，&rdquo;state&rdquo;的行为和路由都未实现，由上层实现；</li></ul></li></ul><blockquote><p>基于以上两层理论上可以自定义扩展任何&rdquo;流程&rdquo;引擎。这两层的设计是参考了内部金融网络平台的设计。</p></blockquote><ul><li>StateMachineEngine 层：<ul><li>实现状态机引擎每种 state 的行为和路由逻辑；</li><li>提供 API、状态机语言仓库；</li></ul></li></ul><h3 id=saga-模式下服务设计的实践经验>Saga 模式下服务设计的实践经验</h3><p>下面是实践中总结的在 Saga 模式下微服务设计的一些经验，当然这是推荐做法，并不是说一定要 100% 遵循，没有遵循也有“绕过”方案。</p><blockquote><p>好消息：Seata Saga 模式对微服务的接口参数没有任务要求，这使得 Saga 模式可用于集成遗留系统或外部机构的服务。</p></blockquote><h4 id=允许空补偿>允许空补偿</h4><ul><li>空补偿：原服务未执行，补偿服务执行了；</li><li>出现原因：<ul><li>原服务 超时（丢包）；</li><li>Saga 事务触发 回滚；</li><li>未收到原服务请求，先收到补偿请求；</li></ul></li></ul><p>所以服务设计时需要允许空补偿，即没有找到要补偿的业务主键时返回补偿成功并将原业务主键记录下来。</p><h4 id=防悬挂控制>防悬挂控制</h4><ul><li>悬挂：补偿服务 比 原服务 先执行；</li><li>出现原因：<ul><li>原服务 超时（拥堵）；</li><li>Saga 事务回滚，触发 回滚；</li><li>拥堵的原服务到达；</li></ul></li></ul><p>所以要检查当前业务主键是否已经在空补偿记录下来的业务主键中存在，如果存在则要拒绝服务的执行。</p><h4 id=幂等控制>幂等控制</h4><ul><li>原服务与补偿服务都需要保证幂等性, 由于网络可能超时，可以设置重试策略，重试发生时要通过幂等控制避免业务数据重复更新。</li></ul><h2 id=总结>总结</h2><p>很多时候我们不需要强调强一性，我们基于 BASE 和 Saga 理论去设计更有弹性的系统，在分布式架构下获得更好的性能和容错能力。分布式架构没有银弹，只有适合特定场景的方案，事实上 Seata Saga 是一个具备“服务编排”和“Saga 分布式事务”能力的产品，总结下来它的适用场景是：</p><ul><li>适用于微服务架构下的“长事务”处理；</li><li>适用于微服务架构下的“服务编排”需求；</li><li>适用于金融核心系统以上的有大量组合服务的业务系统（比如在渠道层、产品层、集成层的系统）；</li><li>适用于业务流程中需要集成遗留系统或外部机构提供的服务的场景（这些服务不可变不能对其提出改造要求）。</li></ul><h3 id=seata-相关阅读>Seata 相关阅读</h3><ul><li><a href=/blog/sofa-meetup-3-seata-retrospect/>分布式事务 Seata Saga 模式首秀以及三种模式详解 | Meetup#3 回顾</a></li><li><a href=/blog/seata-distributed-transaction-deep-dive/>Seata 分布式事务实践和开源详解 | GIAC 实录</a></li><li><a href=/blog/sofa-channel-4-retrospect/>分布式事务 Seata TCC 模式深度解析 | SOFAChannel#4 直播整理</a></li><li><a href=/blog/seata-server-deep-analysis/>深度剖析一站式分布式事务方案 Seata-Server</a></li><li><a href=/blog/sofa-meetup-1-seata/>蚂蚁金服分布式事务开源以及实践 | SOFA 开源一周年献礼</a></li></ul></article><div class=-show-mobile><nav class=ss-pagination-next><a class=link-prev href=/blog/sofa-weekly-20191101/><span class=text>上一篇:</span>
 <span class=text>SOFA Weekly | 每周精选【10/28 - 11/01】</span></a>
 <a class=link-next href=/blog/service-mesh-antfin-deep-practice-qcon/><span class=text>下一篇:</span>
 <span class=text>诗和远方：蚂蚁金服 Service Mesh 深度实践 | QCon 实录</span></a></nav></div></main><aside class=ss-layout-aside><div class=ss-card><h2 class=card-title>相关推荐</h2><ul class=ss-aside-related><li><a href=/blog/sofa-meetup-3-seata-retrospect/>分布式事务 Seata Saga 模式首秀以及三种模式详解 | Meetup#3 回顾</a></li><li><a href=/blog/sofastack-cloud-native-workshop-show/>五小时构建云原生电商平台 | KubeCon SOFAStack Workshop 详解</a></li><li><a href=/blog/seata-distributed-transaction-deep-dive/>Seata 分布式事务实践和开源详解 | GIAC 实录</a></li><li><a href=/blog/sofa-channel-4-retrospect/>分布式事务 Seata TCC 模式深度解析 | SOFAChannel#4 直播整理</a></li><li><a href=/blog/seata-server-deep-analysis/>深度剖析一站式分布式事务方案 Seata-Server</a></li></ul></div><div class="ss-aside-tags ss-card"><h2 class=card-title>标签

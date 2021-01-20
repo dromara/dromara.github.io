@@ -1,4 +1,4 @@
-<!doctype html><html><head><title>SOFABoot 拓展点 · SOFAStack</title><meta charset=utf-8><meta http-equiv=x-ua-compatible content="IE=edge,chrome=1"><meta name=viewport content="width=device-width,minimum-scale=1"><meta name=description content="SOFAStack is a Scalable Open Financial Architecture for building cloud native applications"><meta name=generator content="Hugo 0.80.0"><link rel="shortcut icon" href=https://gw.alipayobjects.com/os/q/cms/images/jqu9346l/4ba95631-2489-4885-881f-bc7f8d787d5e_w64_h61.png type=image/png><link href=https://unpkg.com/purecss@1.0.0/build/base-min.css rel=stylesheet><link href=/css/main.css rel=stylesheet><link href=/css/zoom-image.css rel=stylesheet><script src=/js/iconfont.js></script><script src=/js/highlight.pack.js></script><script>hljs.initHighlightingOnLoad();</script><script>window.SITE_LANGUAGE="zh"</script><script src=/js/app.js></script><script type=application/javascript>var doNotTrack=false;if(!doNotTrack){(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');ga('create','UA-142131411-1','auto');ga('send','pageview');}</script></head><body><header class=ss-header><nav class=navbar role=navigation aria-label="main navigation"><div class=navbar-brand><a class=logo-link href=/><img class=logo src=/img/logo.png></a><div class=-show-mobile><a id=mobile-menu-icon><svg class="icon" aria-hidden="true"><use xlink:href="#icon-menu"/></svg></a><nav id=mobile-menu><div id=js-menu-search-mobile class=navbar-search-mobile><input class=input placeholder=请输入要搜索的关键词><svg class="icon" aria-hidden="true"><use xlink:href="#icon-search"/></svg></div><a href=/projects/><span>项目</span><svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"/></svg></a>
+<!doctype html><html><head><title>SOFABoot 拓展点 · SOFAStack</title><meta charset=utf-8><meta http-equiv=x-ua-compatible content="IE=edge,chrome=1"><meta name=viewport content="width=device-width,minimum-scale=1"><meta name=description content="SOFAStack is a Scalable Open Financial Architecture for building cloud native applications"><meta name=generator content="Hugo 0.55.5"><link rel="shortcut icon" href=https://gw.alipayobjects.com/os/q/cms/images/jqu9346l/4ba95631-2489-4885-881f-bc7f8d787d5e_w64_h61.png type=image/png><link href=https://unpkg.com/purecss@1.0.0/build/base-min.css rel=stylesheet><link href=/css/main.css rel=stylesheet><link href=/css/zoom-image.css rel=stylesheet><script src=/js/iconfont.js></script><script src=/js/highlight.pack.js></script><script>hljs.initHighlightingOnLoad();</script><script>window.SITE_LANGUAGE="zh"</script><script src=/js/app.js></script><script type=application/javascript>var doNotTrack=false;if(!doNotTrack){(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');ga('create','UA-142131411-1','auto');ga('send','pageview');}</script></head><body><header class=ss-header><nav class=navbar role=navigation aria-label="main navigation"><div class=navbar-brand><a class=logo-link href=/><img class=logo src=/img/logo.png></a><div class=-show-mobile><a id=mobile-menu-icon><svg class="icon" aria-hidden="true"><use xlink:href="#icon-menu"/></svg></a><nav id=mobile-menu><div id=js-menu-search-mobile class=navbar-search-mobile><input class=input placeholder=请输入要搜索的关键词><svg class="icon" aria-hidden="true"><use xlink:href="#icon-search"/></svg></div><a href=/projects/><span>项目</span><svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"/></svg></a>
 <a href=/guides/><span>指南</span><svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"/></svg></a>
 <a href=/blog/><span>博客</span><svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"/></svg></a>
 <a href=/activities/><span>活动</span><svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"/></svg></a>
@@ -9,95 +9,178 @@
 <a class=navbar-item href=/blog/>博客</a>
 <a class=navbar-item href=/activities/>活动</a>
 <a class=navbar-item href=/community/>社区</a>
-<a class=navbar-item href=/awesome/>Awesome SOFA</a></div><div class=navbar-end><div class=navbar-item><div id=js-menu-search class=navbar-search><input class=input placeholder=请输入要搜索的关键词><svg class="icon" aria-hidden="true"><use xlink:href="#icon-search"/></svg></div></div><div class=navbar-item><a class=translation href=/en/projects/sofa-boot/extension/>En</a></div></div></div></nav></header><div class=ss-layout-container><aside class="ss-layout-aside -left ss-card -soft-hidden"><div id=js-drawer class=ss-toc><div id=js-drawer-handle class=drawer-handle><svg class="icon icon-menu" aria-hidden="true"><use xlink:href="#icon-menu"/></svg><svg class="icon icon-close" aria-hidden="true"><use xlink:href="#icon-close"/></svg></div><div class=drawer-body><div class=header title="SOFABoot 基于 Spring Boot 的研发框架，在其基础上提供了诸如 Readiness Check，类隔离，日志空间隔离，Bean 异步初始化等能力。">SOFABoot<div class="ss-toc-list-card -hidden-mobile"><svg class="icon -hidden-mobile" aria-hidden="true"><use xlink:href="#icon-menu1"/></svg><div class=ss-tooltip><div class=toc-list><h4 class=title>主要项目</h4><ul class=list><li class=item><a href=/projects/sofa-boot/overview>SOFABoot</a></li><li class=item><a href=/projects/sofa-rpc/overview>SOFARPC</a></li><li class=item><a href=/projects/sofa-tracer/overview>SOFATracer</a></li><li class=item><a href=/projects/sofa-lookout/overview>SOFALookout</a></li><li class=item><a href=/projects/sofa-registry/overview>SOFARegistry</a></li></ul></div><div class=toc-list><h4 class=title>孵化项目</h4><ul class=list><li class=item><a href=/projects/sofa-mesh/overview>SOFAMesh</a></li><li class=item><a href=/projects/sofa-dashboard/overview>SOFADashboard</a></li></ul></div><div class=toc-list><h4 class=title>工具项目</h4><ul class=list><li class=item><a href=/projects/sofa-bolt/overview>SOFABolt</a></li><li class=item><a href=/projects/sofa-jraft/overview>SOFAJRaft</a></li><li class=item><a href=/projects/sofa-acts/overview>SOFAActs</a></li><li class=item><a href=https://www.sofastack.tech/projects/sofa-boot/sofa-ark-readme/>SOFAArk</a></li></ul></div><div class=toc-list><h4 class=title>生态项目</h4><ul class=list><li class=item><a href=https://mosn.io>MOSN</a></li><li class=item><a href=https://occlum.io>Occlum</a></li><li class=item><a href=https://seata.io>Seata</a></li></ul></div></div></div></div><div class=body><ul class=leaf-section><li class=item><div class=link><a title="SOFABoot 介绍" href=/projects/sofa-boot/overview>SOFABoot 介绍</a></div></li><li class=item><div class=link><a title=快速开始 href=/projects/sofa-boot/quick-start>快速开始</a></div></li><li class=item><div class=link><a title=依赖管理 href=/projects/sofa-boot/dependency-management>依赖管理</a></div></li><li class=item><div class=link><a title=健康检查 href=/projects/sofa-boot/health-check>健康检查</a></div></li><li class=item><div class=link><a title=版本查看 href=/projects/sofa-boot/view-versions>版本查看</a></div></li><li class=item><div class=link><a title=启动加速 href=/projects/sofa-boot/speed-up-startup>启动加速</a></div></li><li class=item><div class=link><svg class="icon arrow" aria-hidden="true"><use xlink:href="#icon-arrow"/></svg><a title=模块隔离>模块隔离</a></div><ul class=leaf-section><li class=item><div class=link><a title=模块化开发概述 href=/projects/sofa-boot/modular-development>模块化开发概述</a></div></li><li class=item><div class=link><a title=模块配置 href=/projects/sofa-boot/sofaboot-module>模块配置</a></div></li><li class=item><div class=link><a title="JVM 服务发布与引用" href=/projects/sofa-boot/module-service>JVM 服务发布与引用</a></div></li><li class=item><div class=link><a title=模块并行化启动 href=/projects/sofa-boot/parallel-start>模块并行化启动</a></div></li><li class=item><div class=link><a title="Spring Bean 异步初始化" href=/projects/sofa-boot/bean-async-init>Spring Bean 异步初始化</a></div></li><li class=item><div class=link><a title="SOFABoot Profile" href=/projects/sofa-boot/sofaboot-profile>SOFABoot Profile</a></div></li><li class=item><div class="link -current"><a title="SOFABoot 拓展点" href=/projects/sofa-boot/extension>SOFABoot 拓展点</a></div></li></ul></li><li class=item><div class=link><svg class="icon arrow" aria-hidden="true"><use xlink:href="#icon-arrow"/></svg><a title=类隔离>类隔离</a></div><ul class=leaf-section><li class=item><div class=link><a title="SOFAArk 介绍" href=/projects/sofa-boot/sofa-ark-readme>SOFAArk 介绍</a></div></li><li class=item><div class=link><svg class="icon arrow" aria-hidden="true"><use xlink:href="#icon-arrow"/></svg><a title=快速开始>快速开始</a></div><ul class=leaf-section><li class=item><div class=link><a title="如何打包 Ark Plugin" href=/projects/sofa-boot/sofa-ark-ark-plugin-demo>如何打包 Ark Plugin</a></div></li><li class=item><div class=link><a title="如何打包 Ark 包" href=/projects/sofa-boot/sofa-ark-ark-demo>如何打包 Ark 包</a></div></li></ul></li><li class=item><div class=link><svg class="icon arrow" aria-hidden="true"><use xlink:href="#icon-arrow"/></svg><a title=用户文档>用户文档</a></div><ul class=leaf-section><li class=item><div class=link><a title=基础术语 href=/projects/sofa-boot/sofa-ark-terminology>基础术语</a></div></li><li class=item><div class=link><a title="Ark 包" href=/projects/sofa-boot/sofa-ark-ark-jar>Ark 包</a></div></li><li class=item><div class=link><a title="Ark Plugin" href=/projects/sofa-boot/sofa-ark-ark-plugin>Ark Plugin</a></div></li><li class=item><div class=link><a title="Ark Biz" href=/projects/sofa-boot/sofa-ark-ark-biz>Ark Biz</a></div></li><li class=item><div class=link><a title="SOFAArk 配置" href=/projects/sofa-boot/sofa-ark-ark-config>SOFAArk 配置</a></div></li><li class=item><div class=link><a title="Ark Biz 生命周期" href=/projects/sofa-boot/sofa-ark-biz-lifecycle>Ark Biz 生命周期</a></div></li><li class=item><div class=link><a title="Zookeeper 配置" href=/projects/sofa-boot/sofa-ark-zk-config>Zookeeper 配置</a></div></li><li class=item><div class=link><a title="Ark 服务机制" href=/projects/sofa-boot/sofa-ark-ark-service>Ark 服务机制</a></div></li><li class=item><div class=link><a title="Ark 事件机制" href=/projects/sofa-boot/sofa-ark-ark-event>Ark 事件机制</a></div></li><li class=item><div class=link><a title="Ark 扩展机制" href=/projects/sofa-boot/sofa-ark-ark-extension>Ark 扩展机制</a></div></li><li class=item><div class=link><a title="Ark 服务通信" href=/projects/sofa-boot/sofa-ark-ark-jvm>Ark 服务通信</a></div></li><li class=item><div class=link><a title="Telnet 指令" href=/projects/sofa-boot/sofa-ark-ark-telnet>Telnet 指令</a></div></li><li class=item><div class=link><a title="Ark 日志" href=/projects/sofa-boot/sofa-ark-ark-log>Ark 日志</a></div></li><li class=item><div class=link><a title="SOFABoot 使用类隔离" href=/projects/sofa-boot/classloader-isolation>SOFABoot 使用类隔离</a></div></li></ul></li><li class=item><div class=link><svg class="icon arrow" aria-hidden="true"><use xlink:href="#icon-arrow"/></svg><a title=开发文档>开发文档</a></div><ul class=leaf-section><li class=item><div class=link><a title="Ark 容器启动流程" href=/projects/sofa-boot/sofa-ark-startup>Ark 容器启动流程</a></div></li><li class=item><div class=link><a title="Ark 容器插件机制" href=/projects/sofa-boot/sofa-ark-plugin>Ark 容器插件机制</a></div></li><li class=item><div class=link><a title="Ark 容器类加载机制" href=/projects/sofa-boot/sofa-ark-classloader>Ark 容器类加载机制</a></div></li></ul></li><li class=item><div class=link><a title=发布说明 href=/projects/sofa-boot/sofa-ark-release>发布说明</a></div></li><li class=item><div class=link><a title=发展路线 href=/projects/sofa-boot/sofa-ark-roadmap>发展路线</a></div></li><li class=item><div class=link><a title=参与贡献 href=/projects/sofa-boot/sofa-ark-contribution>参与贡献</a></div></li></ul></li><li class=item><div class=link><svg class="icon arrow" aria-hidden="true"><use xlink:href="#icon-arrow"/></svg><a title=升级文档>升级文档</a></div><ul class=leaf-section><li class=item><div class=link><a title="SOFABoot 2.5.x 升级注意事项" href=/projects/sofa-boot/upgrade_2_5_x>SOFABoot 2.5.x 升级注意事项</a></div></li><li class=item><div class=link><a title="SOFABoot 3.0 升级注意事项" href=/projects/sofa-boot/upgrade_3_x>SOFABoot 3.0 升级注意事项</a></div></li></ul></li><li class=item><div class=link><a title=常见问题 href=/projects/sofa-boot/faq>常见问题</a></div></li><li class=item><div class=link><a title=版权声明 href=/projects/sofa-boot/notice>版权声明</a></div></li></ul></div></div></div></aside><main class="ss-layout-main -card"><div class=ss-meta><div class=container><h1 class=title>SOFABoot 拓展点</h1><a class="edit-button -hidden-mobile" href=https://github.com/sofastack/sofastack.tech/edit/master/content/zh/projects/sofa-boot/extension/index.md>编辑</a></div><div class=meta>更新时间: 2021-01-19</div></div><article class=typo><p>public interface IExtension {</p><pre><code>String &lt;span style=&quot;color:#a6e22e&quot;&gt;say&lt;/span&gt;&lt;span style=&quot;color:#f92672&quot;&gt;();&lt;/span&gt;
-</code></pre><p>}
-定义这个接口的实现：</p><p>public class ExtensionImpl implements IExtension {</p><pre><code>&lt;span style=&quot;color:#66d9ef&quot;&gt;private&lt;/span&gt; String word&lt;span style=&quot;color:#f92672&quot;&gt;;&lt;/span&gt;
+<a class=navbar-item href=/awesome/>Awesome SOFA</a></div><div class=navbar-end><div class=navbar-item><div id=js-menu-search class=navbar-search><input class=input placeholder=请输入要搜索的关键词><svg class="icon" aria-hidden="true"><use xlink:href="#icon-search"/></svg></div></div><div class=navbar-item><a class=translation href=/en/projects/sofa-boot/extension/>En</a></div></div></div></nav></header><div class=ss-layout-container><aside class="ss-layout-aside -left ss-card -soft-hidden"><div id=js-drawer class=ss-toc><div id=js-drawer-handle class=drawer-handle><svg class="icon icon-menu" aria-hidden="true"><use xlink:href="#icon-menu"/></svg><svg class="icon icon-close" aria-hidden="true"><use xlink:href="#icon-close"/></svg></div><div class=drawer-body><div class=header title="SOFABoot 基于 Spring Boot 的研发框架，在其基础上提供了诸如 Readiness Check，类隔离，日志空间隔离，Bean 异步初始化等能力。">SOFABoot<div class="ss-toc-list-card -hidden-mobile"><svg class="icon -hidden-mobile" aria-hidden="true"><use xlink:href="#icon-menu1"/></svg><div class=ss-tooltip><div class=toc-list><h4 class=title>主要项目</h4><ul class=list><li class=item><a href=/projects/sofa-boot/overview>SOFABoot</a></li><li class=item><a href=/projects/sofa-rpc/overview>SOFARPC</a></li><li class=item><a href=/projects/sofa-tracer/overview>SOFATracer</a></li><li class=item><a href=/projects/sofa-lookout/overview>SOFALookout</a></li><li class=item><a href=/projects/sofa-registry/overview>SOFARegistry</a></li></ul></div><div class=toc-list><h4 class=title>孵化项目</h4><ul class=list><li class=item><a href=/projects/sofa-mesh/overview>SOFAMesh</a></li><li class=item><a href=/projects/sofa-dashboard/overview>SOFADashboard</a></li></ul></div><div class=toc-list><h4 class=title>工具项目</h4><ul class=list><li class=item><a href=/projects/sofa-bolt/overview>SOFABolt</a></li><li class=item><a href=/projects/sofa-jraft/overview>SOFAJRaft</a></li><li class=item><a href=/projects/sofa-acts/overview>SOFAActs</a></li><li class=item><a href=https://www.sofastack.tech/projects/sofa-boot/sofa-ark-readme/>SOFAArk</a></li></ul></div><div class=toc-list><h4 class=title>生态项目</h4><ul class=list><li class=item><a href=https://mosn.io>MOSN</a></li><li class=item><a href=https://occlum.io>Occlum</a></li><li class=item><a href=https://seata.io>Seata</a></li></ul></div></div></div></div><div class=body><ul class=leaf-section><li class=item><div class=link><a title="SOFABoot 介绍" href=/projects/sofa-boot/overview>SOFABoot 介绍</a></div></li><li class=item><div class=link><a title=快速开始 href=/projects/sofa-boot/quick-start>快速开始</a></div></li><li class=item><div class=link><a title=依赖管理 href=/projects/sofa-boot/dependency-management>依赖管理</a></div></li><li class=item><div class=link><a title=健康检查 href=/projects/sofa-boot/health-check>健康检查</a></div></li><li class=item><div class=link><a title=版本查看 href=/projects/sofa-boot/view-versions>版本查看</a></div></li><li class=item><div class=link><a title=启动加速 href=/projects/sofa-boot/speed-up-startup>启动加速</a></div></li><li class=item><div class=link><svg class="icon arrow" aria-hidden="true"><use xlink:href="#icon-arrow"/></svg><a title=模块隔离>模块隔离</a></div><ul class=leaf-section><li class=item><div class=link><a title=模块化开发概述 href=/projects/sofa-boot/modular-development>模块化开发概述</a></div></li><li class=item><div class=link><a title=模块配置 href=/projects/sofa-boot/sofaboot-module>模块配置</a></div></li><li class=item><div class=link><a title="JVM 服务发布与引用" href=/projects/sofa-boot/module-service>JVM 服务发布与引用</a></div></li><li class=item><div class=link><a title=模块并行化启动 href=/projects/sofa-boot/parallel-start>模块并行化启动</a></div></li><li class=item><div class=link><a title="Spring Bean 异步初始化" href=/projects/sofa-boot/bean-async-init>Spring Bean 异步初始化</a></div></li><li class=item><div class=link><a title="SOFABoot Profile" href=/projects/sofa-boot/sofaboot-profile>SOFABoot Profile</a></div></li><li class=item><div class="link -current"><a title="SOFABoot 拓展点" href=/projects/sofa-boot/extension>SOFABoot 拓展点</a></div></li></ul></li><li class=item><div class=link><svg class="icon arrow" aria-hidden="true"><use xlink:href="#icon-arrow"/></svg><a title=类隔离>类隔离</a></div><ul class=leaf-section><li class=item><div class=link><a title="SOFAArk 介绍" href=/projects/sofa-boot/sofa-ark-readme>SOFAArk 介绍</a></div></li><li class=item><div class=link><svg class="icon arrow" aria-hidden="true"><use xlink:href="#icon-arrow"/></svg><a title=快速开始>快速开始</a></div><ul class=leaf-section><li class=item><div class=link><a title="如何打包 Ark Plugin" href=/projects/sofa-boot/sofa-ark-ark-plugin-demo>如何打包 Ark Plugin</a></div></li><li class=item><div class=link><a title="如何打包 Ark 包" href=/projects/sofa-boot/sofa-ark-ark-demo>如何打包 Ark 包</a></div></li></ul></li><li class=item><div class=link><svg class="icon arrow" aria-hidden="true"><use xlink:href="#icon-arrow"/></svg><a title=用户文档>用户文档</a></div><ul class=leaf-section><li class=item><div class=link><a title=基础术语 href=/projects/sofa-boot/sofa-ark-terminology>基础术语</a></div></li><li class=item><div class=link><a title="Ark 包" href=/projects/sofa-boot/sofa-ark-ark-jar>Ark 包</a></div></li><li class=item><div class=link><a title="Ark Plugin" href=/projects/sofa-boot/sofa-ark-ark-plugin>Ark Plugin</a></div></li><li class=item><div class=link><a title="Ark Biz" href=/projects/sofa-boot/sofa-ark-ark-biz>Ark Biz</a></div></li><li class=item><div class=link><a title="SOFAArk 配置" href=/projects/sofa-boot/sofa-ark-ark-config>SOFAArk 配置</a></div></li><li class=item><div class=link><a title="Ark Biz 生命周期" href=/projects/sofa-boot/sofa-ark-biz-lifecycle>Ark Biz 生命周期</a></div></li><li class=item><div class=link><a title="Zookeeper 配置" href=/projects/sofa-boot/sofa-ark-zk-config>Zookeeper 配置</a></div></li><li class=item><div class=link><a title="Ark 服务机制" href=/projects/sofa-boot/sofa-ark-ark-service>Ark 服务机制</a></div></li><li class=item><div class=link><a title="Ark 事件机制" href=/projects/sofa-boot/sofa-ark-ark-event>Ark 事件机制</a></div></li><li class=item><div class=link><a title="Ark 扩展机制" href=/projects/sofa-boot/sofa-ark-ark-extension>Ark 扩展机制</a></div></li><li class=item><div class=link><a title="Ark 服务通信" href=/projects/sofa-boot/sofa-ark-ark-jvm>Ark 服务通信</a></div></li><li class=item><div class=link><a title="Telnet 指令" href=/projects/sofa-boot/sofa-ark-ark-telnet>Telnet 指令</a></div></li><li class=item><div class=link><a title="Ark 日志" href=/projects/sofa-boot/sofa-ark-ark-log>Ark 日志</a></div></li><li class=item><div class=link><a title="SOFABoot 使用类隔离" href=/projects/sofa-boot/classloader-isolation>SOFABoot 使用类隔离</a></div></li></ul></li><li class=item><div class=link><svg class="icon arrow" aria-hidden="true"><use xlink:href="#icon-arrow"/></svg><a title=开发文档>开发文档</a></div><ul class=leaf-section><li class=item><div class=link><a title="Ark 容器启动流程" href=/projects/sofa-boot/sofa-ark-startup>Ark 容器启动流程</a></div></li><li class=item><div class=link><a title="Ark 容器插件机制" href=/projects/sofa-boot/sofa-ark-plugin>Ark 容器插件机制</a></div></li><li class=item><div class=link><a title="Ark 容器类加载机制" href=/projects/sofa-boot/sofa-ark-classloader>Ark 容器类加载机制</a></div></li></ul></li><li class=item><div class=link><a title=发布说明 href=/projects/sofa-boot/sofa-ark-release>发布说明</a></div></li><li class=item><div class=link><a title=发展路线 href=/projects/sofa-boot/sofa-ark-roadmap>发展路线</a></div></li><li class=item><div class=link><a title=参与贡献 href=/projects/sofa-boot/sofa-ark-contribution>参与贡献</a></div></li></ul></li><li class=item><div class=link><svg class="icon arrow" aria-hidden="true"><use xlink:href="#icon-arrow"/></svg><a title=升级文档>升级文档</a></div><ul class=leaf-section><li class=item><div class=link><a title="SOFABoot 2.5.x 升级注意事项" href=/projects/sofa-boot/upgrade_2_5_x>SOFABoot 2.5.x 升级注意事项</a></div></li><li class=item><div class=link><a title="SOFABoot 3.0 升级注意事项" href=/projects/sofa-boot/upgrade_3_x>SOFABoot 3.0 升级注意事项</a></div></li></ul></li><li class=item><div class=link><a title=常见问题 href=/projects/sofa-boot/faq>常见问题</a></div></li><li class=item><div class=link><a title=版权声明 href=/projects/sofa-boot/notice>版权声明</a></div></li></ul></div></div></div></aside><main class="ss-layout-main -card"><div class=ss-meta><div class=container><h1 class=title>SOFABoot 拓展点</h1><a class="edit-button -hidden-mobile" href=https://github.com/sofastack/sofastack.tech/edit/master/content/zh/projects/sofa-boot/extension/index.md>编辑</a></div><div class=meta>更新时间: 2021-01-20</div></div><article class=typo><p>SOFABoot 支持模块化隔离，在实际的使用场景中，一个模块中的 bean 有时候需要开放一些入口，供另外一个模块扩展。SOFABoot 借鉴和使用了 <a href=https://github.com/nuxeo-archives/nuxeo-runtime>Nuxeo Runtime</a> 项目 以及 <a href=https://github.com/nuxeo/nuxeo>nuxeo</a> 项目，并在上面扩展，与 Spring 融合，提供扩展点的能力。</p><h2 id=使用>使用</h2><p>在 SOFABoot 中使用扩展点能力，需要以下三个步骤：</p><h3 id=定义提供扩展能力的-bean>定义提供扩展能力的 bean</h3><p>在使用 SOFABoot 扩展点能力时，首先需要定一个需要被扩展的 bean，先定一个接口：</p><pre><code class=language-java>package com.alipay.sofa.boot.test;
 
-&lt;span style=&quot;color:#a6e22e&quot;&gt;@Override&lt;/span&gt;
-&lt;span style=&quot;color:#66d9ef&quot;&gt;public&lt;/span&gt; String &lt;span style=&quot;color:#a6e22e&quot;&gt;say&lt;/span&gt;&lt;span style=&quot;color:#f92672&quot;&gt;()&lt;/span&gt; &lt;span style=&quot;color:#f92672&quot;&gt;{&lt;/span&gt;
-    &lt;span style=&quot;color:#66d9ef&quot;&gt;return&lt;/span&gt; word&lt;span style=&quot;color:#f92672&quot;&gt;;&lt;/span&gt;
-&lt;span style=&quot;color:#f92672&quot;&gt;}&lt;/span&gt;
+public interface IExtension {
 
-&lt;span style=&quot;color:#66d9ef&quot;&gt;public&lt;/span&gt; &lt;span style=&quot;color:#66d9ef&quot;&gt;void&lt;/span&gt; &lt;span style=&quot;color:#a6e22e&quot;&gt;setWord&lt;/span&gt;&lt;span style=&quot;color:#f92672&quot;&gt;(&lt;/span&gt;String word&lt;span style=&quot;color:#f92672&quot;&gt;)&lt;/span&gt; &lt;span style=&quot;color:#f92672&quot;&gt;{&lt;/span&gt;
-    &lt;span style=&quot;color:#66d9ef&quot;&gt;this&lt;/span&gt;&lt;span style=&quot;color:#f92672&quot;&gt;.&lt;/span&gt;&lt;span style=&quot;color:#a6e22e&quot;&gt;word&lt;/span&gt; &lt;span style=&quot;color:#f92672&quot;&gt;=&lt;/span&gt; word&lt;span style=&quot;color:#f92672&quot;&gt;;&lt;/span&gt;
-&lt;span style=&quot;color:#f92672&quot;&gt;}&lt;/span&gt;
+    String say();
+}
+</code></pre><p>定义这个接口的实现：</p><pre><code class=language-java>package com.alipay.sofa.boot.test.impl;
 
-&lt;span style=&quot;color:#66d9ef&quot;&gt;public&lt;/span&gt; &lt;span style=&quot;color:#66d9ef&quot;&gt;void&lt;/span&gt; &lt;span style=&quot;color:#a6e22e&quot;&gt;registerExtension&lt;/span&gt;&lt;span style=&quot;color:#f92672&quot;&gt;(&lt;/span&gt;Extension extension&lt;span style=&quot;color:#f92672&quot;&gt;)&lt;/span&gt; &lt;span style=&quot;color:#66d9ef&quot;&gt;throws&lt;/span&gt; Exception &lt;span style=&quot;color:#f92672&quot;&gt;{&lt;/span&gt;
-    Object&lt;span style=&quot;color:#f92672&quot;&gt;[]&lt;/span&gt; contributions &lt;span style=&quot;color:#f92672&quot;&gt;=&lt;/span&gt; extension&lt;span style=&quot;color:#f92672&quot;&gt;.&lt;/span&gt;&lt;span style=&quot;color:#a6e22e&quot;&gt;getContributions&lt;/span&gt;&lt;span style=&quot;color:#f92672&quot;&gt;();&lt;/span&gt;
-    String extensionPoint &lt;span style=&quot;color:#f92672&quot;&gt;=&lt;/span&gt; extension&lt;span style=&quot;color:#f92672&quot;&gt;.&lt;/span&gt;&lt;span style=&quot;color:#a6e22e&quot;&gt;getExtensionPoint&lt;/span&gt;&lt;span style=&quot;color:#f92672&quot;&gt;();&lt;/span&gt;
+public class ExtensionImpl implements IExtension {
 
-    &lt;span style=&quot;color:#66d9ef&quot;&gt;if&lt;/span&gt; &lt;span style=&quot;color:#f92672&quot;&gt;(&lt;/span&gt;contributions &lt;span style=&quot;color:#f92672&quot;&gt;==&lt;/span&gt; &lt;span style=&quot;color:#66d9ef&quot;&gt;null&lt;/span&gt;&lt;span style=&quot;color:#f92672&quot;&gt;)&lt;/span&gt; &lt;span style=&quot;color:#f92672&quot;&gt;{&lt;/span&gt;
-        &lt;span style=&quot;color:#66d9ef&quot;&gt;return&lt;/span&gt;&lt;span style=&quot;color:#f92672&quot;&gt;;&lt;/span&gt;
-    &lt;span style=&quot;color:#f92672&quot;&gt;}&lt;/span&gt;
+    private String word;
 
-    &lt;span style=&quot;color:#66d9ef&quot;&gt;for&lt;/span&gt; &lt;span style=&quot;color:#f92672&quot;&gt;(&lt;/span&gt;Object contribution &lt;span style=&quot;color:#f92672&quot;&gt;:&lt;/span&gt; contributions&lt;span style=&quot;color:#f92672&quot;&gt;)&lt;/span&gt; &lt;span style=&quot;color:#f92672&quot;&gt;{&lt;/span&gt;
-        &lt;span style=&quot;color:#66d9ef&quot;&gt;if&lt;/span&gt; &lt;span style=&quot;color:#f92672&quot;&gt;(&lt;/span&gt;&lt;span style=&quot;color:#e6db74&quot;&gt;&amp;#34;word&amp;#34;&lt;/span&gt;&lt;span style=&quot;color:#f92672&quot;&gt;.&lt;/span&gt;&lt;span style=&quot;color:#a6e22e&quot;&gt;equals&lt;/span&gt;&lt;span style=&quot;color:#f92672&quot;&gt;(&lt;/span&gt;extensionPoint&lt;span style=&quot;color:#f92672&quot;&gt;))&lt;/span&gt; &lt;span style=&quot;color:#f92672&quot;&gt;{&lt;/span&gt;
-            setWord&lt;span style=&quot;color:#f92672&quot;&gt;(((&lt;/span&gt;ExtensionDescriptor&lt;span style=&quot;color:#f92672&quot;&gt;)&lt;/span&gt; contribution&lt;span style=&quot;color:#f92672&quot;&gt;).&lt;/span&gt;&lt;span style=&quot;color:#a6e22e&quot;&gt;getValue&lt;/span&gt;&lt;span style=&quot;color:#f92672&quot;&gt;());&lt;/span&gt;
-        &lt;span style=&quot;color:#f92672&quot;&gt;}&lt;/span&gt;
-    &lt;span style=&quot;color:#f92672&quot;&gt;}&lt;/span&gt;
-&lt;span style=&quot;color:#f92672&quot;&gt;}&lt;/span&gt;
-</code></pre><p>}
-在这里可以看到有一个方法：registerExtension ，暂时可以先不用管这个方法，后续会介绍其具体的作用。</p><pre><code>&lt;span style=&quot;color:#a6e22e&quot;&gt;@XNode&lt;/span&gt;&lt;span style=&quot;color:#f92672&quot;&gt;(&lt;/span&gt;&lt;span style=&quot;color:#e6db74&quot;&gt;&amp;#34;value&amp;#34;&lt;/span&gt;&lt;span style=&quot;color:#f92672&quot;&gt;)&lt;/span&gt;
-&lt;span style=&quot;color:#66d9ef&quot;&gt;private&lt;/span&gt; String value&lt;span style=&quot;color:#f92672&quot;&gt;;&lt;/span&gt;
+    @Override
+    public String say() {
+        return word;
+    }
 
-&lt;span style=&quot;color:#66d9ef&quot;&gt;public&lt;/span&gt; String &lt;span style=&quot;color:#a6e22e&quot;&gt;getValue&lt;/span&gt;&lt;span style=&quot;color:#f92672&quot;&gt;()&lt;/span&gt; &lt;span style=&quot;color:#f92672&quot;&gt;{&lt;/span&gt;
-    &lt;span style=&quot;color:#66d9ef&quot;&gt;return&lt;/span&gt; value&lt;span style=&quot;color:#f92672&quot;&gt;;&lt;/span&gt;
-&lt;span style=&quot;color:#f92672&quot;&gt;}&lt;/span&gt;
-</code></pre><p>}
-然后在 xml 中定义扩展点：</p><p>public interface IExtension {</p><pre><code>List&lt;span style=&quot;color:#f92672&quot;&gt;&amp;lt;&lt;/span&gt;SimpleSpringListBean&lt;span style=&quot;color:#f92672&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span style=&quot;color:#a6e22e&quot;&gt;getSimpleSpringListBeans&lt;/span&gt;&lt;span style=&quot;color:#f92672&quot;&gt;();&lt;/span&gt;
-</code></pre><p>}
-其中 SimpleSpringListBean 可根据需求来定义，这里我们假设定义了一个空实现</p><pre><code>&lt;span style=&quot;color:#a6e22e&quot;&gt;@Override&lt;/span&gt;
-&lt;span style=&quot;color:#66d9ef&quot;&gt;public&lt;/span&gt; List&lt;span style=&quot;color:#f92672&quot;&gt;&amp;lt;&lt;/span&gt;SimpleSpringListBean&lt;span style=&quot;color:#f92672&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span style=&quot;color:#a6e22e&quot;&gt;getSimpleSpringListBeans&lt;/span&gt;&lt;span style=&quot;color:#f92672&quot;&gt;()&lt;/span&gt; &lt;span style=&quot;color:#f92672&quot;&gt;{&lt;/span&gt;
-    &lt;span style=&quot;color:#66d9ef&quot;&gt;return&lt;/span&gt; simpleSpringListBeans&lt;span style=&quot;color:#f92672&quot;&gt;;&lt;/span&gt;
-&lt;span style=&quot;color:#f92672&quot;&gt;}&lt;/span&gt;
+    public void setWord(String word) {
+        this.word = word;
+    }
 
- &lt;span style=&quot;color:#66d9ef&quot;&gt;public&lt;/span&gt; &lt;span style=&quot;color:#66d9ef&quot;&gt;void&lt;/span&gt; &lt;span style=&quot;color:#a6e22e&quot;&gt;registerExtension&lt;/span&gt;&lt;span style=&quot;color:#f92672&quot;&gt;(&lt;/span&gt;Extension extension&lt;span style=&quot;color:#f92672&quot;&gt;)&lt;/span&gt; &lt;span style=&quot;color:#66d9ef&quot;&gt;throws&lt;/span&gt; Exception &lt;span style=&quot;color:#f92672&quot;&gt;{&lt;/span&gt;
-    Object&lt;span style=&quot;color:#f92672&quot;&gt;[]&lt;/span&gt; contributions &lt;span style=&quot;color:#f92672&quot;&gt;=&lt;/span&gt; extension&lt;span style=&quot;color:#f92672&quot;&gt;.&lt;/span&gt;&lt;span style=&quot;color:#a6e22e&quot;&gt;getContributions&lt;/span&gt;&lt;span style=&quot;color:#f92672&quot;&gt;();&lt;/span&gt;
-    String extensionPoint &lt;span style=&quot;color:#f92672&quot;&gt;=&lt;/span&gt; extension&lt;span style=&quot;color:#f92672&quot;&gt;.&lt;/span&gt;&lt;span style=&quot;color:#a6e22e&quot;&gt;getExtensionPoint&lt;/span&gt;&lt;span style=&quot;color:#f92672&quot;&gt;();&lt;/span&gt;
+    public void registerExtension(Extension extension) throws Exception {
+        Object[] contributions = extension.getContributions();
+        String extensionPoint = extension.getExtensionPoint();
 
-    &lt;span style=&quot;color:#66d9ef&quot;&gt;if&lt;/span&gt; &lt;span style=&quot;color:#f92672&quot;&gt;(&lt;/span&gt;contributions &lt;span style=&quot;color:#f92672&quot;&gt;==&lt;/span&gt; &lt;span style=&quot;color:#66d9ef&quot;&gt;null&lt;/span&gt;&lt;span style=&quot;color:#f92672&quot;&gt;)&lt;/span&gt; &lt;span style=&quot;color:#f92672&quot;&gt;{&lt;/span&gt;
-        &lt;span style=&quot;color:#66d9ef&quot;&gt;return&lt;/span&gt;&lt;span style=&quot;color:#f92672&quot;&gt;;&lt;/span&gt;
-    &lt;span style=&quot;color:#f92672&quot;&gt;}&lt;/span&gt;
+        if (contributions == null) {
+            return;
+        }
 
-    &lt;span style=&quot;color:#66d9ef&quot;&gt;for&lt;/span&gt; &lt;span style=&quot;color:#f92672&quot;&gt;(&lt;/span&gt;Object contribution &lt;span style=&quot;color:#f92672&quot;&gt;:&lt;/span&gt; contributions&lt;span style=&quot;color:#f92672&quot;&gt;)&lt;/span&gt; &lt;span style=&quot;color:#f92672&quot;&gt;{&lt;/span&gt;
-        &lt;span style=&quot;color:#66d9ef&quot;&gt;if&lt;/span&gt; &lt;span style=&quot;color:#f92672&quot;&gt;(&lt;/span&gt;&lt;span style=&quot;color:#e6db74&quot;&gt;&amp;#34;testSpringList&amp;#34;&lt;/span&gt;&lt;span style=&quot;color:#f92672&quot;&gt;.&lt;/span&gt;&lt;span style=&quot;color:#a6e22e&quot;&gt;equals&lt;/span&gt;&lt;span style=&quot;color:#f92672&quot;&gt;(&lt;/span&gt;extensionPoint&lt;span style=&quot;color:#f92672&quot;&gt;))&lt;/span&gt; &lt;span style=&quot;color:#f92672&quot;&gt;{&lt;/span&gt;
-            simpleSpringListBeans&lt;span style=&quot;color:#f92672&quot;&gt;.&lt;/span&gt;&lt;span style=&quot;color:#a6e22e&quot;&gt;addAll&lt;/span&gt;&lt;span style=&quot;color:#f92672&quot;&gt;(((&lt;/span&gt;SpringListExtensionDescriptor&lt;span style=&quot;color:#f92672&quot;&gt;)&lt;/span&gt; contribution&lt;span style=&quot;color:#f92672&quot;&gt;)&lt;/span&gt;
-                &lt;span style=&quot;color:#f92672&quot;&gt;.&lt;/span&gt;&lt;span style=&quot;color:#a6e22e&quot;&gt;getValues&lt;/span&gt;&lt;span style=&quot;color:#f92672&quot;&gt;());&lt;/span&gt;
-        &lt;span style=&quot;color:#f92672&quot;&gt;}&lt;/span&gt;
-    &lt;span style=&quot;color:#f92672&quot;&gt;}&lt;/span&gt;
-&lt;span style=&quot;color:#f92672&quot;&gt;}&lt;/span&gt;
-</code></pre><p>}
-可以看到：在 registerExtension 中将通过贡献点定义的 bean 加入到 list 中，以达到让用户扩展这个 list 的能力。</p><pre><code>&lt;span style=&quot;color:#a6e22e&quot;&gt;@XNodeListSpring&lt;/span&gt;&lt;span style=&quot;color:#f92672&quot;&gt;(&lt;/span&gt;value &lt;span style=&quot;color:#f92672&quot;&gt;=&lt;/span&gt; &lt;span style=&quot;color:#e6db74&quot;&gt;&amp;#34;value&amp;#34;&lt;/span&gt;&lt;span style=&quot;color:#f92672&quot;&gt;,&lt;/span&gt; componentType &lt;span style=&quot;color:#f92672&quot;&gt;=&lt;/span&gt; SimpleSpringListBean&lt;span style=&quot;color:#f92672&quot;&gt;.&lt;/span&gt;&lt;span style=&quot;color:#a6e22e&quot;&gt;class&lt;/span&gt;&lt;span style=&quot;color:#f92672&quot;&gt;,&lt;/span&gt; type &lt;span style=&quot;color:#f92672&quot;&gt;=&lt;/span&gt; ArrayList&lt;span style=&quot;color:#f92672&quot;&gt;.&lt;/span&gt;&lt;span style=&quot;color:#a6e22e&quot;&gt;class&lt;/span&gt;&lt;span style=&quot;color:#f92672&quot;&gt;)&lt;/span&gt;
-&lt;span style=&quot;color:#66d9ef&quot;&gt;private&lt;/span&gt; List&lt;span style=&quot;color:#f92672&quot;&gt;&amp;lt;&lt;/span&gt;SimpleSpringListBean&lt;span style=&quot;color:#f92672&quot;&gt;&amp;gt;&lt;/span&gt; values&lt;span style=&quot;color:#f92672&quot;&gt;;&lt;/span&gt;
+        for (Object contribution : contributions) {
+            if (&quot;word&quot;.equals(extensionPoint)) {
+                setWord(((ExtensionDescriptor) contribution).getValue());
+            }
+        }
+    }
+}
+</code></pre><p>在这里可以看到有一个方法：<code>registerExtension</code> ，暂时可以先不用管这个方法，后续会介绍其具体的作用。</p><p>在模块的 Spring 配置文件中，我们把这个 bean 给配置起来：</p><pre><code class=language-xml>&lt;bean id=&quot;extension&quot; class=&quot;com.alipay.sofa.boot.test.impl.ExtensionImpl&quot;&gt;
+    &lt;property name=&quot;word&quot; value=&quot;Hello, world&quot;/&gt;
+&lt;/bean&gt;
+</code></pre><h3 id=定义扩展点>定义扩展点</h3><p>在上面的 bean 中有一个字段 word ，在实际中，我们希望这个字段能够被其他的模块自定义进行覆盖，这里我们将其以扩展点的形式暴露出来。</p><p>首先需要一个类去描述这个扩展点：</p><pre><code class=language-java>@XObject(&quot;word&quot;)
+public class ExtensionDescriptor {
 
-&lt;span style=&quot;color:#66d9ef&quot;&gt;public&lt;/span&gt; List&lt;span style=&quot;color:#f92672&quot;&gt;&amp;lt;&lt;/span&gt;SimpleSpringListBean&lt;span style=&quot;color:#f92672&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span style=&quot;color:#a6e22e&quot;&gt;getValues&lt;/span&gt;&lt;span style=&quot;color:#f92672&quot;&gt;()&lt;/span&gt; &lt;span style=&quot;color:#f92672&quot;&gt;{&lt;/span&gt;
-    &lt;span style=&quot;color:#66d9ef&quot;&gt;return&lt;/span&gt; values&lt;span style=&quot;color:#f92672&quot;&gt;;&lt;/span&gt;
-&lt;span style=&quot;color:#f92672&quot;&gt;}&lt;/span&gt;
-</code></pre><p>}
-在这里用到了 @XNodeListSpring ，当在 xml 中配置相应 bean 的名字时， SOFABoot 会从 spring 上下文中获取到相应的 bean 实例</p><p>&lt;sofa:extension bean="iExtension" point="testSpringList">
-&lt;sofa:content>
-&lt;testSpringList>
-&lt;value>simpleSpringListBean1&lt;/value>
-&lt;value>simpleSpringListBean2&lt;/value>
-&lt;/testSpringList>
-&lt;/sofa:content>
-&lt;/sofa:extension>
-在定义扩展时，首先定义了两个 bean，然后将它们放入扩展定义中。</p><pre><code> &lt;span style=&quot;color:#66d9ef&quot;&gt;private&lt;/span&gt; ExtensionClient extensionClient&lt;span style=&quot;color:#f92672&quot;&gt;;&lt;/span&gt;
+    @XNode(&quot;value&quot;)
+    private String value;
 
- &lt;span style=&quot;color:#a6e22e&quot;&gt;@Override&lt;/span&gt;
- &lt;span style=&quot;color:#66d9ef&quot;&gt;public&lt;/span&gt; &lt;span style=&quot;color:#66d9ef&quot;&gt;void&lt;/span&gt; &lt;span style=&quot;color:#a6e22e&quot;&gt;setExtensionClient&lt;/span&gt;&lt;span style=&quot;color:#f92672&quot;&gt;(&lt;/span&gt;ExtensionClient extensionClient&lt;span style=&quot;color:#f92672&quot;&gt;)&lt;/span&gt; &lt;span style=&quot;color:#f92672&quot;&gt;{&lt;/span&gt;
-     &lt;span style=&quot;color:#66d9ef&quot;&gt;this&lt;/span&gt;&lt;span style=&quot;color:#f92672&quot;&gt;.&lt;/span&gt;&lt;span style=&quot;color:#a6e22e&quot;&gt;clientFactory&lt;/span&gt; &lt;span style=&quot;color:#f92672&quot;&gt;=&lt;/span&gt; extensionClient&lt;span style=&quot;color:#f92672&quot;&gt;;&lt;/span&gt;
- &lt;span style=&quot;color:#f92672&quot;&gt;}&lt;/span&gt;
+    public String getValue() {
+        return value;
+    }
+}
+</code></pre><p>然后在 xml 中定义扩展点：</p><pre><code class=language-xml>&lt;sofa:extension-point name=&quot;word&quot; ref=&quot;extension&quot;&gt;
+    &lt;sofa:object class=&quot;com.alipay.sofa.boot.test.extension.ExtensionDescriptor&quot;/&gt;
+&lt;/sofa:extension-point&gt;
+</code></pre><p>其中：
+- name 为扩展点的名字
+- ref 为扩展点所作用在的 bean
+- object 为扩展点的贡献点具体的描述，这个描述是通过 XMap 的方式来进行的(XMap 的作用是将 Java 对象和 XML 文件进行映射，这里建议通过在网上搜索下 XMap 的文档来了解 XMap)</p><h3 id=定义扩展>定义扩展</h3><p>上述已经将扩展点定义好了，此时我们就可以对这个 bean 进行扩展了:</p><pre><code class=language-xml>&lt;sofa:extension bean=&quot;extension&quot; point=&quot;word&quot;&gt;
+    &lt;sofa:content&gt;
+        &lt;word&gt;
+            &lt;value&gt;newValue&lt;/value&gt;
+        &lt;/word&gt;
+    &lt;/sofa:content&gt;
+&lt;/sofa:extension&gt;
+</code></pre><p>其中：
+- bean 为扩展所作用在的 bean
+- point 为扩展点的名字
+- content 里面的内容为扩展的定义，其会通过 XMap 将内容解析为：扩展点的贡献点具体的描述对象，在这里即为 <code>com.alipay.sofa.boot.test.extension.ExtensionDescriptor</code> 对象</p><p>到这里，我们可以回头看一开始在 <code>com.alipay.sofa.boot.test.impl.ExtensionImpl</code> 中定义的 <code>registerExtension</code> 方法了，SOFABoot 在解析到贡献点时，会调用被扩展 bean 的 <code>registerExtension</code> 方法，其中包含了用户定义的贡献点处理逻辑，在上述的例子中，获取用户定义的 value 值，并将其设置到 word 字段中覆盖 bean 中原始定义的值。</p><p>此时，调用 <code>extension</code> bean 的 <code>say()</code> 方法，可以看到返回扩展中定义的值: newValue 。</p><h2 id=xmap-支持和扩展>XMap 支持和扩展</h2><p>上述的例子中只是一个很简单的扩展，其实 XMap 包含了非常丰富的描述能力，包括 <code>List</code>, <code>Map</code> 等，这些可以通过查看 XMap 的文档来了解。</p><p>在 SOFABoot 中，除了 XMap 原生的支持以外，还扩展了跟 Spring 集成的能力：
+- 通过 <code>XNode</code> 扩展出了 <code>XNodeSpring</code>
+- 通过 <code>XNodeList</code> 扩展出了 <code>XNodeListSpring</code>
+- 通过 <code>XNodeMap</code> 扩展出了 <code>XNodeMapSpring</code></p><p>这部分的扩展能力，让扩展点的能力更加丰富，描述对象中可以直接指向一个 SpringBean(用户配置 bean 的名字，SOFABoot 会根据名字从 spring 上下文中获取到 bean)，这里举一个使用 <code>XNodeListSpring</code> 的例子，依然是上述描述的三个步骤：</p><h3 id=定义提供扩展能力的-bean-1>定义提供扩展能力的 bean</h3><p>接口定义：</p><p>在这个接口里，返回一个 list，目标是这个 list 能够被通过扩展的方式填充</p><pre><code class=language-java>package com.alipay.sofa.boot.test;
 
- &lt;span style=&quot;color:#66d9ef&quot;&gt;public&lt;/span&gt; ExtensionClient &lt;span style=&quot;color:#a6e22e&quot;&gt;getClientFactory&lt;/span&gt;&lt;span style=&quot;color:#f92672&quot;&gt;()&lt;/span&gt; &lt;span style=&quot;color:#f92672&quot;&gt;{&lt;/span&gt;
-     &lt;span style=&quot;color:#66d9ef&quot;&gt;return&lt;/span&gt; extensionClient&lt;span style=&quot;color:#f92672&quot;&gt;;&lt;/span&gt;
- &lt;span style=&quot;color:#f92672&quot;&gt;}&lt;/span&gt;
-</code></pre><p>}
-将 ExtensionClientBean 定义为 spring bean 即可</p><pre><code>&lt;span style=&quot;color:#66d9ef&quot;&gt;public&lt;/span&gt; String &lt;span style=&quot;color:#a6e22e&quot;&gt;getValue&lt;/span&gt;&lt;span style=&quot;color:#f92672&quot;&gt;()&lt;/span&gt; &lt;span style=&quot;color:#f92672&quot;&gt;{&lt;/span&gt;
-    &lt;span style=&quot;color:#66d9ef&quot;&gt;return&lt;/span&gt; value&lt;span style=&quot;color:#f92672&quot;&gt;;&lt;/span&gt;
-&lt;span style=&quot;color:#f92672&quot;&gt;}&lt;/span&gt;
-</code></pre><p>}
-通过 com.alipay.sofa.runtime.api.client.ExtensionClient 的 publishExtensionPoint 即可定义扩展点</p></article></main></div><footer class=ss-footer><div class=container><div class=links><div class=cate><h2 class=cate-title>资源</h2><a class=link href=https://github.com/sofastack>Github</a>
+public interface IExtension {
+
+    List&lt;SimpleSpringListBean&gt; getSimpleSpringListBeans();
+}
+</code></pre><p>其中 <code>SimpleSpringListBean</code> 可根据需求来定义，这里我们假设定义了一个空实现</p><p>实现：</p><pre><code class=language-java>public class IExtensionImpl implements IExtension {
+    private List&lt;SimpleSpringListBean&gt;       simpleSpringListBeans  = new ArrayList&lt;&gt;();
+
+    @Override
+    public List&lt;SimpleSpringListBean&gt; getSimpleSpringListBeans() {
+        return simpleSpringListBeans;
+    }
+    
+     public void registerExtension(Extension extension) throws Exception {
+        Object[] contributions = extension.getContributions();
+        String extensionPoint = extension.getExtensionPoint();
+
+        if (contributions == null) {
+            return;
+        }
+
+        for (Object contribution : contributions) {
+            if (&quot;testSpringList&quot;.equals(extensionPoint)) {
+                simpleSpringListBeans.addAll(((SpringListExtensionDescriptor) contribution)
+                    .getValues());
+            }
+        }
+    }
+}
+</code></pre><p>可以看到：在 <code>registerExtension</code> 中将通过贡献点定义的 bean 加入到 list 中，以达到让用户扩展这个 list 的能力。</p><p>在模块的 Spring 配置文件中，我们把这个 bean 给配置起来：</p><pre><code class=language-xml>    &lt;bean id=&quot;iExtension&quot; class=&quot;com.alipay.sofa.runtime.integration.extension.bean.IExtensionImpl&quot;/&gt;
+</code></pre><h3 id=定义扩展点-1>定义扩展点</h3><p>首先需要一个对象去描述：</p><pre><code class=language-java>@XObject(&quot;testSpringList&quot;)
+public class SpringListExtensionDescriptor {
+
+    @XNodeListSpring(value = &quot;value&quot;, componentType = SimpleSpringListBean.class, type = ArrayList.class)
+    private List&lt;SimpleSpringListBean&gt; values;
+
+    public List&lt;SimpleSpringListBean&gt; getValues() {
+        return values;
+    }
+}
+</code></pre><p>在这里用到了 <code>@XNodeListSpring</code> ，当在 xml 中配置相应 bean 的名字时， SOFABoot 会从 spring 上下文中获取到相应的 bean 实例</p><p>在 xml 中将这个扩展点定义出来</p><pre><code class=language-xml>&lt;sofa:extension-point name=&quot;testSpringList&quot; ref=&quot;iExtension&quot;&gt;
+        &lt;sofa:object class=&quot;com.alipay.sofa.runtime.integration.extension.descriptor.SpringListExtensionDescriptor&quot;/&gt;
+    &lt;/sofa:extension-point&gt;
+</code></pre><h3 id=定义扩展-1>定义扩展</h3><pre><code class=language-xml>&lt;bean id=&quot;simpleSpringListBean1&quot; class=&quot;com.alipay.sofa.runtime.integration.extension.bean.SimpleSpringListBean&quot; /&gt;
+&lt;bean id=&quot;simpleSpringListBean2&quot; class=&quot;com.alipay.sofa.runtime.integration.extension.bean.SimpleSpringListBean&quot; /&gt;
+
+&lt;sofa:extension bean=&quot;iExtension&quot; point=&quot;testSpringList&quot;&gt;
+    &lt;sofa:content&gt;
+        &lt;testSpringList&gt;
+            &lt;value&gt;simpleSpringListBean1&lt;/value&gt;
+            &lt;value&gt;simpleSpringListBean2&lt;/value&gt;
+        &lt;/testSpringList&gt;
+    &lt;/sofa:content&gt;
+&lt;/sofa:extension&gt;
+</code></pre><p>在定义扩展时，首先定义了两个 bean，然后将它们放入扩展定义中。</p><p>此时，调用 <code>iExtension</code> 的 <code>getSimpleSpringListBeans</code> 方法，可以看到其中包含了通过扩展方式添加的两个 bean。</p><h2 id=通过客户端方式定义扩展点和扩展>通过客户端方式定义扩展点和扩展</h2><p>除了通过上述 xml 的方式配置定义扩展点和扩展以外，SOFABoot 中还提供了 <code>com.alipay.sofa.runtime.api.client.ExtensionClient</code> 的方式来定义扩展点和扩展</p><h3 id=获取-extensionclient>获取 <code>ExtensionClient</code></h3><p>获取 <code>com.alipay.sofa.runtime.api.client.ExtensionClient</code> 比较简单，SOFABoot 中提供了 <code>com.alipay.sofa.runtime.api.aware.ExtensionClientAware</code>：</p><pre><code class=language-java>public class ExtensionClientBean implements ExtensionClientAware {
+ 
+     private ExtensionClient extensionClient;
+ 
+     @Override
+     public void setExtensionClient(ExtensionClient extensionClient) {
+         this.clientFactory = extensionClient;
+     }
+ 
+     public ExtensionClient getClientFactory() {
+         return extensionClient;
+     }
+}
+</code></pre><p>将 <code>ExtensionClientBean</code> 定义为 spring bean 即可</p><h3 id=定义扩展点-2>定义扩展点</h3><pre><code class=language-java>ExtensionPointParam extensionPointParam = new ExtensionPointParam();
+extensionPointParam.setName(&quot;clientValue&quot;);
+extensionPointParam.setTargetName(&quot;iExtension&quot;);
+extensionPointParam.setTarget(iExtension);
+extensionPointParam.setContributionClass(ClientExtensionDescriptor.class);
+extensionClient.publishExtensionPoint(extensionPointParam);
+</code></pre><p>通过客户端和通过 xml 注册扩展点时各参数的含义保持一致：
+其中：
+- name 为扩展点的名字
+- targetName 为扩展点所作用在的 bean 的名字
+- target 为扩展点所作用在的 bean
+- contributionClass 为扩展点的贡献点具体的描述，这里描述的定义示例如下：</p><pre><code class=language-java>@XObject(&quot;clientValue&quot;)
+public class ClientExtensionDescriptor {
+    @XNode(&quot;value&quot;)
+    private String value;
+
+    public String getValue() {
+        return value;
+    }
+}
+</code></pre><p>通过 <code>com.alipay.sofa.runtime.api.client.ExtensionClient</code> 的 <code>publishExtensionPoint</code> 即可定义扩展点</p><h3 id=定义扩展-2>定义扩展</h3><pre><code class=language-java>DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
+Document doc = dBuilder.parse(new File(Thread.currentThread().getContextClassLoader()
+    .getResource(&quot;META-INF/extension/extension.xml&quot;).toURI()));
+ExtensionParam extensionParam = new ExtensionParam();
+extensionParam.setTargetName(&quot;clientValue&quot;);
+extensionParam.setTargetInstanceName(&quot;iExtension&quot;);
+extensionParam.setElement(doc.getDocumentElement());
+extensionClient.publishExtension(extensionParam);
+</code></pre><p>通过客户端和通过 xml 注册扩展点时各参数的含义保持一致：
+- targetInstanceName 为扩展所作用在的 bean
+- targetName 为扩展点的名字
+- element 里面的内容为扩展的定义，这里需要传入 <code>Element</code> 对象，通过从 xml 中读取，这里示例子的内容如下：</p><pre><code class=language-xml>&lt;clientValue&gt;
+    &lt;value&gt;SOFABoot Extension Client Test&lt;/value&gt;
+&lt;/clientValue&gt;
+</code></pre><p>通过 <code>com.alipay.sofa.runtime.api.client.ExtensionClient</code> 的 <code>publishExtension</code> 即可定义扩展</p><h3 id=客户端限制>客户端限制</h3><p>可以看到由于扩展的定义强依赖 XML ，故而虽然这里是通过客户端发布扩展点和扩展，但是扩展自身的内容还是需要 XML 来描述，并没有真正做到只使用客户端，此部分欢迎有兴趣的同学提改进意见。</p></article></main></div><footer class=ss-footer><div class=container><div class=links><div class=cate><h2 class=cate-title>资源</h2><a class=link href=https://github.com/sofastack>Github</a>
 <a class=link href=https://gitee.com/sofastack/>Gitee</a>
 <a class=link href=https://github.com/sofastack-guides>示例</a></div><div class=cate><h2 class=cate-title>社交媒体</h2><a class=link href=https://zhuanlan.zhihu.com/sofastack>知乎专栏</a>
 <a class=link href=https://weibo.com/sofastack>新浪微博</a>

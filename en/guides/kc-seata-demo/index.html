@@ -1,4 +1,4 @@
-<!doctype html><html><head><title>Seata distributed transaction practice · SOFAStack</title><meta charset=utf-8><meta http-equiv=x-ua-compatible content="IE=edge,chrome=1"><meta name=viewport content="width=device-width,minimum-scale=1"><meta name=description content="SOFAStack is a Scalable Open Financial Architecture for building cloud native applications"><meta name=generator content="Hugo 0.80.0"><link rel="shortcut icon" href=https://gw.alipayobjects.com/os/q/cms/images/jqu9346l/4ba95631-2489-4885-881f-bc7f8d787d5e_w64_h61.png type=image/png><link href=https://unpkg.com/purecss@1.0.0/build/base-min.css rel=stylesheet><link href=/css/main.css rel=stylesheet><link href=/css/zoom-image.css rel=stylesheet><script src=/js/iconfont.js></script><script src=/js/highlight.pack.js></script><script>hljs.initHighlightingOnLoad();</script><script>window.SITE_LANGUAGE="en"</script><script src=/js/app.js></script><script type=application/javascript>var doNotTrack=false;if(!doNotTrack){(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');ga('create','UA-142131411-1','auto');ga('send','pageview');}</script></head><body><header class=ss-header><nav class=navbar role=navigation aria-label="main navigation"><div class=navbar-brand><a class=logo-link href=/en/><img class=logo src=/img/logo.png></a><div class=-show-mobile><a id=mobile-menu-icon><svg class="icon" aria-hidden="true"><use xlink:href="#icon-menu"/></svg></a><nav id=mobile-menu><div id=js-menu-search-mobile class=navbar-search-mobile><input class=input placeholder=Search><svg class="icon" aria-hidden="true"><use xlink:href="#icon-search"/></svg></div><a href=/en/projects/><span>Projects</span><svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"/></svg></a>
+<!doctype html><html><head><title>Seata distributed transaction practice · SOFAStack</title><meta charset=utf-8><meta http-equiv=x-ua-compatible content="IE=edge,chrome=1"><meta name=viewport content="width=device-width,minimum-scale=1"><meta name=description content="SOFAStack is a Scalable Open Financial Architecture for building cloud native applications"><meta name=generator content="Hugo 0.55.5"><link rel="shortcut icon" href=https://gw.alipayobjects.com/os/q/cms/images/jqu9346l/4ba95631-2489-4885-881f-bc7f8d787d5e_w64_h61.png type=image/png><link href=https://unpkg.com/purecss@1.0.0/build/base-min.css rel=stylesheet><link href=/css/main.css rel=stylesheet><link href=/css/zoom-image.css rel=stylesheet><script src=/js/iconfont.js></script><script src=/js/highlight.pack.js></script><script>hljs.initHighlightingOnLoad();</script><script>window.SITE_LANGUAGE="en"</script><script src=/js/app.js></script><script type=application/javascript>var doNotTrack=false;if(!doNotTrack){(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');ga('create','UA-142131411-1','auto');ga('send','pageview');}</script></head><body><header class=ss-header><nav class=navbar role=navigation aria-label="main navigation"><div class=navbar-brand><a class=logo-link href=/en/><img class=logo src=/img/logo.png></a><div class=-show-mobile><a id=mobile-menu-icon><svg class="icon" aria-hidden="true"><use xlink:href="#icon-menu"/></svg></a><nav id=mobile-menu><div id=js-menu-search-mobile class=navbar-search-mobile><input class=input placeholder=Search><svg class="icon" aria-hidden="true"><use xlink:href="#icon-search"/></svg></div><a href=/en/projects/><span>Projects</span><svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"/></svg></a>
 <a href=/en/guides/><span>Guides</span><svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"/></svg></a>
 <a href=/en/blog/><span>Blog</span><svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"/></svg></a>
 <a href=/en/activities/><span>Activity</span><svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"/></svg></a>
@@ -7,211 +7,416 @@
 <a class=navbar-item href=/en/guides/>Guides</a>
 <a class=navbar-item href=/en/blog/>Blog</a>
 <a class=navbar-item href=/en/activities/>Activity</a>
-<a class=navbar-item href=/awesome/>Awesome SOFA</a></div><div class=navbar-end><div class=navbar-item><div id=js-menu-search class=navbar-search><input class=input placeholder=Search><svg class="icon" aria-hidden="true"><use xlink:href="#icon-search"/></svg></div></div><div class=navbar-item><a class=translation href=/guides/kc-seata-demo/>中</a></div></div></div></nav></header><div class=ss-layout-container><main class="ss-layout-main -card"><div class=ss-meta><h1 class=title>Seata distributed transaction practice</h1><div class=meta></div></div><article class=typo><pre><code>    &lt;span style=&quot;color:#f92672&quot;&gt;&amp;lt;dependency&amp;gt;&lt;/span&gt;
-        &lt;span style=&quot;color:#f92672&quot;&gt;&amp;lt;groupId&amp;gt;&lt;/span&gt;io.seata&lt;span style=&quot;color:#f92672&quot;&gt;&amp;lt;/groupId&amp;gt;&lt;/span&gt;
-        &lt;span style=&quot;color:#f92672&quot;&gt;&amp;lt;artifactId&amp;gt;&lt;/span&gt;seata-all&lt;span style=&quot;color:#f92672&quot;&gt;&amp;lt;/artifactId&amp;gt;&lt;/span&gt;
-        &lt;span style=&quot;color:#f92672&quot;&gt;&amp;lt;version&amp;gt;&lt;/span&gt;${seata.version}&lt;span style=&quot;color:#f92672&quot;&gt;&amp;lt;/version&amp;gt;&lt;/span&gt;
-    &lt;span style=&quot;color:#f92672&quot;&gt;&amp;lt;/dependency&amp;gt;&lt;/span&gt;
+<a class=navbar-item href=/awesome/>Awesome SOFA</a></div><div class=navbar-end><div class=navbar-item><div id=js-menu-search class=navbar-search><input class=input placeholder=Search><svg class="icon" aria-hidden="true"><use xlink:href="#icon-search"/></svg></div></div><div class=navbar-item><a class=translation href=/guides/kc-seata-demo/>中</a></div></div></div></nav></header><div class=ss-layout-container><main class="ss-layout-main -card"><div class=ss-meta><h1 class=title>Seata distributed transaction practice</h1><div class=meta></div></div><article class=typo><p>SEATA Demo for SOFAStack Cloud Native Workshop on KubeCon China 2019</p><h2 id=at-mode>AT mode</h2><h4 id=1-introduce-maven-dependencies>1.Introduce maven dependencies</h4><p>Introduce the following dependencies into the POM file of the parent project (seata-demo-at/pom.xml):</p><pre><code class=language-xml>...
+&lt;properties&gt;
+    ...
+    &lt;seata.version&gt;0.6.1&lt;/seata.version&gt;
+    &lt;netty4.version&gt;4.1.24.Final&lt;/netty4.version&gt;
+&lt;/properties&gt;
+...
+&lt;dependencyManagement&gt;
+    &lt;dependencies&gt;
+        ...
 
-    &lt;span style=&quot;color:#f92672&quot;&gt;&amp;lt;dependency&amp;gt;&lt;/span&gt;
-        &lt;span style=&quot;color:#f92672&quot;&gt;&amp;lt;groupId&amp;gt;&lt;/span&gt;io.seata&lt;span style=&quot;color:#f92672&quot;&gt;&amp;lt;/groupId&amp;gt;&lt;/span&gt;
-        &lt;span style=&quot;color:#f92672&quot;&gt;&amp;lt;artifactId&amp;gt;&lt;/span&gt;seata-server&lt;span style=&quot;color:#f92672&quot;&gt;&amp;lt;/artifactId&amp;gt;&lt;/span&gt;
-        &lt;span style=&quot;color:#f92672&quot;&gt;&amp;lt;version&amp;gt;&lt;/span&gt;${seata.version}&lt;span style=&quot;color:#f92672&quot;&gt;&amp;lt;/version&amp;gt;&lt;/span&gt;
-        &lt;span style=&quot;color:#f92672&quot;&gt;&amp;lt;exclusions&amp;gt;&lt;/span&gt;
-            &lt;span style=&quot;color:#f92672&quot;&gt;&amp;lt;exclusion&amp;gt;&lt;/span&gt;
-                &lt;span style=&quot;color:#f92672&quot;&gt;&amp;lt;groupId&amp;gt;&lt;/span&gt;javax.servlet&lt;span style=&quot;color:#f92672&quot;&gt;&amp;lt;/groupId&amp;gt;&lt;/span&gt;
-                &lt;span style=&quot;color:#f92672&quot;&gt;&amp;lt;artifactId&amp;gt;&lt;/span&gt;servlet-api&lt;span style=&quot;color:#f92672&quot;&gt;&amp;lt;/artifactId&amp;gt;&lt;/span&gt;
-            &lt;span style=&quot;color:#f92672&quot;&gt;&amp;lt;/exclusion&amp;gt;&lt;/span&gt;
-        &lt;span style=&quot;color:#f92672&quot;&gt;&amp;lt;/exclusions&amp;gt;&lt;/span&gt;
-    &lt;span style=&quot;color:#f92672&quot;&gt;&amp;lt;/dependency&amp;gt;&lt;/span&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;io.seata&lt;/groupId&gt;
+            &lt;artifactId&gt;seata-all&lt;/artifactId&gt;
+            &lt;version&gt;${seata.version}&lt;/version&gt;
+        &lt;/dependency&gt;
 
-    &lt;span style=&quot;color:#f92672&quot;&gt;&amp;lt;dependency&amp;gt;&lt;/span&gt;
-        &lt;span style=&quot;color:#f92672&quot;&gt;&amp;lt;groupId&amp;gt;&lt;/span&gt;io.netty&lt;span style=&quot;color:#f92672&quot;&gt;&amp;lt;/groupId&amp;gt;&lt;/span&gt;
-        &lt;span style=&quot;color:#f92672&quot;&gt;&amp;lt;artifactId&amp;gt;&lt;/span&gt;netty-all&lt;span style=&quot;color:#f92672&quot;&gt;&amp;lt;/artifactId&amp;gt;&lt;/span&gt;
-        &lt;span style=&quot;color:#f92672&quot;&gt;&amp;lt;version&amp;gt;&lt;/span&gt;${netty4.version}&lt;span style=&quot;color:#f92672&quot;&gt;&amp;lt;/version&amp;gt;&lt;/span&gt;
-    &lt;span style=&quot;color:#f92672&quot;&gt;&amp;lt;/dependency&amp;gt;&lt;/span&gt;
-&lt;span style=&quot;color:#f92672&quot;&gt;&amp;lt;/dependencies&amp;gt;&lt;/span&gt;
-</code></pre><p>&lt;/dependencyManagement>
-Introduce the following dependencies into the POM file of the stock-mng project (seata-demo-at/stock-mng/pom.xml):</p><pre><code>&lt;span style=&quot;color:#f92672&quot;&gt;&amp;lt;dependency&amp;gt;&lt;/span&gt;
-    &lt;span style=&quot;color:#f92672&quot;&gt;&amp;lt;groupId&amp;gt;&lt;/span&gt;io.netty&lt;span style=&quot;color:#f92672&quot;&gt;&amp;lt;/groupId&amp;gt;&lt;/span&gt;
-    &lt;span style=&quot;color:#f92672&quot;&gt;&amp;lt;artifactId&amp;gt;&lt;/span&gt;netty-all&lt;span style=&quot;color:#f92672&quot;&gt;&amp;lt;/artifactId&amp;gt;&lt;/span&gt;
-&lt;span style=&quot;color:#f92672&quot;&gt;&amp;lt;/dependency&amp;gt;&lt;/span&gt;
-</code></pre><p>&lt;dependencies>
-Introduce the following dependencies into the POM file of the balance-mng-impl project (seata-demo-at/balance-mng/balance-mng-impl/pom.xml):</p><pre><code>&lt;span style=&quot;color:#f92672&quot;&gt;&amp;lt;dependency&amp;gt;&lt;/span&gt;
-    &lt;span style=&quot;color:#f92672&quot;&gt;&amp;lt;groupId&amp;gt;&lt;/span&gt;io.seata&lt;span style=&quot;color:#f92672&quot;&gt;&amp;lt;/groupId&amp;gt;&lt;/span&gt;
-    &lt;span style=&quot;color:#f92672&quot;&gt;&amp;lt;artifactId&amp;gt;&lt;/span&gt;seata-server&lt;span style=&quot;color:#f92672&quot;&gt;&amp;lt;/artifactId&amp;gt;&lt;/span&gt;
-&lt;span style=&quot;color:#f92672&quot;&gt;&amp;lt;/dependency&amp;gt;&lt;/span&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;io.seata&lt;/groupId&gt;
+            &lt;artifactId&gt;seata-server&lt;/artifactId&gt;
+            &lt;version&gt;${seata.version}&lt;/version&gt;
+            &lt;exclusions&gt;
+                &lt;exclusion&gt;
+                    &lt;groupId&gt;javax.servlet&lt;/groupId&gt;
+                    &lt;artifactId&gt;servlet-api&lt;/artifactId&gt;
+                &lt;/exclusion&gt;
+            &lt;/exclusions&gt;
+        &lt;/dependency&gt;
 
-&lt;span style=&quot;color:#f92672&quot;&gt;&amp;lt;dependency&amp;gt;&lt;/span&gt;
-    &lt;span style=&quot;color:#f92672&quot;&gt;&amp;lt;groupId&amp;gt;&lt;/span&gt;io.netty&lt;span style=&quot;color:#f92672&quot;&gt;&amp;lt;/groupId&amp;gt;&lt;/span&gt;
-    &lt;span style=&quot;color:#f92672&quot;&gt;&amp;lt;artifactId&amp;gt;&lt;/span&gt;netty-all&lt;span style=&quot;color:#f92672&quot;&gt;&amp;lt;/artifactId&amp;gt;&lt;/span&gt;
-&lt;span style=&quot;color:#f92672&quot;&gt;&amp;lt;/dependency&amp;gt;&lt;/span&gt;
-</code></pre><p>&lt;dependencies>
-2. Use Seata’s DataSourceProxy to proxy actual data source and configure GlobalTransactionScanner to scan @GlobalTransaction annotation</p><p>@Configuration
-public static class DataSourceConfig {</p><pre><code>&lt;span style=&quot;color:#a6e22e&quot;&gt;@Bean&lt;/span&gt;
-&lt;span style=&quot;color:#a6e22e&quot;&gt;@Primary&lt;/span&gt;
-&lt;span style=&quot;color:#a6e22e&quot;&gt;@ConfigurationProperties&lt;/span&gt;&lt;span style=&quot;color:#f92672&quot;&gt;(&lt;/span&gt;prefix &lt;span style=&quot;color:#f92672&quot;&gt;=&lt;/span&gt; &lt;span style=&quot;color:#e6db74&quot;&gt;&amp;#34;spring.datasource.hikari&amp;#34;&lt;/span&gt;&lt;span style=&quot;color:#f92672&quot;&gt;)&lt;/span&gt;
-&lt;span style=&quot;color:#66d9ef&quot;&gt;public&lt;/span&gt; DataSource &lt;span style=&quot;color:#a6e22e&quot;&gt;dataSource&lt;/span&gt;&lt;span style=&quot;color:#f92672&quot;&gt;(&lt;/span&gt;DataSourceProperties properties&lt;span style=&quot;color:#f92672&quot;&gt;)&lt;/span&gt; &lt;span style=&quot;color:#f92672&quot;&gt;{&lt;/span&gt;
-    HikariDataSource dataSource &lt;span style=&quot;color:#f92672&quot;&gt;=&lt;/span&gt; createDataSource&lt;span style=&quot;color:#f92672&quot;&gt;(&lt;/span&gt;properties&lt;span style=&quot;color:#f92672&quot;&gt;,&lt;/span&gt; HikariDataSource&lt;span style=&quot;color:#f92672&quot;&gt;.&lt;/span&gt;&lt;span style=&quot;color:#a6e22e&quot;&gt;class&lt;/span&gt;&lt;span style=&quot;color:#f92672&quot;&gt;);&lt;/span&gt;
-    &lt;span style=&quot;color:#66d9ef&quot;&gt;if&lt;/span&gt; &lt;span style=&quot;color:#f92672&quot;&gt;(&lt;/span&gt;StringUtils&lt;span style=&quot;color:#f92672&quot;&gt;.&lt;/span&gt;&lt;span style=&quot;color:#a6e22e&quot;&gt;hasText&lt;/span&gt;&lt;span style=&quot;color:#f92672&quot;&gt;(&lt;/span&gt;properties&lt;span style=&quot;color:#f92672&quot;&gt;.&lt;/span&gt;&lt;span style=&quot;color:#a6e22e&quot;&gt;getName&lt;/span&gt;&lt;span style=&quot;color:#f92672&quot;&gt;()))&lt;/span&gt; &lt;span style=&quot;color:#f92672&quot;&gt;{&lt;/span&gt;
-        dataSource&lt;span style=&quot;color:#f92672&quot;&gt;.&lt;/span&gt;&lt;span style=&quot;color:#a6e22e&quot;&gt;setPoolName&lt;/span&gt;&lt;span style=&quot;color:#f92672&quot;&gt;(&lt;/span&gt;properties&lt;span style=&quot;color:#f92672&quot;&gt;.&lt;/span&gt;&lt;span style=&quot;color:#a6e22e&quot;&gt;getName&lt;/span&gt;&lt;span style=&quot;color:#f92672&quot;&gt;());&lt;/span&gt;
-    &lt;span style=&quot;color:#f92672&quot;&gt;}&lt;/span&gt;
-    &lt;span style=&quot;color:#66d9ef&quot;&gt;return&lt;/span&gt; &lt;span style=&quot;color:#66d9ef&quot;&gt;new&lt;/span&gt; DataSourceProxy&lt;span style=&quot;color:#f92672&quot;&gt;(&lt;/span&gt;dataSource&lt;span style=&quot;color:#f92672&quot;&gt;);&lt;/span&gt;
-&lt;span style=&quot;color:#f92672&quot;&gt;}&lt;/span&gt;
+        &lt;dependency&gt;
+            &lt;groupId&gt;io.netty&lt;/groupId&gt;
+            &lt;artifactId&gt;netty-all&lt;/artifactId&gt;
+            &lt;version&gt;${netty4.version}&lt;/version&gt;
+        &lt;/dependency&gt;
+    &lt;/dependencies&gt;
+&lt;/dependencyManagement&gt;
+</code></pre><p>Introduce the following dependencies into the POM file of the stock-mng project (seata-demo-at/stock-mng/pom.xml):</p><pre><code class=language-xml>&lt;dependencies&gt;
+....
+    &lt;dependency&gt;
+        &lt;groupId&gt;io.seata&lt;/groupId&gt;
+        &lt;artifactId&gt;seata-all&lt;/artifactId&gt;
+    &lt;/dependency&gt;
 
-&lt;span style=&quot;color:#a6e22e&quot;&gt;@SuppressWarnings&lt;/span&gt;&lt;span style=&quot;color:#f92672&quot;&gt;(&lt;/span&gt;&lt;span style=&quot;color:#e6db74&quot;&gt;&amp;#34;unchecked&amp;#34;&lt;/span&gt;&lt;span style=&quot;color:#f92672&quot;&gt;)&lt;/span&gt;
-&lt;span style=&quot;color:#66d9ef&quot;&gt;protected&lt;/span&gt; &lt;span style=&quot;color:#66d9ef&quot;&gt;static&lt;/span&gt; &lt;span style=&quot;color:#f92672&quot;&gt;&amp;lt;&lt;/span&gt;T&lt;span style=&quot;color:#f92672&quot;&gt;&amp;gt;&lt;/span&gt; T &lt;span style=&quot;color:#a6e22e&quot;&gt;createDataSource&lt;/span&gt;&lt;span style=&quot;color:#f92672&quot;&gt;(&lt;/span&gt;DataSourceProperties properties&lt;span style=&quot;color:#f92672&quot;&gt;,&lt;/span&gt;
-                                        Class&lt;span style=&quot;color:#f92672&quot;&gt;&amp;lt;?&lt;/span&gt; &lt;span style=&quot;color:#66d9ef&quot;&gt;extends&lt;/span&gt; DataSource&lt;span style=&quot;color:#f92672&quot;&gt;&amp;gt;&lt;/span&gt; type&lt;span style=&quot;color:#f92672&quot;&gt;)&lt;/span&gt; &lt;span style=&quot;color:#f92672&quot;&gt;{&lt;/span&gt;
-    &lt;span style=&quot;color:#66d9ef&quot;&gt;return&lt;/span&gt; &lt;span style=&quot;color:#f92672&quot;&gt;(&lt;/span&gt;T&lt;span style=&quot;color:#f92672&quot;&gt;)&lt;/span&gt; properties&lt;span style=&quot;color:#f92672&quot;&gt;.&lt;/span&gt;&lt;span style=&quot;color:#a6e22e&quot;&gt;initializeDataSourceBuilder&lt;/span&gt;&lt;span style=&quot;color:#f92672&quot;&gt;().&lt;/span&gt;&lt;span style=&quot;color:#a6e22e&quot;&gt;type&lt;/span&gt;&lt;span style=&quot;color:#f92672&quot;&gt;(&lt;/span&gt;type&lt;span style=&quot;color:#f92672&quot;&gt;).&lt;/span&gt;&lt;span style=&quot;color:#a6e22e&quot;&gt;build&lt;/span&gt;&lt;span style=&quot;color:#f92672&quot;&gt;();&lt;/span&gt;
-&lt;span style=&quot;color:#f92672&quot;&gt;}&lt;/span&gt;
+    &lt;dependency&gt;
+        &lt;groupId&gt;io.netty&lt;/groupId&gt;
+        &lt;artifactId&gt;netty-all&lt;/artifactId&gt;
+    &lt;/dependency&gt;
+&lt;dependencies&gt;
+</code></pre><p>Introduce the following dependencies into the POM file of the balance-mng-impl project (seata-demo-at/balance-mng/balance-mng-impl/pom.xml):</p><pre><code class=language-xml>&lt;dependencies&gt;
+....
+    &lt;dependency&gt;
+        &lt;groupId&gt;io.seata&lt;/groupId&gt;
+        &lt;artifactId&gt;seata-all&lt;/artifactId&gt;
+    &lt;/dependency&gt;
 
-&lt;span style=&quot;color:#a6e22e&quot;&gt;@Bean&lt;/span&gt;
-&lt;span style=&quot;color:#a6e22e&quot;&gt;@Primary&lt;/span&gt;
-&lt;span style=&quot;color:#66d9ef&quot;&gt;public&lt;/span&gt; GlobalTransactionScanner &lt;span style=&quot;color:#a6e22e&quot;&gt;globalTransactionScanner&lt;/span&gt;&lt;span style=&quot;color:#f92672&quot;&gt;(){&lt;/span&gt;
-    &lt;span style=&quot;color:#66d9ef&quot;&gt;return&lt;/span&gt; &lt;span style=&quot;color:#66d9ef&quot;&gt;new&lt;/span&gt; GlobalTransactionScanner&lt;span style=&quot;color:#f92672&quot;&gt;(&lt;/span&gt;&lt;span style=&quot;color:#e6db74&quot;&gt;&amp;#34;kc-balance-mng&amp;#34;&lt;/span&gt;&lt;span style=&quot;color:#f92672&quot;&gt;,&lt;/span&gt; &lt;span style=&quot;color:#e6db74&quot;&gt;&amp;#34;my_test_tx_group&amp;#34;&lt;/span&gt;&lt;span style=&quot;color:#f92672&quot;&gt;);&lt;/span&gt;
-&lt;span style=&quot;color:#f92672&quot;&gt;}&lt;/span&gt;
-</code></pre><p>}
-Note that the above dataSource method returns the data source of the DataSourceProxy.</p><p>@Override
-@GlobalTransactional(timeoutMills = 300000, name = "kc-book-store-tx")
+    &lt;dependency&gt;
+        &lt;groupId&gt;io.seata&lt;/groupId&gt;
+        &lt;artifactId&gt;seata-server&lt;/artifactId&gt;
+    &lt;/dependency&gt;
+
+    &lt;dependency&gt;
+        &lt;groupId&gt;io.netty&lt;/groupId&gt;
+        &lt;artifactId&gt;netty-all&lt;/artifactId&gt;
+    &lt;/dependency&gt;
+&lt;dependencies&gt;
+</code></pre><h4 id=2-use-seata-s-datasourceproxy-to-proxy-actual-data-source-and-configure-globaltransactionscanner-to-scan-globaltransaction-annotation>2. Use Seata&rsquo;s DataSourceProxy to proxy actual data source and configure GlobalTransactionScanner to scan @GlobalTransaction annotation</h4><p>Add the following java snippet to the main methods in BalanceMngApplication and StockMngApplication classes:</p><pre><code class=language-java>...
+import io.seata.rm.datasource.DataSourceProxy;
+import io.seata.spring.annotation.GlobalTransactionScanner;
+...
+
+@Configuration
+public static class DataSourceConfig {
+
+    @Bean
+    @Primary
+    @ConfigurationProperties(prefix = &quot;spring.datasource.hikari&quot;)
+    public DataSource dataSource(DataSourceProperties properties) {
+        HikariDataSource dataSource = createDataSource(properties, HikariDataSource.class);
+        if (StringUtils.hasText(properties.getName())) {
+            dataSource.setPoolName(properties.getName());
+        }
+        return new DataSourceProxy(dataSource);
+    }
+
+    @SuppressWarnings(&quot;unchecked&quot;)
+    protected static &lt;T&gt; T createDataSource(DataSourceProperties properties,
+                                            Class&lt;? extends DataSource&gt; type) {
+        return (T) properties.initializeDataSourceBuilder().type(type).build();
+    }
+
+    @Bean
+    @Primary
+    public GlobalTransactionScanner globalTransactionScanner(){
+        return new GlobalTransactionScanner(&quot;kc-balance-mng&quot;, &quot;my_test_tx_group&quot;);
+    }
+}
+</code></pre><p>Note that the above dataSource method returns the data source of the DataSourceProxy.</p><h4 id=3-configure-globaltransactional-annotation-to-validate-the-distributed-transaction-effective>3. Configure @GlobalTransactional annotation to validate the distributed transaction effective</h4><p>Add the @GlobalTransactional annotation to the purchase method in the BookStoreControllerImpl class:</p><pre><code class=language-java>...
+import io.seata.spring.annotation.GlobalTransactional;
+...
+
+@Override
+@GlobalTransactional(timeoutMills = 300000, name = &quot;kc-book-store-tx&quot;)
 public Success purchase(String body) {
-&mldr;
+  ...
 }
-4. Configure Seata server</p><pre><code>startSeatServer&lt;span style=&quot;color:#f92672&quot;&gt;();&lt;/span&gt;
+</code></pre><h4 id=4-configure-seata-server>4. Configure Seata server</h4><p>For simplicity, start Seata server together with BalanceMngApplication, and add the code to start Seata server in the BalanceMngApplication class:</p><pre><code class=language-java>...
+public static void main(String[] args) {
 
-SpringApplication&lt;span style=&quot;color:#f92672&quot;&gt;.&lt;/span&gt;&lt;span style=&quot;color:#a6e22e&quot;&gt;run&lt;/span&gt;&lt;span style=&quot;color:#f92672&quot;&gt;(&lt;/span&gt;BalanceMngApplication&lt;span style=&quot;color:#f92672&quot;&gt;.&lt;/span&gt;&lt;span style=&quot;color:#a6e22e&quot;&gt;class&lt;/span&gt;&lt;span style=&quot;color:#f92672&quot;&gt;,&lt;/span&gt; args&lt;span style=&quot;color:#f92672&quot;&gt;);&lt;/span&gt;
-</code></pre><p>}</p><p>/** * The seata server. */
-static Server server = null;</p><p>private static void startSeatServer(){</p><pre><code>&lt;span style=&quot;color:#66d9ef&quot;&gt;new&lt;/span&gt; Thread&lt;span style=&quot;color:#f92672&quot;&gt;(&lt;/span&gt;&lt;span style=&quot;color:#66d9ef&quot;&gt;new&lt;/span&gt; Runnable&lt;span style=&quot;color:#f92672&quot;&gt;()&lt;/span&gt; &lt;span style=&quot;color:#f92672&quot;&gt;{&lt;/span&gt;
+    startSeatServer();
 
-    &lt;span style=&quot;color:#66d9ef&quot;&gt;public&lt;/span&gt; &lt;span style=&quot;color:#66d9ef&quot;&gt;void&lt;/span&gt; &lt;span style=&quot;color:#a6e22e&quot;&gt;run&lt;/span&gt;&lt;span style=&quot;color:#f92672&quot;&gt;()&lt;/span&gt; &lt;span style=&quot;color:#f92672&quot;&gt;{&lt;/span&gt;
-        server &lt;span style=&quot;color:#f92672&quot;&gt;=&lt;/span&gt; &lt;span style=&quot;color:#66d9ef&quot;&gt;new&lt;/span&gt; Server&lt;span style=&quot;color:#f92672&quot;&gt;();&lt;/span&gt;
-        &lt;span style=&quot;color:#66d9ef&quot;&gt;try&lt;/span&gt; &lt;span style=&quot;color:#f92672&quot;&gt;{&lt;/span&gt;
-            server&lt;span style=&quot;color:#f92672&quot;&gt;.&lt;/span&gt;&lt;span style=&quot;color:#a6e22e&quot;&gt;main&lt;/span&gt;&lt;span style=&quot;color:#f92672&quot;&gt;(&lt;/span&gt;&lt;span style=&quot;color:#66d9ef&quot;&gt;new&lt;/span&gt; String&lt;span style=&quot;color:#f92672&quot;&gt;[]&lt;/span&gt; &lt;span style=&quot;color:#f92672&quot;&gt;{&lt;/span&gt;&lt;span style=&quot;color:#e6db74&quot;&gt;&amp;#34;8091&amp;#34;&lt;/span&gt;&lt;span style=&quot;color:#f92672&quot;&gt;,&lt;/span&gt; StoreMode&lt;span style=&quot;color:#f92672&quot;&gt;.&lt;/span&gt;&lt;span style=&quot;color:#a6e22e&quot;&gt;FILE&lt;/span&gt;&lt;span style=&quot;color:#f92672&quot;&gt;.&lt;/span&gt;&lt;span style=&quot;color:#a6e22e&quot;&gt;name&lt;/span&gt;&lt;span style=&quot;color:#f92672&quot;&gt;(),&lt;/span&gt; &lt;span style=&quot;color:#e6db74&quot;&gt;&amp;#34;127.0.0.1&amp;#34;&lt;/span&gt;&lt;span style=&quot;color:#f92672&quot;&gt;});&lt;/span&gt;
-        &lt;span style=&quot;color:#f92672&quot;&gt;}&lt;/span&gt; &lt;span style=&quot;color:#66d9ef&quot;&gt;catch&lt;/span&gt; &lt;span style=&quot;color:#f92672&quot;&gt;(&lt;/span&gt;IOException e&lt;span style=&quot;color:#f92672&quot;&gt;)&lt;/span&gt; &lt;span style=&quot;color:#f92672&quot;&gt;{&lt;/span&gt;
-            &lt;span style=&quot;color:#66d9ef&quot;&gt;throw&lt;/span&gt; &lt;span style=&quot;color:#66d9ef&quot;&gt;new&lt;/span&gt; RuntimeException&lt;span style=&quot;color:#f92672&quot;&gt;(&lt;/span&gt;e&lt;span style=&quot;color:#f92672&quot;&gt;);&lt;/span&gt;
-        &lt;span style=&quot;color:#f92672&quot;&gt;}&lt;/span&gt;
-    &lt;span style=&quot;color:#f92672&quot;&gt;}&lt;/span&gt;
-&lt;span style=&quot;color:#f92672&quot;&gt;}).&lt;/span&gt;&lt;span style=&quot;color:#a6e22e&quot;&gt;start&lt;/span&gt;&lt;span style=&quot;color:#f92672&quot;&gt;();&lt;/span&gt;
-</code></pre><p>}
-&mldr;
-The Seata server in demo uses local file as storage. Copy the following two files to the /src/main/resources directory in the balance-mng-bootstrap and stock-mng projects:</p><p>## transaction log store
+    SpringApplication.run(BalanceMngApplication.class, args);
+}
+
+/**
+ * The seata server.
+ */
+static Server server = null;
+
+private static void startSeatServer(){
+
+    new Thread(new Runnable() {
+
+        public void run() {
+            server = new Server();
+            try {
+                server.main(new String[] {&quot;8091&quot;, StoreMode.FILE.name(), &quot;127.0.0.1&quot;});
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }
+    }).start();
+
+}
+...
+</code></pre><p>The Seata server in demo uses local file as storage. Copy the following two files to the <code>/src/main/resources</code> directory in the balance-mng-bootstrap and stock-mng projects:</p><p><br>File name: file.conf<br>File content:</p><pre><code class=language-yaml>transport {
+  # tcp udt unix-domain-socket
+  type = &quot;TCP&quot;
+  #NIO NATIVE
+  server = &quot;NIO&quot;
+  #enable heartbeat
+  heartbeat = true
+  #thread factory for netty
+  thread-factory {
+    boss-thread-prefix = &quot;NettyBoss&quot;
+    worker-thread-prefix = &quot;NettyServerNIOWorker&quot;
+    server-executor-thread-prefix = &quot;NettyServerBizHandler&quot;
+    share-boss-worker = false
+    client-selector-thread-prefix = &quot;NettyClientSelector&quot;
+    client-selector-thread-size = 1
+    client-worker-thread-prefix = &quot;NettyClientWorkerThread&quot;
+    # netty boss thread size,will not be used for UDT
+    boss-thread-size = 1
+    #auto default pin or 8
+    worker-thread-size = 8
+  }
+}
+service {
+  #vgroup-&gt;rgroup
+  vgroup_mapping.my_test_tx_group = &quot;default&quot;
+  #only support single node
+  default.grouplist = &quot;127.0.0.1:8091&quot;
+  #degrade current not support
+  enableDegrade = false
+  #disable
+  disable = false
+}
+client {
+  async.commit.buffer.limit = 10000
+  lock {
+    retry.internal = 10
+    retry.times = 30
+  }
+}
+
+## transaction log store
 store {
-## store mode: file、db
-mode = "file"</p><p>## file store
-file {
-dir = "file_store/seata"
+  ## store mode: file、db
+  mode = &quot;file&quot;
+
+  ## file store
+  file {
+    dir = &quot;file_store/seata&quot;
+  }
 }
+</code></pre><p><br>File name: registry.conf<br>File content:</p><pre><code class=language-yaml>registry {
+  # file 、nacos 、eureka、redis、zk
+  type = &quot;file&quot;
+
+  nacos {
+    serverAddr = &quot;localhost&quot;
+    namespace = &quot;public&quot;
+    cluster = &quot;default&quot;
+  }
+  eureka {
+    serviceUrl = &quot;http://localhost:1001/eureka&quot;
+    application = &quot;default&quot;
+    weight = &quot;1&quot;
+  }
+  redis {
+    serverAddr = &quot;localhost:6379&quot;
+    db = &quot;0&quot;
+  }
+  zk {
+    cluster = &quot;default&quot;
+    serverAddr = &quot;127.0.0.1:2181&quot;
+    session.timeout = 6000
+    connect.timeout = 2000
+  }
+  file {
+    name = &quot;file.conf&quot;
+  }
 }
-File name: registry.conf</p><p>nacos {
-serverAddr = "localhost"
-namespace = "public"
-cluster = "default"
+
+config {
+  # file、nacos 、apollo、zk
+  type = &quot;file&quot;
+
+  nacos {
+    serverAddr = &quot;localhost&quot;
+    namespace = &quot;public&quot;
+    cluster = &quot;default&quot;
+  }
+  apollo {
+    app.id = &quot;fescar-server&quot;
+    apollo.meta = &quot;http://192.168.1.204:8801&quot;
+  }
+  zk {
+    serverAddr = &quot;127.0.0.1:2181&quot;
+    session.timeout = 6000
+    connect.timeout = 2000
+  }
+  file {
+    name = &quot;file.conf&quot;
+  }
 }
-eureka {
-serviceUrl = "http://localhost:1001/eureka"
-application = "default"
-weight = "1"
-}
-redis {
-serverAddr = "localhost:6379"
-db = "0"
-}
-zk {
-cluster = "default"
-serverAddr = "127.0.0.1:2181"
-session.timeout = 6000
-connect.timeout = 2000
-}
-file {
-name = "file.conf"
-}
-}</p><p>config {
-# file、nacos 、apollo、zk
-type = "file"</p><p>nacos {
-serverAddr = "localhost"
-namespace = "public"
-cluster = "default"
-}
-apollo {
-app.id = "fescar-server"
-apollo.meta = "http://192.168.1.204:8801"
-}
-zk {
-serverAddr = "127.0.0.1:2181"
-session.timeout = 6000
-connect.timeout = 2000
-}
-file {
-name = "file.conf"
-}
-}
-5. Create undo_log table</p><p>6. Start Seata server, stock-mng and balance-mng applications</p><p></p><p>boolean minusBalanceCommit(BusinessActionContext context);</p><p>boolean minusBalanceRollback(BusinessActionContext context);</p><p></p><p>@Update("update balance_tb set freezed = freezed - #{amount} where user_name = #{userName}")
-int minusBalanceCommit(@Param("userName") String userName, @Param("amount") BigDecimal amount);</p><p>@Update("update balance_tb set balance = balance + #{amount}, freezed = freezed - #{amount} where user_name = #{userName}")
-int minusBalanceRollback(@Param("userName") String userName, @Param("amount") BigDecimal amount);</p><p></p><p></p><p>@Override
+</code></pre><h4 id=5-create-undo-log-table>5. Create undo_log table</h4><p>Create an undo_log table in both the balance_db and stock_db databases:</p><pre><code class=language-sql>CREATE TABLE `undo_log` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `branch_id` bigint(20) NOT NULL,
+  `xid` varchar(100) NOT NULL,
+  `rollback_info` longblob NOT NULL,
+  `log_status` int(11) NOT NULL,
+  `log_created` datetime NOT NULL,
+  `log_modified` datetime NOT NULL,
+  `ext` varchar(100) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `ux_undo_log` (`xid`,`branch_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+
+</code></pre><h4 id=6-start-seata-server-stock-mng-and-balance-mng-applications>6. Start Seata server, stock-mng and balance-mng applications</h4><ol><li>Run the main method of BalanceMngApplication class (including starting Seata server)</li><li>Run the main method of StockMngApplication class</li><li>Visit <a href=http://127.0.0.1:8080/>http://127.0.0.1:8080/</a> in the browser</li></ol><h2 id=tcc-mode>TCC mode</h2><h4 id=1-introduce-maven-dependencies-1>1. Introduce maven dependencies</h4><p>See above for AT mode</p><h4 id=2-implement-three-interfaces-required-by-tcc-mode-prepare-commit-rollback>2. Implement three interfaces required by TCC mode: prepare, commit, rollback</h4><ol><li>Introduce dependencies in the POM file of balance-mng-facade project:</li></ol><pre><code class=language-xml>...
+&lt;dependencies&gt;
+    &lt;dependency&gt;
+        &lt;groupId&gt;io.seata&lt;/groupId&gt;
+        &lt;artifactId&gt;seata-all&lt;/artifactId&gt;
+    &lt;/dependency&gt;
+&lt;/dependencies&gt;
+
+</code></pre><ol><li>Add three methods to the BalanceMngFacade interface:</li></ol><pre><code class=language-java>...
+@TwoPhaseBusinessAction(name = &quot;minusBalancePrepare&quot;, commitMethod = &quot;minusBalanceCommit&quot;, rollbackMethod = &quot;minusBalanceRollback&quot;)
+boolean minusBalancePrepare(BusinessActionContext context,
+                            @BusinessActionContextParameter(paramName = &quot;userName&quot;) String userName,
+                            @BusinessActionContextParameter(paramName = &quot;amount&quot;) BigDecimal amount);
+
+boolean minusBalanceCommit(BusinessActionContext context);
+
+boolean minusBalanceRollback(BusinessActionContext context);
+
+</code></pre><ol><li>Implement the SQL required for the above three interfaces in the BalanceMngMapper interface:</li></ol><pre><code class=language-java>...
+@Update(&quot;update balance_tb set balance = balance - #{amount}, freezed = freezed +  #{amount} where user_name = #{userName}&quot;)
+int minusBalancePrepare(@Param(&quot;userName&quot;) String userName, @Param(&quot;amount&quot;) BigDecimal amount);
+
+@Update(&quot;update balance_tb set freezed = freezed - #{amount} where user_name = #{userName}&quot;)
+int minusBalanceCommit(@Param(&quot;userName&quot;) String userName, @Param(&quot;amount&quot;) BigDecimal amount);
+
+@Update(&quot;update balance_tb set balance = balance + #{amount}, freezed = freezed - #{amount} where user_name = #{userName}&quot;)
+int minusBalanceRollback(@Param(&quot;userName&quot;) String userName, @Param(&quot;amount&quot;) BigDecimal amount);
+
+</code></pre><ol><li>Modify the table structure of balance_tb and add the freezed field:</li></ol><pre><code class=language-sql>ALTER TABLE balance_tb add column freezed decimal(10,2) default 0.00;
+
+</code></pre><ol><li>Implement the three methods added to the BalanceMngFacade interface in the BalanceMngImpl class:</li></ol><pre><code class=language-java>...
+private static final Logger LOGGER = LoggerFactory.getLogger(BalanceMngImpl.class);
+
+@Override
 public boolean minusBalancePrepare(BusinessActionContext context, String userName, BigDecimal amount) {
-LOGGER.info("minus balance prepare begin &mldr;");
-LOGGER.info("minus balance prepare SQL: update balance_tb set balance = balance - {}, freezed = freezed + {} where user_name = {}", amount, amount, userName);</p><pre><code>&lt;span style=&quot;color:#66d9ef&quot;&gt;int&lt;/span&gt; effect &lt;span style=&quot;color:#f92672&quot;&gt;=&lt;/span&gt; balanceMngMapper&lt;span style=&quot;color:#f92672&quot;&gt;.&lt;/span&gt;&lt;span style=&quot;color:#a6e22e&quot;&gt;minusBalancePrepare&lt;/span&gt;&lt;span style=&quot;color:#f92672&quot;&gt;(&lt;/span&gt;userName&lt;span style=&quot;color:#f92672&quot;&gt;,&lt;/span&gt; amount&lt;span style=&quot;color:#f92672&quot;&gt;);&lt;/span&gt;
-LOGGER&lt;span style=&quot;color:#f92672&quot;&gt;.&lt;/span&gt;&lt;span style=&quot;color:#a6e22e&quot;&gt;info&lt;/span&gt;&lt;span style=&quot;color:#f92672&quot;&gt;(&lt;/span&gt;&lt;span style=&quot;color:#e6db74&quot;&gt;&amp;#34;minus balance prepare end&amp;#34;&lt;/span&gt;&lt;span style=&quot;color:#f92672&quot;&gt;);&lt;/span&gt;
-&lt;span style=&quot;color:#66d9ef&quot;&gt;return&lt;/span&gt; &lt;span style=&quot;color:#f92672&quot;&gt;(&lt;/span&gt;effect &lt;span style=&quot;color:#f92672&quot;&gt;&amp;gt;&lt;/span&gt; 0&lt;span style=&quot;color:#f92672&quot;&gt;);&lt;/span&gt;
-</code></pre><p>}</p><p>@Override
-public boolean minusBalanceCommit(BusinessActionContext context) {</p><pre><code>&lt;span style=&quot;color:#75715e&quot;&gt;//Transcation ID
-</code></pre><p>final String xid = context.getXid();</p><pre><code>&lt;span style=&quot;color:#66d9ef&quot;&gt;final&lt;/span&gt; String userName &lt;span style=&quot;color:#f92672&quot;&gt;=&lt;/span&gt; String&lt;span style=&quot;color:#f92672&quot;&gt;.&lt;/span&gt;&lt;span style=&quot;color:#a6e22e&quot;&gt;valueOf&lt;/span&gt;&lt;span style=&quot;color:#f92672&quot;&gt;(&lt;/span&gt;context&lt;span style=&quot;color:#f92672&quot;&gt;.&lt;/span&gt;&lt;span style=&quot;color:#a6e22e&quot;&gt;getActionContext&lt;/span&gt;&lt;span style=&quot;color:#f92672&quot;&gt;(&lt;/span&gt;&lt;span style=&quot;color:#e6db74&quot;&gt;&amp;#34;userName&amp;#34;&lt;/span&gt;&lt;span style=&quot;color:#f92672&quot;&gt;));&lt;/span&gt;
+    LOGGER.info(&quot;minus balance prepare begin ...&quot;);
+    LOGGER.info(&quot;minus balance prepare SQL: update balance_tb set balance = balance - {}, freezed = freezed + {}  where user_name = {}&quot;, amount, amount, userName);
 
-&lt;span style=&quot;color:#66d9ef&quot;&gt;final&lt;/span&gt; BigDecimal amount &lt;span style=&quot;color:#f92672&quot;&gt;=&lt;/span&gt; &lt;span style=&quot;color:#66d9ef&quot;&gt;new&lt;/span&gt; BigDecimal&lt;span style=&quot;color:#f92672&quot;&gt;(&lt;/span&gt;String&lt;span style=&quot;color:#f92672&quot;&gt;.&lt;/span&gt;&lt;span style=&quot;color:#a6e22e&quot;&gt;valueOf&lt;/span&gt;&lt;span style=&quot;color:#f92672&quot;&gt;(&lt;/span&gt;context&lt;span style=&quot;color:#f92672&quot;&gt;.&lt;/span&gt;&lt;span style=&quot;color:#a6e22e&quot;&gt;getActionContext&lt;/span&gt;&lt;span style=&quot;color:#f92672&quot;&gt;(&lt;/span&gt;&lt;span style=&quot;color:#e6db74&quot;&gt;&amp;#34;amount&amp;#34;&lt;/span&gt;&lt;span style=&quot;color:#f92672&quot;&gt;)));&lt;/span&gt;
-
-LOGGER&lt;span style=&quot;color:#f92672&quot;&gt;.&lt;/span&gt;&lt;span style=&quot;color:#a6e22e&quot;&gt;info&lt;/span&gt;&lt;span style=&quot;color:#f92672&quot;&gt;(&lt;/span&gt;&lt;span style=&quot;color:#e6db74&quot;&gt;&amp;#34;minus balance commit begin ... xid: &amp;#34;&lt;/span&gt; &lt;span style=&quot;color:#f92672&quot;&gt;+&lt;/span&gt; xid&lt;span style=&quot;color:#f92672&quot;&gt;);&lt;/span&gt;
-LOGGER&lt;span style=&quot;color:#f92672&quot;&gt;.&lt;/span&gt;&lt;span style=&quot;color:#a6e22e&quot;&gt;info&lt;/span&gt;&lt;span style=&quot;color:#f92672&quot;&gt;(&lt;/span&gt;&lt;span style=&quot;color:#e6db74&quot;&gt;&amp;#34;minus balance commit SQL: update balance_tb set freezed = freezed - {}  where user_name = {}&amp;#34;&lt;/span&gt;&lt;span style=&quot;color:#f92672&quot;&gt;,&lt;/span&gt; amount&lt;span style=&quot;color:#f92672&quot;&gt;,&lt;/span&gt; userName&lt;span style=&quot;color:#f92672&quot;&gt;);&lt;/span&gt;
-
-&lt;span style=&quot;color:#66d9ef&quot;&gt;int&lt;/span&gt; effect &lt;span style=&quot;color:#f92672&quot;&gt;=&lt;/span&gt; balanceMngMapper&lt;span style=&quot;color:#f92672&quot;&gt;.&lt;/span&gt;&lt;span style=&quot;color:#a6e22e&quot;&gt;minusBalanceCommit&lt;/span&gt;&lt;span style=&quot;color:#f92672&quot;&gt;(&lt;/span&gt;userName&lt;span style=&quot;color:#f92672&quot;&gt;,&lt;/span&gt; amount&lt;span style=&quot;color:#f92672&quot;&gt;);&lt;/span&gt;
-LOGGER&lt;span style=&quot;color:#f92672&quot;&gt;.&lt;/span&gt;&lt;span style=&quot;color:#a6e22e&quot;&gt;info&lt;/span&gt;&lt;span style=&quot;color:#f92672&quot;&gt;(&lt;/span&gt;&lt;span style=&quot;color:#e6db74&quot;&gt;&amp;#34;minus balance commit end&amp;#34;&lt;/span&gt;&lt;span style=&quot;color:#f92672&quot;&gt;);&lt;/span&gt;
-&lt;span style=&quot;color:#66d9ef&quot;&gt;return&lt;/span&gt; &lt;span style=&quot;color:#f92672&quot;&gt;(&lt;/span&gt;effect &lt;span style=&quot;color:#f92672&quot;&gt;&amp;gt;&lt;/span&gt; 0&lt;span style=&quot;color:#f92672&quot;&gt;);&lt;/span&gt;
-</code></pre><p>}</p><p>@Override
-public boolean minusBalanceRollback(BusinessActionContext context) {
-//Transcation ID final String xid = context.getXid();</p><pre><code>&lt;span style=&quot;color:#66d9ef&quot;&gt;final&lt;/span&gt; String userName &lt;span style=&quot;color:#f92672&quot;&gt;=&lt;/span&gt; String&lt;span style=&quot;color:#f92672&quot;&gt;.&lt;/span&gt;&lt;span style=&quot;color:#a6e22e&quot;&gt;valueOf&lt;/span&gt;&lt;span style=&quot;color:#f92672&quot;&gt;(&lt;/span&gt;context&lt;span style=&quot;color:#f92672&quot;&gt;.&lt;/span&gt;&lt;span style=&quot;color:#a6e22e&quot;&gt;getActionContext&lt;/span&gt;&lt;span style=&quot;color:#f92672&quot;&gt;(&lt;/span&gt;&lt;span style=&quot;color:#e6db74&quot;&gt;&amp;#34;userName&amp;#34;&lt;/span&gt;&lt;span style=&quot;color:#f92672&quot;&gt;));&lt;/span&gt;
-
-&lt;span style=&quot;color:#66d9ef&quot;&gt;final&lt;/span&gt; BigDecimal amount &lt;span style=&quot;color:#f92672&quot;&gt;=&lt;/span&gt; &lt;span style=&quot;color:#66d9ef&quot;&gt;new&lt;/span&gt; BigDecimal&lt;span style=&quot;color:#f92672&quot;&gt;(&lt;/span&gt;String&lt;span style=&quot;color:#f92672&quot;&gt;.&lt;/span&gt;&lt;span style=&quot;color:#a6e22e&quot;&gt;valueOf&lt;/span&gt;&lt;span style=&quot;color:#f92672&quot;&gt;(&lt;/span&gt;context&lt;span style=&quot;color:#f92672&quot;&gt;.&lt;/span&gt;&lt;span style=&quot;color:#a6e22e&quot;&gt;getActionContext&lt;/span&gt;&lt;span style=&quot;color:#f92672&quot;&gt;(&lt;/span&gt;&lt;span style=&quot;color:#e6db74&quot;&gt;&amp;#34;amount&amp;#34;&lt;/span&gt;&lt;span style=&quot;color:#f92672&quot;&gt;)));&lt;/span&gt;
-
-LOGGER&lt;span style=&quot;color:#f92672&quot;&gt;.&lt;/span&gt;&lt;span style=&quot;color:#a6e22e&quot;&gt;info&lt;/span&gt;&lt;span style=&quot;color:#f92672&quot;&gt;(&lt;/span&gt;&lt;span style=&quot;color:#e6db74&quot;&gt;&amp;#34;minus balance rollback begin ... xid: &amp;#34;&lt;/span&gt; &lt;span style=&quot;color:#f92672&quot;&gt;+&lt;/span&gt; xid&lt;span style=&quot;color:#f92672&quot;&gt;);&lt;/span&gt;
-LOGGER&lt;span style=&quot;color:#f92672&quot;&gt;.&lt;/span&gt;&lt;span style=&quot;color:#a6e22e&quot;&gt;info&lt;/span&gt;&lt;span style=&quot;color:#f92672&quot;&gt;(&lt;/span&gt;&lt;span style=&quot;color:#e6db74&quot;&gt;&amp;#34;minus balance rollback SQL: update balance_tb set balance = balance + {}, freezed = freezed - {}  where user_name = {}&amp;#34;&lt;/span&gt;&lt;span style=&quot;color:#f92672&quot;&gt;,&lt;/span&gt; amount&lt;span style=&quot;color:#f92672&quot;&gt;,&lt;/span&gt; amount&lt;span style=&quot;color:#f92672&quot;&gt;,&lt;/span&gt; userName&lt;span style=&quot;color:#f92672&quot;&gt;);&lt;/span&gt;
-
-&lt;span style=&quot;color:#66d9ef&quot;&gt;int&lt;/span&gt; effect &lt;span style=&quot;color:#f92672&quot;&gt;=&lt;/span&gt; balanceMngMapper&lt;span style=&quot;color:#f92672&quot;&gt;.&lt;/span&gt;&lt;span style=&quot;color:#a6e22e&quot;&gt;minusBalanceRollback&lt;/span&gt;&lt;span style=&quot;color:#f92672&quot;&gt;(&lt;/span&gt;userName&lt;span style=&quot;color:#f92672&quot;&gt;,&lt;/span&gt; amount&lt;span style=&quot;color:#f92672&quot;&gt;);&lt;/span&gt;
-LOGGER&lt;span style=&quot;color:#f92672&quot;&gt;.&lt;/span&gt;&lt;span style=&quot;color:#a6e22e&quot;&gt;info&lt;/span&gt;&lt;span style=&quot;color:#f92672&quot;&gt;(&lt;/span&gt;&lt;span style=&quot;color:#e6db74&quot;&gt;&amp;#34;minus balance rollback end&amp;#34;&lt;/span&gt;&lt;span style=&quot;color:#f92672&quot;&gt;);&lt;/span&gt;
-&lt;span style=&quot;color:#66d9ef&quot;&gt;return&lt;/span&gt; &lt;span style=&quot;color:#f92672&quot;&gt;(&lt;/span&gt;effect &lt;span style=&quot;color:#f92672&quot;&gt;&amp;gt;&lt;/span&gt; 0&lt;span style=&quot;color:#f92672&quot;&gt;);&lt;/span&gt;
-</code></pre><p>}</p><p>3、Cancel the DataSourceProxy using AT mode</p><pre><code>&lt;span style=&quot;color:#75715e&quot;&gt;//@Bean
-</code></pre><p>//@Primary //@ConfigurationProperties(prefix = "spring.datasource.hikari") //public DataSource dataSource(DataSourceProperties properties) { // HikariDataSource dataSource = createDataSource(properties, HikariDataSource.class); // if (StringUtils.hasText(properties.getName())) { // dataSource.setPoolName(properties.getName()); // } // return new DataSourceProxy(dataSource); //} // //@SuppressWarnings("unchecked") //protected static &lt;T> T createDataSource(DataSourceProperties properties, // Class&lt;? extends DataSource> type) { // return (T) properties.initializeDataSourceBuilder().type(type).build(); //}
-@Bean
-@Primary
-public GlobalTransactionScanner globalTransactionScanner(){
-return new GlobalTransactionScanner("kc-balance-mng", "my_test_tx_group");
+    int effect = balanceMngMapper.minusBalancePrepare(userName, amount);
+    LOGGER.info(&quot;minus balance prepare end&quot;);
+    return (effect &gt; 0);
 }
-}</p><p>4、Change BookStoreControllerImpl purchase method to the BalanceMngFacade.minusBalancePrepare method:</p><pre><code>JSONObject obj &lt;span style=&quot;color:#f92672&quot;&gt;=&lt;/span&gt; JSON&lt;span style=&quot;color:#f92672&quot;&gt;.&lt;/span&gt;&lt;span style=&quot;color:#a6e22e&quot;&gt;parseObject&lt;/span&gt;&lt;span style=&quot;color:#f92672&quot;&gt;(&lt;/span&gt;body&lt;span style=&quot;color:#f92672&quot;&gt;);&lt;/span&gt;
-String userName &lt;span style=&quot;color:#f92672&quot;&gt;=&lt;/span&gt; obj&lt;span style=&quot;color:#f92672&quot;&gt;.&lt;/span&gt;&lt;span style=&quot;color:#a6e22e&quot;&gt;getString&lt;/span&gt;&lt;span style=&quot;color:#f92672&quot;&gt;(&lt;/span&gt;&lt;span style=&quot;color:#e6db74&quot;&gt;&amp;#34;userName&amp;#34;&lt;/span&gt;&lt;span style=&quot;color:#f92672&quot;&gt;);&lt;/span&gt;
-String productCode &lt;span style=&quot;color:#f92672&quot;&gt;=&lt;/span&gt; obj&lt;span style=&quot;color:#f92672&quot;&gt;.&lt;/span&gt;&lt;span style=&quot;color:#a6e22e&quot;&gt;getString&lt;/span&gt;&lt;span style=&quot;color:#f92672&quot;&gt;(&lt;/span&gt;&lt;span style=&quot;color:#e6db74&quot;&gt;&amp;#34;productCode&amp;#34;&lt;/span&gt;&lt;span style=&quot;color:#f92672&quot;&gt;);&lt;/span&gt;
-&lt;span style=&quot;color:#66d9ef&quot;&gt;int&lt;/span&gt; count &lt;span style=&quot;color:#f92672&quot;&gt;=&lt;/span&gt; obj&lt;span style=&quot;color:#f92672&quot;&gt;.&lt;/span&gt;&lt;span style=&quot;color:#a6e22e&quot;&gt;getInteger&lt;/span&gt;&lt;span style=&quot;color:#f92672&quot;&gt;(&lt;/span&gt;&lt;span style=&quot;color:#e6db74&quot;&gt;&amp;#34;count&amp;#34;&lt;/span&gt;&lt;span style=&quot;color:#f92672&quot;&gt;);&lt;/span&gt;
 
-BigDecimal productPrice &lt;span style=&quot;color:#f92672&quot;&gt;=&lt;/span&gt; stockMngFacade&lt;span style=&quot;color:#f92672&quot;&gt;.&lt;/span&gt;&lt;span style=&quot;color:#a6e22e&quot;&gt;queryProductPrice&lt;/span&gt;&lt;span style=&quot;color:#f92672&quot;&gt;(&lt;/span&gt;productCode&lt;span style=&quot;color:#f92672&quot;&gt;,&lt;/span&gt; userName&lt;span style=&quot;color:#f92672&quot;&gt;);&lt;/span&gt;
-&lt;span style=&quot;color:#66d9ef&quot;&gt;if&lt;/span&gt; &lt;span style=&quot;color:#f92672&quot;&gt;(&lt;/span&gt;productPrice &lt;span style=&quot;color:#f92672&quot;&gt;==&lt;/span&gt; &lt;span style=&quot;color:#66d9ef&quot;&gt;null&lt;/span&gt;&lt;span style=&quot;color:#f92672&quot;&gt;)&lt;/span&gt; &lt;span style=&quot;color:#f92672&quot;&gt;{&lt;/span&gt;
-    &lt;span style=&quot;color:#66d9ef&quot;&gt;throw&lt;/span&gt; &lt;span style=&quot;color:#66d9ef&quot;&gt;new&lt;/span&gt; RuntimeException&lt;span style=&quot;color:#f92672&quot;&gt;(&lt;/span&gt;&lt;span style=&quot;color:#e6db74&quot;&gt;&amp;#34;product code does not exist&amp;#34;&lt;/span&gt;&lt;span style=&quot;color:#f92672&quot;&gt;);&lt;/span&gt;
-&lt;span style=&quot;color:#f92672&quot;&gt;}&lt;/span&gt;
-&lt;span style=&quot;color:#66d9ef&quot;&gt;if&lt;/span&gt; &lt;span style=&quot;color:#f92672&quot;&gt;(&lt;/span&gt;count &lt;span style=&quot;color:#f92672&quot;&gt;&amp;lt;=&lt;/span&gt; 0&lt;span style=&quot;color:#f92672&quot;&gt;)&lt;/span&gt; &lt;span style=&quot;color:#f92672&quot;&gt;{&lt;/span&gt;
-    &lt;span style=&quot;color:#66d9ef&quot;&gt;throw&lt;/span&gt; &lt;span style=&quot;color:#66d9ef&quot;&gt;new&lt;/span&gt; RuntimeException&lt;span style=&quot;color:#f92672&quot;&gt;(&lt;/span&gt;&lt;span style=&quot;color:#e6db74&quot;&gt;&amp;#34;purchase count should not be negative&amp;#34;&lt;/span&gt;&lt;span style=&quot;color:#f92672&quot;&gt;);&lt;/span&gt;
-&lt;span style=&quot;color:#f92672&quot;&gt;}&lt;/span&gt;
-LOGGER&lt;span style=&quot;color:#f92672&quot;&gt;.&lt;/span&gt;&lt;span style=&quot;color:#a6e22e&quot;&gt;info&lt;/span&gt;&lt;span style=&quot;color:#f92672&quot;&gt;(&lt;/span&gt;&lt;span style=&quot;color:#e6db74&quot;&gt;&amp;#34;purchase begin ... XID:&amp;#34;&lt;/span&gt; &lt;span style=&quot;color:#f92672&quot;&gt;+&lt;/span&gt; RootContext&lt;span style=&quot;color:#f92672&quot;&gt;.&lt;/span&gt;&lt;span style=&quot;color:#a6e22e&quot;&gt;getXID&lt;/span&gt;&lt;span style=&quot;color:#f92672&quot;&gt;());&lt;/span&gt;
-stockMngFacade&lt;span style=&quot;color:#f92672&quot;&gt;.&lt;/span&gt;&lt;span style=&quot;color:#a6e22e&quot;&gt;createOrder&lt;/span&gt;&lt;span style=&quot;color:#f92672&quot;&gt;(&lt;/span&gt;userName&lt;span style=&quot;color:#f92672&quot;&gt;,&lt;/span&gt; productCode&lt;span style=&quot;color:#f92672&quot;&gt;,&lt;/span&gt; count&lt;span style=&quot;color:#f92672&quot;&gt;);&lt;/span&gt;
-stockMngFacade&lt;span style=&quot;color:#f92672&quot;&gt;.&lt;/span&gt;&lt;span style=&quot;color:#a6e22e&quot;&gt;minusStockCount&lt;/span&gt;&lt;span style=&quot;color:#f92672&quot;&gt;(&lt;/span&gt;userName&lt;span style=&quot;color:#f92672&quot;&gt;,&lt;/span&gt; productCode&lt;span style=&quot;color:#f92672&quot;&gt;,&lt;/span&gt; count&lt;span style=&quot;color:#f92672&quot;&gt;);&lt;/span&gt;
-balanceMngFacade&lt;span style=&quot;color:#f92672&quot;&gt;.&lt;/span&gt;&lt;span style=&quot;color:#a6e22e&quot;&gt;minusBalancePrepare&lt;/span&gt;&lt;span style=&quot;color:#f92672&quot;&gt;(&lt;/span&gt;&lt;span style=&quot;color:#66d9ef&quot;&gt;null&lt;/span&gt;&lt;span style=&quot;color:#f92672&quot;&gt;,&lt;/span&gt; userName&lt;span style=&quot;color:#f92672&quot;&gt;,&lt;/span&gt; productPrice&lt;span style=&quot;color:#f92672&quot;&gt;.&lt;/span&gt;&lt;span style=&quot;color:#a6e22e&quot;&gt;multiply&lt;/span&gt;&lt;span style=&quot;color:#f92672&quot;&gt;(&lt;/span&gt;&lt;span style=&quot;color:#66d9ef&quot;&gt;new&lt;/span&gt; BigDecimal&lt;span style=&quot;color:#f92672&quot;&gt;(&lt;/span&gt;count&lt;span style=&quot;color:#f92672&quot;&gt;)));&lt;/span&gt;
-LOGGER&lt;span style=&quot;color:#f92672&quot;&gt;.&lt;/span&gt;&lt;span style=&quot;color:#a6e22e&quot;&gt;info&lt;/span&gt;&lt;span style=&quot;color:#f92672&quot;&gt;(&lt;/span&gt;&lt;span style=&quot;color:#e6db74&quot;&gt;&amp;#34;purchase end&amp;#34;&lt;/span&gt;&lt;span style=&quot;color:#f92672&quot;&gt;);&lt;/span&gt;
-Success success &lt;span style=&quot;color:#f92672&quot;&gt;=&lt;/span&gt; &lt;span style=&quot;color:#66d9ef&quot;&gt;new&lt;/span&gt; Success&lt;span style=&quot;color:#f92672&quot;&gt;();&lt;/span&gt;
-success&lt;span style=&quot;color:#f92672&quot;&gt;.&lt;/span&gt;&lt;span style=&quot;color:#a6e22e&quot;&gt;setSuccess&lt;/span&gt;&lt;span style=&quot;color:#f92672&quot;&gt;(&lt;/span&gt;&lt;span style=&quot;color:#e6db74&quot;&gt;&amp;#34;true&amp;#34;&lt;/span&gt;&lt;span style=&quot;color:#f92672&quot;&gt;);&lt;/span&gt;
-&lt;span style=&quot;color:#66d9ef&quot;&gt;return&lt;/span&gt; success&lt;span style=&quot;color:#f92672&quot;&gt;;&lt;/span&gt;
-</code></pre><p>}</p><p>5. Introduce BalanceMngFacade interface that StockMngImpl depends on using XML</p><pre><code>&lt;span style=&quot;color:#f92672&quot;&gt;&amp;lt;sofa:reference&lt;/span&gt; &lt;span style=&quot;color:#a6e22e&quot;&gt;id=&lt;/span&gt;&lt;span style=&quot;color:#e6db74&quot;&gt;&amp;#34;balanceMngFacade&amp;#34;&lt;/span&gt; &lt;span style=&quot;color:#a6e22e&quot;&gt;interface=&lt;/span&gt;&lt;span style=&quot;color:#e6db74&quot;&gt;&amp;#34;io.sofastack.balance.manage.facade.BalanceMngFacade&amp;#34;&lt;/span&gt; &lt;span style=&quot;color:#a6e22e&quot;&gt;unique-id=&lt;/span&gt;&lt;span style=&quot;color:#e6db74&quot;&gt;&amp;#34;${service.unique.id}&amp;#34;&lt;/span&gt;&lt;span style=&quot;color:#f92672&quot;&gt;&amp;gt;&lt;/span&gt;
-    &lt;span style=&quot;color:#f92672&quot;&gt;&amp;lt;sofa:binding.bolt&lt;/span&gt; &lt;span style=&quot;color:#f92672&quot;&gt;/&amp;gt;&lt;/span&gt;
-&lt;span style=&quot;color:#f92672&quot;&gt;&amp;lt;/sofa:reference&amp;gt;&lt;/span&gt;
-</code></pre><p>&lt;/beans></p><p></p><p></p><p>6. Start Seata server, stock-mng and balance-mng applications:</p></article><nav class=ss-pagination-next><a class=link-prev href=/en/guides/kc-sofastack-dynamic-demo/><span class=text>Prev:</span>
-<span class=text>SOFABoot dynamic module practice</span></a>
-<a class=link-next href=/en/guides/kc-cloud-mesh-demo/><span class=text>Next:</span>
-<span class=text>Put Service Mesh into practice with CloudMesh</span></a></nav></main><aside class=ss-layout-aside><div class=ss-card><h2 class=card-title>Get the Code</h2><div id=js-code class=ss-aside-code><div class=button-group><button class=button>HTTPS</button>
+@Override
+public boolean minusBalanceCommit(BusinessActionContext context) {
+
+    //Transcation ID
+    final String xid = context.getXid();
+
+    final String userName = String.valueOf(context.getActionContext(&quot;userName&quot;));
+
+    final BigDecimal amount = new BigDecimal(String.valueOf(context.getActionContext(&quot;amount&quot;)));
+
+    LOGGER.info(&quot;minus balance commit begin ... xid: &quot; + xid);
+    LOGGER.info(&quot;minus balance commit SQL: update balance_tb set freezed = freezed - {}  where user_name = {}&quot;, amount, userName);
+
+    int effect = balanceMngMapper.minusBalanceCommit(userName, amount);
+    LOGGER.info(&quot;minus balance commit end&quot;);
+    return (effect &gt; 0);
+}
+
+@Override
+public boolean minusBalanceRollback(BusinessActionContext context) {
+    //Transcation ID
+    final String xid = context.getXid();
+
+    final String userName = String.valueOf(context.getActionContext(&quot;userName&quot;));
+
+    final BigDecimal amount = new BigDecimal(String.valueOf(context.getActionContext(&quot;amount&quot;)));
+
+    LOGGER.info(&quot;minus balance rollback begin ... xid: &quot; + xid);
+    LOGGER.info(&quot;minus balance rollback SQL: update balance_tb set balance = balance + {}, freezed = freezed - {}  where user_name = {}&quot;, amount, amount, userName);
+
+    int effect = balanceMngMapper.minusBalanceRollback(userName, amount);
+    LOGGER.info(&quot;minus balance rollback end&quot;);
+    return (effect &gt; 0);
+}
+
+</code></pre><h4 id=3-cancel-the-datasourceproxy-using-at-mode>3、Cancel the DataSourceProxy using AT mode</h4><p>The TCC mode does not need proxy data source, since there is no need to parse sql, generate an undo log, and comment out the dataSource and createDataSource methods in the BalanceMngApplication class:</p><pre><code class=language-java>...
+@Configuration
+public static class DataSourceConfig {
+
+    //@Bean
+    //@Primary
+    //@ConfigurationProperties(prefix = &quot;spring.datasource.hikari&quot;)
+    //public DataSource dataSource(DataSourceProperties properties) {
+    //    HikariDataSource dataSource = createDataSource(properties, HikariDataSource.class);
+    //    if (StringUtils.hasText(properties.getName())) {
+    //        dataSource.setPoolName(properties.getName());
+    //    }
+    //    return new DataSourceProxy(dataSource);
+    //}
+    //
+    //@SuppressWarnings(&quot;unchecked&quot;)
+    //protected static &lt;T&gt; T createDataSource(DataSourceProperties properties,
+    //                                        Class&lt;? extends DataSource&gt; type) {
+    //    return (T) properties.initializeDataSourceBuilder().type(type).build();
+    //}
+
+    @Bean
+    @Primary
+    public GlobalTransactionScanner globalTransactionScanner(){
+        return new GlobalTransactionScanner(&quot;kc-balance-mng&quot;, &quot;my_test_tx_group&quot;);
+    }
+}
+
+</code></pre><h4 id=4-change-bookstorecontrollerimpl-purchase-method-to-the-balancemngfacade-minusbalanceprepare-method>4、Change BookStoreControllerImpl purchase method to the BalanceMngFacade.minusBalancePrepare method:</h4><pre><code class=language-java>@Override
+@GlobalTransactional(timeoutMills = 300000, name = &quot;kc-book-store-tx&quot;)
+public Success purchase(String body) {
+
+    JSONObject obj = JSON.parseObject(body);
+    String userName = obj.getString(&quot;userName&quot;);
+    String productCode = obj.getString(&quot;productCode&quot;);
+    int count = obj.getInteger(&quot;count&quot;);
+
+    BigDecimal productPrice = stockMngFacade.queryProductPrice(productCode, userName);
+    if (productPrice == null) {
+        throw new RuntimeException(&quot;product code does not exist&quot;);
+    }
+    if (count &lt;= 0) {
+        throw new RuntimeException(&quot;purchase count should not be negative&quot;);
+    }
+    LOGGER.info(&quot;purchase begin ... XID:&quot; + RootContext.getXID());
+    stockMngFacade.createOrder(userName, productCode, count);
+    stockMngFacade.minusStockCount(userName, productCode, count);
+    balanceMngFacade.minusBalancePrepare(null, userName, productPrice.multiply(new BigDecimal(count)));
+    LOGGER.info(&quot;purchase end&quot;);
+    Success success = new Success();
+    success.setSuccess(&quot;true&quot;);
+    return success;
+}
+
+</code></pre><h4 id=5-introduce-balancemngfacade-interface-that-stockmngimpl-depends-on-using-xml>5. Introduce BalanceMngFacade interface that StockMngImpl depends on using XML</h4><p>BalanceMngFacade is an RPC interface. In the previous example, it is introduced by @SofaReference annotation. Currently, the TCC mode does not support annotation interception (the next version is fixed), so it is required to change to XML method:</p><ol><li>Create a spring directory in src/main/resources directory of stock-mng project and create <code>seata-sofarpc-reference.xml</code>:</li></ol><pre><code class=language-xml>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;beans xmlns=&quot;http://www.springframework.org/schema/beans&quot;
+       xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
+       xmlns:sofa=&quot;http://sofastack.io/schema/sofaboot&quot;
+       xsi:schemaLocation=&quot;http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+            http://sofastack.io/schema/sofaboot http://sofastack.io/schema/sofaboot.xsd&quot;
+       default-autowire=&quot;byName&quot;&gt;
+
+    &lt;sofa:reference id=&quot;balanceMngFacade&quot; interface=&quot;io.sofastack.balance.manage.facade.BalanceMngFacade&quot; unique-id=&quot;${service.unique.id}&quot;&gt;
+        &lt;sofa:binding.bolt /&gt;
+    &lt;/sofa:reference&gt;
+
+&lt;/beans&gt;
+
+</code></pre><ol><li>Add @ImportResource annotation on the StockMngApplication class to load the above spring configuration file:</li></ol><pre><code class=language-java>...
+@SpringBootApplication
+@ImportResource(&quot;classpath*:spring/*.xml&quot;)
+public class StockMngApplication {
+...
+
+</code></pre><ol><li>Replace the annotation to reference balanceMngFacade interface in BookStoreControllerImpl class with @Autowared:</li></ol><pre><code class=language-java>...
+//@SofaReference(interfaceType = BalanceMngFacade.class, uniqueId = &quot;${service.unique.id}&quot;, binding = @SofaReferenceBinding(bindingType = &quot;bolt&quot;))
+@Autowired
+private BalanceMngFacade balanceMngFacade;
+...
+
+</code></pre><h4 id=6-start-seata-server-stock-mng-and-balance-mng-applications-1>6. Start Seata server, stock-mng and balance-mng applications:</h4><ol><li>Run the main method in BalanceMngApplication class (including starting Seata server)</li><li>Run the main method in StockMngApplication class</li><li>Visit <a href=http://127.0.0.1:8080/>http://127.0.0.1:8080/</a> in the browser</li></ol></article><nav class=ss-pagination-next><a class=link-next href=/en/guides/kc-sofastack-dynamic-demo/><span class=text>Next:</span>
+<span class=text>SOFABoot dynamic module practice</span></a></nav></main><aside class=ss-layout-aside><div class=ss-card><h2 class=card-title>Get the Code</h2><div id=js-code class=ss-aside-code><div class=button-group><button class=button>HTTPS</button>
 <button class=button>SSH</button></div><div class=input-group><input class=input value=https://github.com/sofastack-guides/kc-seata-demo spellcheck=false>
-<span class=addon><svg class="icon copy" aria-hidden="true"><use xlink:href="#icon-copy"/></svg><svg class="icon tick" aria-hidden="true"><use xlink:href="#icon-ictick"/></svg></span></div><a class="button download" href=https://github.com/sofastack-guides/kc-seata-demo/archive/master.zip>Download</a></div></div><div class=ss-card><h2 class=card-title>Project</h2><div class=ss-aside-project><a class=link href=https://github.com/seata/seata>Seata</a></div></div><div class="ss-card ss-aside-toc"><h2 class=card-title>Table of contents</h2><nav id=TableOfContents><ul><li><a href=#at-mode>AT mode</a><ul><li></li></ul></li><li><a href=#tcc-mode>TCC mode</a><ul><li></li></ul></li></ul></nav></div></aside></div><footer class=ss-footer><div class=container><div class=links><div class=cate><h2 class=cate-title>Resources</h2><a class=link href=https://github.com/sofastack>Github</a>
+<span class=addon><svg class="icon copy" aria-hidden="true"><use xlink:href="#icon-copy"/></svg><svg class="icon tick" aria-hidden="true"><use xlink:href="#icon-ictick"/></svg></span></div><a class="button download" href=https://github.com/sofastack-guides/kc-seata-demo/archive/master.zip>Download</a></div></div><div class=ss-card><h2 class=card-title>Project</h2><div class=ss-aside-project><a class=link href=https://github.com/seata/seata>Seata</a></div></div><div class="ss-card ss-aside-toc"><h2 class=card-title>Table of contents</h2><nav id=TableOfContents><ul><li><ul><li><a href=#at-mode>AT mode</a><ul><li><ul><li><a href=#1-introduce-maven-dependencies>1.Introduce maven dependencies</a></li><li><a href=#2-use-seata-s-datasourceproxy-to-proxy-actual-data-source-and-configure-globaltransactionscanner-to-scan-globaltransaction-annotation>2. Use Seata&rsquo;s DataSourceProxy to proxy actual data source and configure GlobalTransactionScanner to scan @GlobalTransaction annotation</a></li><li><a href=#3-configure-globaltransactional-annotation-to-validate-the-distributed-transaction-effective>3. Configure @GlobalTransactional annotation to validate the distributed transaction effective</a></li><li><a href=#4-configure-seata-server>4. Configure Seata server</a></li><li><a href=#5-create-undo-log-table>5. Create undo_log table</a></li><li><a href=#6-start-seata-server-stock-mng-and-balance-mng-applications>6. Start Seata server, stock-mng and balance-mng applications</a></li></ul></li></ul></li><li><a href=#tcc-mode>TCC mode</a><ul><li><ul><li><a href=#1-introduce-maven-dependencies-1>1. Introduce maven dependencies</a></li><li><a href=#2-implement-three-interfaces-required-by-tcc-mode-prepare-commit-rollback>2. Implement three interfaces required by TCC mode: prepare, commit, rollback</a></li><li><a href=#3-cancel-the-datasourceproxy-using-at-mode>3、Cancel the DataSourceProxy using AT mode</a></li><li><a href=#4-change-bookstorecontrollerimpl-purchase-method-to-the-balancemngfacade-minusbalanceprepare-method>4、Change BookStoreControllerImpl purchase method to the BalanceMngFacade.minusBalancePrepare method:</a></li><li><a href=#5-introduce-balancemngfacade-interface-that-stockmngimpl-depends-on-using-xml>5. Introduce BalanceMngFacade interface that StockMngImpl depends on using XML</a></li><li><a href=#6-start-seata-server-stock-mng-and-balance-mng-applications-1>6. Start Seata server, stock-mng and balance-mng applications:</a></li></ul></li></ul></li></ul></li></ul></nav></div></aside></div><footer class=ss-footer><div class=container><div class=links><div class=cate><h2 class=cate-title>Resources</h2><a class=link href=https://github.com/sofastack>Github</a>
 <a class=link href=https://gitee.com/sofastack/>Gitee</a>
 <a class=link href=https://github.com/sofastack-guides>Samples</a></div><div class=cate><h2 class=cate-title>Social Media</h2><a class=link href=https://zhuanlan.zhihu.com/sofastack>Zhihu</a>
 <a class=link href=https://weibo.com/sofastack>Weibo</a>
