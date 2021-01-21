@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Soul on dromara(Open source organization)</title><link>/en/projects/soul/</link><description>Recent content in Soul on dromara(Open source organization)</description><generator>Hugo -- gohugo.io</generator><language>zh-CN</language><atom:link href="/en/projects/soul/index.xml" rel="self" type="application/rss+xml"/><item><title>Soul Introduction</title><link>/en/projects/soul/overview/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/en/projects/soul/overview/</guid><description>What is the Soul？ This is an asynchronous, high-performance, cross-language, responsive API gateway.I hope that something can protect your micro service like a soul.After referring to excellent gateways such as Kong, Spring-Cloud-Gateway, soul was born standing on the shoulders of giants!
+# Features
+Support various languages (http protocol), support dubbo, spring cloud protocol.
+Plugin design idea, plugin hot swap, easy to expand.
+Flexible flow filtering to meet various flow control.</description></item></channel></rss>
