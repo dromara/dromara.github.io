@@ -14,7 +14,7 @@ googleAnalytics = "UA-142131411-1"
 [params]
 	github = "https://github.com/dromara"
 	# legacyWebsite = "http://legacy.sofastack.tech"
-	description = "The girl on the prairie"
+  description = "The girl on the prairie"
 
 # 首页订阅
 [params.homeSubscription]
