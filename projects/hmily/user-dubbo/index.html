@@ -1,0 +1,79 @@
+<!doctype html><html><head><title>dubbo用户指南 · dromara(Open source organization)</title><meta charset=utf-8><meta http-equiv=x-ua-compatible content="IE=edge,chrome=1"><meta name=viewport content="width=device-width,minimum-scale=1"><meta name=description content="The girl on the prairie"><meta name=generator content="Hugo 0.55.5"><link rel="shortcut icon" href=/img/favicon.png type=image/png><link href=https://unpkg.com/purecss@1.0.0/build/base-min.css rel=stylesheet><link href=/css/main.css rel=stylesheet><link href=/css/zoom-image.css rel=stylesheet><script src=/js/iconfont.js></script><script src=/js/highlight.pack.js></script><script>hljs.initHighlightingOnLoad();</script><script>window.SITE_LANGUAGE="zh"</script><script src=/js/app.js></script><script type=application/javascript>var doNotTrack=false;if(!doNotTrack){(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');ga('create','UA-187960192-2','auto');ga('send','pageview');}</script></head><body><header class=ss-header><nav class=navbar role=navigation aria-label="main navigation"><div class=navbar-brand><a class=logo-link href=/><img class=logo src=/img/logo.png></a><div class=-show-mobile><a id=mobile-menu-icon><svg class="icon" aria-hidden="true"><use xlink:href="#icon-menu"/></svg></a><nav id=mobile-menu><div id=js-menu-search-mobile class=navbar-search-mobile><input class=input placeholder=请输入要搜索的关键词><svg class="icon" aria-hidden="true"><use xlink:href="#icon-search"/></svg></div><a href=/projects/><span>项目</span><svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"/></svg></a>
+<a href=/guides/><span>指南</span><svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"/></svg></a>
+<a href=/blog/><span>博客</span><svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"/></svg></a>
+<a href=/activities/><span>活动</span><svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"/></svg></a>
+<a href=/community/><span>社区</span><svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"/></svg></a>
+<a href=/awesome/><span>Awesome Dromara</span><svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"/></svg></a>
+<a href=/en/projects/hmily/user-dubbo/><span>English</span><svg class="icon" aria-hidden="true"><use xlink:href="#icon-transfer"/></svg></a></nav></div></div><div class="navbar-menu -hidden-mobile"><div class=navbar-start><a class=navbar-item href=/projects/>项目</a>
+<a class=navbar-item href=/guides/>指南</a>
+<a class=navbar-item href=/blog/>博客</a>
+<a class=navbar-item href=/activities/>活动</a>
+<a class=navbar-item href=/community/>社区</a>
+<a class=navbar-item href=/awesome/>Awesome Dromara</a></div><div class=navbar-end><div class=navbar-item><div id=js-menu-search class=navbar-search><input class=input placeholder=请输入要搜索的关键词><svg class="icon" aria-hidden="true"><use xlink:href="#icon-search"/></svg></div></div><div class=navbar-item><a class=translation href=/en/projects/hmily/user-dubbo/>En</a></div></div></div></nav></header><div class=ss-layout-container><aside class="ss-layout-aside -left ss-card -soft-hidden"><div id=js-drawer class=ss-toc><div id=js-drawer-handle class=drawer-handle><svg class="icon icon-menu" aria-hidden="true"><use xlink:href="#icon-menu"/></svg><svg class="icon icon-close" aria-hidden="true"><use xlink:href="#icon-close"/></svg></div><div class=drawer-body><div class=header title="Hmily是一款高性能，零侵入，金融级分布式事务解决方案，目前主要提供柔性事务的支持，包含 TCC, TAC(自动生成回滚SQL) 方案，未来还会支持 XA 等方案。">Hmily<div class="ss-toc-list-card -hidden-mobile"><svg class="icon -hidden-mobile" aria-hidden="true"><use xlink:href="#icon-menu1"/></svg><div class=ss-tooltip><div class=toc-list><h4 class=title>主要项目</h4><ul class=list><li class=item><a href=/projects/soul/overview>Soul</a></li><li class=item><a href=/projects/hmily/overview>Hmily</a></li><li class=item><a href=/projects/raincat/overview>Raincat</a></li><li class=item><a href=/projects/myth/overview>Myth</a></li></ul></div></div></div></div><div class=body><ul class=leaf-section><li class=item><div class=link><a title="Hmily 介绍" href=/projects/hmily/overview>Hmily 介绍</a></div></li><li class=item><div class=link><a title=术语 href=/projects/hmily/term>术语</a></div></li><li class=item><div class=link><a title=团队介绍 href=/projects/hmily/team>团队介绍</a></div></li><li class=item><div class=link><a title=FAQ href=/projects/hmily/faq>FAQ</a></div></li><li class=item><div class=link><svg class="icon arrow" aria-hidden="true"><use xlink:href="#icon-arrow"/></svg><a title=配置模块>配置模块</a></div><ul class=leaf-section><li class=item><div class=link><a title=配置详解 href=/projects/hmily/config>配置详解</a></div></li><li class=item><div class=link><a title=本地配置 href=/projects/hmily/config-local>本地配置</a></div></li><li class=item><div class=link><a title=Zookeeper配置中心 href=/projects/hmily/config-zookeeper>Zookeeper配置中心</a></div></li><li class=item><div class=link><a title=Nacos配置中心 href=/projects/hmily/config-nacos>Nacos配置中心</a></div></li><li class=item><div class=link><a title=Apollo配置中心 href=/projects/hmily/config-apollo>Apollo配置中心</a></div></li><li class=item><div class=link><a title=Etcd配置中心 href=/projects/hmily/config-etcd>Etcd配置中心</a></div></li><li class=item><div class=link><a title=Consul配置中心 href=/projects/hmily/config-consul>Consul配置中心</a></div></li></ul></li><li class=item><div class=link><a title=注解详解 href=/projects/hmily/annotation>注解详解</a></div></li><li class=item><div class=link><a title=事务上下文 href=/projects/hmily/context>事务上下文</a></div></li><li class=item><div class=link><a title=metrics信息 href=/projects/hmily/metrics>metrics信息</a></div></li><li class=item><div class=link><a title=TCC模式 href=/projects/hmily/tcc>TCC模式</a></div></li><li class=item><div class=link><a title=TAC模式 href=/projects/hmily/tac>TAC模式</a></div></li><li class=item><div class=link><svg class="icon arrow" aria-hidden="true"><use xlink:href="#icon-arrow"/></svg><a title=用户文档>用户文档</a></div><ul class=leaf-section><li class=item><div class="link -current"><a title=dubbo用户 href=/projects/hmily/user-dubbo>dubbo用户</a></div></li><li class=item><div class=link><a title=motan用户 href=/projects/hmily/user-motan>motan用户</a></div></li><li class=item><div class=link><a title=springcloud用户 href=/projects/hmily/user-springcloud>springcloud用户</a></div></li><li class=item><div class=link><a title=sofa-rpc用户 href=/projects/hmily/user-rpc>sofa-rpc用户</a></div></li><li class=item><div class=link><a title=tars用户 href=/projects/hmily/user-tars>tars用户</a></div></li><li class=item><div class=link><a title=Grpc用户 href=/projects/hmily/user-grpc>Grpc用户</a></div></li></ul></li><li class=item><div class=link><svg class="icon arrow" aria-hidden="true"><use xlink:href="#icon-arrow"/></svg><a title=快速体验>快速体验</a></div><ul class=leaf-section><li class=item><div class=link><a title=dubbo快速体验 href=/projects/hmily/quick-start-dubbo>dubbo快速体验</a></div></li><li class=item><div class=link><a title=springcloud快速体验 href=/projects/hmily/quick-start-springcloud>springcloud快速体验</a></div></li><li class=item><div class=link><a title=motan快速体验 href=/projects/hmily/quick-start-motan>motan快速体验</a></div></li><li class=item><div class=link><a title=sofa-rpc快速体验 href=/projects/hmily/quick-start-rpc>sofa-rpc快速体验</a></div></li><li class=item><div class=link><a title=tars快速体验 href=/projects/hmily/quick-start-tars>tars快速体验</a></div></li><li class=item><div class=link><a title=grpc快速体验 href=/projects/hmily/quick-start-grpc>grpc快速体验</a></div></li></ul></li><li class=item><div class=link><svg class="icon arrow" aria-hidden="true"><use xlink:href="#icon-arrow"/></svg><a title=运维平台>运维平台</a></div><ul class=leaf-section><li class=item><div class=link><a title=启动admin href=/projects/hmily/admin>启动admin</a></div></li></ul></li><li class=item><div class=link><svg class="icon arrow" aria-hidden="true"><use xlink:href="#icon-arrow"/></svg><a title=社区贡献>社区贡献</a></div><ul class=leaf-section><li class=item><div class=link><a title=贡献者指南 href=/projects/hmily/contributor>贡献者指南</a></div></li><li class=item><div class=link><a title=提交者指南 href=/projects/hmily/committer>提交者指南</a></div></li><li class=item><div class=link><a title=编码规范 href=/projects/hmily/code-conduct>编码规范</a></div></li></ul></li></ul></div></div></div></aside><main class="ss-layout-main -card"><div class=ss-meta><div class=container><h1 class=title>dubbo用户指南</h1><a class="edit-button -hidden-mobile" href=https://github.com/dromara/edit/master/content/zh/projects/hmily/user-dubbo/index.md>编辑</a></div><div class=meta>更新时间: 2021-01-24</div></div><article class=typo><h1 id=dubbo接口部分>Dubbo接口部分</h1><ul><li>在你的接口项目中引入jar包。</li></ul><pre><code class=language-xml>      &lt;dependency&gt;
+          &lt;groupId&gt;org.dromara&lt;/groupId&gt;
+          &lt;artifactId&gt;hmily-annotation&lt;/artifactId&gt;
+          &lt;version&gt;{last.version}&lt;/version&gt;
+      &lt;/dependency&gt;
+</code></pre><ul><li><p>在需要进行Hmily分布式事务的接口方法上加上 <code>@Hmily</code> 标识。</p><pre><code class=language-java>public interface HelloService {
+
+@Hmily
+void say(String hello);
+}
+</code></pre><h1 id=dubbo实现项目>Dubbo实现项目</h1><ul><li><p>步骤一 ： 引入依赖<code>hmily</code>的jar包</p></li><li><p>步骤二 ： 新增<code>Hmily</code>配置</p></li><li><p>步骤三 ： 在实现方法上添加注解。<code>TC</code>C模式，则需要完成 <code>confirm</code>，<code>cancel</code>方法的开发</p></li></ul><h3 id=引入依赖>引入依赖</h3><h5 id=spring-namespace>Spring-Namespace</h5><ul><li>Alibaba-Dubbo 用户引入</li></ul><pre><code class=language-xml>    &lt;dependency&gt;
+        &lt;groupId&gt;org.dromara&lt;/groupId&gt;
+        &lt;artifactId&gt;hmily-dubbo&lt;/artifactId&gt;
+       &lt;version&gt;{last.version}&lt;/version&gt;
+    &lt;/dependency&gt;
+</code></pre></li><li><p>Aapche-Dubbo 用户引入</p></li></ul><pre><code class=language-xml>        &lt;dependency&gt;
+            &lt;groupId&gt;org.dromara&lt;/groupId&gt;
+            &lt;artifactId&gt;hmily-apache-dubbo&lt;/artifactId&gt;
+           &lt;version&gt;{last.version}&lt;/version&gt;
+        &lt;/dependency&gt;
+</code></pre><ul><li>在xml中进行如下配置</li></ul><pre><code class=language-xml>    &lt;!--设置开启aspectj-autoproxy--&gt;
+    &lt;aop:aspectj-autoproxy expose-proxy=&quot;true&quot;/&gt;
+    &lt;bean id = &quot;hmilyTransactionAspect&quot; class=&quot;org.dromara.hmily.spring.aop.SpringHmilyTransactionAspect&quot;/&gt;
+    &lt;bean id = &quot;hmilyApplicationContextAware&quot; class=&quot;org.dromara.hmily.spring.HmilyApplicationContextAware&quot;/&gt;
+
+</code></pre><h5 id=spring-boot>Spring-Boot</h5><ul><li>Alibaba-Dubbo 用户引入</li></ul><pre><code class=language-xml>        &lt;dependency&gt;
+            &lt;groupId&gt;org.dromara&lt;/groupId&gt;
+            &lt;artifactId&gt;hmily-spring-boot-starter-dubbo&lt;/artifactId&gt;
+           &lt;version&gt;{last.version}&lt;/version&gt;
+        &lt;/dependency&gt;
+</code></pre><ul><li>Aapche-Dubbo 用户引入</li></ul><pre><code class=language-xml>        &lt;dependency&gt;
+            &lt;groupId&gt;org.dromara&lt;/groupId&gt;
+            &lt;artifactId&gt;hmily-spring-boot-starter-apache-dubbo&lt;/artifactId&gt;
+           &lt;version&gt;{last.version}&lt;/version&gt;
+        &lt;/dependency&gt;
+</code></pre><h2 id=引入-hmily配置>引入 hmily配置</h2><ul><li><p>在项目的 <code>resource</code> 新建文件名为:<code>hmily.yml</code>配置文件</p></li><li><p>具体的参数配置可以参考<a href=config.md>配置详解</a>,<a href=config-local.md>本地配置模式</a>, <a href=config-zookeeper.md>zookeeper配置模式</a>, <a href=config-nacos.md>nacos配置模式</a>,<a href=config-apollo.md>apollo配置模式</a></p></li></ul><h2 id=实现接口上添加注解>实现接口上添加注解</h2><p>上述我们已经完成了集成，下面将讲述具体的实现。</p><h5 id=tcc模式>TCC模式</h5><ul><li><p>对<code>@Hmily</code> 标识的接口方法的具体实现上，加上<code>@HmilyTCC(confirmMethod = &quot;confirm&quot;, cancelMethod = &quot;cancel&quot;)</code></p></li><li><p><code>confirmMethod</code> : 确认方法名称，该方法参数列表与返回类型应与标识方法一致。</p></li><li><p><code>cancelMethod</code> : 回滚方法名称，该方法参数列表与返回类型应与标识方法一致。</p></li><li><p><code>TCC</code>模式应该保证 <code>confirm</code> 和 <code>cancel</code> 方法的幂等性，用户需要自行去开发这个2个方法，所有的事务的确认与回滚，完全由用户决定。Hmily框架只是负责来进行调用</p></li></ul><pre><code class=language-java>
+public class HelloServiceImpl implements HelloService  {
+
+    @HmilyTCC(confirmMethod = &quot;sayConfrim&quot;, cancelMethod = &quot;sayCancel&quot;)
+    public void say(String hello) {
+         System.out.println(&quot;hello world&quot;);
+    }
+    
+    public void sayConfrim(String hello) {
+         System.out.println(&quot; confirm hello world&quot;);
+    }
+
+    public void sayCancel(String hello) {
+         System.out.println(&quot; cancel hello world&quot;);
+    }
+}
+</code></pre><h1 id=dubbo注解用户>dubbo注解用户</h1><p>对于使用 <code>@Reference</code> 注解来注入dubbo服务的用户，请注意：你可以需要做如下配置:</p><h4 id=spring-namespace-用户>spring-namespace 用户</h4><p>在你的xml配置中，需要将 <code>org.dromara.hmily.spring.annotation.RefererAnnotationBeanPostProcessor</code> 注入成spring的bean</p><pre><code class=language-xml> &lt;bean id = &quot;refererAnnotationBeanPostProcessor&quot; class=&quot;org.dromara.hmily.spring.annotation.RefererAnnotationBeanPostProcessor&quot;/&gt;
+</code></pre><h4 id=spring-boot用户>spring-boot用户</h4><p>需要在yml文件里面开启注解支持：</p><pre><code class=language-yml>hmily.support.rpc.annotation = true 
+</code></pre><p>或者在项目中显示注入：</p><pre><code class=language-java>@Bean
+public BeanPostProcessor refererAnnotationBeanPostProcessor() {
+    return new RefererAnnotationBeanPostProcessor();
+}
+</code></pre><h3 id=tac模式-在开发-未发布>TAC模式(在开发，未发布)</h3><ul><li>对<code>@Hmily</code> 标识的接口方法的具体实现上加上<code>@HmilyTAC</code><br></li></ul><h2 id=重要注意事项>重要注意事项</h2><p>在调用任何RPC调用之前，当你需要聚合rpc调用成为一次分布式事务的时候，需要在聚合RPC调用的方法上，先行添加 <code>@HmilyTCC</code> 或者 <code>@HmilyTAC</code> 注解,表示开启全局事务。</p><h4 id=负载均衡>负载均衡</h4><ul><li><p>如果服务部署了几个节点， 负载均衡算法最好使用 <code>hmily</code>, 这样 <code>try</code>, <code>confirm</code>, <code>cancel</code> 调用会落在同一个节点
+充分利用了缓存，提搞了效率。</p></li><li><p>支持一下几种 <code>hmilyConsistentHash</code>, <code>hmilyLeastActive</code>, <code>hmilyRandom</code>, <code>hmilyRoundRobin</code> 几种方式均是继承dubbo原生的</p></li></ul><pre><code class=language-xml>   &lt;dubbo:reference  interface=&quot;xxx&quot;  id=&quot;xxx&quot; loadbalance=&quot;hmilyConsistentHash&quot;/&gt;           
+</code></pre><h4 id=设置永不重试>设置永不重试</h4><ul><li>需要进行分布式事务的dubbo接口，调用放要设置为永远不重试(retries=&ldquo;0&rdquo;)</li></ul><pre><code class=language-xml>   &lt;dubbo:reference  interface=&quot;xxx&quot;  id=&quot;xxx&quot; retries=&quot;0&quot;/&gt;           
+</code></pre><h4 id=异常>异常</h4><ul><li><code>try</code>, <code>confirm</code>, <code>cancel</code> 方法的所有异常不要自行<code>catch</code> 任何异常都应该抛出给 <code>Hmily</code>框架处理。</li></ul></article></main></div><footer class=ss-footer><div class=container><div class=links><div class=cate><h2 class=cate-title>资源</h2><a class=link href=https://github.com/dromara>Github</a>
+<a class=link href=https://gitee.com/shuaiqiyu>Gitee</a></div><div class=cate><h2 class=cate-title>参与进来</h2><a class=link href=https://github.com/dromara/soul/issues/new>反馈</a>
+<a class=link href=/community>社区</a>
+<a class=link href=/blog>博客</a></div><div class=cate><h2 class=cate-title>文档</h2><a class=link href=/projects/soul/overview/>Soul</a>
+<a class=link href=/projects/hmily/overview/>Hmily</a>
+<a class=link href=/projects/raincat/overview/>Raincat</a>
+<a class=link href=/projects/myth/overview/>Myth</a></div></div><div class=qrcode><div><img class=qrcode-img src=/img/qrcode/qrcode_1.png><p class=qrcode-desc>微信公众号</p></div><div><img class=qrcode-img src=/img/qrcode/qrcode_2.png><p class=qrcode-desc>QQ群</p></div></div></div><div class=copyright><p>Copyright ©2021
+<a href=/>xiaoyu@apache.org by xiaoyu</a></p></div></footer></body></html>
