@@ -20,6 +20,7 @@
     width: 31%;
     margin-bottom: 24px;
     margin-right: 24px;
+
     &:nth-child(3n) {
       margin-right: 0;
     }
@@ -71,7 +72,7 @@
       width: 100%;
       margin-top: 14px;
       display: flex;
-      justify-content: space-around;
+      justify-content: space-between;
       .project-button {
         display: inline-block;
         width: 70px;
@@ -102,7 +103,7 @@
   .-selected{
     background-color:rgba(255,255,255,0.7);
     border: 1px solid rgb(255,255,255);
-    box-shadow: 1px 1px 8px 10px rgba(27 ,31 ,35 , 0.05);
+    box-shadow: 1px 1px 8px 10px rgba(27 ,31 ,35 , 0.09);
   }
 
   .-display{
@@ -149,6 +150,7 @@
           font-family: Avenir-Heavy;
           font-size: 36px;
           color: #333;
+          font-weight: 500;
           margin-bottom: 40px;
           word-break: break-word;
         }
@@ -293,7 +295,7 @@
   .card-title {
     margin: 0;
     font-size: 20px;
-    font-weight: 450;
+    font-weight: 500;
     color: $text-color;
   }
 

@@ -1,5 +1,6 @@
+{{ $language := .Site.Language.Lang }}
 <section class="feature-section">
-	<h3>特性一览</h3>
+	<h3>{{ if eq $language "zh"}} 特性一览 {{ else }} Features {{ end }}</h3>
 	<ul>
 		<li>
 			<img  src="{{ .Params.feature1Img | relURL }}" />
