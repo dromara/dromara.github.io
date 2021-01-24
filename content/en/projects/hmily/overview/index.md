@@ -1,3 +1,8 @@
+---
+title: "Hmily Introduce"
+aliases: "/hmily/docs/Home"
+---
+
 What's Hmily？
 ================
 
