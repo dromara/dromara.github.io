@@ -52,16 +52,21 @@
     &lt;artifactId&gt;soul-client-sofa&lt;/artifactId&gt;
     &lt;version&gt;${project.version}&lt;/version&gt;
 &lt;/dependency&gt;
-</code></pre><ul><li>Add the following in the xml file of your bean definition ：
-```xml
-<bean id=sofaServiceBeanPostProcessor class=org.dromara.soul.client.sofa.SofaServiceBeanPostProcessor><constructor-arg ref=sofaConfig></bean></li></ul><p><bean id=sofaConfig class=org.dromara.soul.client.sofa.common.config.SofaConfig><property name=adminUrl value=http://localhost:9095><property name=contextPath value="/your contextPath"><property name=appName value="your name"></bean>```</p></li></ul></li></ul><h2 id=sofa-plugin-settings>sofa Plugin settings</h2><ul><li><p>First in the <code>soul-admin</code> plugin management, set the <code>sofa</code> plugin to open。</p></li><li><p>Secondly, configure your registered address in the <code>sofa</code> plugin, or the address of other registry.</p></li></ul><pre><code class=language-yaml>{&quot;protocol&quot;:&quot;zookeeper&quot;,&quot;register&quot;:&quot;127.0.0.1:2181&quot;}
+</code></pre><ul><li>Add the following in the xml file of your bean definition ：<br></li></ul><pre><code class=language-xml>&lt;bean id =&quot;sofaServiceBeanPostProcessor&quot; class =&quot;org.dromara.soul.client.sofa.SofaServiceBeanPostProcessor&quot;&gt;
+     &lt;constructor-arg  ref=&quot;sofaConfig&quot;/&gt;
+&lt;/bean&gt;
 
+&lt;bean id=&quot;sofaConfig&quot; class=&quot;org.dromara.soul.client.sofa.common.config.SofaConfig&quot;&gt;
+     &lt;property name=&quot;adminUrl&quot; value=&quot;http://localhost:9095&quot;/&gt;
+     &lt;property name=&quot;contextPath&quot; value=&quot;/your contextPath&quot;/&gt;
+     &lt;property name=&quot;appName&quot; value=&quot;your name&quot;/&gt;
+&lt;/bean&gt;
+</code></pre></li></ul></li></ul><h2 id=sofa-plugin-settings>sofa Plugin settings</h2><ul><li><p>First in the <code>soul-admin</code> plugin management, set the <code>sofa</code> plugin to open。</p></li><li><p>Secondly, configure your registered address in the <code>sofa</code> plugin, or the address of other registry.</p></li></ul><pre><code class=language-yaml>{&quot;protocol&quot;:&quot;zookeeper&quot;,&quot;register&quot;:&quot;127.0.0.1:2181&quot;}
 </code></pre><h2 id=interface-registered-to-the-gateway>Interface registered to the gateway</h2><ul><li><p>For your sofa service implementation class, add @SoulSofaClient annotation to the method，Indicates that the interface method is registered to the gateway.</p></li><li><p>Start your provider and output the log <code>sofa client register success</code>. You’re done. Your sofa interface has been published to the soul gateway. If you still don’t understand, you can refer to the <code>soul-test-sofa</code> project.</p></li></ul><h2 id=sofa-user-request-and-parameter-description>sofa user request and parameter description</h2><ul><li><p>To put it bluntly, it is to request your sofa service through http</p></li><li><p>Soul gateway needs to have a routing prefix, this routing prefix is ​​for you to access the project for configuration <code>contextPath</code></p></li></ul><pre><code class=language-yaml># For example, if you have an order service, it has an interface and its registration path /order/test/save
 
 # Now it's to request the gateway via post：http://localhost:9195/order/test/save
 
 # Where localhost:9195 is the IP port of the gateway，default port is 9195 ，/order is the contextPath of your sofa access gateway configuration
-
 </code></pre><ul><li><p>Parameter passing：</p><ul><li><p>Access the gateway through http post，and pass through body and json。</p></li><li><p>For more parameter type transfer, please refer to the interface definition in <a href=https://github.com/dromara/soul/tree/master/soul-test/soul-test-sofa>soul-test-sofa</a> and the parameter transfer method。</p></li></ul></li><li><p>Single java bean parameter type （default）</p></li><li><p>Customize multi-parameter support:</p><ul><li>In the gateway project you built，add a new class A，implements org.dromara.soul.plugin.api.sofa.SofaParamResolveService。</li></ul></li></ul><pre><code class=language-java>    public interface SofaParamResolveService {
     
         /**
