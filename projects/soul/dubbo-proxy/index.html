@@ -211,7 +211,7 @@ public class TestServiceImpl implements TestService {
     &quot;data&quot;: &quot;Param binding error.&quot;
 }
 </code></pre><h2 id=let-s-break-down-this-process-http-gateway-dubbo-provider>Let&rsquo;s break down this process: http &ndash;&gt; gateway &ndash;&gt; dubbo provider</h2><ul><li><p>It basically switches from HTTP request to Dubbo protocol，then invoke Dubbo service and return to the result.</p></li><li><p>Two things need to notice after intgeration with gateway, one is the added annoation <code>@SoulDubboClient</code>, another is a path used to speicify the request path.</p></li><li><p>And you added a config value of <code>contextPath</code>.</p></li><li><p>If you still remember, then we can start.</p></li><li><p>If you have a function like this, the config value in contextPath is <code>/dubbo</code></p></li></ul><p><pre><code class=language-java>@Override
-@@SoulDubboClient(path = &quot;/insert&quot;, desc = &quot;insert data&quot;)
+@SoulDubboClient(path = &quot;/insert&quot;, desc = &quot;insert data&quot;)
 public DubboTest insert(final DubboTest dubboTest) {
     return dubboTest;
 }
