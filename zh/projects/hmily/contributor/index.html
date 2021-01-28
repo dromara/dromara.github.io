@@ -13,7 +13,7 @@
 </code></pre><h3 id=选择issue>选择issue</h3><ul><li>请在选择您要修改的issue。如果是您新发现的问题或想提供issue中没有的功能增强，请先新建一个issue并设置正确的标签。</li><li>在选中相关的issue之后，请回复以表明您当前正在这个issue上工作。并在回复的时候为自己设置一个deadline，添加至回复内容中。</li></ul><h3 id=创建分支>创建分支</h3><ul><li>切换到fork的master分支，拉取最新代码，创建本次的分支。</li></ul><pre><code class=language-shell>git checkout master
 git pull upstream master
 git checkout -b issueNo
-</code></pre><p><strong>注意</strong> ：PR会按照squash的方式进行merge，如果不创建新分支，本地和远程的提交记录将不能保持同步。</p><h3 id=编码>编码</h3><ul><li>请您在开发过程中遵循hmily的 <a href=code-conduct.md>开发规范</a>。并在准备提交pull request之前完成相应的检查。</li><li>将修改的代码push到fork库的分支上。</li></ul><pre><code class=language-shell>git add 修改代码
+</code></pre><p><strong>注意</strong> ：PR会按照squash的方式进行merge，如果不创建新分支，本地和远程的提交记录将不能保持同步。</p><h3 id=编码>编码</h3><ul><li>请您在开发过程中遵循hmily的 <a href=../code-conduct>开发规范</a>。并在准备提交pull request之前完成相应的检查。</li><li>将修改的代码push到fork库的分支上。</li></ul><pre><code class=language-shell>git add 修改代码
 git commit -m 'commit log'
 git push origin issueNo
 </code></pre><h3 id=提交pr>提交PR</h3><ul><li>发送一个pull request到hmily的master分支。</li><li>接着导师做CodeReview，然后他会与您讨论一些细节（包括设计，实现，性能等）。当导师对本次修改满意后，会将提交合并到当前开发版本的分支中。</li><li>最后，恭喜您已经成为了hmily的贡献者！</li></ul><h3 id=删除分支>删除分支</h3><ul><li>在导师将pull request合并到hmily的master分支中之后，您就可以将远程的分支（origin/issueNo）及与远程分支（origin/issueNo）关联的本地分支（issueNo）删除。</li></ul><pre><code class=language-shell>git checkout master
