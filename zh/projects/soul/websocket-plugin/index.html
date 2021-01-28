@@ -28,7 +28,7 @@
 4.rpcType ：websocket 必填，且必须为websocket
 </code></pre><ul><li>在 <code>divide</code>插件中选择器新增一条配置，如下</li></ul><p><img src=https://yu199195.github.io/images/soul/websocket-selector.png alt></p><ul><li>在这一条选择器下新增一条 规则 ：</li></ul><p><img src=https://yu199195.github.io/images/soul/websocket-rule.png alt></p><ul><li>总结，这个时候注意看你的路径 <code>ws://localhost:9195/?module=ws&amp;method=/websocket&amp;rpcType=websocket</code>。</li></ul><p>它就会被你新增的选择器规则匹配，然后代理的的真实websocket地址为：<code>127.0.0.1:8080/websocket</code>，这样soul就进行的websocket的代理。</p><p>你就可以进行和websocket服务进行通信了，就是这么简单。</p><ul><li>最后再说一句，module，method 命名和值，你完全可以自己来决定，我的只是列子，只要选择器 和规则能够匹配就行。<br></li></ul></article></main></div><footer class=ss-footer><div class=container><div class=links><div class=cate><h2 class=cate-title>资源</h2><a class=link href=https://github.com/dromara>Github</a>
 <a class=link href=https://gitee.com/shuaiqiyu>Gitee</a></div><div class=cate><h2 class=cate-title>参与进来</h2><a class=link href=https://github.com/dromara/soul/issues/new>反馈</a>
-<a class=link href=/community>社区</a>
+<a class=link href=/zh/community>社区</a>
 <a class=link href=/blog>博客</a></div><div class=cate><h2 class=cate-title>文档</h2><a class=link href=/projects/soul/overview/>Soul</a>
 <a class=link href=/projects/hmily/overview/>Hmily</a>
 <a class=link href=/projects/raincat/overview/>Raincat</a>
