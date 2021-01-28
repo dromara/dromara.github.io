@@ -26,7 +26,7 @@
 4.rpcType ：websocket must be filled in，and must be websocket
 </code></pre><ul><li>Add a new configuration to the selector in the <code>divide</code> plugin, as follows</li></ul><p><img src=https://yu199195.github.io/images/soul/websocket-selector.png alt></p><ul><li>Add a new rule in this selector:</li></ul><p><img src=https://yu199195.github.io/images/soul/websocket-rule.png alt></p><ul><li>In summary, pay attention to your path at this time <code>ws://localhost:9195/?module=ws&amp;method=/websocket&amp;rpcType=websocket</code>.<br></li></ul><p>It will be matched by your new selector rule, and then the real websocket address of the proxy is:<code>127.0.0.1:8080/websocket</code>,so that soul can proxy websocket.</p><p>You can communicate with websocket service, it is actually very simple.</p><ul><li>I would like to add just one last word that you can decide the name and value of module and method by yourself as long as the selector and the rule can match, this is just an example,</li></ul></article></main></div><footer class=ss-footer><div class=container><div class=links><div class=cate><h2 class=cate-title>Resources</h2><a class=link href=https://github.com/dromara>Github</a>
 <a class=link href=https://gitee.com/shuaiqiyu>Gitee</a></div><div class=cate><h2 class=cate-title>Get Involved</h2><a class=link href=https://github.com/dromara/soul/issues/new>Feedback</a>
-<a class=link href=/community>Community</a>
+<a class=link href=/zh/community>Community</a>
 <a class=link href=/blog>Blog</a></div><div class=cate><h2 class=cate-title>Document</h2><a class=link href=/projects/soul/overview/>Soul</a>
 <a class=link href=/projects/hmily/overview/>Hmily</a>
 <a class=link href=/projects/raincat/overview/>Raincat</a>
