@@ -54,7 +54,7 @@
          &lt;property name=&quot;appName&quot; value=&quot;你的名字&quot;/&gt;
          &lt;property name=&quot;full&quot; value=&quot;false&quot;/&gt;
     &lt;/bean&gt;
-</code></pre></li><li><p>在你的 <code>controller</code> 的接口上加上 <code>@SoulSpringMvcClient</code> 注解。</p><ul><li><p>你可以把注解加到 <code>Controller</code> 类上面，里面的path属性则为前缀，如果含有 <code>/**</code> 代表你的整个接口需要被网关代理。</p></li><li><p>举列子 （1）： 代表 <code>/test/payment</code>，<code>/test/findByUserId</code> 都会被网关代理。</p></li></ul><pre><code class=language-java>  @RestController
+</code></pre></li><li><p>在你的 <code>controller</code> 的接口上加上 <code>@SoulSpringMvcClient</code> 注解。</p><ul><li><p>你可以把注解加到 <code>Controller</code> 类上面，里面的path属性则为前缀，如果含有 <code>/**</code> 代表你的整个接口需要被网关代理。</p></li><li><p>举例子 （1）： 代表 <code>/test/payment</code>，<code>/test/findByUserId</code> 都会被网关代理。</p></li></ul><pre><code class=language-java>  @RestController
   @RequestMapping(&quot;/test&quot;)
   @SoulSpringMvcClient(path = &quot;/test/**&quot;)
   public class HttpTestController {
@@ -72,7 +72,7 @@
           return userDTO;
       }      
    }
-</code></pre><ul><li>举列子 （2）：代表 <code>/order/save</code>，会被网关代理，而<code>/order/findById</code> 则不会。<br></li></ul><pre><code class=language-java>  @RestController
+</code></pre><ul><li>举例子 （2）：代表 <code>/order/save</code>，会被网关代理，而<code>/order/findById</code> 则不会。<br></li></ul><pre><code class=language-java>  @RestController
   @RequestMapping(&quot;/order&quot;)
   @SoulSpringMvcClient(path = &quot;/order&quot;)
   public class OrderController {
