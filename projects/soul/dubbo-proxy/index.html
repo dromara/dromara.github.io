@@ -77,7 +77,7 @@
    &lt;version&gt;4.0.1&lt;/version&gt;
 &lt;/dependency&gt;
 &lt;!-- Dubbo zookeeper registry dependency end --&gt;
-</code></pre></li><li><p>restart gateway service.</p></li></ul><h2 id=dubbo-integration-with-gateway-pls-refer-to-soul-test-dubbo-https-github-com-dromara-soul-tree-master-soul-test-soul-test-dubbo>dubbo integration with gateway,pls refer to : <a href=https://github.com/Dromara/soul/tree/master/soul-test/soul-test-dubbo>soul-test-dubbo</a></h2><ul><li><p>alibaba dubbo user</p><ul><li><p>springboot</p><ul><li>Add these dependencies:<br></li></ul><pre><code class=language-xml>&lt;dependency&gt;
+</code></pre></li><li><p>restart gateway service.</p></li></ul><h2 id=dubbo-integration-with-gateway-pls-refer-to-soul-examples-dubbo-https-github-com-dromara-soul-tree-master-soul-examples-soul-examples-dubbo>dubbo integration with gateway,pls refer to : <a href=https://github.com/dromara/soul/tree/master/soul-examples/soul-examples-dubbo>soul-examples-dubbo</a></h2><ul><li><p>alibaba dubbo user</p><ul><li><p>springboot</p><ul><li>Add these dependencies:<br></li></ul><pre><code class=language-xml>&lt;dependency&gt;
      &lt;groupId&gt;org.dromara&lt;/groupId&gt;
      &lt;artifactId&gt;soul-spring-boot-starter-client-alibaba-dubbo&lt;/artifactId&gt;
      &lt;version&gt;${last.version}&lt;/version&gt;
@@ -139,7 +139,7 @@ project.</p></li></ul><h2 id=dubbo-user-request-and-parameter-explanation>dubbo 
 # now we can communicate with gateway through POST request http://localhost:9195/order/test/save
 
 # localhost:9195 is gateway's ip port，default port is 9195 ，/order is the contextPath you set through gateway.
-</code></pre><ul><li><p>parameter deliver：</p><ul><li><p>communicate with gateway through body or json of http post request.</p></li><li><p>more parameter types, pls refer to the interface definition in <a href=https://github.com/Dromara/soul/tree/master/soul-test/soul-test-dubbo>soul-test-dubbo</a> and parameter passing
+</code></pre><ul><li><p>parameter deliver：</p><ul><li><p>communicate with gateway through body or json of http post request.</p></li><li><p>more parameter types, pls refer to the interface definition in <a href=https://github.com/dromara/soul/tree/master/soul-examples/soul-examples-dubbo>soul-examples-dubbo</a> and parameter passing
 method.</p></li></ul></li><li><p>Single java bean parameter type (defaulta).</p></li><li><p>Multi-parameter type support, add this config value in gateway&rsquo;s yaml file:</p></li></ul><pre><code class=language-yaml>soul :
     dubbo :
       parameter: multi
