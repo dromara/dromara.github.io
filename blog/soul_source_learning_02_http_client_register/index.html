@@ -2,11 +2,13 @@
 <a href=/guides/><span>Guides</span><svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"/></svg></a>
 <a href=/blog/><span>Blog</span><svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"/></svg></a>
 <a href=/activities/><span>Activity</span><svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"/></svg></a>
+<a href=/community/><span>Community</span><svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"/></svg></a>
 <a href=/awesome/><span>Awesome Dromara</span><svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"/></svg></a>
 <a href=/zh/blog/soul_source_learning_02_http_client_register/><span>中文</span><svg class="icon" aria-hidden="true"><use xlink:href="#icon-transfer"/></svg></a></nav></div></div><div class="navbar-menu -hidden-mobile"><div class=navbar-start><a class=navbar-item href=/projects/>Projects</a>
 <a class=navbar-item href=/guides/>Guides</a>
 <a class=navbar-item href=/blog/>Blog</a>
 <a class=navbar-item href=/activities/>Activity</a>
+<a class=navbar-item href=/community/>Community</a>
 <a class=navbar-item href=/awesome/>Awesome Dromara</a></div><div class=navbar-end><div class=navbar-item><div id=js-menu-search class=navbar-search><input class=input placeholder=Search><svg class="icon" aria-hidden="true"><use xlink:href="#icon-search"/></svg></div></div><div class=navbar-item><a class=translation href=/zh/blog/soul_source_learning_02_http_client_register/>中</a></div></div></div></nav></header><div class=ss-layout-container><main class="ss-layout-main -card"><div class=ss-meta><h1 class=title>Soul Gateway Learning (2) HTTP Client Access Source Code Parsing</h1><div class=meta>2021-01-18 ·
 fanjinpeng ·
 <span class=tags><a class=tag href=/tags/soul/ rel=tag>#Soul</a></span></div></div><article class=typo><h1 id=http-用户接入-soul-网关注册逻辑分析>HTTP 用户接入 Soul 网关注册逻辑分析</h1><h2 id=1-注册入口>1. 注册入口</h2><p>HTTP 用户接入 Soul 网关时，会调用 soul-admin 一个接口，把需要 Soul 网关管理的接口注册，今天就具体看看到底干了点儿啥。</p><p>先看下调用的接口信息如下：</p><pre><code class=language-java>// SpringMvcClientBeanPostProcessor.java
