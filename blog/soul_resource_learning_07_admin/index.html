@@ -1,0 +1,104 @@
+<!doctype html><html><head><title>Soul Gateway Learning Admin Source Code Analysis · dromara(Open source organization)</title><meta charset=utf-8><meta http-equiv=x-ua-compatible content="IE=edge,chrome=1"><meta name=viewport content="width=device-width,minimum-scale=1"><meta name=description content="The girl on the prairie"><meta name=generator content="Hugo 0.55.5"><link rel="shortcut icon" href=/img/favicon.png type=image/png><link href=https://unpkg.com/purecss@1.0.0/build/base-min.css rel=stylesheet><link href=/css/main.css rel=stylesheet><link href=/css/zoom-image.css rel=stylesheet><script src=/js/iconfont.js></script><script src=/js/highlight.pack.js></script><script>hljs.initHighlightingOnLoad();</script><script>window.SITE_LANGUAGE="en"</script><script src=/js/app.js></script><script type=application/javascript>var doNotTrack=false;if(!doNotTrack){(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');ga('create','UA-187960192-2','auto');ga('send','pageview');}</script></head><body><header class=ss-header><nav class=navbar role=navigation aria-label="main navigation"><div class=navbar-brand><a class=logo-link href=/><img class=logo src=/img/logo.png></a><div class=-show-mobile><a id=mobile-menu-icon><svg class="icon" aria-hidden="true"><use xlink:href="#icon-menu"/></svg></a><nav id=mobile-menu><div id=js-menu-search-mobile class=navbar-search-mobile><input class=input placeholder=Search><svg class="icon" aria-hidden="true"><use xlink:href="#icon-search"/></svg></div><a href=/projects/><span>Projects</span><svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"/></svg></a>
+<a href=/guides/><span>Guides</span><svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"/></svg></a>
+<a href=/blog/><span>Blog</span><svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"/></svg></a>
+<a href=/activities/><span>Activity</span><svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"/></svg></a>
+<a href=/community/><span>Community</span><svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"/></svg></a>
+<a href=/awesome/><span>Awesome Dromara</span><svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"/></svg></a>
+<a href=/zh/blog/soul_resource_learning_07_admin/><span>中文</span><svg class="icon" aria-hidden="true"><use xlink:href="#icon-transfer"/></svg></a></nav></div></div><div class="navbar-menu -hidden-mobile"><div class=navbar-start><a class=navbar-item href=/projects/>Projects</a>
+<a class=navbar-item href=/guides/>Guides</a>
+<a class=navbar-item href=/blog/>Blog</a>
+<a class=navbar-item href=/activities/>Activity</a>
+<a class=navbar-item href=/community/>Community</a>
+<a class=navbar-item href=/awesome/>Awesome Dromara</a></div><div class=navbar-end><div class=navbar-item><div id=js-menu-search class=navbar-search><input class=input placeholder=Search><svg class="icon" aria-hidden="true"><use xlink:href="#icon-search"/></svg></div></div><div class=navbar-item><a class=translation href=/zh/blog/soul_resource_learning_07_admin/>中</a></div></div></div></nav></header><div class=ss-layout-container><main class="ss-layout-main -card"><div class=ss-meta><h1 class=title>Soul Gateway Learning Admin Source Code Analysis</h1><div class=meta>2021-01-20 ·
+zenglinhui ·
+<span class=tags><a class=tag href=/tags/soul/ rel=tag>#Soul</a></span></div></div><article class=typo><h1 id=源码分析>源码分析</h1><ol><li><strong>页面操作源码分析</strong></li></ol><p>在分析源码之前，先看下图，页面显示加载的插件列表会对应后端的请求，根据后端请求，找到对应的controller类
+<img src="https://img-blog.csdnimg.cn/20210117034006267.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3l1dGFuYm8xMjM=,size_16,color_FFFFFF,t_70" alt=在这里插入图片描述>
+然后找到对应的方法，在上图可以看到这里是访问 plugin 中默认为空的 mapping，传入到分页相关的参数，然后去查询数据库中对应的插件记录
+<img src="https://img-blog.csdnimg.cn/20210117034215738.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3l1dGFuYm8xMjM=,size_16,color_FFFFFF,t_70" alt=在这里插入图片描述>
+数据库中对应的表为下图所示，divide 状态是启用，在上一篇中，就是用这个插件来测试网关
+<img src="https://img-blog.csdnimg.cn/20210117035235400.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3l1dGFuYm8xMjM=,size_16,color_FFFFFF,t_70" alt=在这里插入图片描述>
+同时请求的还有选择器，请求的 controller 见下图。在上篇的演示中，我们直接在页面把选择器中的条件 CRUD，可以实时反应到网关中去，而不需要重启网关，所以这里除了query方法中，增加、删除、和修改方法中,在保存到数据库之后都有一个 publishEvent 方法。就是这个事件方法，可以让用户直接在 soul 后台配置规则，从而达到时时生效的目地
+<img src="https://img-blog.csdnimg.cn/20210117040000892.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3l1dGFuYm8xMjM=,size_16,color_FFFFFF,t_70" alt=在这里插入图片描述></p><pre><code>public int createOrUpdate(final SelectorDTO selectorDTO) {
+        int selectorCount;
+        SelectorDO selectorDO = SelectorDO.buildSelectorDO(selectorDTO);
+        List&lt;SelectorConditionDTO&gt; selectorConditionDTOs = selectorDTO.getSelectorConditions();
+        if (StringUtils.isEmpty(selectorDTO.getId())) {
+            selectorCount = selectorMapper.insertSelective(selectorDO);
+            selectorConditionDTOs.forEach(selectorConditionDTO -&gt; {
+                selectorConditionDTO.setSelectorId(selectorDO.getId());
+                selectorConditionMapper.insertSelective(SelectorConditionDO.buildSelectorConditionDO(selectorConditionDTO));
+            });
+        } else {
+            selectorCount = selectorMapper.updateSelective(selectorDO);
+            //delete rule condition then add
+            selectorConditionMapper.deleteByQuery(new SelectorConditionQuery(selectorDO.getId()));
+            selectorConditionDTOs.forEach(selectorConditionDTO -&gt; {
+                selectorConditionDTO.setSelectorId(selectorDO.getId());
+                SelectorConditionDO selectorConditionDO = SelectorConditionDO.buildSelectorConditionDO(selectorConditionDTO);
+                selectorConditionMapper.insertSelective(selectorConditionDO);
+            });
+        }
+        publishEvent(selectorDO, selectorConditionDTOs);
+        return selectorCount;
+    }
+</code></pre><ol><li><strong>与soul-bootstrap 数据同步(websocket)源码分析</strong></li></ol><p>之前介绍了 admin 页面操作之后把数据保存数据库，然后用了 spring 自带的响应式编程把数据同步到 bootstrap 项目，以达到动态刷新网关规则及插件，而不用添加配置后去重启网关。
+当 soul-bootstrap 启动时，看日志会打出来这么一段</p><pre><code>2021-01-21 00:33:39.620  INFO 14276 --- [0.0-9095-exec-5] o.d.s.a.l.websocket.WebsocketCollector   : websocket on open successful....
+</code></pre><p>那么问题来了，它用 websocket 和谁连接了，又是怎么连接的？下面通过找到打日志的代码，再通过打断点的方式来调试一下，这里是打日志出来的地方
+<img src="https://img-blog.csdnimg.cn/20210121004835890.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3l1dGFuYm8xMjM=,size_16,color_FFFFFF,t_70" alt=在这里插入图片描述>
+先来分析一下这个代码：
+- 从 websocketConfig 这个配置里面拿到配的请求地址，这个配置文件当然是在下图的这个地方配的
+- 拿到这个配置地址后，创建了一个定时的线程池，线程池大小为 urls.length，线程名称前缀为&rdquo;websocket-connect&rdquo;的守护线程。这里为什么要创建守护线程，因为这只是为了保证 bootstrap 和 admin 的 websocket 连接不断，类似于心跳的作用，所以用守护线程是最好的
+- 根据创建的 client 端，一个一个的去请求配置文件配的地址，然后打印之前所找到的日志
+- 后面就启动线程去判断 client 是否关闭，如果关闭就会去重新连接(初始间隔10秒，然后每30秒去执行一次检查，所以如果你看到控制台有时会打印多个连接成功的日志，说明重连了)
+<img src="https://img-blog.csdnimg.cn/20210121005138940.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3l1dGFuYm8xMjM=,size_16,color_FFFFFF,t_70" alt=在这里插入图片描述>
+- 我们再来看看在 admin 后台操作的数据是怎么同步到 bootstrap 中的呢，之前有说过，在后台保存或者更新数据之后，会调用 publishEvent 方法，这个是 spring 自带响应式编程的方法，既然是响应式，那就是基于事件的，那就得有 listener
+<img src="https://img-blog.csdnimg.cn/20210121011826544.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3l1dGFuYm8xMjM=,size_16,color_FFFFFF,t_70" alt=在这里插入图片描述></p><p>一找果不其然，上图画红框的地方是不是很眼熟，没错，监听器，和websocket相关的监听器，如果还是有点看不明白监听和之前的 publishEvent 有什么关系，那就把监听器里的代码打上断点，调试一把。我这里为了方便，就点了这个同步所有数据
+<img src="https://img-blog.csdnimg.cn/20210121012123937.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3l1dGFuYm8xMjM=,size_16,color_FFFFFF,t_70" alt=在这里插入图片描述>
+这里进的是 DataChangedEventDispatcher 这个类，调用了event 相关的方法，在左下角这个地方，是不是看到了熟悉了方法了，没错就是上面说的 publishEvent
+<img src="https://img-blog.csdnimg.cn/20210121012240486.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3l1dGFuYm8xMjM=,size_16,color_FFFFFF,t_70" alt=在这里插入图片描述></p><ul><li>然后会跳转到 WebsocketDataChangedListener 这个类中，这里重点看一下在调试方法中 send 方法
+<img src="https://img-blog.csdnimg.cn/2021012101272614.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3l1dGFuYm8xMjM=,size_16,color_FFFFFF,t_70" alt=在这里插入图片描述></li><li>这里通过 send 方法把更新的数据发到 bootstrap 中，到此 admin 怎么同步数据到 bootstrap 中就真相大白了
+<img src="https://img-blog.csdnimg.cn/20210121013002688.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3l1dGFuYm8xMjM=,size_16,color_FFFFFF,t_70" alt=在这里插入图片描述></li><li><strong>与soul-bootstrap 数据同步(zookeeper)源码分析</strong>
+话不多说，先上图，把 websocket 的配置先注释掉，打开 zookeeper 的配置，前提是把本地或者远程的 zookeeper 服务打开，然后启动 soul-admin
+<img src="https://img-blog.csdnimg.cn/20210121152407500.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3l1dGFuYm8xMjM=,size_16,color_FFFFFF,t_70" alt=在这里插入图片描述>
+首先进入了 ZookeeperDataInit 类的 run 方法，这个方法执行完之后，奇怪的一点是跳到了 WebsocketDataChangedListener 类中去了
+<img src="https://img-blog.csdnimg.cn/20210121233759520.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3l1dGFuYm8xMjM=,size_16,color_FFFFFF,t_70" alt=在这里插入图片描述>
+这一点没弄明白，等这个类里面的 onPluginChanged 方法执行完了之后，回到了 ZookeeperDataChangedListener 类里来了
+<img src="https://img-blog.csdnimg.cn/20210121234036652.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3l1dGFuYm8xMjM=,size_16,color_FFFFFF,t_70" alt=在这里插入图片描述>
+如果不是删除的话，就会更新 zkNode 节点数据
+<img src="https://img-blog.csdnimg.cn/20210121234326495.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3l1dGFuYm8xMjM=,size_16,color_FFFFFF,t_70" alt=在这里插入图片描述>
+更新 zk 节点的方法
+<img src="https://img-blog.csdnimg.cn/20210121234628900.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3l1dGFuYm8xMjM=,size_16,color_FFFFFF,t_70" alt=在这里插入图片描述>
+而且之后的 onSelectorChanged、onMetaDataChanged 、onRuleChanged 方法都会先走 WebsocketDataChangedListener 类里面相对应的方法，然后才会进 ZookeeperDataChangedListener 类的方法。如果插件数据有更改，也是通过上面的步骤重新来一遍。
+这里面同步数据会进两个 Listener 类的问题到这还没解决，突然想到在 pom 文件里面有对 websocket 的依赖，因为 application.yml 文件中已经把 websocket 这个配置注释掉了(不是把enable=false)，先把这个依赖注释掉再看，然后看着代码编译都不通过了。还有一个办法是把 websocket 改成不启用，改完重启发现不会再跳到 websocket 相关的类中了
+<img src="https://img-blog.csdnimg.cn/20210122000547192.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3l1dGFuYm8xMjM=,size_16,color_FFFFFF,t_70" alt=在这里插入图片描述></li><li><strong>与soul-bootstrap 数据同步(http)源码分析</strong></li></ul><p>老规矩，改 yml 文件中的配置，然后找到对应的 listener 类打断点调试，这里如果是用 http 的话 websocket 相关的类还是会被访问到，所以这里一样的不能直接注释
+<img src="https://img-blog.csdnimg.cn/20210122005803207.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3l1dGFuYm8xMjM=,size_16,color_FFFFFF,t_70" alt=在这里插入图片描述></p><p>下面来看看里面的代码：
+这里一个构造方法，里面实例化了一个 clients 数组阻塞队列，大小为1024。一个定时任务线程池，线程数为1，名字前缀为 &ldquo;long-polling&rdquo; 的后台守护线程，看名字可以知道，这是用来长轮询的。一个相关的属性配置
+初始化前方法里面启动了定时线程，间隔5分钟之后，每5分钟执行一次，去执行 refreshLocalCache 这个刷新本地缓存的方法
+<img src="https://img-blog.csdnimg.cn/20210122004153175.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3l1dGFuYm8xMjM=,size_16,color_FFFFFF,t_70" alt=在这里插入图片描述></p><pre><code>    private void refreshLocalCache() {
+        this.updateAppAuthCache();
+        this.updatePluginCache();
+        this.updateRuleCache();
+        this.updateSelectorCache();
+        this.updateMetaDataCache();
+    }
+</code></pre><p>如果是手动点同步数据时，会去执行下面这些相关的方法，也是通过定时线程池来执行，只不过是立即执行
+<img src="https://img-blog.csdnimg.cn/20210122010007881.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3l1dGFuYm8xMjM=,size_16,color_FFFFFF,t_70" alt=在这里插入图片描述>
+五分钟后，执行相关的刷新方法，打印的日志</p><pre><code>2021-01-22 01:00:19.007  INFO 20800 --- [-long-polling-2] a.l.h.HttpLongPollingDataChangedListener : http sync strategy refresh config start.
+2021-01-22 01:00:19.010  INFO 20800 --- [-long-polling-2] o.d.s.a.l.AbstractDataChangedListener    : update config cache[APP_AUTH], old: {group='APP_AUTH', md5='d751713988987e9331980363e24189ce', lastModifyTime=1611248118794}, updated: {group='APP_AUTH', md5='d751713988987e9331980363e24189ce', lastModifyTime=1611248419010}
+2021-01-22 01:00:19.012  INFO 20800 --- [-long-polling-2] o.d.s.a.l.AbstractDataChangedListener    : update config cache[PLUGIN], old: {group='PLUGIN', md5='70b269257d47f0f6404ae7b7e976d8f1', lastModifyTime=1611248295740}, updated: {group='PLUGIN', md5='70b269257d47f0f6404ae7b7e976d8f1', lastModifyTime=1611248419012}
+2021-01-22 01:00:19.069  INFO 20800 --- [-long-polling-2] o.d.s.a.l.AbstractDataChangedListener    : update config cache[RULE], old: {group='RULE', md5='5811b56257e31109621976d39fc226aa', lastModifyTime=1611248301607}, updated: {group='RULE', md5='5811b56257e31109621976d39fc226aa', lastModifyTime=1611248419069}
+2021-01-22 01:00:19.075  INFO 20800 --- [-long-polling-2] o.d.s.a.l.AbstractDataChangedListener    : update config cache[SELECTOR], old: {group='SELECTOR', md5='70bad5ebb1cf6e3fc55278eef2df42f3', lastModifyTime=1611248299419}, updated: {group='SELECTOR', md5='70bad5ebb1cf6e3fc55278eef2df42f3', lastModifyTime=1611248419075}
+2021-01-22 01:00:19.077  INFO 20800 --- [-long-polling-2] o.d.s.a.l.AbstractDataChangedListener    : update config cache[META_DATA], old: {group='META_DATA', md5='5f79d821e3b601330631a2d53294fb34', lastModifyTime=1611248302571}, updated: {group='META_DATA', md5='5f79d821e3b601330631a2d53294fb34', lastModifyTime=1611248419077}
+2021-01-22 01:00:19.077  INFO 20800 --- [-long-polling-2] a.l.h.HttpLongPollingDataChangedListener : http sync strategy refresh config success.
+</code></pre><ol><li><p>soul 中还有其它方法同步数据，这些后面有精力再分析，soul-admin 源码先分析到这，如果后续再分析的话，会另外再写一遍文章，这里就先到此为止</p><h1 id=总结>总结</h1><p>soul-admin 中还有功能现在还没有使用到，还有很多好玩的东西，这篇会持续更新，到用到的时候再去具体分析里面的源码。</p></li><li><p>2021-01-20分析了 soul-admin 用websocket 同步数据到 soul-bootstrap 中</p></li><li><p>2021-01-21分析了 soul-admin 用 zookeeper 同步数据到 soul-bootstrap 中</p></li><li><p>2021-01-21分析了 soul-admin 用 http 同步数据到 soul-bootstrap 中</p></li></ol></article><div class=-show-mobile><nav class=ss-pagination-next><a class=link-prev href=/blog/soul_source_learning_02_http_client_register/><span class=text>Prev:</span>
+<span class=text>Soul Gateway Learning (2) HTTP Client Access Source Code Parsing</span></a>
+<a class=link-next href=/blog/soul_source_learning_08_httplongpolling_01/><span class=text>Next:</span>
+<span class=text>Soul Gateway Learns Http Long Polling Analysis 01</span></a></nav></div></main><aside class=ss-layout-aside><div class=ss-card><h2 class=card-title>Related</h2><ul class=ss-aside-related><li><a href=/blog/soul_source_learning_02_http_client_register/>Soul Gateway Learning (2) HTTP Client Access Source Code Parsing</a></li><li><a href=/blog/soul_source_larning_02_divide_plugin_source/>Soul Learning(2) How Does The Divide Plugin Forward Http Requests</a></li><li><a href=/blog/soul_source_learning_02_divide_plugin/>Soul Learning(2) Use Divide Plugin</a></li><li><a href=/blog/soul_source_learning_05_plugin/>Soul Gateway learning plugin chain and load balancing analysis</a></li><li><a href=/blog/soul_source_learning_01/>Soul Learning(1) Environment Configuration</a></li></ul></div><div class="ss-aside-tags ss-card"><h2 class=card-title>Tag
+<span class=card-extra></span></h2><ul class=tag-list><li class=tag><a href=/tags/dreamcode/>DreamCode</a></li><li class=tag><a href=/tags/dromara/>Dromara</a></li><li class=tag><a href=/tags/gateway/>GateWay</a></li><li class=tag><a href=/tags/hmily/>hmily</a></li><li class=tag><a href=/tags/reactor/>Reactor</a></li><li class=tag><a href=/tags/soul/>Soul</a></li><li class=tag><a href=/tags/tcc/>TCC</a></li></ul></div></aside></div><footer class=ss-footer><div class=container><div class=links><div class=cate><h2 class=cate-title>Resources</h2><a class=link href=https://github.com/dromara>Github</a>
+<a class=link href=https://gitee.com/shuaiqiyu>Gitee</a></div><div class=cate><h2 class=cate-title>Get Involved</h2><a class=link href=https://github.com/dromara/soul/issues/new>Feedback</a>
+<a class=link href=/community>Community</a>
+<a class=link href=/blog>Blog</a></div><div class=cate><h2 class=cate-title>Document</h2><a class=link href=/projects/soul/overview/>Soul</a>
+<a class=link href=/projects/hmily/overview/>Hmily</a>
+<a class=link href=/projects/raincat/overview/>Raincat</a>
+<a class=link href=/projects/myth/overview/>Myth</a></div></div><div class=qrcode><div><img class=qrcode-img src=/img/qrcode/qrcode_1.png><p class=qrcode-desc>Wechat Official Account</p></div><div><img class=qrcode-img src=/img/qrcode/qrcode_2.png><p class=qrcode-desc>QQ Group</p></div></div></div><div class=copyright><p>Copyright ©2021
+<a href=/>xiaoyu@apache.org by xiaoyu</a></p></div></footer></body></html>
