@@ -8,7 +8,7 @@ cover: "/dromara-open-source.jpg"
 descripton: "Dromara Soul源码线上分享会，1 月 24 日 15 点至17 点。"
 ---
 
-![Dromara 线上活动](soul-xmind.png)
+![Dromara 线上活动](/img/soul/activite/soul-xmind.png)
 
 ### Dromara 源码阅读（Soul 2021 首次活动）
 

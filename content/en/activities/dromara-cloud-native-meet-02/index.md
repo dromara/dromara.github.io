@@ -8,7 +8,7 @@ cover: "/dromara-open-source.jpg"
 descripton: "Dromara Soul source code 02 online sharing session, February 6th from 20:00 to 23:00."
 ---
 
-![Dromara Online Activity](soul-xmind.png)
+![Dromara Online Activity](/img/soul/activite/soul-xmind.png)
 
 ### Dromara source code reading (Soul 2021 first activity)
 
