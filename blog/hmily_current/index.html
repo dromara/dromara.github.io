@@ -50,7 +50,7 @@ kroy&gt;hessian&gt;protostuff&gt;jdk</p></li><li><p>recoverDelayTime :定时任�
             &lt;property name=&quot;mongoUserPwd&quot; value=&quot;123456&quot;/&gt;
         &lt;/bean&gt;
     &lt;/property&gt;
-</code></pre><ul><li><p>如果你采用redis存储日志,配置如下：</p></li><li><p>redis单节点</p></li></ul><p><pre><code class=language-xml>&lt;property name=&quot;repositorySupport&quot; value=&quot;redis&quot; /&gt;
+</code></pre><ul><li><p>如果你采用redis存储日志,配置如下：</p></li><li><p>redis单节点</p></li></ul><pre><code class=language-xml>&lt;property name=&quot;repositorySupport&quot; value=&quot;redis&quot; /&gt;
 &lt;property name=&quot;tccRedisConfig&quot;&gt;
     &lt;bean class=&quot;com.hmily.tcc.common.config.TccRedisConfig&quot;&gt;
         &lt;property name=&quot;hostName&quot;
@@ -59,40 +59,35 @@ kroy&gt;hessian&gt;protostuff&gt;jdk</p></li><li><p>recoverDelayTime :定时任�
         &lt;property name=&quot;password&quot; value=&quot;&quot;/&gt;
     &lt;/bean&gt;
 &lt;/property&gt;
-</code></pre></li></p><p><li><p>redis哨兵模式集群:</p></li></ul></p><p><code>xml
-&lt;property name=&quot;repositorySupport&quot; value=&quot;redis&quot;/&gt;
-&lt;property name=&quot;tccRedisConfig&quot;&gt;
-&lt;bean class=&quot;com.hmily.tcc.common.config.TccRedisConfig&quot;&gt;
-&lt;property name=&quot;masterName&quot; value=&quot;aaa&quot;/&gt;
-&lt;property name=&quot;sentinel&quot; value=&quot;true&quot;/&gt;
-&lt;property name=&quot;sentinelUrl&quot; value=&quot;192.168.1.91:26379;192.168.1.92:26379;192.168.1.93:26379&quot;/&gt;
-&lt;property name=&quot;password&quot; value=&quot;123456&quot;/&gt;
-&lt;/bean&gt;
-&lt;/property&gt;</code>
-* redis集群:</p><p><code>xml
-&lt;property name=&quot;repositorySupport&quot; value=&quot;redis&quot;/&gt;
-&lt;property name=&quot;tccRedisConfig&quot;&gt;
-&lt;bean class=&quot;com.hmily.tcc.common.config.TccRedisConfig&quot;&gt;
-&lt;property name=&quot;cluster&quot; value=&quot;true&quot;/&gt;
-&lt;property name=&quot;clusterUrl&quot; value=&quot;192.168.1.91:26379;192.168.1.92:26379;192.168.1.93:26379&quot;/&gt;
-&lt;property name=&quot;password&quot; value=&quot;123456&quot;/&gt;
-&lt;/bean&gt;
-&lt;/property&gt;</code>
-* 如果你采用zookeeper存储日志,配置如下：
-<code>xml
-&lt;property name=&quot;repositorySupport&quot; value=&quot;zookeeper&quot;/&gt;
-&lt;property name=&quot;tccZookeeperConfig&quot;&gt;
-&lt;bean class=&quot;om.hmily.tcc.common.config.TccZookeeperConfig&quot;&gt;
-&lt;property name=&quot;host&quot; value=&quot;192.168.1.73:2181&quot;/&gt;
-&lt;property name=&quot;sessionTimeOut&quot; value=&quot;100000&quot;/&gt;
-&lt;property name=&quot;rootPath&quot; value=&quot;/tcc&quot;/&gt;
-&lt;/bean&gt;
-&lt;/property&gt;</code>
-* 数据库的配置在上面已经有了，使用file方式的存储我就不介绍了.
-* 以上就是今天分享的内容，一个注解，几行配置轻轻松松搞定高并发分布式事务！</p></article><div class=-show-mobile><nav class=ss-pagination-next><a class=link-prev href=/blog/hmily_introuduction/><span class=text>Prev:</span>
+</code></pre></li><li><p>redis哨兵模式集群:</p></li></ul><pre><code class=language-xml>&lt;property name=&quot;repositorySupport&quot; value=&quot;redis&quot;/&gt;
+ &lt;property name=&quot;tccRedisConfig&quot;&gt;
+     &lt;bean class=&quot;com.hmily.tcc.common.config.TccRedisConfig&quot;&gt;
+         &lt;property name=&quot;masterName&quot; value=&quot;aaa&quot;/&gt;
+         &lt;property name=&quot;sentinel&quot; value=&quot;true&quot;/&gt;
+         &lt;property name=&quot;sentinelUrl&quot; value=&quot;192.168.1.91:26379;192.168.1.92:26379;192.168.1.93:26379&quot;/&gt;
+         &lt;property name=&quot;password&quot; value=&quot;123456&quot;/&gt;
+     &lt;/bean&gt;
+ &lt;/property&gt;
+</code></pre><ul><li>redis集群:</li></ul><pre><code class=language-xml>&lt;property name=&quot;repositorySupport&quot; value=&quot;redis&quot;/&gt;
+ &lt;property name=&quot;tccRedisConfig&quot;&gt;
+     &lt;bean class=&quot;com.hmily.tcc.common.config.TccRedisConfig&quot;&gt;
+         &lt;property name=&quot;cluster&quot; value=&quot;true&quot;/&gt;
+         &lt;property name=&quot;clusterUrl&quot; value=&quot;192.168.1.91:26379;192.168.1.92:26379;192.168.1.93:26379&quot;/&gt;
+         &lt;property name=&quot;password&quot; value=&quot;123456&quot;/&gt;
+     &lt;/bean&gt;
+ &lt;/property&gt;
+</code></pre><ul><li>如果你采用zookeeper存储日志,配置如下：</li></ul><pre><code class=language-xml>  &lt;property name=&quot;repositorySupport&quot; value=&quot;zookeeper&quot;/&gt;
+  &lt;property name=&quot;tccZookeeperConfig&quot;&gt;
+      &lt;bean class=&quot;om.hmily.tcc.common.config.TccZookeeperConfig&quot;&gt;
+          &lt;property name=&quot;host&quot;  value=&quot;192.168.1.73:2181&quot;/&gt;
+          &lt;property name=&quot;sessionTimeOut&quot; value=&quot;100000&quot;/&gt;
+          &lt;property name=&quot;rootPath&quot; value=&quot;/tcc&quot;/&gt;
+      &lt;/bean&gt;
+  &lt;/property&gt;
+</code></pre><ul><li>数据库的配置在上面已经有了，使用file方式的存储我就不介绍了.</li><li>以上就是今天分享的内容，一个注解，几行配置轻轻松松搞定高并发分布式事务！</li></ul></article><div class=-show-mobile><nav class=ss-pagination-next><a class=link-prev href=/blog/hmily_introduction/><span class=text>Prev:</span>
 <span class=text>Hmily: High-Performance Asynchronous Distributed Transaction TCC Framework</span></a>
 <a class=link-next href=/blog/soul_source_learning_01/><span class=text>Next:</span>
-<span class=text>Soul Learning(1) Environment Configuration</span></a></nav></div></main><aside class=ss-layout-aside><div class=ss-card><h2 class=card-title>Related</h2><ul class=ss-aside-related><li><a href=/blog/hmily_introuduction/>Hmily: High-Performance Asynchronous Distributed Transaction TCC Framework</a></li></ul></div><div class="ss-aside-tags ss-card"><h2 class=card-title>Tag
+<span class=text>Soul Learning(1) Environment Configuration</span></a></nav></div></main><aside class=ss-layout-aside><div class=ss-card><h2 class=card-title>Related</h2><ul class=ss-aside-related><li><a href=/blog/hmily_introduction/>Hmily: High-Performance Asynchronous Distributed Transaction TCC Framework</a></li></ul></div><div class="ss-aside-tags ss-card"><h2 class=card-title>Tag
 <span class=card-extra></span></h2><ul class=tag-list><li class=tag><a href=/tags/dreamcode/>DreamCode</a></li><li class=tag><a href=/tags/dromara/>Dromara</a></li><li class=tag><a href=/tags/gateway/>GateWay</a></li><li class=tag><a href=/tags/hmily/>hmily</a></li><li class=tag><a href=/tags/reactor/>Reactor</a></li><li class=tag><a href=/tags/soul/>Soul</a></li><li class=tag><a href=/tags/tcc/>TCC</a></li></ul></div></aside></div><footer class=ss-footer><div class=container><div class=links><div class=cate><h2 class=cate-title>Resources</h2><a class=link href=https://github.com/dromara>Github</a>
 <a class=link href=https://gitee.com/shuaiqiyu>Gitee</a></div><div class=cate><h2 class=cate-title>Get Involved</h2><a class=link href=https://github.com/dromara/soul/issues/new>Feedback</a>
 <a class=link href=/community>Community</a>

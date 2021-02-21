@@ -3,12 +3,13 @@
 <a href=/blog/><span>Blog</span><svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"/></svg></a>
 <a href=/activities/><span>Activity</span><svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"/></svg></a>
 <a href=/community/><span>Community</span><svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"/></svg></a>
-<a href=/awesome/><span>Awesome Dromara</span><svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"/></svg></a></nav></div></div><div class="navbar-menu -hidden-mobile"><div class=navbar-start><a class=navbar-item href=/projects/>Projects</a>
+<a href=/awesome/><span>Awesome Dromara</span><svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"/></svg></a>
+<a href=/zh/blog/hmily_introduction/><span>中文</span><svg class="icon" aria-hidden="true"><use xlink:href="#icon-transfer"/></svg></a></nav></div></div><div class="navbar-menu -hidden-mobile"><div class=navbar-start><a class=navbar-item href=/projects/>Projects</a>
 <a class=navbar-item href=/guides/>Guides</a>
 <a class=navbar-item href=/blog/>Blog</a>
 <a class=navbar-item href=/activities/>Activity</a>
 <a class=navbar-item href=/community/>Community</a>
-<a class=navbar-item href=/awesome/>Awesome Dromara</a></div><div class=navbar-end><div class=navbar-item><div id=js-menu-search class=navbar-search><input class=input placeholder=Search><svg class="icon" aria-hidden="true"><use xlink:href="#icon-search"/></svg></div></div><div class=navbar-item></div></div></div></nav></header><div class=ss-layout-container><main class="ss-layout-main -card"><div class=ss-meta><h1 class=title>Hmily: High-Performance Asynchronous Distributed Transaction TCC Framework</h1><div class=meta>2018-09-25 ·
+<a class=navbar-item href=/awesome/>Awesome Dromara</a></div><div class=navbar-end><div class=navbar-item><div id=js-menu-search class=navbar-search><input class=input placeholder=Search><svg class="icon" aria-hidden="true"><use xlink:href="#icon-search"/></svg></div></div><div class=navbar-item><a class=translation href=/zh/blog/hmily_introduction/>中</a></div></div></div></nav></header><div class=ss-layout-container><main class="ss-layout-main -card"><div class=ss-meta><h1 class=title>Hmily: High-Performance Asynchronous Distributed Transaction TCC Framework</h1><div class=meta>2018-09-25 ·
 xiaoyu ·
 <span class=tags><a class=tag href=/tags/hmily/ rel=tag>#hmily</a>
 <a class=tag href=/tags/tcc/ rel=tag>#TCC</a></span></div></div><article class=typo><h1 id=hmily框架特性-https-github-com-yu199195-hmily>Hmily框架特性[<a href=https://github.com/yu199195/hmily>https://github.com/yu199195/hmily</a>]</h1><ul><li><p>无缝集成Spring,Spring boot start。</p></li><li><p>无缝集成Dubbo,SpringCloud,Motan等rpc框架。</p></li><li><p>多种事务日志的存储方式（redis，mongdb,mysql等）。</p></li><li><p>多种不同日志序列化方式（Kryo,protostuff,hession）。</p></li><li><p>事务自动恢复。</p></li><li><p>支持内嵌事务的依赖传递。</p><ul><li>代码零侵入,配置简单灵活。</li></ul></li></ul><h1 id=hmily为什么这么高性能>Hmily为什么这么高性能？</h1><h3 id=1-采用disruptor进行事务日志的异步读写-disruptor是一个无锁-无gc的并发编程框架>1.采用disruptor进行事务日志的异步读写（disruptor是一个无锁，无GC的并发编程框架）</h3><pre><code class=language-java>package com.hmily.tcc.core.disruptor.publisher;
