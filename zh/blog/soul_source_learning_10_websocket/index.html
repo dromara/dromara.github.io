@@ -11,7 +11,7 @@
 <a class=navbar-item href=/zh/community/>社区</a>
 <a class=navbar-item href=/zh/awesome/>Awesome Dromara</a></div><div class=navbar-end><div class=navbar-item><div id=js-menu-search class=navbar-search><input class=input placeholder=请输入要搜索的关键词><svg class="icon" aria-hidden="true"><use xlink:href="#icon-search"/></svg></div></div><div class=navbar-item><a class=translation href=/blog/soul_source_learning_10_websocket/>En</a></div></div></div></nav></header><div class=ss-layout-container><main class="ss-layout-main -card"><div class=ss-meta><h1 class=title>Soul网关学习WebSocket数据同步解析</h1><div class=meta>2021-01-22 ·
 范金鹏,朱明 ·
-<span class=tags><a class=tag href=/zh/tags/soul/ rel=tag>#Soul</a></span></div></div><article class=typo><blockquote><p>范金鹏</p></blockquote><h1 id=1-前情回顾>1.前情回顾</h1><p>在第4篇中，我们分析了 HTTP 用户业务系统接入 Soul 网关后，会调用 soul-admin 的注册接口，把需要网关代理的接口信息全部注册到 soul-admin 上，在最后，会通过 websocket 长连接，将soul-admin 接收到的接口信息同步给 Soul 网关（即 soul-bootstrap），今天就来接着继续分析，数据是怎么同步到 soul-bootstrap 的。</p><p>不清楚流程的可以出门左转看下第4篇文章 <a href=https://blog.csdn.net/hellboy0621/article/details/112727101>【Soul源码阅读】4.HTTP 用户接入 Soul 调用 /soul-client/springmvc-register 接口逻辑分析</a></p><h1 id=2-soul-admin-与-soul-bootstrap-数据同步>2.soul-admin 与 soul-bootstrap 数据同步</h1><p>这里为了验证数据同步流程，其实也没必要非得启动业务系统，完全可以只启动 soul-admin 和 soul-bootstrap 两个系统即可，可以在页面打开或关闭插件，看看这个流程是怎么实现的。</p><p>数据同步策略官网链接 <a href=https://dromara.org/zh-cn/docs/soul/user-dataSync.html>https://dromara.org/zh-cn/docs/soul/user-dataSync.html</a></p><h2 id=2-1-启动2个系统>2.1 启动2个系统</h2><p>都是按照项目默认启动的，无需修改任何配置文件。</p><h2 id=2-2-页面操作查找接口>2.2 页面操作查找接口</h2><p>这里把 divide 插件启动，F12，看下前台会调用 soul-admin 哪个接口。</p><p><img src=/img/soul/fanjinpeng/open_divide_plugin.png alt=open_divide_plugin></p><p>可以看到前台向后台发送了一个 PUT 请求：<a href=http://localhost:9095/plugin/5>http://localhost:9095/plugin/5</a></p><h2 id=2-3-后台接口>2.3 后台接口</h2><p>在项目中搜索这个接口</p><pre><code class=language-java>// PluginController.java
+<span class=tags><a class=tag href=/zh/tags/soul/ rel=tag>#Soul</a></span></div></div><article class=typo><blockquote><p>范金鹏</p></blockquote><h1 id=1-前情回顾>1.前情回顾</h1><p>在第4篇中，我们分析了 HTTP 用户业务系统接入 Soul 网关后，会调用 soul-admin 的注册接口，把需要网关代理的接口信息全部注册到 soul-admin 上，在最后，会通过 websocket 长连接，将soul-admin 接收到的接口信息同步给 Soul 网关（即 soul-bootstrap），今天就来接着继续分析，数据是怎么同步到 soul-bootstrap 的。</p><p>不清楚流程的可以出门左转看下第4篇文章 <a href=https://blog.csdn.net/hellboy0621/article/details/112727101>【Soul源码阅读】4.HTTP 用户接入 Soul 调用 /soul-client/springmvc-register 接口逻辑分析</a></p><h1 id=2-soul-admin-与-soul-bootstrap-数据同步>2.soul-admin 与 soul-bootstrap 数据同步</h1><p>这里为了验证数据同步流程，其实也没必要非得启动业务系统，完全可以只启动 soul-admin 和 soul-bootstrap 两个系统即可，可以在页面打开或关闭插件，看看这个流程是怎么实现的。</p><p>数据同步策略官网链接 <a href=https://dromara.org/zh-cn/docs/soul/user-dataSync.html>https://dromara.org/zh-cn/docs/soul/user-dataSync.html</a></p><h2 id=2-1-启动2个系统>2.1 启动2个系统</h2><p>都是按照项目默认启动的，无需修改任何配置文件。</p><h2 id=2-2-页面操作查找接口>2.2 页面操作查找接口</h2><p>这里把 divide 插件启动，F12，看下前台会调用 soul-admin 哪个接口。</p><p><img src=/img/soul/blog3/open_divide_plugin.png alt=open_divide_plugin></p><p>可以看到前台向后台发送了一个 PUT 请求：<a href=http://localhost:9095/plugin/5>http://localhost:9095/plugin/5</a></p><h2 id=2-3-后台接口>2.3 后台接口</h2><p>在项目中搜索这个接口</p><pre><code class=language-java>// PluginController.java
 @RestController
 @RequestMapping(&quot;/plugin&quot;)
 public class PluginController {
@@ -218,7 +218,7 @@ public interface DataChangedListener {
     }
  
 }
-</code></pre><p>可以看到接口中定义了5个方法，分别针对当监听到 appAuth、plugin、selector、metaData、rule 数据变动时对应的处理方法。</p><p>其继承关系：</p><p><img src=/img/soul/fanjinpeng/DataChangedListener.png alt=DataChangedListener></p><p>因为默认是采用的 websocket，这里的监听器对应的就是 WebsocketDataChangedListener，Alt + F7，搜索到这个类实例化的地方，就是如下的配置类：</p><pre><code class=language-java>// DataSyncConfiguration.java
+</code></pre><p>可以看到接口中定义了5个方法，分别针对当监听到 appAuth、plugin、selector、metaData、rule 数据变动时对应的处理方法。</p><p>其继承关系：</p><p><img src=/img/soul/blog3/DataChangedListener.png alt=DataChangedListener></p><p>因为默认是采用的 websocket，这里的监听器对应的就是 WebsocketDataChangedListener，Alt + F7，搜索到这个类实例化的地方，就是如下的配置类：</p><pre><code class=language-java>// DataSyncConfiguration.java
 @Configuration
 public class DataSyncConfiguration {
  
@@ -453,7 +453,7 @@ public class WebsocketCollector {
         }
     }
 }
-</code></pre><p>WebsocketController 使用了 @ServerEndpoint(&ldquo;/websocket&rdquo;) 注解，开启了一个 websocket 服务接口，等待连接。</p><p>当 soul-bootstrap 启动后，会连接这个 websocket，这时触发 onOpen 方法，将此次连接信息的 Session 存放在 SESSION_SET 这个 Set 集合里。</p><p>在 send 方法中，会先判断 DataEventTypeEnum type 是不是 MYSELF，这个 type 可以追溯到 2.3-2.4，此次是 UPDATE，关于什么时候是 MYSELF，还需要后续补充，此处存疑（// TODO）。</p><p>下面的 for 循环遍历所有的 websocket 连接 Session，发送变动数据。</p><p>到这里，默认的 websocket 同步数据策略就分析清楚了。</p><blockquote><p>朱明</p></blockquote><h2 id=后台与网关数据同步-websocket篇>后台与网关数据同步 (Websocket篇)</h2><h3 id=后台如何建立websocket>后台如何建立Websocket?</h3><p><img src=/img/soul/zhuming/05.png alt=05>
+</code></pre><p>WebsocketController 使用了 @ServerEndpoint(&ldquo;/websocket&rdquo;) 注解，开启了一个 websocket 服务接口，等待连接。</p><p>当 soul-bootstrap 启动后，会连接这个 websocket，这时触发 onOpen 方法，将此次连接信息的 Session 存放在 SESSION_SET 这个 Set 集合里。</p><p>在 send 方法中，会先判断 DataEventTypeEnum type 是不是 MYSELF，这个 type 可以追溯到 2.3-2.4，此次是 UPDATE，关于什么时候是 MYSELF，还需要后续补充，此处存疑（// TODO）。</p><p>下面的 for 循环遍历所有的 websocket 连接 Session，发送变动数据。</p><p>到这里，默认的 websocket 同步数据策略就分析清楚了。</p><blockquote><p>朱明</p></blockquote><h2 id=后台与网关数据同步-websocket篇>后台与网关数据同步 (Websocket篇)</h2><h3 id=后台如何建立websocket>后台如何建立Websocket?</h3><p><img src=/img/soul/blog1/05.png alt=05>
 DataSyncConfiguration: 作为 Spring Bean 的配置工厂, 可以根据配置信息, 构建各类监听器, 包括 HTTP 长轮询方式、Zookeeper 方式、Nacos 方式、Websocket 方法.</p><pre><code class=language-java>@Configuration
 public class DataSyncConfiguration {
   
@@ -471,7 +471,7 @@ public class DataSyncConfiguration {
   }
 }
 </code></pre><p>WebsocketListener: 作为 <code>DataSyncConfiguration</code> 的内部类, 负责 websocket 监听器初始化.
-WebsocketCollector: 监听 websocket 连接及接收信息, 维护所有连接后台的 session 会话, 提供 <code>send()</code> 方法通知 session 信息.</p><h3 id=网关如何建立websocket>网关如何建立Websocket?</h3><p><img src=/img/soul/zhuming/06.png alt=06></p><p>WebsocketSyncDataConfiguration: 作为 Spring Bean 的配置工厂, 是网关端构建 Websocket 通信的入口. (独立出一个启动项目 <code>soul-spring-boot-starter-sync-data-websocket</code> , 供网关自由选用)</p><pre><code class=language-java>@Configuration
+WebsocketCollector: 监听 websocket 连接及接收信息, 维护所有连接后台的 session 会话, 提供 <code>send()</code> 方法通知 session 信息.</p><h3 id=网关如何建立websocket>网关如何建立Websocket?</h3><p><img src=/img/soul/blog1/06.png alt=06></p><p>WebsocketSyncDataConfiguration: 作为 Spring Bean 的配置工厂, 是网关端构建 Websocket 通信的入口. (独立出一个启动项目 <code>soul-spring-boot-starter-sync-data-websocket</code> , 供网关自由选用)</p><pre><code class=language-java>@Configuration
 @ConditionalOnClass(WebsocketSyncDataService.class)
 @ConditionalOnProperty(prefix = &quot;soul.sync.websocket&quot;, name = &quot;urls&quot;)
 @Slf4j
@@ -524,7 +524,7 @@ public class WebsocketSyncDataConfiguration {
     ENUM_MAP.get(type).handle(json, eventType);
   }
 }
-</code></pre><h3 id=网关数据变动调用链>网关数据变动调用链</h3><p>实现 Websocket 通信的入口类 <code>SoulWebsocketClient</code> 在接到后台通信后, 调用 <code>WebsocketDataHandler</code> 的 <code>executor()</code> 方法匹配信息类型, 并调用对应的 <code>DataHandler</code> 的 <code>handler()</code> 去处理信息.</p><p><img src=/img/soul/zhuming/07.png alt=07></p><p>AbstractDataHandler: 实现 <code>handler()</code> 方法, 根据事件的类型 (如刷新、更新、创建、删除等), 调用对应事件抽象方法.</p><pre><code class=language-java>public abstract class AbstractDataHandler&lt;T&gt; implements DataHandler {
+</code></pre><h3 id=网关数据变动调用链>网关数据变动调用链</h3><p>实现 Websocket 通信的入口类 <code>SoulWebsocketClient</code> 在接到后台通信后, 调用 <code>WebsocketDataHandler</code> 的 <code>executor()</code> 方法匹配信息类型, 并调用对应的 <code>DataHandler</code> 的 <code>handler()</code> 去处理信息.</p><p><img src=/img/soul/blog1/07.png alt=07></p><p>AbstractDataHandler: 实现 <code>handler()</code> 方法, 根据事件的类型 (如刷新、更新、创建、删除等), 调用对应事件抽象方法.</p><pre><code class=language-java>public abstract class AbstractDataHandler&lt;T&gt; implements DataHandler {
 
   // 根据数据的事件类型 (eventType) 分发到各自方法, 这些被调用的方法由子类实现, 因为不同类型的元数据处理类的处理方式不同
   @Override
@@ -563,7 +563,7 @@ public class PluginDataHandler extends AbstractDataHandler&lt;PluginData&gt; {
   
   // ...
 }
-</code></pre><p>CommonPluginDataSubscriber: 订阅器的 <code>onSubscribe()</code> 方法会通知到所有注入为 Bean 的 <code>PluginDataHandler</code> 类 (不要和前面的同名类混淆, 它是 <code>soul-plugin-base</code> 下的接口, 它的实现类在各个可插拔插件包)</p><p><img src=/img/soul/zhuming/image-20210122172333111.png alt=image-20210122172333111></p><pre><code class=language-java>public class CommonPluginDataSubscriber implements PluginDataSubscriber {
+</code></pre><p>CommonPluginDataSubscriber: 订阅器的 <code>onSubscribe()</code> 方法会通知到所有注入为 Bean 的 <code>PluginDataHandler</code> 类 (不要和前面的同名类混淆, 它是 <code>soul-plugin-base</code> 下的接口, 它的实现类在各个可插拔插件包)</p><p><img src=/img/soul/blog1/image-20210122172333111.png alt=image-20210122172333111></p><pre><code class=language-java>public class CommonPluginDataSubscriber implements PluginDataSubscriber {
   
   // 收集所有注册为 Bean 的数据处理器并缓存, 比如 HTTP 插件 divide 下的 DividePluginDataHandler
   private final Map&lt;String, PluginDataHandler&gt; handlerMap;

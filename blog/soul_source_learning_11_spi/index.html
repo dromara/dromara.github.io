@@ -1,0 +1,518 @@
+<!doctype html><html><head><title>Soul Gateway Learning SPI · dromara(Open source organization)</title><meta charset=utf-8><meta http-equiv=x-ua-compatible content="IE=edge,chrome=1"><meta name=viewport content="width=device-width,minimum-scale=1"><meta name=description content="The girl on the prairie"><meta name=generator content="Hugo 0.55.5"><link rel="shortcut icon" href=/img/favicon.png type=image/png><link href=https://unpkg.com/purecss@1.0.0/build/base-min.css rel=stylesheet><link href=/css/main.css rel=stylesheet><link href=/css/zoom-image.css rel=stylesheet><script src=/js/iconfont.js></script><script src=/js/highlight.pack.js></script><script>hljs.initHighlightingOnLoad();</script><script>window.SITE_LANGUAGE="en"</script><script src=/js/app.js></script><script type=application/javascript>var doNotTrack=false;if(!doNotTrack){(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');ga('create','UA-187960192-2','auto');ga('send','pageview');}</script></head><body><header class=ss-header><nav class=navbar role=navigation aria-label="main navigation"><div class=navbar-brand><a class=logo-link href=/><img class=logo src=/img/logo.png></a><div class=-show-mobile><a id=mobile-menu-icon><svg class="icon" aria-hidden="true"><use xlink:href="#icon-menu"/></svg></a><nav id=mobile-menu><div id=js-menu-search-mobile class=navbar-search-mobile><input class=input placeholder=Search><svg class="icon" aria-hidden="true"><use xlink:href="#icon-search"/></svg></div><a href=/projects/><span>Projects</span><svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"/></svg></a>
+<a href=/guides/><span>Guides</span><svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"/></svg></a>
+<a href=/blog/><span>Blog</span><svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"/></svg></a>
+<a href=/activities/><span>Activity</span><svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"/></svg></a>
+<a href=/community/><span>Community</span><svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"/></svg></a>
+<a href=/awesome/><span>Awesome Dromara</span><svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"/></svg></a>
+<a href=/zh/blog/soul_source_learning_11_spi/><span>中文</span><svg class="icon" aria-hidden="true"><use xlink:href="#icon-transfer"/></svg></a></nav></div></div><div class="navbar-menu -hidden-mobile"><div class=navbar-start><a class=navbar-item href=/projects/>Projects</a>
+<a class=navbar-item href=/guides/>Guides</a>
+<a class=navbar-item href=/blog/>Blog</a>
+<a class=navbar-item href=/activities/>Activity</a>
+<a class=navbar-item href=/community/>Community</a>
+<a class=navbar-item href=/awesome/>Awesome Dromara</a></div><div class=navbar-end><div class=navbar-item><div id=js-menu-search class=navbar-search><input class=input placeholder=Search><svg class="icon" aria-hidden="true"><use xlink:href="#icon-search"/></svg></div></div><div class=navbar-item><a class=translation href=/zh/blog/soul_source_learning_11_spi/>中</a></div></div></div></nav></header><div class=ss-layout-container><main class="ss-layout-main -card"><div class=ss-meta><h1 class=title>Soul Gateway Learning SPI</h1><div class=meta>2021-01-30 ·
+zhuming ·
+<span class=tags><a class=tag href=/tags/soul/ rel=tag>#Soul</a></span></div></div><article class=typo><h1 id=soul-中-spi-的使用>SOUL 中 SPI 的使用</h1><p>在之前分析 divide 插件的负载均衡策略时, 有看到过一行代码:</p><pre><code class=language-java>DivideUpstream divideUpstream = LoadBalanceUtils.selector(upstreamList, ruleHandle.getLoadBalance(), ip);
+</code></pre><p>当时很简单的略过了它的实现, 它的作用很容易分析, 调用一个看似工具类的方法, 传入多个节点组成的集群, 返回一个节点. 这是一个负载均衡器.</p><p>但是细节却非常多, 最重要的一点是使用 SPI 来选择具体的实现类. 看看这个方法的代码:</p><pre><code class=language-java>public class LoadBalanceUtils {
+
+  public static DivideUpstream selector(final List&lt;DivideUpstream&gt; upstreamList, final String algorithm, final String ip) {
+    // 调用自定义的 SPI 得到一个子类
+    LoadBalance loadBalance = ExtensionLoader.getExtensionLoader(LoadBalance.class).getJoin(algorithm);
+    return loadBalance.select(upstreamList, ip);
+  }
+}
+</code></pre><p>后面的是调用具体子类的 <code>select()</code> 方法, 根据子类的不同实现, 最终会表现出各种形式. 目前的子类实现有:</p><ul><li>HashLoadBalance</li><li>RandomLoadBalance</li><li>RoundRobinLoadBalance</li></ul><p>关键就在于 <code>ExtensionLoader.getExtensionLoader(LoadBalance.class).getJoin(algorithm);</code> 这行.</p><p>在研究它之前, 我们先不妨研究下 Java 提供的 SPI 机制.</p><h2 id=java-spi>Java SPI</h2><p><em>&lt;&lt;高可用可伸缩微服务架构&gt;&gt; 第3章 Apache Dubbo 框架的原理与实现</em> 中有这样的一句定义.</p><blockquote><p>SPI 全称为 Service Provider Interface, 是 JDK 内置的一种服务提供发现功能, 一种动态替换发现的机制. 举个例子, 要想在运行时动态地给一个接口添加实现, 只需要添加一个实现即可.</p></blockquote><p>书中也有个非常形象的脑图, 展示了 SPI 的使用:</p><p><img src=/img/soul/blog1/08.png alt=08></p><p>也就是说在我们代码中的实现里, 无需去写入一个 Factory 工厂, 用 MAP 去包装一些子类, 最终返回的类型是父接口. 只需要定义好资源文件, 让父接口与它的子类在文件中写明, 即可通过设置好的方式拿到所有定义的子类对象:</p><pre><code class=language-java>ServiceLoader&lt;Interface&gt; loaders = ServiceLoader.load(Interface.class)
+for(Interface interface : loaders){
+    System.out.println(interface.toString());
+}
+</code></pre><p>这种方式相比与普通的工厂模式, 肯定是更符合开闭原则, 新加入一个子类不用去修改工厂方法, 而是编辑资源文件.</p><h3 id=从一个-demo-开始>从一个 Demo 开始</h3><p>按照 SPI 的规范, 我建了一个 demo, 看看具体的实现效果</p><p><img src=/img/soul/blog1/image-20210129095623013.png alt=image-20210129095623013></p><p><img src=/img/soul/blog1/image-20210129095703911.png alt=image-20210129095703911></p><p>Animal 中定义一个 <code>run()</code> 方法, 而子类实现它.</p><pre><code class=language-java>public interface Animal {
+  void run();
+}
+
+public class Dog implements Animal {
+  @Override
+  public void run() {
+    System.out.println(&quot;狗在跑&quot;);
+  }
+}
+
+public class Horse implements Animal {
+  @Override
+  public void run() {
+    System.out.println(&quot;马在跑&quot;);
+  }
+}
+</code></pre><p>使用 SPI 的加载类, 得到子类的执行结果:</p><pre><code class=language-java>private static void test() {
+  final ServiceLoader&lt;Animal&gt; load = ServiceLoader.load(Animal.class);
+  
+  for (Animal animal : load) {
+    System.out.println(animal);
+    animal.run();
+  }
+}
+</code></pre><p><img src=/img/soul/blog1/image-20210129103047851.png alt=image-20210129103047851></p><p>在调用后我们得到之前在资源文件中写入的实现类, 并成功调取它们各自的 <code>run()</code> 方法.</p><p>到这里我产生一个疑问, <strong>是否每次调用 <code>ServiceLoader.load(Animal.class)</code> 返回的都是同一个对象?</strong> 如果是我猜测它是在启动时加载到缓存了, 如果不是, 可能就是在底层用了反射, 每次调用都有一定消耗. 我们看看下面的实验:</p><pre><code class=language-java>public static void main(String[] args) {
+  for (int i = 0; i &lt; 2; i++) {
+    test();
+    System.out.println(&quot;----------&quot;);
+  }
+}
+
+private static void test() {
+  final ServiceLoader&lt;Animal&gt; load = ServiceLoader.load(Animal.class);
+  for (Animal animal : load) {
+    System.out.println(animal);
+    animal.run();
+  }
+}
+</code></pre><p><img src=/img/soul/blog1/image-20210129103451844.png alt=image-20210129103451844></p><p>两次调用出现的对象却不一样, 不由让我替其性能揪心一下, 所以我们先分析下它的代码, 看看到底怎么实现.</p><h3 id=spi-的实现>SPI 的实现</h3><p>找到 <code>java.util,ServiceLoaders</code> 这个类, 入眼最醒目的就是之前我们按照规范放置资源文件的目录</p><pre><code class=language-java>public final class ServiceLoader&lt;S&gt; implements Iterable&lt;S&gt; {
+
+  private static final String PREFIX = &quot;META-INF/services/&quot;;
+}
+</code></pre><p>在 debug <code>PREFIX</code> 属性的被调用处时, 发现 <code>ServiceLoader.load</code> 实际是使用懒加载的方式, 并没有在调用它的时候, 找寻到实际返回类, 而是在遍历时查找.</p><p>它的懒加载具体实现在如下代码:</p><pre><code class=language-java>public final class ServiceLoader&lt;S&gt; implements Iterable&lt;S&gt; {
+  
+  public static &lt;S&gt; ServiceLoader&lt;S&gt; load(Class&lt;S&gt; service) {
+    // 获取当前的类加载器 (我们自己的通常是弟中弟 AppClassLoader )
+    ClassLoader cl = Thread.currentThread().getContextClassLoader();
+    return ServiceLoader.load(service, cl);
+  }
+  
+  public static &lt;S&gt; ServiceLoader&lt;S&gt; load(Class&lt;S&gt; service, ClassLoader loader) {
+    // 调用构造器初始化对象 (说明每次调用都使用新的 ServiceLoader 对象)
+    return new ServiceLoader&lt;&gt;(service, loader);
+  }
+  
+  private ServiceLoader(Class&lt;S&gt; svc, ClassLoader cl) {
+    service = Objects.requireNonNull(svc, &quot;Service interface cannot be null&quot;);
+    loader = (cl == null) ? ClassLoader.getSystemClassLoader() : cl;
+    acc = (System.getSecurityManager() != null) ? AccessController.getContext() : null;
+    // 上面都是将信息放入对象实例属性中, 这行才是关键调用
+    reload();
+  }
+  
+  public void reload() {
+    providers.clear();
+    // 创建懒加载迭代器, 传入关键的接口 Class 以及加载器
+    lookupIterator = new LazyIterator(service, loader);
+  }
+}
+
+</code></pre><p>调用 <code>ServiceLoader.load</code> 后关键事情都没干, 仅仅是将接口 class 和加载器传给 LazyIterator 这个迭代器的实现类.</p><p>看到这可以猜测, 真正迭代调用返回的对象时, 肯定需要迭代器完成实现类的搜索和初始化, 而传参是 Class 信息和加载器, 实现类的初始化也明显会是反射了.</p><p>看下 LazyIterator 的实现方式, 先从其最开始会被调用到的 <code>hasNext()</code> 开始:</p><pre><code class=language-java>private class LazyIterator implements Iterator&lt;S&gt; {
+  
+  public boolean hasNext() {
+    if (acc == null) {
+      return hasNextService();
+    } else {
+      // ...
+    }
+  }
+  
+  private boolean hasNextService() {
+    if (nextName != null) {
+      return true;
+    }
+    if (configs == null) {
+      try {
+        String fullName = PREFIX + service.getName();
+        if (loader == null)
+          configs = ClassLoader.getSystemResources(fullName);
+        else
+          // 加载资源文件
+          configs = loader.getResources(fullName);
+      } catch (IOException x) {
+        fail(service, &quot;Error locating configuration files&quot;, x);
+      }
+    }
+    while ((pending == null) || !pending.hasNext()) {
+      if (!configs.hasMoreElements()) {
+        return false;
+      }
+      // 解析出资源文件中写入的实现类类名
+      pending = parse(service, configs.nextElement());
+    }
+    // 获取一个类名
+    nextName = pending.next();
+    return true;
+  }
+}
+</code></pre><p><img src=/img/soul/blog1/image-20210129111231212.png alt=image-20210129111231212></p><p><code>hasNext()</code> 的调用可以获取到我们资源中的类名, 写入到实例属性 <code>nextName</code> 中, 并返回 <code>true</code>, 让迭代器可以进行 <code>next()</code> 的调用</p><pre><code class=language-java>public S next() {
+  if (acc == null) {
+    return nextService();
+  } else {
+    // ...
+  }
+}
+
+private S nextService() {
+  if (!hasNextService()) throw new NoSuchElementException();
+  String cn = nextName;
+  nextName = null;
+  Class&lt;?&gt; c = null;
+  try {
+    // 反射得到 Class 对象
+    c = Class.forName(cn, false, loader);
+  } catch (ClassNotFoundException x) {
+    fail(service, &quot;Provider &quot; + cn + &quot; not found&quot;);
+  }
+  if (!service.isAssignableFrom(c)) {
+    fail(service, &quot;Provider &quot; + cn  + &quot; not a subtype&quot;);
+  }
+  try {
+    // 初始化对象, 并判断是否与接口符合
+    S p = service.cast(c.newInstance());
+    // 将初始化的对象放入hash缓存 (关键步骤)
+    providers.put(cn, p);
+    return p;
+  } catch (Throwable x) {
+    fail(service, &quot;Provider &quot; + cn + &quot; could not be instantiated&quot;, x);
+  }
+  throw new Error();          // This cannot happen
+}
+</code></pre><p>看到这里我们明白了, 在初始化后会将对象放入缓存中, key 就是接口 class 二次调用不会再有反射消耗.</p><p>那么之前我们在测试时的方式为什么会产生不同对象实例呢? 原因就是每次调用 <code>ServiceLoader.load()</code> 都会产生新的 <code>ServiceLoader</code> 对象. 我们将测试方法改进下:</p><pre><code class=language-java>public static void main(String[] args) {
+  // 复用 ServiceLoaders
+  final ServiceLoader&lt;Animal&gt; load = ServiceLoader.load(Animal.class);
+  for (int i = 0; i &lt; 2; i++) {
+    test(load);
+    System.out.println(&quot;----------&quot;);
+  }
+}
+
+private static void test(ServiceLoader&lt;Animal&gt; load) {
+  for (Animal animal : load) {
+    System.out.println(animal);
+    animal.run();
+  }
+}
+</code></pre><p><img src=/img/soul/blog1/image-20210129113307494.png alt=image-20210129113307494></p><h3 id=java-spi-思考>Java SPI 思考</h3><p>Java SPI 中我们还有很多的细节没有描述到, 但主流程就是这些. 我们之前的两个疑问点, 如何实现以及性能情况也可以得到解答:</p><ol><li>如何实现: 通过IO流读取到资源文件, 反射加载对应路径并生成Class对象, 初始化后放入缓存中</li><li>性能情况: 首次迭代调用即会有反射调用, 但多次使用时, 只要保证是用同一个 ServiceLoader 对象, 即可避免多次反射, 因为会直接复用缓存中的对象.</li></ol><p>写到这我有个非常疑惑的地方, 之前我觉得它和工厂方法很类似但比它有优势, 因为添加子类后仅需用改动资源文件不用变动工厂类.</p><p>但我尝试用 Java SPI 去真正实现时, 发现并不能达到这个效果, 一个重要的原因是, <strong>资源文件中的各个实现类没有区分度</strong>, 我无法去筛选出某一个我需要的缓存在 <code>ServiceLoaders</code> 中的实现类.</p><p>那么它的使用场景在哪呢?</p><h2 id=jdbc-spi-使用方式>JDBC SPI 使用方式</h2><p>经过查阅资料得知, 在 JDBC 中最关键的可插拔式驱动设计就是由 SPI 实现.</p><h3 id=mysql-驱动包-spi>Mysql 驱动包 SPI</h3><p>各个数据库连接包中关于 JDBC 方式实现, 都需要实现其 Driver 接口, 这块其实用的就是 SPI 的方式, 我们看看 <code>mysql-connector-java.jar</code></p><p><img src=/img/soul/blog1/image-20210130202512831.png alt=image-20210130202512831></p><p>那么 JDK 中的 JDBC 相关类, 是如何实现这块的? 关键类就是 DriverManager</p><pre><code class=language-java>public class DriverManager {
+  
+  static {
+    loadInitialDrivers();
+  }
+  
+  private static void loadInitialDrivers() {
+    // ...
+    
+    AccessController.doPrivileged(new PrivilegedAction&lt;Void&gt;() {
+      public Void run() {
+                
+        // 这里就是 SPI 的实现, 迭代时实际会 Class.forName() 初始化实现类
+        ServiceLoader&lt;Driver&gt; loadedDrivers = ServiceLoader.load(Driver.class);
+        Iterator&lt;Driver&gt; driversIterator = loadedDrivers.iterator();
+        try{
+          while(driversIterator.hasNext()) {
+            driversIterator.next();
+          }
+        } catch(Throwable t) {
+          // Do nothing
+        }
+        return null;
+      }
+    });
+    
+    // ...
+  }
+}
+</code></pre><p>如果代码中调用到 DriverManager 的静态方法, 即会触发上面这些代码, 而这些代码的<strong>作用便是将 SPI 资源文件中 Driver 实现类全部初始化</strong>, 那么初始化实现类后又有什么作用呢? 接着看看 <code>com.mysql.jdbc.Driver</code></p><pre><code class=language-java>public class Driver extends NonRegisteringDriver implements java.sql.Driver {
+  static {
+    try {
+      // 调用 DriverManager 的注册方法, 将此 Driver 实现类注册到 JDBC 的 Driver 管理器中
+      java.sql.DriverManager.registerDriver(new Driver());
+    } catch (SQLException E) {
+      throw new RuntimeException(&quot;Can't register driver!&quot;);
+    }
+  }
+}
+</code></pre><p>DriverManager 的注册方法实现很简单, 即将入参放入静态变量作为全局缓存</p><pre><code class=language-java>public class DriverManager {
+    // 缓存 Driver 实现类
+  private final static CopyOnWriteArrayList&lt;DriverInfo&gt; registeredDrivers = new CopyOnWriteArrayList&lt;&gt;();
+
+  public static synchronized void registerDriver(java.sql.Driver driver) throws SQLException {
+    registerDriver(driver, null);
+  }
+
+  public static synchronized void registerDriver(java.sql.Driver driver, DriverAction da) throws SQLException {
+    if(driver != null) {
+      // 注册到变量中
+      registeredDrivers.addIfAbsent(new DriverInfo(driver, da));
+    } else {
+      throw new NullPointerException();
+    }
+  }
+}
+</code></pre><h3 id=筛选-driver-约定大于配置>筛选 Driver: 约定大于配置</h3><p>正常使用时, 我们会直接用 <code>DriverManager.getConnection(url, user, passwd)</code> 获取到连接, 但这里就有疑问了, 我们在 DriverManager 中注册了多个 Driver, 为什么这里能确定一个唯一 Driver 呢?</p><p>先找到 DriverManager 的 <code>getConnection()</code> 方法:</p><pre><code class=language-java>public static Connection getConnection(String url, String user, String password) throws SQLException {
+  // ...
+  return (getConnection(url, info, Reflection.getCallerClass()));
+}
+
+private static Connection getConnection(
+        String url, java.util.Properties info, Class&lt;?&gt; caller) throws SQLException {
+
+  // ...
+  
+  for(DriverInfo aDriver : registeredDrivers) {
+    // isDriverAllowed() 仅是通过 Class.forName() 初始化, 没有甄别作用
+    if(isDriverAllowed(aDriver.driver, callerCL)) {
+      try {
+        // 最关键的点在这行, 筛选工作其实在实现类自身的 connect() 方法中, 会根据传入的 url 筛选
+        Connection con = aDriver.driver.connect(url, info);
+        if (con != null) {
+          return (con);
+        }
+      } catch (SQLException ex) {
+      }
+    } else {
+    }
+
+  }
+
+  // ...
+}
+</code></pre><p>看看最重要的 Mysql 的 Driver 中如何实现筛选 (Driver 继承自 NonRegisteringDriver)</p><pre><code class=language-java>public class NonRegisteringDriver implements java.sql.Driver {
+    private static final String URL_PREFIX = &quot;jdbc:mysql://&quot;;
+  private static final String REPLICATION_URL_PREFIX = &quot;jdbc:mysql:replication://&quot;;
+  private static final String MXJ_URL_PREFIX = &quot;jdbc:mysql:mxj://&quot;;
+  public static final String LOADBALANCE_URL_PREFIX = &quot;jdbc:mysql:loadbalance://&quot;;
+  
+  public java.sql.Connection connect(String url, Properties info) throws SQLException {
+    // ...
+        // parseURL() 会匹配 url 是否符合其所在 Driver 的连接方式
+    // 这里就是采用&quot;约定大于配置&quot;的思想, 通过匹配路径头做筛选
+    if ((props = parseURL(url, info)) == null) {
+      return null;
+    }
+
+    // ...
+  }
+  
+  public Properties parseURL(String url, Properties defaults) throws java.sql.SQLException {
+    // ...
+        // 如果 url 不匹配此 Driver 的路径则返回null, 最外层会继续尝试下个 Driver
+    if (!StringUtils.startsWithIgnoreCase(url, URL_PREFIX) &amp;&amp; !StringUtils.startsWithIgnoreCase(url, MXJ_URL_PREFIX)
+        &amp;&amp; !StringUtils.startsWithIgnoreCase(url, LOADBALANCE_URL_PREFIX) &amp;&amp; !StringUtils.startsWithIgnoreCase(url, REPLICATION_URL_PREFIX)) {
+      return null;
+    }
+    
+    // ...
+  }
+}
+</code></pre><h3 id=总结-mysql-jdbc>总结 MySQL &amp; JDBC</h3><p>看到这里我想你已经了解 MySQL &amp; JDBC 中关于 SPI 的实现方式了, 归纳几点</p><ul><li>JDBC 中的 DriverManager 会加载 SPI 资源文件, 将 <code>java.sql.Driver</code> 的实现类全部初始化</li><li>其实现类初始化时, 会自主创建自身对象并注入到 DriverManager 中进行统一管理</li><li>DriverManager 对于管理的 Driver 筛选方式是交由 Driver 实现类自身进行的, 它仅负责遍历并取出可用的 Driver</li><li>Driver 实现类通过传入的数据库 url 头, 判断是否该返回自身. 如果判断为否则返回 <code>null</code>. JDBC 的 DriverManager 接收到 <code>null</code> 会继续下个 Driver 实现类的调用.</li><li>MySql 驱动实选方案是路径头匹配, 是一种 <strong>约定大于配置的思想</strong></li></ul><h3 id=jdbc-demo>JDBC Demo</h3><p>写完这些分析我们再来看如果实现个简单的 demo.</p><p>先分享个我以前写的方式</p><pre><code class=language-java>static {
+  try {
+    // 反射, 该类加载时会在静态块中, 向 DriverManager 注册 Driver
+    Class.forName(&quot;com.mysql.jdbc.Driver&quot;);
+  } catch (ClassNotFoundException e) {
+    e.printStackTrace();
+  }
+}
+
+public static void main(String[] args) {
+  try (
+    final Connection conn = DriverManager.getConnection(url, user, passwd);
+    final Statement stmt = conn.createStatement();
+    final ResultSet rs = stmt.executeQuery(&quot;select count(1) from test&quot;)
+  ) {
+    while (rs.next()) {
+      int count = rs.getInt(&quot;count(1)&quot;);
+      System.out.println(count);
+    }
+  } catch (Exception e) {
+    e.printStackTrace();
+  }
+}
+</code></pre><p>虽然这样可以使用, 但不觉得有多余的代码吗? 看看我新写的方式</p><pre><code class=language-java>public static void main(String[] args) throws ClassNotFoundException {
+  try (
+    final Connection conn = DriverManager.getConnection(url, user, passwd);
+    final Statement stmt = conn.createStatement();
+    final ResultSet rs = stmt.executeQuery(&quot;select count(1) from test&quot;)
+  ) {
+    while (rs.next()) {
+      int count = rs.getInt(&quot;count(1)&quot;);
+      System.out.println(count);
+    }
+  } catch (Exception e) {
+    e.printStackTrace();
+  }
+}
+</code></pre><p>仅仅需要这些简单的代码即可, <code>DriverManager.getConnection()</code> 被调用时 DriverManager 会自动加载 SPI 中的实现类, 不需要我们再去 <code>Class.forName()</code> 手动调用 <code>java.mysql.Driver</code> 的初始化.</p><p><strong>看到这里我想你依然明白 SPI 最最重要的作用了. 无需显式的写出接口对应的实现类</strong></p><p>那么我们还有个在 &ldquo;Java SPI 思考&rdquo; 中的问题也解开了. **如何区分出 SPI 中要使用的实现类呢? 让实现类自己判定即可, 外层调用仅需迭代所有. **</p><h2 id=soul-spi-实现>SOUL SPI 实现</h2><p>Java 中 SPI 的使用方式我们已经掰开来了解透彻了, 而 Soul 中的 SPI 是自己设计的, 采用 Dubbo 中 SPI 的设计思想. 在 <code>org.dromara.soul.spi.SPI</code> 注释类上可以看到相关注释.</p><pre><code class=language-java>/**
+ * SPI Extend the processing.
+ * All spi system reference the apache implementation of
+ * https://github.com/apache/dubbo/blob/master/dubbo-common/src/main/java/org/apache/dubbo/common/extension.
+ */
+</code></pre><h3 id=java-spi-缺陷>Java SPI 缺陷</h3><p>在上两个模块中分析 Java SPI 使用时, 发现了些缺点:</p><ol><li>如果使用 ServiceLoader 不当, <strong>没有正确利用到它的缓存机制</strong>, 会导致每次获取具体实现类都要反射出类对象以及初始化实例对象, 性能完蛋不说, 每次得到的对象都不一样可能会引发程序问题.</li><li>即每次找寻具体实现类都要迭代一遍才行, 虽然子类少的使用没什么影响, 但这种方式还是很傻. 另外参考 MySQL 驱动中 JDBC 的实现, 还需要自行设计一套比较复杂的筛选机制.</li></ol><p>那么 Soul SPI 的实现, 是如何解决这两个问题的? 关键就在接下来的两个子模块中</p><ul><li>优化的 ExtensionLoader</li><li>增强型 getJoin()</li></ul><h3 id=优化的-extensionloader>优化的 ExtensionLoader</h3><p>先来看 SPI 实现项目的全貌, 项目为 <code>soul-spi</code>:</p><p><img src=/img/soul/blog1/image-20210130214402997.png alt=image-20210130214402997></p><p>其中最核心的类就是 ExtensionLoader, 可以说是 Soul 版的 ServiceLoader, 它也定义了 SPI 资源文件的路径位置</p><pre><code class=language-java>public final class ExtensionLoader&lt;T&gt; {
+  private static final String SOUL_DIRECTORY = &quot;META-INF/soul/&quot;;
+}
+</code></pre><p>通过检查它各个方法的调用处, 我们找到入口方法 <code>getExtensionLoader()</code></p><pre><code class=language-java>public final class ExtensionLoader&lt;T&gt; {
+  
+  private static final Map&lt;Class&lt;?&gt;, ExtensionLoader&lt;?&gt;&gt; LOADERS = new ConcurrentHashMap&lt;&gt;();
+  
+  public static &lt;T&gt; ExtensionLoader&lt;T&gt; getExtensionLoader(final Class&lt;T&gt; clazz) {
+    // ...
+
+    // 根据加载类对象取出缓存中数据, 如果没有则新建 ExtensionLoader 对象并放入缓存
+    ExtensionLoader&lt;T&gt; extensionLoader = (ExtensionLoader&lt;T&gt;) LOADERS.get(clazz);
+    if (extensionLoader != null) {
+      return extensionLoader;
+    }
+    LOADERS.putIfAbsent(clazz, new ExtensionLoader&lt;&gt;(clazz));
+    return (ExtensionLoader&lt;T&gt;) LOADERS.get(clazz);
+  }
+}
+</code></pre><p>这个方法的作用其实就像是 ServiceLoader 的 <code>load()</code> 方法, 会返回一个 ServiceLoader 对象.</p><p>只是 Soul 中的实现改了种方式, 将 ExtensionLoader 对象缓存起来, 这样 <strong>二次调用时传入相同 Class 对象也会返回同样的 ExtensionLoader, 避免了 ServiceLoader 使用时不理解其机制导致没有用到它的缓存, 每次迭代都去反射初始化所有实现类</strong></p><h3 id=增强型搜索-getjoin>增强型搜索 getJoin()</h3><p>再来看看 ExtensionLoader 的 <code>getJoin()</code> 方法, 我将它理解为 <strong>更优的 ServiceLoader 迭代器版实现</strong>. 它同样是做了两件 ServiceLoader 迭代时做过的事情:</p><ul><li><p>初始化 SPI 中的实现类</p></li><li><p>将实现类缓存 -&gt; 缓存为 Key-Value 形式的 Map 集合</p></li></ul><p>基于 K-V 缓存模式, 它还做了一件我最期待的改造:</p><ul><li>时间复杂度 <code>O(1)</code> 的直接匹配实现类方式</li></ul><h3 id=多层缓存>多层缓存</h3><p>ExtensionLoader 之所以能做到这种增强型搜索, 无需每次都迭代所有, 是依靠三种不同类型的缓存.</p><p>这三种缓存我将它分为二层, 它们各有不同用途, 总览如下:</p><pre><code class=language-java>// 一层缓存
+private final Map&lt;String, Holder&lt;Object&gt;&gt; cachedInstances = new ConcurrentHashMap&lt;&gt;();
+
+// 二层缓存之一
+private final Holder&lt;Map&lt;String, Class&lt;?&gt;&gt;&gt; cachedClasses = new Holder&lt;&gt;();
+
+// 二层缓存之一
+private final Map&lt;Class&lt;?&gt;, Object&gt; joinInstances = new ConcurrentHashMap&lt;&gt;();
+</code></pre><h4 id=第一层缓存-cachedinstances>第一层缓存: cachedInstances</h4><p>首先是第一层缓存, 它是我们搜索接口的具体实现类时最先接触到的, 如果命中它则直接可以得到实现类的对象</p><pre><code class=language-java>private final Map&lt;String, Holder&lt;Object&gt;&gt; cachedInstances = new ConcurrentHashMap&lt;&gt;();
+</code></pre><p>它的 <code>key</code> 其实就是 Soul SPI 资源文件中我们配置的信息, 比如 Divide 插件的负载均衡实现类的资源文件</p><p><img src=/img/soul/blog1/image-20210130230250748.png alt=image-20210130230250748></p><p>而它的 <code>value</code> 则是 Holder 对象, 其中存有实现类的对象. 调用 <code>getJoin()</code> 时传入标识 (比如 random) 获得实现类对象.</p><pre><code class=language-java>public T getJoin(final String name) {
+  // ...
+  Holder&lt;Object&gt; objectHolder = cachedInstances.get(name);
+  Object value = objectHolder.getValue();
+  // ...
+  return (T) value;
+}
+</code></pre><h4 id=第二层缓存之-cachedclasses>第二层缓存之: cachedClasses</h4><p><code>cachedClasses</code> 存放的是 标识(random) 与 类对象 的映射</p><pre><code class=language-java>private final Holder&lt;Map&lt;String, Class&lt;?&gt;&gt;&gt; cachedClasses = new Holder&lt;&gt;();
+</code></pre><p><code>cachedClasses</code> 缓存的信息如何填充的呢? 是直接触发到检索 SPI 资源文件, 然后解析成 <code>cachedClasses</code> 缓存. 具体方法在 <code>loadResources()</code> 中</p><pre><code class=language-java>private void loadResources(final Map&lt;String, Class&lt;?&gt;&gt; classes, final URL url) throws IOException {
+  Properties properties = new Properties();
+  // 解析资源文件
+  properties.load(inputStream);
+  properties.forEach((name, classPath) -&gt; {
+    // 读出 K-V 结构并组装成 classes, 外层调用会包装到 cachedClasses
+    loadClass(classes, name, classPath);
+    });
+}
+</code></pre><h4 id=第二层缓存之-joininstances>第二层缓存之: joinInstances</h4><p><code>joinInstances</code> 缓存存放的是 类对象与对象实例 的映射</p><pre><code class=language-java>private final Map&lt;Class&lt;?&gt;, Object&gt; joinInstances = new ConcurrentHashMap&lt;&gt;();
+</code></pre><p>这一层缓存会借助第二层缓存, 得到对应标识(random) 的类对象, 并通过类对象初始化实例, 缓存到自身中. 对应实现方法为 <code>createExtension()</code></p><pre><code class=language-java>private T createExtension(final String name) {
+  Class&lt;?&gt; aClass = getExtensionClasses().get(name);
+  Object o = joinInstances.get(aClass);
+  if (o == null) {
+    joinInstances.putIfAbsent(aClass, aClass.newInstance());
+  }
+  return (T) o;
+}
+</code></pre><h4 id=缓存小结>缓存小结</h4><p>通过 ExtensionLoader 加载某个接口的实现类时, 缓存调用流程图如下:</p><p><img src=/img/soul/blog1/09.png alt=09></p><h3 id=详细源码分析-可跳过>详细源码分析 (可跳过)</h3><pre><code class=language-java>// name 理解为标识, 用于甄别 SPI 文件中, 想要获取的某个实现类
+public T getJoin(final String name) {
+  // ...
+  // cachedInstances 缓存所有 Holder 对象. Holder 对象的 value 属性存放具体实现类
+  // 我将 cachedInstances 理解为第一层缓存, 命中则直接返回要找的类
+  Holder&lt;Object&gt; objectHolder = cachedInstances.get(name);
+  if (objectHolder == null) {
+    cachedInstances.putIfAbsent(name, new Holder&lt;&gt;());
+    objectHolder = cachedInstances.get(name);
+  }
+  Object value = objectHolder.getValue();
+  // 双重锁, 如果没有命中则调用 createExtension()
+  if (value == null) {
+    synchronized (cachedInstances) {
+      value = objectHolder.getValue();
+      if (value == null) {
+        value = createExtension(name);
+        objectHolder.setValue(value);
+      }
+    }
+  }
+  return (T) value;
+}
+</code></pre><pre><code class=language-java>private T createExtension(final String name) {
+  // 关键代码, 搜索标识对应的类对象
+  Class&lt;?&gt; aClass = getExtensionClasses().get(name);
+  if (aClass == null) {
+    throw new IllegalArgumentException(&quot;name is error&quot;);
+  }
+  // joinInstances 理解为第二层缓存, K-V 存放类对象与其初始化对象
+  Object o = joinInstances.get(aClass);
+  if (o == null) {
+    try {
+      joinInstances.putIfAbsent(aClass, aClass.newInstance());
+      o = joinInstances.get(aClass);
+    } catch (InstantiationException | IllegalAccessException e) {
+      // ...
+    }
+  }
+  return (T) o;
+}
+</code></pre><pre><code class=language-java>public Map&lt;String, Class&lt;?&gt;&gt; getExtensionClasses() {
+  // cachedClasses 为第三层缓存, 存放标识与类对象映射
+  Map&lt;String, Class&lt;?&gt;&gt; classes = cachedClasses.getValue();
+  if (classes == null) {
+    synchronized (cachedClasses) {
+      classes = cachedClasses.getValue();
+      if (classes == null) {
+            // 构造 classes 缓存, classes 的 K-V 结构为 标识-类对象
+        classes = loadExtensionClass();
+        cachedClasses.setValue(classes);
+      }
+    }
+  }
+  return classes;
+}
+</code></pre><pre><code class=language-java>private Map&lt;String, Class&lt;?&gt;&gt; loadExtensionClass() {
+  // 拿到接口的 SPI 注解
+  SPI annotation = clazz.getAnnotation(SPI.class);
+  if (annotation != null) {
+    String value = annotation.value();
+    if (StringUtils.isNotBlank(value)) {
+      cachedDefaultName = value;
+    }
+  }
+  // 构造 classes 缓存, classes 的 K-V 结构为 标识-类对象
+  Map&lt;String, Class&lt;?&gt;&gt; classes = new HashMap&lt;&gt;(16);
+  loadDirectory(classes);
+  return classes;
+}
+</code></pre><pre><code class=language-java>private void loadDirectory(final Map&lt;String, Class&lt;?&gt;&gt; classes) {
+  String fileName = SOUL_DIRECTORY + clazz.getName();
+  try {
+    ClassLoader classLoader = ExtensionLoader.class.getClassLoader();
+    // 读取 SPI 资源文件
+    Enumeration&lt;URL&gt; urls = classLoader != null ? classLoader.getResources(fileName)
+      : ClassLoader.getSystemResources(fileName);
+    if (urls != null) {
+      while (urls.hasMoreElements()) {
+        URL url = urls.nextElement();
+        // 构造 classes 缓存, classes 的 K-V 结构为 标识-类对象
+        loadResources(classes, url);
+      }
+    }
+  }
+}
+</code></pre><pre><code class=language-java>private void loadResources(final Map&lt;String, Class&lt;?&gt;&gt; classes, final URL url) throws IOException {
+  try (InputStream inputStream = url.openStream()) {
+    Properties properties = new Properties();
+    properties.load(inputStream);
+    // 解析资源文件为 KV 结构
+    properties.forEach((k, v) -&gt; {
+      String name = (String) k;
+      String classPath = (String) v;
+      if (StringUtils.isNotBlank(name) &amp;&amp; StringUtils.isNotBlank(classPath)) {
+        try {
+          // 加载路径, 传入 classes 缓存、标识、类路径
+          loadClass(classes, name, classPath);
+        } catch (ClassNotFoundException e) {
+          throw new IllegalStateException(&quot;load extension resources error&quot;, e);
+        }
+      }
+    });
+  }
+}
+</code></pre><pre><code class=language-java>private void loadClass(final Map&lt;String, Class&lt;?&gt;&gt; classes,
+                           final String name, final String classPath) throws ClassNotFoundException {
+  // 将资源文件中的类路径反射成类对象
+  Class&lt;?&gt; subClass = Class.forName(classPath);
+  // 拿到实现类的 Join 注解
+  Join annotation = subClass.getAnnotation(Join.class);
+  Class&lt;?&gt; oldClass = classes.get(name);
+  if (oldClass == null) {
+    // 放入入参 classes 缓存中, K-V 形式为 标识-类对象
+    classes.put(name, subClass);
+  }
+}
+</code></pre></article><div class=-show-mobile><nav class=ss-pagination-next><a class=link-prev href=/blog/soul_source_learning_12_sign/><span class=text>Prev:</span>
+<span class=text>Soul Gateway Learning Sign Plugin</span></a></nav></div></main><aside class=ss-layout-aside><div class=ss-card><h2 class=card-title>Related</h2><ul class=ss-aside-related><li><a href=/blog/soul_source_learning_12_sign/>Soul Gateway Learning Sign Plugin</a></li><li><a href=/blog/soul_source_learning_09_httplongpolling_02/>Soul Gateway Learns Http Long Polling Analysis 02</a></li><li><a href=/blog/soul_source_learning_08_httplongpolling_01/>Soul Gateway Learns Http Long Polling Analysis 01</a></li><li><a href=/blog/soul_source_learning_10_websocket/>Soul Gateway Learns WebSocket Data Synchronization Analysis</a></li><li><a href=/activities/dromara-cloud-native-meet/>Dromara Soul source code 01 reading sharing session 01</a></li></ul></div><div class="ss-aside-tags ss-card"><h2 class=card-title>Tag
+<span class=card-extra></span></h2><ul class=tag-list><li class=tag><a href=/tags/dreamcode/>DreamCode</a></li><li class=tag><a href=/tags/dromara/>Dromara</a></li><li class=tag><a href=/tags/gateway/>GateWay</a></li><li class=tag><a href=/tags/hmily/>hmily</a></li><li class=tag><a href=/tags/reactor/>Reactor</a></li><li class=tag><a href=/tags/soul/>Soul</a></li><li class=tag><a href=/tags/tcc/>TCC</a></li></ul></div></aside></div><footer class=ss-footer><div class=container><div class=links><div class=cate><h2 class=cate-title>Resources</h2><a class=link href=https://github.com/dromara>Github</a>
+<a class=link href=https://gitee.com/shuaiqiyu>Gitee</a></div><div class=cate><h2 class=cate-title>Get Involved</h2><a class=link href=https://github.com/dromara/soul/issues/new>Feedback</a>
+<a class=link href=/community>Community</a>
+<a class=link href=/blog>Blog</a></div><div class=cate><h2 class=cate-title>Document</h2><a class=link href=/projects/soul/overview/>Soul</a>
+<a class=link href=/projects/hmily/overview/>Hmily</a>
+<a class=link href=/projects/raincat/overview/>Raincat</a>
+<a class=link href=/projects/myth/overview/>Myth</a></div></div><div class=qrcode><div><img class=qrcode-img src=/img/qrcode/qrcode_1.png><p class=qrcode-desc>Wechat Official Account</p></div><div><img class=qrcode-img src=/img/qrcode/qrcode_2.png><p class=qrcode-desc>QQ Group</p></div></div></div><div class=copyright><p>Copyright ©2021
+<a href=/>xiaoyu@apache.org by xiaoyu</a></p></div></footer></body></html>

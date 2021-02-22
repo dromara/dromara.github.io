@@ -1,0 +1,90 @@
+<!doctype html><html><head><title>Soul网关学习Sign插件 · dromara(Open source organization)</title><meta charset=utf-8><meta http-equiv=x-ua-compatible content="IE=edge,chrome=1"><meta name=viewport content="width=device-width,minimum-scale=1"><meta name=description content="The girl on the prairie"><meta name=generator content="Hugo 0.55.5"><link rel="shortcut icon" href=/img/favicon.png type=image/png><link href=https://unpkg.com/purecss@1.0.0/build/base-min.css rel=stylesheet><link href=/css/main.css rel=stylesheet><link href=/css/zoom-image.css rel=stylesheet><script src=/js/iconfont.js></script><script src=/js/highlight.pack.js></script><script>hljs.initHighlightingOnLoad();</script><script>window.SITE_LANGUAGE="zh"</script><script src=/js/app.js></script><script type=application/javascript>var doNotTrack=false;if(!doNotTrack){(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');ga('create','UA-187960192-2','auto');ga('send','pageview');}</script></head><body><header class=ss-header><nav class=navbar role=navigation aria-label="main navigation"><div class=navbar-brand><a class=logo-link href=/zh/><img class=logo src=/img/logo.png></a><div class=-show-mobile><a id=mobile-menu-icon><svg class="icon" aria-hidden="true"><use xlink:href="#icon-menu"/></svg></a><nav id=mobile-menu><div id=js-menu-search-mobile class=navbar-search-mobile><input class=input placeholder=请输入要搜索的关键词><svg class="icon" aria-hidden="true"><use xlink:href="#icon-search"/></svg></div><a href=/zh/projects/><span>项目</span><svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"/></svg></a>
+<a href=/zh/guides/><span>指南</span><svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"/></svg></a>
+<a href=/zh/blog/><span>博客</span><svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"/></svg></a>
+<a href=/zh/activities/><span>活动</span><svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"/></svg></a>
+<a href=/zh/community/><span>社区</span><svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"/></svg></a>
+<a href=/zh/awesome/><span>Awesome Dromara</span><svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"/></svg></a>
+<a href=/blog/soul_source_learning_12_sign/><span>English</span><svg class="icon" aria-hidden="true"><use xlink:href="#icon-transfer"/></svg></a></nav></div></div><div class="navbar-menu -hidden-mobile"><div class=navbar-start><a class=navbar-item href=/zh/projects/>项目</a>
+<a class=navbar-item href=/zh/guides/>指南</a>
+<a class=navbar-item href=/zh/blog/>博客</a>
+<a class=navbar-item href=/zh/activities/>活动</a>
+<a class=navbar-item href=/zh/community/>社区</a>
+<a class=navbar-item href=/zh/awesome/>Awesome Dromara</a></div><div class=navbar-end><div class=navbar-item><div id=js-menu-search class=navbar-search><input class=input placeholder=请输入要搜索的关键词><svg class="icon" aria-hidden="true"><use xlink:href="#icon-search"/></svg></div></div><div class=navbar-item><a class=translation href=/blog/soul_source_learning_12_sign/>En</a></div></div></div></nav></header><div class=ss-layout-container><main class="ss-layout-main -card"><div class=ss-meta><h1 class=title>Soul网关学习Sign插件</h1><div class=meta>2021-01-29 ·
+唐甜 ·
+<span class=tags><a class=tag href=/zh/tags/soul/ rel=tag>#Soul</a></span></div></div><article class=typo><h2 id=介绍>介绍</h2><p>sign插件用来对请求进行签名认证的插件</p><h2 id=ak-sk-介绍>AK/SK 介绍</h2><p>AK/SK（Access Key ID/Secret Access Key）即访问密钥，包含访问密钥ID（AK）和秘密访问密钥（SK）两部分，主要用于对用户的调用行为进行鉴权和认证。</p><h2 id=插件使用-以-dubbo-findall-为例>插件使用-以（/dubbo/findAll）为例</h2><h3 id=在soulbootstrap的-pom-xml-文件中添加-sign-的支持>在SoulBootstrap的 pom.xml 文件中添加 <code>sign</code> 的支持</h3><pre><code class=language-xml>  &lt;!-- soul sign plugin start--&gt;
+  &lt;dependency&gt;
+      &lt;groupId&gt;org.dromara&lt;/groupId&gt;
+      &lt;artifactId&gt;soul-spring-boot-starter-plugin-sign&lt;/artifactId&gt;
+     &lt;version&gt;${last.version}&lt;/version&gt;
+  &lt;/dependency&gt;
+  &lt;!-- soul sign plugin end--&gt;
+</code></pre><h3 id=新增appkey-secretkey>新增appKey，secretKey</h3><p><img src=/img/soul/blog4/01.png alt=image.png>
+<img src=/img/soul/blog4/02.png alt=image.png>
+<img src=/img/soul/blog4/03.png alt=image.png>
+<img src=/img/soul/blog4/04.png alt=image.png></p><h2 id=配置选择器和规则器>配置选择器和规则器</h2><p>添加选择器
+<img src=/img/soul/blog4/05.png alt=image.png>
+添加规则器
+<img src=/img/soul/blog4/06.png alt=image.png></p><h3 id=增加获取鉴权服务>增加获取鉴权服务</h3><p>在自己服务中增加一个对外访问的方法</p><pre><code class=language-java>    @GetMapping(&quot;/authUrl&quot;)
+    public String authUrl() {
+        Map&lt;String, String&gt; map = Maps.newHashMapWithExpectedSize(2);
+        //timestamp为毫秒数的字符串形式 String.valueOf(LocalDateTime.now().toInstant(ZoneOffset.of(&quot;+8&quot;)).toEpochMilli())
+        String timetamp = String.valueOf(LocalDateTime.now().toInstant(ZoneOffset.of(&quot;+8&quot;)).toEpochMilli()) ;
+        System.out.println(timetamp);
+        map.put(&quot;timestamp&quot;,timetamp);  //值应该为毫秒数的字符串形式
+        map.put(&quot;path&quot;, &quot;/dubbo/findAll&quot;);
+        map.put(&quot;version&quot;, &quot;1.0.0&quot;);
+        List&lt;String&gt; storedKeys = Arrays.stream(map.keySet()
+                .toArray(new String[]{}))
+                .sorted(Comparator.naturalOrder())
+                .collect(Collectors.toList());
+        final String sign = storedKeys.stream()
+                .map(key -&gt; String.join(&quot;&quot;, key, map.get(key)))
+                .collect(Collectors.joining()).trim()
+                .concat(&quot;D19CF79F647A465AB9C5C66F430CAD28&quot;);//SECRETkey
+        return DigestUtils.md5DigestAsHex(sign.getBytes()).toUpperCase();
+    }
+
+</code></pre><p>下面需要注意的
+<img src=/img/soul/blog4/07.png alt=image.png></p><h3 id=在网关中增加鉴权头信息>在网关中增加鉴权头信息</h3><p><img src=/img/soul/blog4/08.png alt=image.png></p><h3 id=请求的结果演示>请求的结果演示</h3><p>通过的返回
+<img src=/img/soul/blog4/09.png alt=image.png>
+5min超时的返回
+<img src=/img/soul/blog4/10.png alt=image.png>
+appKey填写错误的返回
+<img src=/img/soul/blog4/11.png alt=image.png>
+签名错误的返回
+<img src=/img/soul/blog4/12.png alt=image.png>
+禁用sign插件的返回
+<img src=/img/soul/blog4/13.png alt=image.png></p><h2 id=sign插件的实现分析>sign插件的实现分析</h2><h3 id=java中pair>java中Pair</h3><p>简单的说就是pair保存的是一对key value，而map可以保存多对key value。
+SignPlugin插件调用DefaultSignService中signVerify方法
+判断sign 插件是否可用，如果可用获取在global 插件存入的soulContext并调用verify方法</p><pre><code class=language-java>if (signData != null &amp;&amp; signData.getEnabled()) {
+  final SoulContext soulContext = exchange.getAttribute(Constants.CONTEXT);
+  assert soulContext != null;
+  return verify(soulContext, exchange);
+}
+</code></pre><p>verify方法中
+判断请求头信息是否正确
+如果不正确就抛出 log.error(&ldquo;sign parameters are incomplete,{}&rdquo;, soulContext)异常</p><pre><code class=language-java>if (StringUtils.isBlank(soulContext.getAppKey())
+    || StringUtils.isBlank(soulContext.getSign())
+    || StringUtils.isBlank(soulContext.getTimestamp())) {
+  log.error(&quot;sign parameters are incomplete,{}&quot;, soulContext);
+  return Pair.of(Boolean.FALSE, Constants.SIGN_PARAMS_ERROR);
+}
+</code></pre><p>判断请求时间是否超时</p><pre><code class=language-java>    if (between &gt; delay) {
+            return Pair.of(Boolean.FALSE, String.format(SoulResultEnum.SING_TIME_IS_TIMEOUT.getMsg(), delay));
+        }
+</code></pre><p>没有超时继续调用sign方法
+获取认证数据，这个数据在soulAdmin 中配置</p><pre><code class=language-java>AppAuthData appAuthData = SignAuthDataCache.getInstance().obtainAuthData(soulContext.getAppKey());
+</code></pre><p>后面对appAuthData数据进行判断，数据有错误就不通过
+对获取的参数再次签名，判断传入的和再次签名的是否一样</p><pre><code class=language-java>String sigKey = SignUtils.generateSign(appAuthData.getAppSecret(), buildParamsMap(soulContext));
+</code></pre><p>如果都校验都通过就完成认证 访问请求。</p></article><div class=-show-mobile><nav class=ss-pagination-next><a class=link-prev href=/zh/blog/soul_source_learning_09_httplongpolling_02/><span class=text>上一篇:</span>
+<span class=text>Soul网关学习Http长轮询解析02</span></a>
+<a class=link-next href=/zh/blog/soul_source_learning_11_spi/><span class=text>下一篇:</span>
+<span class=text>Soul网关学习SPI学习使用</span></a></nav></div></main><aside class=ss-layout-aside><div class=ss-card><h2 class=card-title>相关推荐</h2><ul class=ss-aside-related><li><a href=/zh/blog/soul_source_learning_09_httplongpolling_02/>Soul网关学习Http长轮询解析02</a></li><li><a href=/zh/blog/soul_source_learning_08_httplongpolling_01/>Soul网关学习Http长轮询解析01</a></li><li><a href=/zh/blog/soul_source_learning_10_websocket/>Soul网关学习WebSocket数据同步解析</a></li><li><a href=/zh/activities/dromara-cloud-native-meet/>Dromara Soul 源码01期阅读分享会01</a></li><li><a href=/zh/blog/soul_resource_learning_07_admin/>Soul网关学习Admin源码分析</a></li></ul></div><div class="ss-aside-tags ss-card"><h2 class=card-title>标签
+<span class=card-extra></span></h2><ul class=tag-list><li class=tag><a href=/zh/tags/dreamcode/>DreamCode</a></li><li class=tag><a href=/zh/tags/dromara/>Dromara</a></li><li class=tag><a href=/zh/tags/gateway/>GateWay</a></li><li class=tag><a href=/zh/tags/hmily/>hmily</a></li><li class=tag><a href=/zh/tags/reactor/>Reactor</a></li><li class=tag><a href=/zh/tags/soul/>Soul</a></li><li class=tag><a href=/zh/tags/tcc/>TCC</a></li></ul></div></aside></div><footer class=ss-footer><div class=container><div class=links><div class=cate><h2 class=cate-title>资源</h2><a class=link href=https://github.com/dromara>Github</a>
+<a class=link href=https://gitee.com/shuaiqiyu>Gitee</a></div><div class=cate><h2 class=cate-title>参与进来</h2><a class=link href=https://github.com/dromara/soul/issues/new>反馈</a>
+<a class=link href=/zh/community>社区</a>
+<a class=link href=/zh/blog>博客</a></div><div class=cate><h2 class=cate-title>文档</h2><a class=link href=/zh/projects/soul/overview/>Soul</a>
+<a class=link href=/zh/projects/hmily/overview/>Hmily</a>
+<a class=link href=/zh/projects/raincat/overview/>Raincat</a>
+<a class=link href=/zh/projects/myth/overview/>Myth</a></div></div><div class=qrcode><div><img class=qrcode-img src=/img/qrcode/qrcode_1.png><p class=qrcode-desc>微信公众号</p></div><div><img class=qrcode-img src=/img/qrcode/qrcode_2.png><p class=qrcode-desc>QQ群</p></div></div></div><div class=copyright><p>Copyright ©2021
+<a href=/>xiaoyu@apache.org by xiaoyu</a></p></div></footer></body></html>
