@@ -1,0 +1,192 @@
+<!doctype html><html><head><title>Soul Gateway Learns Zookeeper Data Synchronization 01 · dromara(Open source organization)</title><meta charset=utf-8><meta http-equiv=x-ua-compatible content="IE=edge,chrome=1"><meta name=viewport content="width=device-width,minimum-scale=1"><meta name=description content="The girl on the prairie"><meta name=generator content="Hugo 0.55.5"><link rel="shortcut icon" href=/img/favicon.png type=image/png><link href=https://unpkg.com/purecss@1.0.0/build/base-min.css rel=stylesheet><link href=/css/main.css rel=stylesheet><link href=/css/zoom-image.css rel=stylesheet><script src=/js/iconfont.js></script><script src=/js/highlight.pack.js></script><script>hljs.initHighlightingOnLoad();</script><script>window.SITE_LANGUAGE="en"</script><script src=/js/app.js></script><script type=application/javascript>var doNotTrack=false;if(!doNotTrack){(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');ga('create','UA-187960192-2','auto');ga('send','pageview');}</script></head><body><header class=ss-header><nav class=navbar role=navigation aria-label="main navigation"><div class=navbar-brand><a class=logo-link href=/><img class=logo src=/img/logo/dromara.jpg></a><div class=-show-mobile><a id=mobile-menu-icon><svg class="icon" aria-hidden="true"><use xlink:href="#icon-menu"/></svg></a><nav id=mobile-menu><div id=js-menu-search-mobile class=navbar-search-mobile><input class=input placeholder=Search><svg class="icon" aria-hidden="true"><use xlink:href="#icon-search"/></svg></div><a href=/projects/><span>Projects</span><svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"/></svg></a>
+<a href=/guides/><span>Guides</span><svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"/></svg></a>
+<a href=/blog/><span>Blog</span><svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"/></svg></a>
+<a href=/activities/><span>Activity</span><svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"/></svg></a>
+<a href=/community/><span>Community</span><svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"/></svg></a>
+<a href=/awesome/><span>Awesome Dromara</span><svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"/></svg></a>
+<a href=/zh/blog/soul_source_learning_13_zookeeper_01/><span>中文</span><svg class="icon" aria-hidden="true"><use xlink:href="#icon-transfer"/></svg></a></nav></div></div><div class="navbar-menu -hidden-mobile"><div class=navbar-start><a class=navbar-item href=/projects/>Projects</a>
+<a class=navbar-item href=/guides/>Guides</a>
+<a class=navbar-item href=/blog/>Blog</a>
+<a class=navbar-item href=/activities/>Activity</a>
+<a class=navbar-item href=/community/>Community</a>
+<a class=navbar-item href=/awesome/>Awesome Dromara</a></div><div class=navbar-end><div class=navbar-item><div id=js-menu-search class=navbar-search><input class=input placeholder=Search><svg class="icon" aria-hidden="true"><use xlink:href="#icon-search"/></svg></div></div><div class=navbar-item><a class=translation href=/zh/blog/soul_source_learning_13_zookeeper_01/>中</a></div></div></div></nav></header><div class=ss-layout-container><main class="ss-layout-main -card"><div class=ss-meta><h1 class=title>Soul Gateway Learns Zookeeper Data Synchronization 01</h1><div class=meta>2021-01-20 ·
+liquan ·
+<span class=tags><a class=tag href=/tags/soul/ rel=tag>#Soul</a></span></div></div><article class=typo><h4 id=启动-soul-admin-soul-bootstrap-使用zookeeper同步数据到网关>启动 soul-admin、soul-bootstrap， 使用zookeeper同步数据到网关</h4><h6 id=一-配置环境>一、配置环境</h6><p>1、soul-admin 服务配置，需要重启服务</p><p>soul-admin/src/main/resources/application.yml</p><pre><code class=language-yaml>soul:
+  sync:
+      zookeeper:
+          url: localhost:2181
+          sessionTimeout: 5000
+          connectionTimeout: 2000
+</code></pre><p>2、soul-bootstrap 网关服务配置，需要重启</p><p>soul-bootstrap/pom.xml</p><pre><code class=language-xml>&lt;!--soul data sync start use zookeeper--&gt;
+&lt;dependency&gt;
+    &lt;groupId&gt;org.dromara&lt;/groupId&gt;
+    &lt;artifactId&gt;soul-spring-boot-starter-sync-data-zookeeper&lt;/artifactId&gt;
+    &lt;version&gt;${project.version}&lt;/version&gt;
+&lt;/dependency&gt;
+</code></pre><p>soul-bootstrap/src/main/resources/application-local.yml</p><pre><code class=language-yaml>soul :
+    sync:
+        zookeeper:
+             url: localhost:2181
+             sessionTimeout: 5000
+             connectionTimeout: 2000
+</code></pre><h6 id=二-启动服务>二、启动服务</h6><p>1、 启动 zookeeper</p><pre><code>zookeeper ./bin/zkServer.sh start
+/usr/bin/java
+ZooKeeper JMX enabled by default
+Using config: /Documents/soft/zookeeper/bin/../conf/zoo.cfg
+Starting zookeeper ... STARTED
+</code></pre><p>2、soul-admin 网关后台服务启动，服务启动后可以看到发起的ZooKeeper请求调用</p><pre><code>
+2021-01-20 17:34:48.752  INFO 64500 --- [-localhost:2181] org.I0Itec.zkclient.ZkEventThread        : Starting ZkClient event thread.
+2021-01-20 17:34:48.761  INFO 64500 --- [           main] org.apache.zookeeper.ZooKeeper           : Client environment:zookeeper.version=3.5.6-c11b7e26bc554b8523dc929761dd28808913f091, built on 10/08/2019 20:18 GMT
+2021-01-20 17:34:48.761  INFO 64500 --- [           main] org.apache.zookeeper.ZooKeeper           : Client environment:host.name=10.7.254.31
+2021-01-20 17:34:48.761  INFO 64500 --- [           main] org.apache.zookeeper.ZooKeeper           : Client environment:java.version=1.8.0_261
+2021-01-20 17:34:48.761  INFO 64500 --- [           main] org.apache.zookeeper.ZooKeeper           : Client environment:java.vendor=Oracle Corporation
+......
+2021-01-20 17:34:48.806  INFO 64500 --- [localhost:2181)] org.apache.zookeeper.ClientCnxn          : Opening socket connection to server localhost/0:0:0:0:0:0:0:1:2181. Will not attempt to authenticate using SASL (unknown error)
+2021-01-20 17:34:48.826  INFO 64500 --- [localhost:2181)] org.apache.zookeeper.ClientCnxn          : Socket connection established, initiating session, client: /0:0:0:0:0:0:0:1:58214, server: localhost/0:0:0:0:0:0:0:1:2181
+2021-01-20 17:34:48.857  INFO 64500 --- [localhost:2181)] org.apache.zookeeper.ClientCnxn          : Session establishment complete on server localhost/0:0:0:0:0:0:0:1:2181, sessionid = 0x1000b5e22f50001, negotiated timeout = 5000
+2021-01-20 17:34:48.861  INFO 64500 --- [ain-EventThread] org.I0Itec.zkclient.ZkClient             : zookeeper state changed (SyncConnected)
+</code></pre><p>3、soul-bootstrap 网关服务启动，服务启动后可以看到发起的ZooKeeper请求调用</p><pre><code>2021-01-20 17:35:58.996  INFO 64583 --- [           main] s.b.s.d.z.ZookeeperSyncDataConfiguration : you use zookeeper sync soul data.......
+2021-01-20 17:35:59.003  INFO 64583 --- [-localhost:2181] org.I0Itec.zkclient.ZkEventThread        : Starting ZkClient event thread.
+......
+
+2021-01-20 17:35:59.012  INFO 64583 --- [           main] org.apache.zookeeper.ZooKeeper           : Client environment:user.home=/Users/liquan
+2021-01-20 17:35:59.012  INFO 64583 --- [           main] org.apache.zookeeper.ZooKeeper           : Client environment:os.memory.total=310MB
+2021-01-20 17:35:59.018  INFO 64583 --- [           main] org.apache.zookeeper.ZooKeeper           : Initiating client connection, connectString=localhost:2181 sessionTimeout=5000 watcher=org.I0Itec.zkclient.ZkClient@114a5e0
+2021-01-20 17:35:59.121  INFO 64583 --- [localhost:2181)] org.apache.zookeeper.ClientCnxn          : Session establishment complete on server localhost/127.0.0.1:2181, sessionid = 0x1000b5e22f50002, negotiated timeout = 5000
+2021-01-20 17:35:59.126  INFO 64583 --- [ain-EventThread] org.I0Itec.zkclient.ZkClient             : zookeeper state changed (SyncConnected)
+</code></pre><p>4、查看 zookeeper 上的soul网关同步的注册信息
+<img src=/img/soul/blog5/zk1.png alt=在这里插入图片描述></p><h6 id=三-soul-网关-zookeeper-数据同步原理解析>三、Soul 网关 Zookeeper 数据同步原理解析</h6><p>在 soul-admin 启动后在控制台中看到了 org.I0Itec.zkclient.ZkClient，以此为入口进行跟踪调试。</p><p>1、ZookeeperConfiguration 作用：注册 zkClient 到Spring容器。</p><pre><code class=language-java>// EnableConfigurationProperties 作用：使用 @ConfigurationProperties 注解的类生效。如果一个配置类只配置@ConfigurationProperties注解，而没有使用@Component，那么在IOC容器中是获取不到properties 配置文件转化的bean。@EnableConfigurationProperties 相当于把使用@ConfigurationProperties 的类进行了一次注入。
+// @ConditionalOnMissingBean 容器中没有指定的类，就进行注入，@ConditionalOnBean与之相反
+/**
+ * ZookeeperConfiguration .
+ * @author xiaoyu(Myth)
+ */
+@EnableConfigurationProperties(ZookeeperProperties.class)
+public class ZookeeperConfiguration {
+    /**
+     * register zkClient in spring ioc.
+     *
+     * @param zookeeperProp the zookeeper configuration
+     * @return ZkClient {@linkplain ZkClient}
+     */
+    @Bean
+    @ConditionalOnMissingBean(ZkClient.class)
+    public ZkClient zkClient(final ZookeeperProperties zookeeperProp) {
+        return new ZkClient(zookeeperProp.getUrl(), zookeeperProp.getSessionTimeout(), zookeeperProp.getConnectionTimeout());
+    }
+}
+</code></pre><p>soul-admin 启动后，会实读取 zookeeper 配置信息，向容器中注入 zkClient 和 zookeeper建立连接。
+<img src=/img/soul/blog5/zk2.png alt=在这里插入图片描述></p><p><img src=/img/soul/blog5/zk3.png alt=在这里插入图片描述></p><p>2、实例化 ZkClient 的调用栈中会调用 DataChangedEventDispatcher 的 afterPropertiesSet 方法。</p><p>org.dromara.soul.admin.listener.DataChangedEventDispatcher 作用：事件转发器，将更改的事件转发到每个ConfigEventListener。</p><p>此类 实现了 InitializingBean，在DataChangedEventDispatcher初始化过程中，会执行afterPropertiesSet方法。</p><p>afterPropertiesSet 方法会在容器中查找类型是 DataChangedListener.class 的bean。</p><pre><code class=language-java>@Component
+public class DataChangedEventDispatcher implements ApplicationListener&lt;DataChangedEvent&gt;, InitializingBean {
+    private ApplicationContext applicationContext;
+    private List&lt;DataChangedListener&gt; listeners;
+    public DataChangedEventDispatcher(final ApplicationContext applicationContext) {
+        this.applicationContext = applicationContext;
+    }
+@Override
+@SuppressWarnings(&quot;unchecked&quot;)
+public void onApplicationEvent(final DataChangedEvent event) {
+    for (DataChangedListener listener : listeners) {
+        switch (event.getGroupKey()) {
+            case APP_AUTH:
+                listener.onAppAuthChanged((List&lt;AppAuthData&gt;) event.getSource(), event.getEventType());
+                break;
+            .......
+            default:
+                throw new IllegalStateException(&quot;Unexpected value: &quot; + event.getGroupKey());
+        }
+    }
+     ......
+    @Override
+    public void afterPropertiesSet() {
+        Collection&lt;DataChangedListener&gt; listenerBeans = applicationContext.getBeansOfType(DataChangedListener.class).values();
+        this.listeners = Collections.unmodifiableList(new ArrayList&lt;&gt;(listenerBeans));
+    }
+}
+</code></pre><p>3、afterPropertiesSet 方法的执行会查找 DataChangedListener.class 相关类的实例化。</p><p>org.dromara.soul.admin.config.DataSyncConfiguration 作用：数据同步配置类。</p><p>ZookeeperDataChangedListener 数据变化监听器，作用：应该是监听元数据变化，然后同步到zookeeper。</p><p>ZookeeperDataInit zookeeper数据初始化，作用：向zookeeper同步初始化数据。</p><pre><code class=language-java>/**
+ * The type Zookeeper listener. 
+ */
+@Configuration
+@ConditionalOnProperty(prefix = &quot;soul.sync.zookeeper&quot;, name = &quot;url&quot;)
+@Import(ZookeeperConfiguration.class)
+static class ZookeeperListener {
+    /**
+     * Config event listener data changed listener.
+     * @param zkClient the zk client
+     * @return the data changed listener
+     */
+    @Bean
+    @ConditionalOnMissingBean(ZookeeperDataChangedListener.class)
+    public DataChangedListener zookeeperDataChangedListener(final ZkClient zkClient) {
+        return new ZookeeperDataChangedListener(zkClient);
+    }
+    /**
+     * Zookeeper data init zookeeper data init
+     * @param zkClient        the zk client
+     * @param syncDataService the sync data service
+     * @return the zookeeper data init
+     */
+    @Bean
+    @ConditionalOnMissingBean(ZookeeperDataInit.class)
+    public ZookeeperDataInit zookeeperDataInit(final ZkClient zkClient, final SyncDataService syncDataService) {
+        return new ZookeeperDataInit(zkClient, syncDataService);
+    }
+}
+</code></pre><p>4、org.dromara.soul.admin.listener.zookeeper.ZookeeperDataInit 作用：负责向zookeeper同步初始化数据。此类实现了 CommandLineRunner。</p><p>CommandLineRunner：作用：SpringBoot在项目启动后会遍历所有实现CommandLineRunner的实体类并执行run方法，如果需要按照一定的顺序去执行，那么就需要在实体类上使用一个@Order注解（或者实现Order接口）来表明顺序。</p><p>run 方法会调用 syncDataService.syncAll方法。</p><pre><code class=language-java>public class ZookeeperDataInit implements CommandLineRunner {
+    private final ZkClient zkClient;
+    private final SyncDataService syncDataService;
+    /**
+     * Instantiates a new Zookeeper data init.
+     * @param zkClient        the zk client
+     * @param syncDataService the sync data service
+     */
+    public ZookeeperDataInit(final ZkClient zkClient, final SyncDataService syncDataService) {
+        this.zkClient = zkClient;
+        this.syncDataService = syncDataService;
+    }
+    @Override
+    public void run(final String... args) {
+        String pluginPath = ZkPathConstants.PLUGIN_PARENT;
+        String authPath = ZkPathConstants.APP_AUTH_PARENT;
+        String metaDataPath = ZkPathConstants.META_DATA;
+        if (!zkClient.exists(pluginPath) &amp;&amp; !zkClient.exists(authPath) &amp;&amp; !zkClient.exists(metaDataPath)) {
+            syncDataService.syncAll(DataEventTypeEnum.REFRESH);
+        }
+    }
+}
+</code></pre><p>5、org.dromara.soul.admin.service.sync.SyncDataServiceImpl</p><p>syncAll 方法会调用事件发布器进行事件发布，事件类型是 DataEventTypeEnum.REFRESH。</p><pre><code class=language-java>/**
+ * The type sync data service.
+ * @author xiaoyu(Myth)
+ */
+@Service(&quot;syncDataService&quot;)
+public class SyncDataServiceImpl implements SyncDataService {
+    // 发布事件，也就是把某个事件告诉的所有与这个事件相关的监听器
+    private final ApplicationEventPublisher eventPublisher;
+    ......
+    @Override
+    public boolean syncAll(final DataEventTypeEnum type) {
+        appAuthService.syncData();
+        List&lt;PluginData&gt; pluginDataList = pluginService.listAll();
+        eventPublisher.publishEvent(new DataChangedEvent(ConfigGroupEnum.PLUGIN, type, pluginDataList));
+        List&lt;SelectorData&gt; selectorDataList = selectorService.listAll();
+        eventPublisher.publishEvent(new DataChangedEvent(ConfigGroupEnum.SELECTOR, type, selectorDataList));
+        List&lt;RuleData&gt; ruleDataList = ruleService.listAll();
+        eventPublisher.publishEvent(new DataChangedEvent(ConfigGroupEnum.RULE, type, ruleDataList));
+        metaDataService.syncData();
+        return true;
+    }
+    ......
+}
+</code></pre><p><img src=/img/soul/blog5//zk4.png alt=在这里插入图片描述></p><p>6、事件发布后 org.dromara.soul.admin.listener.DataChangedEventDispatcher 类的onApplicationEvent 方法会监听事件变化，遍历所有的监听者进行数据同步处理，这里的监听者实现类是 ZookeeperDataChangedListener，根据对应的事件类型通过 zkClient 向
+zookeeper 同步数据。</p><p><img src=/img/soul/blog5//zk5.png alt=在这里插入图片描述></p><p>7、soul-admin 初始化到数据到zookeeper思维导图</p><p><img src=/img/soul/blog5//zk6.png alt=在这里插入图片描述></p><h6 id=四-总结>四、总结</h6><p>soul-admin 启动就会同步网关数据 rule、metaData、selector、plugin 等到 zookeeper。数据变化会发布 DataChangedEvent事件，监听事件将数据同步至zookeeper。</p><p><a href=https://dromara.org/projects/soul/data-sync/>Soul网关数据同步原理</a></p></article><div class=-show-mobile><nav class=ss-pagination-next><a class=link-prev href=/blog/soul_source_learning_02_http_client_register/><span class=text>Prev:</span>
+<span class=text>Soul Gateway Learning (2) HTTP Client Access Source Code Parsing</span></a>
+<a class=link-next href=/blog/soul_resource_learning_07_admin/><span class=text>Next:</span>
+<span class=text>Soul Gateway Learning Admin Source Code Analysis</span></a></nav></div></main><aside class=ss-layout-aside><div class=ss-card><h2 class=card-title>Related</h2><ul class=ss-aside-related><li><a href=/blog/soul_resource_learning_07_admin/>Soul Gateway Learning Admin Source Code Analysis</a></li><li><a href=/blog/soul_source_learning_02_http_client_register/>Soul Gateway Learning (2) HTTP Client Access Source Code Parsing</a></li><li><a href=/blog/soul_source_larning_02_divide_plugin_source/>Soul Learning(2) How Does The Divide Plugin Forward Http Requests</a></li><li><a href=/blog/soul_source_learning_02_divide_plugin/>Soul Learning(2) Use Divide Plugin</a></li><li><a href=/blog/soul_source_learning_05_plugin/>Soul Gateway learning plugin chain and load balancing analysis</a></li></ul></div><div class="ss-aside-tags ss-card"><h2 class=card-title>Tag
+<span class=card-extra></span></h2><ul class=tag-list><li class=tag><a href=/tags/dreamcode/>DreamCode</a></li><li class=tag><a href=/tags/dromara/>Dromara</a></li><li class=tag><a href=/tags/gateway/>GateWay</a></li><li class=tag><a href=/tags/hmily/>hmily</a></li><li class=tag><a href=/tags/reactor/>Reactor</a></li><li class=tag><a href=/tags/soul/>Soul</a></li><li class=tag><a href=/tags/tcc/>TCC</a></li></ul></div></aside></div><footer class=ss-footer><div class=container><div class=links><div class=cate><h2 class=cate-title>Resources</h2><a class=link href=https://github.com/dromara>Github</a>
+<a class=link href=https://gitee.com/shuaiqiyu>Gitee</a></div><div class=cate><h2 class=cate-title>Get Involved</h2><a class=link href=https://github.com/dromara/soul/issues/new>Feedback</a>
+<a class=link href=/community>Community</a>
+<a class=link href=/blog>Blog</a></div><div class=cate><h2 class=cate-title>Document</h2><a class=link href=/projects/soul/overview/>Soul</a>
+<a class=link href=/projects/hmily/overview/>Hmily</a>
+<a class=link href=/projects/raincat/overview/>Raincat</a>
+<a class=link href=/projects/myth/overview/>Myth</a></div></div><div class=qrcode><div><img class=qrcode-img src=/img/qrcode/qrcode_1.png><p class=qrcode-desc>Wechat Official Account</p></div><div><img class=qrcode-img src=/img/qrcode/qrcode_2.png><p class=qrcode-desc>QQ Group</p></div></div></div><div class=copyright><p>Copyright ©2021
+<a href=/>xiaoyu@apache.org by xiaoyu</a></p></div></footer></body></html>
