@@ -1,0 +1,93 @@
+<!doctype html><html><head><title>Soul网关学习插件链实现 · dromara(Open source organization)</title><meta charset=utf-8><meta http-equiv=x-ua-compatible content="IE=edge,chrome=1"><meta name=viewport content="width=device-width,minimum-scale=1"><meta name=description content="The girl on the prairie"><meta name=generator content="Hugo 0.55.5"><link rel="shortcut icon" href=/img/favicon.png type=image/png><link href=https://unpkg.com/purecss@1.0.0/build/base-min.css rel=stylesheet><link href=/css/main.css rel=stylesheet><link href=/css/zoom-image.css rel=stylesheet><script src=/js/iconfont.js></script><script src=/js/highlight.pack.js></script><script>hljs.initHighlightingOnLoad();</script><script>window.SITE_LANGUAGE="zh"</script><script src=/js/app.js></script><script type=application/javascript>var doNotTrack=false;if(!doNotTrack){(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');ga('create','UA-187960192-2','auto');ga('send','pageview');}</script></head><body><header class=ss-header><nav class=navbar role=navigation aria-label="main navigation"><div class=navbar-brand><a class=logo-link href=/zh/><img class=logo src=/img/logo/dromara.jpg></a><div class=-show-mobile><a id=mobile-menu-icon><svg class="icon" aria-hidden="true"><use xlink:href="#icon-menu"/></svg></a><nav id=mobile-menu><div id=js-menu-search-mobile class=navbar-search-mobile><input class=input placeholder=请输入要搜索的关键词><svg class="icon" aria-hidden="true"><use xlink:href="#icon-search"/></svg></div><a href=/zh/projects/><span>项目</span><svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"/></svg></a>
+<a href=/zh/guides/><span>指南</span><svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"/></svg></a>
+<a href=/zh/blog/><span>博客</span><svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"/></svg></a>
+<a href=/zh/activities/><span>活动</span><svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"/></svg></a>
+<a href=/zh/community/><span>社区</span><svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"/></svg></a>
+<a href=/zh/awesome/><span>Awesome Dromara</span><svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"/></svg></a>
+<a href=/blog/soul_source_learning_15_plugin_chain/><span>English</span><svg class="icon" aria-hidden="true"><use xlink:href="#icon-transfer"/></svg></a></nav></div></div><div class="navbar-menu -hidden-mobile"><div class=navbar-start><a class=navbar-item href=/zh/projects/>项目</a>
+<a class=navbar-item href=/zh/guides/>指南</a>
+<a class=navbar-item href=/zh/blog/>博客</a>
+<a class=navbar-item href=/zh/activities/>活动</a>
+<a class=navbar-item href=/zh/community/>社区</a>
+<a class=navbar-item href=/zh/awesome/>Awesome Dromara</a></div><div class=navbar-end><div class=navbar-item><div id=js-menu-search class=navbar-search><input class=input placeholder=请输入要搜索的关键词><svg class="icon" aria-hidden="true"><use xlink:href="#icon-search"/></svg></div></div><div class=navbar-item><a class=translation href=/blog/soul_source_learning_15_plugin_chain/>En</a></div></div></div></nav></header><div class=ss-layout-container><main class="ss-layout-main -card"><div class=ss-meta><h1 class=title>Soul网关学习插件链实现</h1><div class=meta>2021-01-21 ·
+沈祥俊 ·
+<span class=tags><a class=tag href=/zh/tags/soul/ rel=tag>#Soul</a></span></div></div><article class=typo><h3 id=一-引言>一、引言</h3><p><strong>插件是 Soul 的灵魂。</strong></p><p>Soul 使用了插件化设计思想，实现了插件的热插拔，且极易扩展。内置丰富的插件支持，鉴权，限流，熔断，防火墙等等。</p><p><img src=https://gitee.com/stephenshen/pic-bed/raw/master/img/20210122021834.png alt=image-20210122021834793></p><p>Soul 是如何实现插件化设计的呢？</p><p>在探究插件化设计之前，我们需要先了解下微内核架构（又称插件化架构）。</p><h3 id=二-微内核架构>二、微内核架构</h3><h4 id=1-架构释义>1、架构释义</h4><p><img src=/img/soul/blog6/mirco.png alt=img></p><p>微内核架构也被称为插件化架构，是一种<strong>面向功能进行拆分</strong>的可扩展性架构，通常用于实现基于产品的应用。</p><p>应用逻辑被分割为独立的<strong>插件模块</strong>和<strong>核心系统</strong>，提供了可扩展性、灵活性、功能隔离和自定义处理逻辑的特性。</p><p>微内核架构的<strong>本质</strong>，是将变化封装在插件里面，从而达到快速灵活扩展的目的，而又不影响整体系统的稳定。</p><h4 id=2-设计关键点>2、设计关键点</h4><p>核心系统设计的关键技术：</p><ul><li><strong>插件管理：</strong>当前有哪些插件可用？如何加载这些插件？什么时候加载插件？</li></ul><p>常见的实现方法是插件注册表机制。</p><ul><li><strong>插件连接：</strong>插件如何连接到核心系统？</li></ul><p>通常由核心系统制定连接规范，然后插件按照规范实现，核心系统按照规范加载即可。</p><p>常见连接机制主要有：OSGi（Eclipse使用）、消息模式、依赖注入（Spring使用）。</p><ul><li><strong>插件通信：</strong>插件与插件、插件与核心系统如何通信？</li></ul><p>通信必须经过核心系统，因此通常由核心系统提供插件通信机制。</p><h3 id=三-soul-的插件化设计>三、Soul 的插件化设计</h3><p>参照微内核架构来看，Soul 的 <code>soul-web</code> 模块相当于核心系统，<code>soul-plugin</code> 下的子模块相当于插件模块。</p><p><strong>插件管理方面：</strong></p><p><code>soul-bootstrap</code> 模块的 pom 文件充当插件列表， 以硬编码的方式引入各插件。</p><p>在容器启动阶段，借助 springboot 的 starter 机制自动扫描并注册插件 bean 到 Spring 容器。</p><p><strong>插件连接方面：</strong></p><p>借助 springboot 支持的多实例自动注入能力（ObjectProvider<list> plugins），将插件 Bean 列表注入到网关的<strong>插件链</strong>，实现插件与网关的连接。</p><p><strong>插件通信方面：</strong></p><p>先在插件链初始化阶段完成插件排序，然后在插件处理时，借助贯穿整个插件链的 ServerWebExchange 完成向下游插件的定向传参，即某种意义上的插件通信机制。</p><h3 id=四-soul-的插件化实现>四、Soul 的插件化实现</h3><p>Soul 网关中定义了一条插件链，所有的插件都在这条链上依次处理。</p><p>在探究插件链之前，我们先来看看插件实现。</p><h4 id=1-插件实现>1、插件实现</h4><p>Soul 中所有插件最终均继承自 SoulPlugin，其完整继承关系如下所示：</p><p><img src=https://gitee.com/stephenshen/pic-bed/raw/master/img/20210122022709.jpg alt=SoulPlugin></p><p>可以看到，Soul 的插件生态极其丰富，正是如此丰富的插件支撑起了 Soul 网关强大的扩展能力。</p><p>我们以常用的 DividePlugin 为例，分析插件内部所做工作。</p><p>DividePlugin 继承结构：</p><p><img src=https://gitee.com/stephenshen/pic-bed/raw/master/img/20210122024517.jpg alt=DividePlugin></p><p>DividePlugin 继承自 AbstractSoulPlugin，最终实现了 SoulPlugin 接口。</p><p>1）先关注 SoulPlugin，该插件接口结构如下：</p><p><img src=https://gitee.com/stephenshen/pic-bed/raw/master/img/20210122025700.png alt=image-20210122025700589></p><ul><li>execute 方法：处理方法，需要传入 exchange交换区 和 SoulPluginChain插件链</li><li>getOrder 方法：取得序号，用作插件排序</li><li>named 方法：获得插件名</li><li>skip 方法：判断是否跳过本次处理</li></ul><p>每次处理时，将先进行 skip 判断，不跳过则执行 excute 处理方法。</p><p>2）再来看下 AbstractSoulPlugin，该抽象类结构如下：</p><p><img src=https://gitee.com/stephenshen/pic-bed/raw/master/img/20210122030444.png alt=image-20210122030444704></p><p>重点关注 execute 方法，其核心代码如下：</p><pre><code class=language-java>if (pluginData.getEnable()){
+    // 获取插件数据
+    final PluginData pluginData = BaseDataCache.getInstance().obtainPluginData(pluginName);
+    // 获取选择器数据
+    final Collection&lt;SelectorData&gt; selectors = BaseDataCache.getInstance().obtainSelectorData(pluginName);
+    final SelectorData selectorData = matchSelector(exchange, selectors);
+    // 获取规则
+    final List&lt;RuleData&gt; rules = BaseDataCache.getInstance().obtainRuleData(selectorData.getId());
+    RuleData rule;
+  if (selectorData.getType() == SelectorTypeEnum.FULL_FLOW.getCode()) {
+    //get last
+    rule = rules.get(rules.size() - 1);
+  } else {
+    rule = matchRule(exchange, rules);
+  }
+  // 执行具体处理
+  return doExecute(exchange, chain, selectorData, rule);
+}
+// 继续执行后续插件处理
+return chain.execute(exchange);
+</code></pre><p>获取选择器数据和规则，然后传入 doExecute 方法进行具体处理，doExecute 方法为抽象方法，交由子类具体实现。</p><p>3）查看插件子类 DividePlugin，其结构如下：</p><p><img src=https://gitee.com/stephenshen/pic-bed/raw/master/img/20210122032336.png alt=image-20210122032336069></p><p>重点关注 doExecute 方法，以下是核心代码：</p><pre><code class=language-java>// 获取网关上下文和规则处理器
+final SoulContext soulContext = exchange.getAttribute(Constants.CONTEXT);
+final DivideRuleHandle ruleHandle = GsonUtils.getInstance().fromJson(rule.getHandle(), DivideRuleHandle.class);
+// 获取上游列表
+final List&lt;DivideUpstream&gt; upstreamList = UpstreamCacheManager.getInstance().findUpstreamListBySelectorId(selector.getId());
+// 选择待分发的目标上游
+final String ip = Objects.requireNonNull(exchange.getRequest().getRemoteAddress()).getAddress().getHostAddress();
+DivideUpstream divideUpstream = LoadBalanceUtils.selector(upstreamList, ruleHandle.getLoadBalance(), ip);
+// 设置 http url 
+String domain = buildDomain(divideUpstream);
+String realURL = buildRealURL(domain, soulContext, exchange);
+exchange.getAttributes().put(Constants.HTTP_URL, realURL);
+// 设置 http timeout
+exchange.getAttributes().put(Constants.HTTP_TIME_OUT, ruleHandle.getTimeout());
+exchange.getAttributes().put(Constants.HTTP_RETRY, ruleHandle.getRetry());
+return chain.execute(exchange);
+</code></pre><p>很明显，divide 插件只是完成目标上游服务的待分发，即根据选择器和规则找到对应服务，再通过负载均衡策略分配上游服务实例。</p><p>而调用上游服务的工作是由其他相应的 client 类插件完成。</p><h4 id=2-插件链实现>2、插件链实现</h4><p>借由插件链，Soul 将众多插件整合到一起进行统一调度处理。</p><p>插件链继承结构：</p><p><img src=https://gitee.com/stephenshen/pic-bed/raw/master/img/20210122035121.jpg alt=SoulPluginChain></p><p>可以看到，Soul 中插件链 SoulPluginChain 仅有一个默认实现类 DefaultSoulPluginChain。</p><p>1）DefaultSoulPluginChain 类结构如下：</p><p><img src=https://gitee.com/stephenshen/pic-bed/raw/master/img/20210122040245.png alt=image-20210122040245671></p><p>其持有通过构造方法传入的插件链，看看 execute 方法：</p><pre><code class=language-java>public Mono&lt;Void&gt; execute(final ServerWebExchange exchange) {
+    // 反应式编程语法：Mono.defer
+    return Mono.defer(() -&gt; {
+        if (this.index &lt; plugins.size()) {
+            SoulPlugin plugin = plugins.get(this.index++);
+            // 判断是否需要调过
+            Boolean skip = plugin.skip(exchange);
+            if (skip) {
+                return this.execute(exchange);
+            }
+            // 依次执行插件处理逻辑
+            return plugin.execute(exchange, this);
+        }
+        return Mono.empty();
+    });
+}
+</code></pre><p>依次处理插件链上的插件，执行插件处理逻辑。</p><p>DefaultSoulPluginChain 是 SoulWebHandler 的内部类，看下 SoulWebHandler 的实现。</p><p>2）SoulWebHandler 结构如下：</p><p><img src=https://gitee.com/stephenshen/pic-bed/raw/master/img/20210122035525.png alt=image-20210122035525261></p><p>SoulWebHandler 是 web 请求处理的起点，在此创建并开始插件链的处理。</p><p>同 DefaultSoulPluginChain 一样，SoulWebHandler 也是持有通过构造方法传入的插件链。</p><p>看看 handle 方法：</p><pre><code class=language-java>public Mono&lt;Void&gt; handle(@NonNull final ServerWebExchange exchange) {
+    MetricsTrackerFacade.getInstance().counterInc(MetricsLabelEnum.REQUEST_TOTAL.getName());
+    Optional&lt;HistogramMetricsTrackerDelegate&gt; startTimer = MetricsTrackerFacade.getInstance().histogramStartTimer(MetricsLabelEnum.REQUEST_LATENCY.getName());
+    return new DefaultSoulPluginChain(plugins).execute(exchange).subscribeOn(scheduler)
+            .doOnSuccess(t -&gt; startTimer.ifPresent(time -&gt; MetricsTrackerFacade.getInstance().histogramObserveDuration(time)));
+}
+</code></pre><p>handle 方法负责插件链执行指标度量的采集，通过在 DefaultSoulPluginChain 执行时加订阅实现，DefaultSoulPluginChain 在此处完成初始化。</p><p>全局查找 SoulWebHandler 构造方法，定位到 SoulConfiguration 的 soulWebHandler 方法。</p><p>3）SoulConfiguration 结构如下：</p><p><img src=https://gitee.com/stephenshen/pic-bed/raw/master/img/20210122042354.png alt=image-20210122042354171></p><p>SoulConfiguration 是 Soul 的核心配置类，负责自动装配网关所需的核心 bean 对象。</p><p>如装配 SoulWebHandler：</p><pre><code class=language-java>@Bean(&quot;webHandler&quot;)
+public SoulWebHandler soulWebHandler(final ObjectProvider&lt;List&lt;SoulPlugin&gt;&gt; plugins) {
+    // 获取可用的插件
+    List&lt;SoulPlugin&gt; pluginList = plugins.getIfAvailable(Collections::emptyList);
+    // 插件重排
+    final List&lt;SoulPlugin&gt; soulPlugins = pluginList.stream()
+            .sorted(Comparator.comparingInt(SoulPlugin::getOrder)).collect(Collectors.toList());
+    soulPlugins.forEach(soulPlugin -&gt; log.info(&quot;load plugin:[{}] [{}]&quot;, soulPlugin.named(), soulPlugin.getClass().getName()));
+    return new SoulWebHandler(soulPlugins);
+}
+</code></pre><p>注意此处的插件列表经过了一次重排，重排顺序参见 PluginEnum。</p><p>4）初始化 SoulWebHandler</p><p>soul-bootstrap 启动的过程中，所有插件是怎么形成 ObjectProvider<list<soulplugin>&gt; plugins，然后初始化 SoulWebHandler 的呢？</p><p>SoulWebHandler 所在的配置类通过配置 @ComponentScan(&ldquo;org.dromara.soul&rdquo;)，通知 spring 扫描 org.dromara.soul 包。</p><p>借助 springboot 的 starter 机制，将 spring.factories 里指定的配置类自动加载到容器。</p><p><img src=https://gitee.com/stephenshen/pic-bed/raw/master/img/20210122044810.png alt=DividePluginConfiguration></p><p>最后，借助 spring4.3 开始支持的 ObjectProvider，实现容器内插件 bean 的集合式注入，最终形成我们看到的插件链。</p><h3 id=总结>总结</h3><p>本篇从微内核架构说起，并以此为框架分析 Soul 的插件化设计，再结合源码实现，基本理清了 Soul 中插件式设计的实现。</p><p>需要注意：</p><p>1）由 SoulConfiguration 自动装配 SoulWebHandler，此时 SoulWebHandler 持有插件列表，但未初始化插件链。</p><p>2）待调用 handle 方法处理请求时，才初始化插件链进入插件处理。</p></article><div class=-show-mobile><nav class=ss-pagination-next><a class=link-prev href=/zh/blog/soul_resource_learning_07_admin/><span class=text>上一篇:</span>
+<span class=text>Soul网关学习Admin源码分析</span></a>
+<a class=link-next href=/zh/blog/soul_source_learning_13_zookeeper_02/><span class=text>下一篇:</span>
+<span class=text>Soul网关学习Zookeeper数据同步02</span></a></nav></div></main><aside class=ss-layout-aside><div class=ss-card><h2 class=card-title>相关推荐</h2><ul class=ss-aside-related><li><a href=/zh/blog/soul_source_learning_13_zookeeper_02/>Soul网关学习Zookeeper数据同步02</a></li><li><a href=/zh/blog/soul_resource_learning_07_admin/>Soul网关学习Admin源码分析</a></li><li><a href=/zh/blog/soul_source_learning_13_zookeeper_01/>Soul网关学习Zookeeper数据同步01</a></li><li><a href=/zh/blog/soul_source_learning_02_http_client_register/>Soul网关学习(2-3)Http客户端接入源码解析</a></li><li><a href=/zh/blog/soul_source_learning_02_divide_plugin_source/>Soul网关学习(2-2)Http代理之divide插件源码解析</a></li></ul></div><div class="ss-aside-tags ss-card"><h2 class=card-title>标签
+<span class=card-extra></span></h2><ul class=tag-list><li class=tag><a href=/zh/tags/dreamcode/>DreamCode</a></li><li class=tag><a href=/zh/tags/dromara/>Dromara</a></li><li class=tag><a href=/zh/tags/gateway/>GateWay</a></li><li class=tag><a href=/zh/tags/hmily/>hmily</a></li><li class=tag><a href=/zh/tags/reactor/>Reactor</a></li><li class=tag><a href=/zh/tags/soul/>Soul</a></li><li class=tag><a href=/zh/tags/tcc/>TCC</a></li></ul></div></aside></div><footer class=ss-footer><div class=container><div class=links><div class=cate><h2 class=cate-title>资源</h2><a class=link href=https://github.com/dromara>Github</a>
+<a class=link href=https://gitee.com/shuaiqiyu>Gitee</a></div><div class=cate><h2 class=cate-title>参与进来</h2><a class=link href=https://github.com/dromara/soul/issues/new>反馈</a>
+<a class=link href=/zh/community>社区</a>
+<a class=link href=/zh/blog>博客</a></div><div class=cate><h2 class=cate-title>文档</h2><a class=link href=/zh/projects/soul/overview/>Soul</a>
+<a class=link href=/zh/projects/hmily/overview/>Hmily</a>
+<a class=link href=/zh/projects/raincat/overview/>Raincat</a>
+<a class=link href=/zh/projects/myth/overview/>Myth</a></div></div><div class=qrcode><div><img class=qrcode-img src=/img/qrcode/qrcode_1.png><p class=qrcode-desc>微信公众号</p></div><div><img class=qrcode-img src=/img/qrcode/qrcode_2.png><p class=qrcode-desc>QQ群</p></div></div></div><div class=copyright><p>Copyright ©2021
+<a href=/>xiaoyu@apache.org by xiaoyu</a></p></div></footer></body></html>
