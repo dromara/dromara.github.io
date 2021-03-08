@@ -13,11 +13,11 @@
    ├──regsiter
    ├    ├──metadata
    ├    ├     ├──${rpcType}
-   ├    ├     ├      ├────contextPath}
+   ├    ├     ├      ├────${contextPath}
    ├    ├     ├               ├──${ruleName} : save metadata data of MetaDataRegisterDTO
    ├    ├──uri
    ├    ├     ├──${rpcType}
-   ├    ├     ├      ├────contextPath}
+   ├    ├     ├      ├────${contextPath}
    ├    ├     ├               ├──${ip:prot} : save uri data of URIRegisterDTO
    ├    ├     ├               ├──${ip:prot}
 </code></pre><p>Zookeeper register client will save data to zookeeper when soul client start.</p><p>Zookeeper register server will watch data node.</p><p>Trigger selector and rule data update and event publish, when metadata data node update.</p><p>Trigger selector and upstream update and event publish, when uri data node update.</p><h2 id=spi>SPI</h2><table><thead><tr><th><em>SPI Name</em></th><th><em>Description</em></th></tr></thead><tbody><tr><td>SoulClientRegisterRepository</td><td>Soul client register SPI</td></tr></tbody></table><table><thead><tr><th><em>Implementation Class</em></th><th><em>Description</em></th></tr></thead><tbody><tr><td>HttpClientRegisterRepository</td><td>Http client register repository</td></tr><tr><td>ZookeeperClientRegisterRepository</td><td>Zookeeper client register repository</td></tr></tbody></table><table><thead><tr><th><em>SPI Name</em></th><th><em>Description</em></th></tr></thead><tbody><tr><td>SoulServerRegisterRepository</td><td>Soul server register SPI</td></tr></tbody></table><table><thead><tr><th><em>Implementation Class</em></th><th><em>Description</em></th></tr></thead><tbody><tr><td>SoulHttpRegistryController</td><td>Http server repository</td></tr><tr><td>ZookeeperServerRegisterRepository</td><td>Zookeeper server registry repository</td></tr></tbody></table></article></main></div><footer class=ss-footer><div class=container><div class=links><div class=cate><h2 class=cate-title>Resources</h2><a class=link href=https://github.com/dromara>Github</a>
