@@ -53,7 +53,7 @@
       &lt;artifactId&gt;soul-spring-boot-starter-client-springcloud&lt;/artifactId&gt;
       &lt;version&gt;${last.version}&lt;/version&gt;
  &lt;/dependency&gt;
-</code></pre><ul><li><p>add these config values in your yaml file, backend server register center config, please look:<a href=../register-center-access>register center access</a>:</p></li><li><p>add the annotation <code>@SoulSpringCloudClient</code> in your <code>controller</code> interface.</p><ul><li><p>you can apply the annotation to class-level in a controller.the name of the path variable is prefix and &lsquo;/**&rsquo; will apply proxy for entire interfaces.</p></li><li><p>example （1）：both <code>/test/payment</code> and <code>/test/findByUserId</code> will be handled by gateway.</p></li></ul></li></ul><pre><code class=language-java>  @RestController
+</code></pre><ul><li><p>backend server register center config, please look:<a href=../register-center-access>register center access</a>.</p></li><li><p>add the annotation <code>@SoulSpringCloudClient</code> in your <code>controller</code> interface.</p><ul><li><p>you can apply the annotation to class-level in a controller.the name of the path variable is prefix and &lsquo;/**&rsquo; will apply proxy for entire interfaces.</p></li><li><p>example （1）：both <code>/test/payment</code> and <code>/test/findByUserId</code> will be handled by gateway.</p></li></ul></li></ul><pre><code class=language-java>  @RestController
   @RequestMapping(&quot;/test&quot;)
   @SoulSpringCloudClient(path = &quot;/test/**&quot;)
   public class HttpTestController {
