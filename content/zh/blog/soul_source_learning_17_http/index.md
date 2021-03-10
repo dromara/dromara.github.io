@@ -20,11 +20,13 @@ cover: "https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/d89a3b45058846be94aa0b
 SoulPlugin类我们已经有了一定的理解，那PluginEnum枚举类的主要作用是什么呢？
 
 PluginEnum:插件的枚举类
-| 属性 | 作用 | 
+
+| 属性 | 作用 |
 |------|------------|
-| code  | 插件的执行顺序 越小越先执行      | 
-| role  | 角色 暂时未发现实际引用地址        | 
+| code  | 插件的执行顺序 越小越先执行      |
+| role  | 角色 暂时未发现实际引用地址        |
 | name  | 插件名称       |
+
 
 其实我们不难发现在**DefaultSoulPluginChain的plugins**的插件都是有固定的执行顺序的，那这个插件的执行顺序是在哪定义的呢？
 
@@ -41,13 +43,13 @@ PluginEnum:插件的枚举类
 ![](https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/d89a3b45058846be94aa0b8935ec1868~tplv-k3u1fbpfcp-watermark.image)
 
 
-| 等级 | 作用 | 
+| 等级 | 作用 |
 |------|------------|
-| 第一等级  | 只有GlobalPlugin 全局插件      | 
-| 第二等级到第八等级  | 可以理解为在请求发起前的前置处理插件      | 
-| 第九等级到第十一等级  | 可以理解为针对调用方的方式所针对的不同调用处理      | 
-| 第十二等级  | 只有MonitorPlugin 监控插件     | 
-| 第十三等级  | 是针对于各个调用方返回结果处理的Response相关插件      | 
+| 第一等级  | 只有GlobalPlugin 全局插件      |
+| 第二等级到第八等级  | 可以理解为在请求发起前的前置处理插件      |
+| 第九等级到第十一等级  | 可以理解为针对调用方的方式所针对的不同调用处理      |
+| 第十二等级  | 只有MonitorPlugin 监控插件     |
+| 第十三等级  | 是针对于各个调用方返回结果处理的Response相关插件      |
 
 在刚才的回顾中我们已经明白soul处理请求的大体流程
 - 1.GloBalPlugin插件 进行全局的初始化
@@ -120,6 +122,7 @@ public Mono<Void> execute(final ServerWebExchange exchange, final SoulPluginChai
 不难看出 在GlobalPlugin的excute方法中主要目的就是封装一个**SoulContext对象**，放入exchange中（exchange对象是整个插件链上的共享对象，有一个插件执行完成后传递给下一个插件，本人理解的就是一个类似于ThreadLocal对象）。
 
 那SoulContext对象中又包含哪些属性呢？
+
 | 属性|含义|
 |------|------------|
 | module  |   每种RPCType针对的值不同http调用时指代网关调用的前置地址|
@@ -128,11 +131,11 @@ public Mono<Void> execute(final ServerWebExchange exchange, final SoulPluginChai
 | httpMethod  | Http调用的方式目前只支持get、post|
 | sign  | 鉴权的相关属性目前不知道具体作用，可能与SignPlugin插件有关|
 | timestamp  | 时间戳|
-| appKey  | 鉴权的相关属性目前不知道具体作用，可能与SignPlugin插件有关      | 
+| appKey  | 鉴权的相关属性目前不知道具体作用，可能与SignPlugin插件有关      |
 | path  | 路径指代调用到soul网关的全路径（在RpcType为http时）|
 | contextPath  | 与module取值一致（在RPCType为http时）|
 | realUrl  | 与method的值一致（在RpcType为http时）|
-| dubboParams  | dubbo的参数？ 
+| dubboParams  | dubbo的参数？| 
 | startDateTime  |开始时间怀疑与监控插件和统计指标模块有联用|
 
 在执行完GlobalPlugin插件后，最终封装完成的SoulContext对象如下所示。
@@ -149,6 +152,7 @@ public Mono<Void> execute(final ServerWebExchange exchange, final SoulPluginChai
 通过追溯源码得知**DividePlugin插件继承于AbstractSoulPlugin类，而AbstractSoulPlugin类实现了SoulPlugin接口**。
 
 那么**AbstractSoulPlugin**又做了哪些扩展呢？让我们梳理一下该类的方法。
+
 | 方法名|作用|
 |------|------------|
 |excute|实现于SoulPlugin接口，在AbstractSoulPlugin中起到一个**模板方法的作用**|
@@ -157,7 +161,7 @@ public Mono<Void> execute(final ServerWebExchange exchange, final SoulPluginChai
 |filterSelector |筛选选择器|
 |matchRule |匹配规则|
 |filterRule |筛选规则|
-|handleSelectorIsNull |处理选择器为空情况
+|handleSelectorIsNull |处理选择器为空情况|
 |handleRuleIsNull |处理规则为空情况|
 |selectorLog |选择器日志打印|
 |ruleLog |规则日志打印 |
