@@ -1,0 +1,236 @@
+<!doctype html><html><head><title>Soul网关学习Http请求探险 · dromara(Open source organization)</title><meta charset=utf-8><meta http-equiv=x-ua-compatible content="IE=edge,chrome=1"><meta name=viewport content="width=device-width,minimum-scale=1"><meta name=description content="The girl on the prairie"><meta name=generator content="Hugo 0.55.5"><link rel="shortcut icon" href=/img/favicon.png type=image/png><link href=https://unpkg.com/purecss@1.0.0/build/base-min.css rel=stylesheet><link href=/css/main.css rel=stylesheet><link href=/css/zoom-image.css rel=stylesheet><script src=/js/iconfont.js></script><script src=/js/highlight.pack.js></script><script>hljs.initHighlightingOnLoad();</script><script>window.SITE_LANGUAGE="zh"</script><script src=/js/app.js></script><script type=application/javascript>var doNotTrack=false;if(!doNotTrack){(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');ga('create','UA-187960192-2','auto');ga('send','pageview');}</script></head><body><header class=ss-header><nav class=navbar role=navigation aria-label="main navigation"><div class=navbar-brand><a class=logo-link href=/zh/><img class=logo src=/img/logo/dromara.jpg></a><div class=-show-mobile><a id=mobile-menu-icon><svg class="icon" aria-hidden="true"><use xlink:href="#icon-menu"/></svg></a><nav id=mobile-menu><div id=js-menu-search-mobile class=navbar-search-mobile><input class=input placeholder=请输入要搜索的关键词><svg class="icon" aria-hidden="true"><use xlink:href="#icon-search"/></svg></div><a href=/zh/projects/><span>项目</span><svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"/></svg></a>
+<a href=/zh/guides/><span>指南</span><svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"/></svg></a>
+<a href=/zh/blog/><span>博客</span><svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"/></svg></a>
+<a href=/zh/activities/><span>活动</span><svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"/></svg></a>
+<a href=/zh/community/><span>社区</span><svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"/></svg></a>
+<a href=/zh/awesome/><span>Awesome Dromara</span><svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"/></svg></a>
+<a href=/blog/soul_source_learning_17_http/><span>English</span><svg class="icon" aria-hidden="true"><use xlink:href="#icon-transfer"/></svg></a></nav></div></div><div class="navbar-menu -hidden-mobile"><div class=navbar-start><a class=navbar-item href=/zh/projects/>项目</a>
+<a class=navbar-item href=/zh/guides/>指南</a>
+<a class=navbar-item href=/zh/blog/>博客</a>
+<a class=navbar-item href=/zh/activities/>活动</a>
+<a class=navbar-item href=/zh/community/>社区</a>
+<a class=navbar-item href=/zh/awesome/>Awesome Dromara</a></div><div class=navbar-end><div class=navbar-item><div id=js-menu-search class=navbar-search><input class=input placeholder=请输入要搜索的关键词><svg class="icon" aria-hidden="true"><use xlink:href="#icon-search"/></svg></div></div><div class=navbar-item><a class=translation href=/blog/soul_source_learning_17_http/>En</a></div></div></div></nav></header><div class=ss-layout-container><main class="ss-layout-main -card"><div class=ss-meta><h1 class=title>Soul网关学习Http请求探险</h1><div class=meta>2021-01-26 ·
+百钰 ·
+<span class=tags><a class=tag href=/zh/tags/soul/ rel=tag>#Soul</a></span></div></div><article class=typo><h1 id=回顾>回顾</h1><p>在Soul 请求处理概览概览这篇文章中，我们已经知晓了Soul针对于请求的处理入库在<strong>DefaultSoulPluginChain的excute</strong>，其中执行了一个插件链的模式来完成了请求的处理。</p><p>我们大体梳理了注入到<strong>plugins</strong>的插件，但是即使这样依然不能纵观全局，对此特地对soul插件所涉及的类进行了相关梳理，整体梳理结果如下图。</p><p><img src=https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/6d9c8e69429e4cb1bcc5bd54ad4f6112~tplv-k3u1fbpfcp-watermark.image alt></p><p>在梳理文章中可以看到核心类是<strong>SoulPlugin、PluginEnum、PluginDataHandler、MetaDataSubscriber</strong>，在梳理请求的相关文章中我们目前只需要重点关注SoulPlugin与PluginEnum类。</p><p>SoulPlugin类我们已经有了一定的理解，那PluginEnum枚举类的主要作用是什么呢？</p><p>PluginEnum:插件的枚举类</p><table><thead><tr><th>属性</th><th>作用</th></tr></thead><tbody><tr><td>code</td><td>插件的执行顺序 越小越先执行</td></tr><tr><td>role</td><td>角色 暂时未发现实际引用地址</td></tr><tr><td>name</td><td>插件名称</td></tr></tbody></table><p>其实我们不难发现在<strong>DefaultSoulPluginChain的plugins</strong>的插件都是有固定的执行顺序的，那这个插件的执行顺序是在哪定义的呢？</p><p>最终可以追溯到<strong>SoulConfiguration</strong>类下</p><pre><code class=language-java>    public SoulWebHandler soulWebHandler(final ObjectProvider&lt;List&lt;SoulPlugin&gt;&gt; plugins) {
+        //省略
+        final List&lt;SoulPlugin&gt; soulPlugins = pluginList.stream()
+               .sorted(Comparator.comparingInt(SoulPlugin::getOrder)).collect(Collectors.toList());
+        return new SoulWebHandler(soulPlugins);
+    }
+</code></pre><p>整理整个PluginEnum类相关引用，整理出如下表格，不难看出插件与插件之间的顺序关系
+<img src=https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/d89a3b45058846be94aa0b8935ec1868~tplv-k3u1fbpfcp-watermark.image alt></p><table><thead><tr><th>等级</th><th>作用</th></tr></thead><tbody><tr><td>第一等级</td><td>只有GlobalPlugin 全局插件</td></tr><tr><td>第二等级到第八等级</td><td>可以理解为在请求发起前的前置处理插件</td></tr><tr><td>第九等级到第十一等级</td><td>可以理解为针对调用方的方式所针对的不同调用处理</td></tr><tr><td>第十二等级</td><td>只有MonitorPlugin 监控插件</td></tr><tr><td>第十三等级</td><td>是针对于各个调用方返回结果处理的Response相关插件</td></tr></tbody></table><p>在刚才的回顾中我们已经明白soul处理请求的大体流程
+- 1.GloBalPlugin插件 进行全局的初始化
+- 2.部分插件根据鉴权、限流、熔断等规则对请求进行处理
+- 3.选择适合自己的调用方式进行拼装参数，发起调用。
+- 4.进行监控
+- 5.对调用的结果进行处理</p><h1 id=请求流程梳理>请求流程梳理</h1><blockquote><p>以下演示代码截图来自于soul-examples下的http demo，调用的接口地址为<a href="http://127.0.0.1:9195/http/test/findByUserId?userId=10">http://127.0.0.1:9195/http/test/findByUserId?userId=10</a></p></blockquote><p>在<strong>DefaultSoulPluginChain的excute</strong>方法进行埋点，查看一次http请求调用经过了哪些类？</p><pre><code class=language-java>public Mono&lt;Void&gt; execute(final ServerWebExchange exchange) {
+            return Mono.defer(() -&gt; {
+                if (this.index &lt; plugins.size()) {
+                    SoulPlugin plugin = plugins.get(this.index++);
+                    Boolean skip = plugin.skip(exchange);
+                    if (skip) {
+                        System.out.println(&quot;跳过的插件为&quot;+plugin.getClass().getName().replace(&quot;org.dromara.soul.plugin.&quot;,&quot;&quot;));
+                        return this.execute(exchange);
+                    }
+                    System.out.println(&quot;未跳过的插件为&quot;+plugin.getClass().getName().replace(&quot;org.dromara.soul.plugin.&quot;,&quot;&quot;));
+                    return plugin.execute(exchange, this);
+                }
+                return Mono.empty();
+            });
+        }
+</code></pre><p>最终输出的未跳过的插件如下：</p><p>未跳过的插件为global.GlobalPlugin<br>未跳过的插件为sign.SignPlugin<br>未跳过的插件为waf.WafPlugin<br>未跳过的插件为ratelimiter.RateLimiterPlugin<br>未跳过的插件为hystrix.HystrixPlugin<br>未跳过的插件为resilience4j.Resilience4JPlugin<br>未跳过的插件为divide.DividePlugin<br>未跳过的插件为httpclient.WebClientPlugin<br>未跳过的插件为alibaba.dubbo.param.BodyParamPlugin<br>未跳过的插件为monitor.MonitorPlugin<br>未跳过的插件为httpclient.response.WebClientResponsePlugin<br></p><blockquote><p>这里有个小疑惑，为啥这个alibaba.dubbo.param.BodyParamPlugin插件会被执行，暂时忽略，后期跟踪。</p></blockquote><p>我们发现一次针对于http请求的网关调用 所执行的插件的大体流程与我们猜想的处理流程一致。<br>目前我们只挑重点来讲，即<strong>GlobalPlugin、DividePlugin、WebClientPlugin、WebClientResponsePlugin</strong>。</p><p>发起Debug调用依次追踪上述四个插件的作用。</p><h2 id=globalplugin-soulcontext对象封装插件>GlobalPlugin SoulContext对象封装插件</h2><p>GlobalPlugin的插件的excute方法如下所示</p><pre><code class=language-java>public Mono&lt;Void&gt; execute(final ServerWebExchange exchange, final SoulPluginChain chain) {
+        final ServerHttpRequest request = exchange.getRequest();
+        final HttpHeaders headers = request.getHeaders();
+        final String upgrade = headers.getFirst(&quot;Upgrade&quot;);
+        SoulContext soulContext;
+        if (StringUtils.isBlank(upgrade) || !&quot;websocket&quot;.equals(upgrade)) {
+            soulContext = builder.build(exchange);
+        } else {
+            final MultiValueMap&lt;String, String&gt; queryParams = request.getQueryParams();
+            soulContext = transformMap(queryParams);
+        }
+        exchange.getAttributes().put(Constants.CONTEXT, soulContext);
+        return chain.execute(exchange);
+    }
+</code></pre><p>不难看出 在GlobalPlugin的excute方法中主要目的就是封装一个<strong>SoulContext对象</strong>，放入exchange中（exchange对象是整个插件链上的共享对象，有一个插件执行完成后传递给下一个插件，本人理解的就是一个类似于ThreadLocal对象）。</p><p>那SoulContext对象中又包含哪些属性呢？</p><table><thead><tr><th>属性</th><th>含义</th></tr></thead><tbody><tr><td>module</td><td>每种RPCType针对的值不同http调用时指代网关调用的前置地址</td></tr><tr><td>method</td><td>切割后的方法名（在RpcType为http时）</td></tr><tr><td>rpcType</td><td>RPC调用类型有Http、dubbo、sofa等</td></tr><tr><td>httpMethod</td><td>Http调用的方式目前只支持get、post</td></tr><tr><td>sign</td><td>鉴权的相关属性目前不知道具体作用，可能与SignPlugin插件有关</td></tr><tr><td>timestamp</td><td>时间戳</td></tr><tr><td>appKey</td><td>鉴权的相关属性目前不知道具体作用，可能与SignPlugin插件有关</td></tr><tr><td>path</td><td>路径指代调用到soul网关的全路径（在RpcType为http时）</td></tr><tr><td>contextPath</td><td>与module取值一致（在RPCType为http时）</td></tr><tr><td>realUrl</td><td>与method的值一致（在RpcType为http时）</td></tr><tr><td>dubboParams</td><td>dubbo的参数？</td></tr><tr><td>startDateTime</td><td>开始时间怀疑与监控插件和统计指标模块有联用</td></tr></tbody></table><p>在执行完GlobalPlugin插件后，最终封装完成的SoulContext对象如下所示。
+<img src=https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/d34d9e900a1e4448b8f15302db36a5bb~tplv-k3u1fbpfcp-watermark.image alt></p><p>其他RPCType的SoulContext的参数封装可以查看<strong>DefaultSoulContextBuilder的build</strong>方法进行追踪，由于本编文章主要追溯http调用，故在这里不在多余讨论。</p><h2 id=divideplugin-路由选择插件>DividePlugin 路由选择插件</h2><p>在执行完成GlobalPlugin插件后，最终封装成了一个<strong>SoulContext对象</strong>，并将其放在了<strong>ServerWebExchange</strong>中，供下游的调用链使用。</p><p>接下来让我们看一下<strong>DividePlugin插件</strong>在整个链式调用过程中到底起了一个什么样的作用？</p><h3 id=abstractsoulplugin>AbstractSoulPlugin</h3><p>通过追溯源码得知<strong>DividePlugin插件继承于AbstractSoulPlugin类，而AbstractSoulPlugin类实现了SoulPlugin接口</strong>。</p><p>那么<strong>AbstractSoulPlugin</strong>又做了哪些扩展呢？让我们梳理一下该类的方法。</p><table><thead><tr><th>方法名</th><th>作用</th></tr></thead><tbody><tr><td>excute</td><td>实现于SoulPlugin接口，在AbstractSoulPlugin中起到一个<strong>模板方法的作用</strong></td></tr><tr><td>doexcute</td><td><strong>抽象方法</strong> 交由各个子类实现</td></tr><tr><td>matchSelector</td><td>匹配选择器</td></tr><tr><td>filterSelector</td><td>筛选选择器</td></tr><tr><td>matchRule</td><td>匹配规则</td></tr><tr><td>filterRule</td><td>筛选规则</td></tr><tr><td>handleSelectorIsNull</td><td>处理选择器为空情况</td></tr><tr><td>handleRuleIsNull</td><td>处理规则为空情况</td></tr><tr><td>selectorLog</td><td>选择器日志打印</td></tr><tr><td>ruleLog</td><td>规则日志打印</td></tr></tbody></table><p>看一下<strong>excute</strong>方法的具体作用</p><pre><code class=language-java>public Mono&lt;Void&gt; execute(final ServerWebExchange exchange, final SoulPluginChain chain) {
+        String pluginName = named();
+        //获取对应插件
+        final PluginData pluginData = BaseDataCache.getInstance().obtainPluginData(pluginName);
+        //判断插件是否启用
+        if (pluginData != null &amp;&amp; pluginData.getEnabled()) {
+            //获取插件下的所有选择器
+            final Collection&lt;SelectorData&gt; selectors = BaseDataCache.getInstance().obtainSelectorData(pluginName);
+            if (CollectionUtils.isEmpty(selectors)) {
+                return handleSelectorIsNull(pluginName, exchange, chain);
+            }
+            //匹配选择器
+            final SelectorData selectorData = matchSelector(exchange, selectors);
+            if (Objects.isNull(selectorData)) {
+                return handleSelectorIsNull(pluginName, exchange, chain);
+            }
+            //打印选择器日志
+            selectorLog(selectorData, pluginName);
+            final List&lt;RuleData&gt; rules = BaseDataCache.getInstance().obtainRuleData(selectorData.getId());
+            if (CollectionUtils.isEmpty(rules)) {
+                return handleRuleIsNull(pluginName, exchange, chain);
+            }
+            RuleData rule;
+            if (selectorData.getType() == SelectorTypeEnum.FULL_FLOW.getCode()) {
+                rule = rules.get(rules.size() - 1);
+            } else {
+                //匹配规则
+                rule = matchRule(exchange, rules);
+            }
+            if (Objects.isNull(rule)) {
+                return handleRu![](https://p9-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/f523f655f0014d288b7a4502cc6a08d1~tplv-k3u1fbpfcp-watermark.image)leIsNull(pluginName, exchange, chain);
+            }
+            //打印规则日志
+            ruleLog(rule, pluginName);
+            //执行子类具体实现
+            return doExecute(exchange, chain, selectorData, rule);
+        }
+        return chain.execute(exchange);
+    }
+</code></pre><p>最终整理的流程图如下所示：
+<img src=https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/a1ec8bd02d6546c79a96d67535049aae~tplv-k3u1fbpfcp-watermark.image alt></p><p>ps：在上述的流程图中并没有细化到具体的方法级别的处理。</p><p>但仍有几个点需要着重解释一下：
+- 1.插件数据、选择器数据、规则数据的获取全部来自于<strong>BaseDataCache</strong>，该类是数据同步过程中最终会影响的类。
+- 2.选择器的类型，在使用SpringMvc项目进行接口注册时，会有一个isFull的选项为true代表全局代理，在全局代理模式下只会注册一个选择器\规则(指代代理所有的接口),所以这里的对应处理为rule.size()-1.
+- 3.选择器和规则的选择，实际的处理要复杂的多，考虑到是介绍一次请求流程的大体逻辑，所以这里不展开阐述，有兴趣的可以查看<strong>MatchStrategy、AbstractMatchStrategy及其相关实现类</strong>（后期会单独开一篇具体讲解），此处对应页面的如下：
+<img src=https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/f624b13f205a44e29b2799718433e0c9~tplv-k3u1fbpfcp-watermark.image alt>
+<img src=https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/f590c2cf336442f08a52b864c81d41a8~tplv-k3u1fbpfcp-watermark.image alt></p><p>梳理一下<strong>AbstractSoulPlugin的exeute方法</strong>作用，经过上述流程图的引导，我们已经知晓该方法的作用是为了选取插件&mdash;&gt;选取选择器&mdash;&gt;选取规则，最后交由子类的<strong>doexcute</strong>方法。</p><p>接下来让我们看一下<strong>DividePlugin的doexcute</strong>方法具体做了哪些事。</p><h3 id=divideplugin>DividePlugin</h3><pre><code class=language-java>protected Mono&lt;Void&gt; doExecute(final ServerWebExchange exchange, final SoulPluginChain chain, final SelectorData selector, final RuleData rule) {
+        final SoulContext soulContext = exchange.getAttribute(Constants.CONTEXT);
+        assert soulContext != null;
+        //获取规则处理数据
+        final DivideRuleHandle ruleHandle = GsonUtils.getInstance().fromJson(rule.getHandle(), DivideRuleHandle.class);
+        //获取该选择器下的注入的地址
+        final List&lt;DivideUpstream&gt; upstreamList = UpstreamCacheManager.getInstance().findUpstreamListBySelectorId(selector.getId());
+        if (CollectionUtils.isEmpty(upstreamList)) {
+            log.error(&quot;divide upstream configuration error： {}&quot;, rule.toString());
+            Object error = SoulResultWrap.error(SoulResultEnum.CANNOT_FIND_URL.getCode(), SoulResultEnum.CANNOT_FIND_URL.getMsg(), null);
+            return WebFluxResultUtils.result(exchange, error);
+        }
+        final String ip = Objects.requireNonNull(exchange.getRequest().getRemoteAddress()).getAddress().getHostAddress();
+        //通过规则对应的负载均衡策略选择一个地址
+        DivideUpstream divideUpstream = LoadBalanceUtils.selector(upstreamList, ruleHandle.getLoadBalance(), ip);
+        if (Objects.isNull(divideUpstream)) {
+            log.error(&quot;divide has no upstream&quot;);
+            Object error = SoulResultWrap.error(SoulResultEnum.CANNOT_FIND_URL.getCode(), SoulResultEnum.CANNOT_FIND_URL.getMsg(), null);
+            return WebFluxResultUtils.result(exchange, error);
+        }
+        // set the http url
+        String domain = buildDomain(divideUpstream);
+        //拼装真实调用地址
+        String realURL = buildRealURL(domain, soulContext, exchange);
+        exchange.getAttributes().put(Constants.HTTP_URL, realURL);
+        //设置超时时间 及重试次数
+        exchange.getAttributes().put(Constants.HTTP_TIME_OUT, ruleHandle.getTimeout());
+        exchange.getAttributes().put(Constants.HTTP_RETRY, ruleHandle.getRetry());
+        return chain.execute(exchange);
+    }
+</code></pre><p>通过上述代码梳理完成后大体逻辑如下：
+- 1.获取选择器对应的注册地址，对应页面数据如下
+<img src=https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/bea039b5c98040ee80433f785dac85aa~tplv-k3u1fbpfcp-watermark.image alt>
+- 2.根据规则的handle字段获取负载均衡策略，并选择真实的调用地址（<strong>LoadBalanceUtils</strong>），重试次数和超时时间，对应页面数据如下。
+<img src=https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/07db1f8f76fc43b2aec61ee0f9ca4c05~tplv-k3u1fbpfcp-watermark.image alt>
+- 3.将真实调用地址，超时时间，重试次数传递到<strong>ServerWebExchange</strong>中，供下游调用链使用。
+debug演示：
+<img src=https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/0aa5f7d95f2942169b33029f074f1712~tplv-k3u1fbpfcp-watermark.image alt>
+ps：在上述的主题逻辑中我们没有看到参数在哪里？那这个参数在哪封装的呢？答案在<strong>buildRealURL方法中</strong>，是从<strong>exchange</strong>上下文中获取到的。</p><h2 id=webclientplugin-http请求调用插件>WebClientPlugin Http请求调用插件</h2><p>接下来让我们看看Soul如何发起的请求调用</p><pre><code class=language-java>public Mono&lt;Void&gt; execute(final ServerWebExchange exchange, final SoulPluginChain chain) {
+        final SoulContext soulContext = exchange.getAttribute(Constants.CONTEXT);
+        assert soulContext != null;
+        //获取真实地址
+        String urlPath = exchange.getAttribute(Constants.HTTP_URL);
+        if (StringUtils.isEmpty(urlPath)) {
+            Object error = SoulResultWrap.error(SoulResultEnum.CANNOT_FIND_URL.getCode(), SoulResultEnum.CANNOT_FIND_URL.getMsg(), null);
+            return WebFluxResultUtils.result(exchange, error);
+        }
+        //获取超时时间
+        long timeout = (long) Optional.ofNullable(exchange.getAttribute(Constants.HTTP_TIME_OUT)).orElse(3000L);
+        //获取重试次数
+        int retryTimes = (int) Optional.ofNullable(exchange.getAttribute(Constants.HTTP_RETRY)).orElse(0);
+        log.info(&quot;The request urlPath is {}, retryTimes is {}&quot;, urlPath, retryTimes);
+        HttpMethod method = HttpMethod.valueOf(exchange.getRequest().getMethodValue());
+        WebClient.RequestBodySpec requestBodySpec = webClient.method(method).uri(urlPath);
+        return handleRequestBody(requestBodySpec, exchange, timeout, retryTimes, chain);
+    }
+</code></pre><p>在webClient的<strong>excute</strong>方法中，主要做了三个事
+- 1.将从Divide插件中放入exchange的属性取出来，<strong>调用的真实地址、超时时间、重试次数</strong>。
+- 2.封装了一个<strong>RequestBodySpec</strong>对象（不认识这个响应式编程的东西）
+- 3.调用了一个<strong>handleRequestBody</strong>方法</p><p>先认识<strong>handleRequestBody</strong>方法</p><pre><code class=language-java>private Mono&lt;Void&gt; handleRequestBody(final WebClient.RequestBodySpec requestBodySpec,
+                                         final ServerWebExchange exchange,
+                                         final long timeout,
+                                         final int retryTimes,
+                                         final SoulPluginChain chain) {
+        return requestBodySpec.headers(httpHeaders -&gt; {
+            httpHeaders.addAll(exchange.getRequest().getHeaders());
+            httpHeaders.remove(HttpHeaders.HOST);
+        })
+                .contentType(buildMediaType(exchange))
+                .body(BodyInserters.fromDataBuffers(exchange.getRequest().getBody()))
+                .exchange()
+                //失败打印日志
+                .doOnError(e -&gt; log.error(e.getMessage()))
+                //设置超时时间
+                .timeout(Duration.ofMillis(timeout))
+                //设置请求重试实际
+                .retryWhen(Retry.onlyIf(x -&gt; x.exception() instanceof ConnectTimeoutException)
+                    .retryMax(retryTimes)
+                    .backoff(Backoff.exponential(Duration.ofMillis(200), Duration.ofSeconds(20), 2, true)))
+                //请求结束后对应的处理
+                .flatMap(e -&gt; doNext(e, exchange, chain));
+
+    }
+</code></pre><p>在这个方法里，大体可以理解为
+- exchange中的请求头放到本次调用的请求头中
+- 设置contentType
+- 设置超时时间
+- 设置失败响应
+- 设置重试的场景及重试次数
+- 最终结果的处理。
+在流程中需要还需要看一个<strong>doNext方法</strong></p><p>大体逻辑就是判断请求是否成功，将请求结果放入exchange中交给下游插件处理。</p><pre><code class=language-java>private Mono&lt;Void&gt; doNext(final ClientResponse res, final ServerWebExchange exchange, final SoulPluginChain chain) {
+        if (res.statusCode().is2xxSuccessful()) {
+            exchange.getAttributes().put(Constants.CLIENT_RESPONSE_RESULT_TYPE, ResultEnum.SUCCESS.getName());
+        } else {
+            exchange.getAttributes().put(Constants.CLIENT_RESPONSE_RESULT_TYPE, ResultEnum.ERROR.getName());
+        }
+        exchange.getAttributes().put(Constants.CLIENT_RESPONSE_ATTR, res);
+        return chain.execute(exchange);
+    }
+</code></pre><p>ps： 虽然并不懂响应式编程，但并不影响我们阅读代码。</p><h2 id=webclientresponseplugin-http结果处理插件>WebClientResponsePlugin Http结果处理插件</h2><p>该实现的excute方法没有什么核心逻辑，就是判断请求状态码，根据状态码返回给前端不同的数据格式。</p><pre><code class=language-java>public Mono&lt;Void&gt; execute(final ServerWebExchange exchange, final SoulPluginChain chain) {
+        return chain.execute(exchange).then(Mono.defer(() -&gt; {
+            ServerHttpResponse response = exchange.getResponse();
+            ClientResponse clientResponse = exchange.getAttribute(Constants.CLIENT_RESPONSE_ATTR);
+            if (Objects.isNull(clientResponse)
+                    || response.getStatusCode() == HttpStatus.BAD_GATEWAY
+                    || response.getStatusCode() == HttpStatus.INTERNAL_SERVER_ERROR) {
+                Object error = SoulResultWrap.error(SoulResultEnum.SERVICE_RESULT_ERROR.getCode(), SoulResultEnum.SERVICE_RESULT_ERROR.getMsg(), null);
+                return WebFluxResultUtils.result(exchange, error);
+            }
+            if (response.getStatusCode() == HttpStatus.GATEWAY_TIMEOUT) {
+                Object error = SoulResultWrap.error(SoulResultEnum.SERVICE_TIMEOUT.getCode(), SoulResultEnum.SERVICE_TIMEOUT.getMsg(), null);
+                return WebFluxResultUtils.result(exchange, error);
+            }
+            response.setStatusCode(clientResponse.statusCode());
+            response.getCookies().putAll(clientResponse.cookies());
+            response.getHeaders().putAll(clientResponse.headers().asHttpHeaders());
+            return response.writeWith(clientResponse.body(BodyExtractors.toDataBuffers()));
+        }));
+    }
+</code></pre><h1 id=总结>总结</h1><p>到此为止，一个基于Soul网关发起的Http请求调用流程大体已经结束。</p><p>梳理http请求调用流程
+- Global插件封装SoulContext对象
+- 前置插件处理熔断限流鉴权等操作。
+- Divide插件选择对应调用的真实地址，重试次数，超时时间。
+- WebClient插件发起真实的Http调用
+- WebClientResponse插件处理对应结果，返回前台。</p><p>基于Http调用的大体流程，我们可以大体猜测出基于别RPC调用的流程，就是替换发起请求的插件和返回结果处理的插件。</p><p>在上文中我们还提到了路由规则的选择<strong>LoadBalanceUtils</strong>，选择器和规则的处理<strong>MatchStrategy</strong>。</p><p>之后将会开启新篇章一步步揭开RPC泛化调用，路由选择，选择器、规则匹配的神秘面纱。</p></article><div class=-show-mobile><nav class=ss-pagination-next><a class=link-prev href=/zh/blog/soul_source_learning_14_nacos/><span class=text>上一篇:</span>
+<span class=text>Soul网关学习Nacos数据同步</span></a>
+<a class=link-next href=/zh/blog/soul_source_learning_09_httplongpolling_02/><span class=text>下一篇:</span>
+<span class=text>Soul网关学习Http长轮询解析02</span></a></nav></div></main><aside class=ss-layout-aside><div class=ss-card><h2 class=card-title>相关推荐</h2><ul class=ss-aside-related><li><a href=/zh/blog/soul_source_learning_14_nacos/>Soul网关学习Nacos数据同步</a></li><li><a href=/zh/blog/soul_source_learning_08_httplongpolling_01/>Soul网关学习Http长轮询解析01</a></li><li><a href=/zh/blog/soul_source_learning_10_websocket/>Soul网关学习WebSocket数据同步解析</a></li><li><a href=/zh/activities/dromara-cloud-native-meet/>Dromara Soul 源码01期阅读分享会01</a></li><li><a href=/zh/blog/soul_source_learning_13_zookeeper_02/>Soul网关学习Zookeeper数据同步02</a></li></ul></div><div class="ss-aside-tags ss-card"><h2 class=card-title>标签
+<span class=card-extra></span></h2><ul class=tag-list><li class=tag><a href=/zh/tags/dreamcode/>DreamCode</a></li><li class=tag><a href=/zh/tags/dromara/>Dromara</a></li><li class=tag><a href=/zh/tags/gateway/>GateWay</a></li><li class=tag><a href=/zh/tags/hmily/>hmily</a></li><li class=tag><a href=/zh/tags/reactor/>Reactor</a></li><li class=tag><a href=/zh/tags/soul/>Soul</a></li><li class=tag><a href=/zh/tags/tcc/>TCC</a></li></ul></div></aside></div><footer class=ss-footer><div class=container><div class=links><div class=cate><h2 class=cate-title>资源</h2><a class=link href=https://github.com/dromara>Github</a>
+<a class=link href=https://gitee.com/shuaiqiyu>Gitee</a></div><div class=cate><h2 class=cate-title>参与进来</h2><a class=link href=https://github.com/dromara/soul/issues/new>反馈</a>
+<a class=link href=/zh/community>社区</a>
+<a class=link href=/zh/blog>博客</a></div><div class=cate><h2 class=cate-title>文档</h2><a class=link href=/zh/projects/soul/overview/>Soul</a>
+<a class=link href=/zh/projects/hmily/overview/>Hmily</a>
+<a class=link href=/zh/projects/raincat/overview/>Raincat</a>
+<a class=link href=/zh/projects/myth/overview/>Myth</a></div></div><div class=qrcode><div><img class=qrcode-img src=/img/qrcode/qrcode_1.png><p class=qrcode-desc>微信公众号</p></div><div><img class=qrcode-img src=/img/qrcode/qrcode_2.png><p class=qrcode-desc>QQ群</p></div></div></div><div class=copyright><p>Copyright ©2021
+<a href=/>xiaoyu@apache.org by xiaoyu</a></p></div></footer></body></html>
