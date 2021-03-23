@@ -1,0 +1,353 @@
+<!doctype html><html><head><title>Soul Gateway Learning Apache Dubbo Plugin · dromara(Open source organization)</title><meta charset=utf-8><meta http-equiv=x-ua-compatible content="IE=edge,chrome=1"><meta name=viewport content="width=device-width,minimum-scale=1"><meta name=description content="The girl on the prairie"><meta name=generator content="Hugo 0.55.5"><link rel="shortcut icon" href=/img/favicon.png type=image/png><link href=https://unpkg.com/purecss@1.0.0/build/base-min.css rel=stylesheet><link href=/css/main.css rel=stylesheet><link href=/css/zoom-image.css rel=stylesheet><script src=/js/iconfont.js></script><script src=/js/highlight.pack.js></script><script>hljs.initHighlightingOnLoad();</script><script>window.SITE_LANGUAGE="en"</script><script src=/js/app.js></script><script type=application/javascript>var doNotTrack=false;if(!doNotTrack){(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');ga('create','UA-187960192-2','auto');ga('send','pageview');}</script></head><body><header class=ss-header><nav class=navbar role=navigation aria-label="main navigation"><div class=navbar-brand><a class=logo-link href=/><img class=logo src=/img/logo/dromara.jpg></a><div class=-show-mobile><a id=mobile-menu-icon><svg class="icon" aria-hidden="true"><use xlink:href="#icon-menu"/></svg></a><nav id=mobile-menu><div id=js-menu-search-mobile class=navbar-search-mobile><input class=input placeholder=Search><svg class="icon" aria-hidden="true"><use xlink:href="#icon-search"/></svg></div><a href=/projects/><span>Projects</span><svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"/></svg></a>
+<a href=/guides/><span>Guides</span><svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"/></svg></a>
+<a href=/blog/><span>Blog</span><svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"/></svg></a>
+<a href=/activities/><span>Activity</span><svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"/></svg></a>
+<a href=/community/><span>Community</span><svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"/></svg></a>
+<a href=/awesome/><span>Awesome Dromara</span><svg class="icon" aria-hidden="true"><use xlink:href="#icon-ARROW"/></svg></a>
+<a href=/zh/blog/soul_source_learning_22_apache_dubbo/><span>中文</span><svg class="icon" aria-hidden="true"><use xlink:href="#icon-transfer"/></svg></a></nav></div></div><div class="navbar-menu -hidden-mobile"><div class=navbar-start><a class=navbar-item href=/projects/>Projects</a>
+<a class=navbar-item href=/guides/>Guides</a>
+<a class=navbar-item href=/blog/>Blog</a>
+<a class=navbar-item href=/activities/>Activity</a>
+<a class=navbar-item href=/community/>Community</a>
+<a class=navbar-item href=/awesome/>Awesome Dromara</a></div><div class=navbar-end><div class=navbar-item><div id=js-menu-search class=navbar-search><input class=input placeholder=Search><svg class="icon" aria-hidden="true"><use xlink:href="#icon-search"/></svg></div></div><div class=navbar-item><a class=translation href=/zh/blog/soul_source_learning_22_apache_dubbo/>中</a></div></div></div></nav></header><div class=ss-layout-container><main class="ss-layout-main -card"><div class=ss-meta><h1 class=title>Soul Gateway Learning Apache Dubbo Plugin</h1><div class=meta>2021-03-23 ·
+nuo-promise ·
+<span class=tags><a class=tag href=/tags/soul/ rel=tag>#Soul</a></span></div></div><article class=typo><h2 id=目标>目标</h2><ul><li>Apache Dubbo 插件介绍<ul><li>元数据介绍</li></ul></li><li>Apache Dubbo 插件配置<ul><li>Bootstrap pom 配置</li><li>soul-admin 配置</li><li>dubbo服务pom配置</li></ul></li><li>Apache Dubbo 泛化调用介绍<ul><li>通过API方式使用泛化调用</li><li>通过spring使用泛化调用</li><li>泛化调用实现流程</li></ul></li><li>Soul Dubbo 插件调用解析<ul><li>ApachDubboPlugin泛化调用准备</li><li>ApacheDubboProxySerivce</li><li>DubboResponsePlugin</li><li>WebFluxResultUtils返回结果</li></ul></li><li>Dubbo泛化调用介绍</li><li>总结</li><li><p>参考</p><h3 id=apache-dubbo-插件介绍>Apache Dubbo 插件介绍</h3><p>Apache Dubbo 是一款高性能、轻量级的开源Java服务框架,主要提供了六大核心能力,面向接口代理的高性能RPC调用,智能容错和负载均衡,服务自动注册与发现,高度可扩展能力,运行期流量调度,可视化的服务治理与运维。
+网关中Dubbo插件主要是将 <code>Http协议</code> 转换成 <code>Dubbo协议</code>  ,也是网关实现Dubbo泛化调用的关键。而Dubbo插件需要配合 <code>元数据</code> 才能实现Dubbo调用。</p><h4 id=元数据介绍>元数据介绍</h4><p>元数据作用就是在进行协议转换时候要获取真实的请求 <code>path</code> 、<code>methodName</code> 、 <code>parameterTypes</code> 为泛化调用做好准备</p></li></ul><p><img src=/img/soul/blog8/01.png alt=image.png></p><ul><li>在数据库中,我们有一张表单独存储Dubbo元信息，通过数据同步方案,会把这张表的数据同步到网关的JVM内存中</li><li><p>表结构如下</p><pre><code class=language-sql>CREATE TABLE  IF NOT EXISTS `meta_data` (
+`id` varchar(128) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'id',
+`app_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL COMMENT '应用名称',
+`path` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL COMMENT '路径,不能重复',
+`path_desc` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL COMMENT '路径描述',
+`rpc_type` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL COMMENT 'rpc类型',
+`service_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL COMMENT '服务名称',
+`method_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL COMMENT '方法名称',
+`parameter_types` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL COMMENT '参数类型 多个参数类型 逗号隔开',
+`rpc_ext` varchar(1024) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT NULL COMMENT 'rpc的扩展信息，json格式',
+`date_created` datetime(0) NOT NULL COMMENT '创建时间',
+`date_updated` datetime(0) NOT NULL ON UPDATE CURRENT_TIMESTAMP(0) COMMENT '更新时间',
+`enabled` tinyint(4) NOT NULL DEFAULT 0 COMMENT '启用状态',
+PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci ROW_FORMAT = Dynamic;
+</code></pre><ul><li><code>path</code> 字段主要是在请求网关的时候,会根据你的 <code>path</code> 字段来匹配到一条数据,然后进行后续的处理流程</li><li><code>rpc_ext</code> 字段如果代理的接口是 <code>Dubbo</code> 类型的服务接口,同时设置了 <code>group</code> <code>version</code> 字段时候,那么信息就会存储到 <code>rpc_ext</code> 中 </li><li>每一个 <code>Dubbo</code> 接口方法会应对一条元数据,对比SpringCloud、http分别是只存储一条/contextPath/** 和不存储</li></ul><h3 id=apache-dubbo-插件配置>Apache Dubbo 插件配置</h3><h4 id=soul-bootstrap-pom-配置>soul-bootstrap pom 配置</h4><pre><code class=language-java>&lt;dependency&gt;
+&lt;groupId&gt;org.dromara&lt;/groupId&gt;
+&lt;artifactId&gt;soul-spring-boot-starter-plugin-apache-dubbo&lt;/artifactId&gt;
+&lt;version&gt;${project.version}&lt;/version&gt;
+&lt;/dependency&gt;
+&lt;dependency&gt;
+&lt;groupId&gt;org.apache.dubbo&lt;/groupId&gt;
+&lt;artifactId&gt;dubbo&lt;/artifactId&gt;
+&lt;version&gt;2.7.5&lt;/version&gt;
+&lt;/dependency&gt;
+&lt;dependency&gt;
+&lt;groupId&gt;org.apache.curator&lt;/groupId&gt;
+&lt;artifactId&gt;curator-client&lt;/artifactId&gt;
+&lt;version&gt;${curator.version}&lt;/version&gt;
+&lt;/dependency&gt;
+&lt;dependency&gt;
+&lt;groupId&gt;org.apache.curator&lt;/groupId&gt;
+&lt;artifactId&gt;curator-framework&lt;/artifactId&gt;
+&lt;version&gt;${curator.version}&lt;/version&gt;
+&lt;/dependency&gt;
+&lt;dependency&gt;
+&lt;groupId&gt;org.apache.curator&lt;/groupId&gt;
+&lt;artifactId&gt;curator-recipes&lt;/artifactId&gt;
+&lt;version&gt;${curator.version}&lt;/version&gt;
+&lt;/dependency&gt;
+</code></pre></li></ul><h4 id=soul-admin-配置>soul-admin 配置</h4><p><img src=/img/soul/blog8/02.png alt=image.png></p><blockquote><p>登录soul-admin后台在插件管理页面打开Dubbo配置选项的开关,和填写注册中心的连接地址</p></blockquote><h4 id=dubbo服务pom配置>dubbo服务pom配置</h4><pre><code class=language-java>&lt;dependency&gt;
+ &lt;groupId&gt;org.dromara&lt;/groupId&gt;
+ &lt;artifactId&gt;soul-spring-boot-starter-client-apache-dubbo&lt;/artifactId&gt;
+ &lt;version&gt;${soul.version}&lt;/version&gt;
+&lt;/dependency&gt;
+</code></pre><pre><code class=language-java>@SoulDubboClient(path = &quot;/insert&quot;, desc = &quot;Insert a row of data&quot;)
+public DubboTest insert(final DubboTest dubboTest) {
+    dubboTest.setName(&quot;hello world Soul Apache Dubbo: &quot; + dubboTest.getName());
+    return dubboTest;
+}
+</code></pre><blockquote><p>被代理的服务使用提供的 <code>soul-spring-boot-starter-client-apache-dubbo</code> 客户端依赖,同时使用<code>@SoulDubboClient</code> 注解,在启动时候将接口的名称,参数类型,参数内容注册到 <code>soul-admin</code> 端,然后 <code>admin</code> 端将数据同步到 <code>bootstrap</code> 端。</p></blockquote><h3 id=apache-dubbo-泛化调用介绍>Apache Dubbo 泛化调用介绍</h3><p>泛化接口调用方式主要用于客户端没有API接口及模型类元的情况,参数及返回值中的所有POJO均用 <code>Map</code> 表示, 通常用于框架集成,可通过GenericSerivce调用所有服务实现。</p><h4 id=通过api方式使用泛化调用-网关目前使用方式>通过API方式使用泛化调用(网关目前使用方式)</h4><pre><code class=language-java>ReferenceConfig&lt;GenericService&gt; reference = new ReferenceConfig&lt;&gt;();
+reference.setGeneric(true);
+reference.setApplication(applicationConfig);
+reference.setRegistry(registryConfig);
+reference.setInterface(metaData.getServiceName());
+reference.setProtocol(&quot;dubbo&quot;);
+</code></pre><blockquote><p>网关通过API方式声明注册使用泛化调用</p></blockquote><h4 id=通过spring使用泛化调用>通过Spring使用泛化调用</h4><pre><code class=language-java>&lt;dubbo:reference id=&quot;barService&quot; interface=&quot;com.foo.BarService&quot; generic=&quot;true&quot; /&gt;
+</code></pre><h4 id=泛化调用实现流程>泛化调用实现流程</h4><pre><code class=language-java>+-------------------------------------------+               +-------------------------------------------+
+|  consumer 端                               |               | provider 端                                |
+|                                           |               |                                           |
+|                                           |               |                                           |
+|                                           |               |                                           |
+|                                           |               |                                           |
+|                    +------------------+   |               |       +--------------+                    |
+|                    |GenericImplFilter |   |  Invocation   |       |GenericFilter |                    |
+|             +----&gt; |                  +-------------------------&gt; |              |                    |
+|             |      +------------------+   |               |       +--------------+                    |
+| +-----------+                             |               |                      |    +-----------+   |
+| |           |                             |               |                      |    |           |   |
+| |Client     |                             |               |                      +--&gt; | Service   |   |
+| |           |                             |               |                           |           |   |
+| +-----------+                             |               |                           +-------+---+   |
+|                                           |               |                                   |       |
+|      ^             +------------------+   |               |       +--------------+            |       |
+|      |             |GenericImplFilter |   |               |       |GenericFilter | &lt;----------+       |
+|      +-------------+                  | &lt;-------------------------+              |                    |
+|                    +------------------+   |               |       +--------------+                    |
+|                                           |               |                                           |
+|                                           |               |                                           |
+|                                           |               |                                           |
+|                                           |               |                                           |
++-------------------------------------------+               +-------------------------------------------+
+</code></pre><blockquote><p><code>GenericService</code> 这个接口和Java的反射调用非常像,只需提供调用的方法名称,参数的类型以及参数的值就可以直接调用对应方法了。
+- GenericFilter : 负责provider端参数的转换
+- 调用时,将hashMap结构的参数转换成对应Pojo
+- 返回结果是,将Pojo转换成hashMap</p><p><img src=/img/soul/blog8/03.png alt=image.png>
+- GenericImplFilter : 负责consumer端参数的转换,将Pojo转换成hashMap接口</p><p><img src=/img/soul/blog8/04.png alt=image.png></p></blockquote><pre><code class=language-java>/**
+ * Generic service interface
+ *
+ * @export
+ */
+public interface GenericService {
+
+    /**
+     * Generic invocation
+     *
+     * @param method         方法名，如：findPerson，如果有重载方法，需带上参数列表，如：findPerson(java.lang.String)
+     * @param parameterTypes 参数类型
+     * @param args           参数列表
+     * @return invocation 返回值
+     * @throws GenericException 方法抛出的异常
+     */
+    Object $invoke(String method, String[] parameterTypes, Object[] args) throws GenericException;
+
+    default CompletableFuture&lt;Object&gt; $invokeAsync(String method, String[] parameterTypes, Object[] args) throws GenericException {
+        Object object = $invoke(method, parameterTypes, args);
+        if (object instanceof CompletableFuture) {
+            return (CompletableFuture&lt;Object&gt;) object;
+        }
+        return CompletableFuture.completedFuture(object);
+    }
+
+}
+</code></pre><h3 id=soul-dubbo-插件调用解析>Soul Dubbo 插件调用解析</h3><p>当业务请求发起时候,首先进入 <code>SoulWebHandler</code> (至于为什么成为请求入口自行查询,本文不作解释) 类的 <code>Handle</code> 方法,下面就带了 <code>plugins</code> 从 <code>DefaultSoulPluginChain</code> 类开始进入插件链调用。</p><pre><code class=language-java>@Override
+    public Mono&lt;Void&gt; handle(@NonNull final ServerWebExchange exchange) {
+        return new DefaultSoulPluginChain(plugins).execute(exchange).subscribeOn(scheduler);
+    }
+</code></pre><pre><code class=language-java>@Override
+public Mono&lt;Void&gt; execute(final ServerWebExchange exchange) {
+    // 响应式编程
+    return Mono.defer(() -&gt; {
+        // 判断当前index 是否 &lt; 插件数量
+        if (this.index &lt; plugins.size()) {
+            // 依次从plugins 中获取一种插件进行调用
+            SoulPlugin plugin = plugins.get(this.index++);
+            // 判断此插件是否未打开
+            Boolean skip = plugin.skip(exchange);
+            if (skip) {
+                return this.execute(exchange);
+            }
+            return plugin.execute(exchange, this);
+        }
+        return Mono.empty();
+    });
+}
+</code></pre><blockquote><p>本章只关注Apache Dubbo 所以我们重点放到Dubbo 插件的调用。
+<img src=/img/soul/blog8/05.png alt=image.png>
+经过Debug网关程序我们知道其实是按照上面的顺序一个一个的进行判断调用。下面我们关注 <code>ApacheDubboPlugin</code> </p></blockquote><h4 id=apachdubboplugin-泛化调用准备>ApachDubboPlugin 泛化调用准备</h4><pre><code class=language-java>@Override
+    protected Mono&lt;Void&gt; doExecute(final ServerWebExchange exchange, final SoulPluginChain chain, final SelectorData selector, final RuleData rule) {
+        // 获取 dubbo_params 数据
+        String body = exchange.getAttribute(Constants.DUBBO_PARAMS);
+        // 获取 exchange context的属性值
+        SoulContext soulContext = exchange.getAttribute(Constants.CONTEXT);
+        assert soulContext != null;
+        // 获取 exchange metaData 属性值
+        MetaData metaData = exchange.getAttribute(Constants.META_DATA);
+        // 判断metaData是否有误,如果有误直接返回 metaData 有误的返回信息
+        if (!checkMetaData(metaData)) {
+            assert metaData != null;
+            log.error(&quot; path is :{}, meta data have error.... {}&quot;, soulContext.getPath(), metaData.toString());
+            exchange.getResponse().setStatusCode(HttpStatus.INTERNAL_SERVER_ERROR);
+            Object error = SoulResultWrap.error(SoulResultEnum.META_DATA_ERROR.getCode(), SoulResultEnum.META_DATA_ERROR.getMsg(), null);
+            return WebFluxResultUtils.result(exchange, error);
+        }
+        // 判断 metaData的parameterTypes 和 body 是否为空,如果有误则返回Body错误信息
+        if (StringUtils.isNoneBlank(metaData.getParameterTypes()) &amp;&amp; StringUtils.isBlank(body)) {
+            exchange.getResponse().setStatusCode(HttpStatus.INTERNAL_SERVER_ERROR);
+            Object error = SoulResultWrap.error(SoulResultEnum.DUBBO_HAVE_BODY_PARAM.getCode(), SoulResultEnum.DUBBO_HAVE_BODY_PARAM.getMsg(), null);
+            return WebFluxResultUtils.result(exchange, error);
+        }
+        // 带着exchange、body、metaData 进行 Dubbo GenericsService的异步调用
+        final Mono&lt;Object&gt; result = dubboProxyService.genericInvoker(body, metaData, exchange);
+        return result.then(chain.execute(exchange));
+    }
+</code></pre><blockquote><p>首先对泛化调用所需要的参数进行检查</p></blockquote><h4 id=apachedubboproxyservice>ApacheDubboProxyService</h4><pre><code class=language-java>public Mono&lt;Object&gt; genericInvoker(final String body, final MetaData metaData, final ServerWebExchange exchange) throws SoulException {
+    // issue(https://github.com/dromara/soul/issues/471), add dubbo tag route
+    String dubboTagRouteFromHttpHeaders = exchange.getRequest().getHeaders().getFirst(Constants.DUBBO_TAG_ROUTE);
+    if (StringUtils.isNotBlank(dubboTagRouteFromHttpHeaders)) {
+        RpcContext.getContext().setAttachment(CommonConstants.TAG_KEY, dubboTagRouteFromHttpHeaders);
+    }
+    // 根据metaData路径获取ferference
+    ReferenceConfig&lt;GenericService&gt; reference = ApplicationConfigCache.getInstance().get(metaData.getPath());
+    if (Objects.isNull(reference) || StringUtils.isEmpty(reference.getInterface())) {
+        ApplicationConfigCache.getInstance().invalidate(metaData.getPath());
+        reference = ApplicationConfigCache.getInstance().initRef(metaData);
+    }
+    // 根据ferference 获取泛化调用的实例 GenericService
+    GenericService genericService = reference.get();
+    Pair&lt;String[], Object[]&gt; pair;
+    if (ParamCheckUtils.dubboBodyIsEmpty(body)) {
+        pair = new ImmutablePair&lt;&gt;(new String[]{}, new Object[]{});
+    } else {
+        // 根据body 和 parameterTypes 组织Dubbo 泛化调用的参数类型和参数值
+        pair = dubboParamResolveService.buildParameter(body, metaData.getParameterTypes());
+    }
+    // 下面使用GenericSerice 默认方法$invokeAsync进行异步调用
+    CompletableFuture&lt;Object&gt; future = genericService.$invokeAsync(metaData.getMethodName(), pair.getLeft(), pair.getRight());
+    return Mono.fromFuture(future.thenApply(ret -&gt; {
+        if (Objects.isNull(ret)) {
+            ret = Constants.DUBBO_RPC_RESULT_EMPTY;
+        }
+        // 等调用成功之后 将结果和类型复制到exchagne 对应的属性上
+        exchange.getAttributes().put(Constants.DUBBO_RPC_RESULT, ret);
+        exchange.getAttributes().put(Constants.CLIENT_RESPONSE_RESULT_TYPE, ResultEnum.SUCCESS.getName());
+        return ret;
+    })).onErrorMap(exception -&gt; exception instanceof GenericException ? new SoulException(((GenericException) exception).getExceptionMessage()) : new SoulException(exception));
+}
+</code></pre><h4 id=dubboresponseplugin>DubboResponsePlugin</h4><pre><code class=language-java>@Override
+public Mono&lt;Void&gt; execute(final ServerWebExchange exchange, final SoulPluginChain chain) {
+    return chain.execute(exchange).then(Mono.defer(() -&gt; {
+        final Object result = exchange.getAttribute(Constants.DUBBO_RPC_RESULT);
+        if (Objects.isNull(result)) {
+            Object error = SoulResultWrap.error(SoulResultEnum.SERVICE_RESULT_ERROR.getCode(), SoulResultEnum.SERVICE_RESULT_ERROR.getMsg(), null);
+            return WebFluxResultUtils.result(exchange, error);
+        }
+        Object success = SoulResultWrap.success(SoulResultEnum.SUCCESS.getCode(), SoulResultEnum.SUCCESS.getMsg(), JsonUtils.removeClass(result));
+        return WebFluxResultUtils.result(exchange, success);
+    }));
+}
+</code></pre><h4 id=image-png-img-soul-blog8-06-png><img src=/img/soul/blog8/06.png alt=image.png></h4><h4 id=webfluxresultutils-返回结果>WebFluxResultUtils 返回结果</h4><p><img src=/img/soul/blog8/07.png alt=image.png></p><h3 id=dubbo泛化调用介绍>Dubbo泛化调用介绍</h3><p>Dubbo泛化调用主要就分为两块分别是消费端如何使用 <code>GenericImplFilter</code> 拦截泛化调用、服务提供端如何使用 <code>GenericFilter</code> 拦截请求后把泛化参数序列化然后请求给具体服务。</p><h4 id=服务消费端org-apache-dubbo-rpc-filter-genericimplfilter是如何拦截泛化调用>服务消费端org.apache.dubbo.rpc.filter.GenericImplFilter是如何拦截泛化调用</h4><pre><code class=language-java>@Activate(group = CommonConstants.CONSUMER, value = GENERIC_KEY, order = 20000)
+public class GenericImplFilter implements Filter, Filter.Listener {
+@Override
+    public Result invoke(Invoker&lt;?&gt; invoker, Invocation invocation) throws RpcException {
+        // ... 省略非核心代码
+        // 判断是否为泛化调用
+        if (isMakingGenericCall(generic, invocation)) {
+            // 获取泛化参数
+            Object[] args = (Object[]) invocation.getArguments()[2];
+            // 如果泛化为nativeJava
+            if (ProtocolUtils.isJavaGenericSerialization(generic)) {
+                for (Object arg : args) {
+                    if (!(byte[].class == arg.getClass())) {
+                        error(generic, byte[].class.getName(), arg.getClass().getName());
+                    }
+                }
+                // 如果泛化方式为bean
+            } else if (ProtocolUtils.isBeanGenericSerialization(generic)) {
+                for (Object arg : args) {
+                    if (!(arg instanceof JavaBeanDescriptor)) {
+                        error(generic, JavaBeanDescriptor.class.getName(), arg.getClass().getName());
+                    }
+                }
+            }
+
+            // 设置attachment ,以便与服务端调用
+            invocation.setAttachment(
+                    GENERIC_KEY, invoker.getUrl().getParameter(GENERIC_KEY));
+        }
+        // 发起远程调用
+        return invoker.invoke(invocation);
+    }
+    private boolean isMakingGenericCall(String generic, Invocation invocation) {
+        return (invocation.getMethodName().equals($INVOKE) || invocation.getMethodName().equals($INVOKE_ASYNC))
+                &amp;&amp; invocation.getArguments() != null
+                &amp;&amp; invocation.getArguments().length == 3
+                &amp;&amp; ProtocolUtils.isGeneric(generic);
+    }
+}
+</code></pre><blockquote><p>GenericImplFilter 实现接口Filter(关于Dubbo中的Filter,不做介绍)然后执行Invoke方法,invoke方法主要做如下事情:
+- 参数校验,检查这个调用是否是泛化调用
+- 获取泛化参数
+- 判断泛化调用方式:遍历每个参数,然后依次判断参数的泛化方式是nativejava还是bean方式
+- 发起远程调用</p></blockquote><h4 id=服务提供端通过genericfilter拦截泛化请求>服务提供端通过GenericFilter拦截泛化请求</h4><pre><code class=language-java>@Activate(group = CommonConstants.PROVIDER, order = -20000)
+public class GenericFilter implements Filter, Filter.Listener {
+    @Override
+    public Result invoke(Invoker&lt;?&gt; invoker, Invocation inv) throws RpcException {
+        // 参数校验
+        if ((inv.getMethodName().equals($INVOKE) || inv.getMethodName().equals($INVOKE_ASYNC))
+                &amp;&amp; inv.getArguments() != null
+                &amp;&amp; inv.getArguments().length == 3
+                &amp;&amp; !GenericService.class.isAssignableFrom(invoker.getInterface())) {
+            // 获取参数名称、参数类型、参数值
+            String name = ((String) inv.getArguments()[0]).trim();
+            String[] types = (String[]) inv.getArguments()[1];
+            Object[] args = (Object[]) inv.getArguments()[2];
+            try {
+                // 使用反射获取调用的方法
+                Method method = ReflectUtils.findMethodByMethodSignature(invoker.getInterface(), name, types);
+                Class&lt;?&gt;[] params = method.getParameterTypes();
+                if (args == null) {
+                    args = new Object[params.length];
+                }
+                // 获取泛化引用使用的泛化类型,true or bean or nativejava
+                String generic = inv.getAttachment(GENERIC_KEY);
+                if (StringUtils.isBlank(generic)) {
+                    generic = RpcContext.getContext().getAttachment(GENERIC_KEY);
+                }
+                // 如果generic=true 则使用true方式对入参进行反序列化
+                if (StringUtils.isEmpty(generic)
+                        || ProtocolUtils.isDefaultGenericSerialization(generic)
+                        || ProtocolUtils.isGenericReturnRawResult(generic)) {
+                    args = PojoUtils.realize(args, params, method.getGenericParameterTypes());
+                    // 如果 generic=nativejava,则使用nativejava方式对入参进行反序列化
+                } else if (ProtocolUtils.isJavaGenericSerialization(generic)) {
+                    for (int i = 0; i &lt; args.length; i++) {
+                        if (byte[].class == args[i].getClass()) {
+                            try (UnsafeByteArrayInputStream is = new UnsafeByteArrayInputStream((byte[]) args[i])) {
+                                args[i] = ExtensionLoader.getExtensionLoader(Serialization.class)
+                                        .getExtension(GENERIC_SERIALIZATION_NATIVE_JAVA)
+                                        .deserialize(null, is).readObject();
+                            } catch (Exception e) {
+                                throw new RpcException(&quot;Deserialize argument [&quot; + (i + 1) + &quot;] failed.&quot;, e);
+                            }
+                        } else {
+                            throw new RpcException(...);
+                        }
+                    }
+                    // 如果 generic=bean 则使用bean方式对入参进行反序列化
+                } else if (ProtocolUtils.isBeanGenericSerialization(generic)) {
+                    for (int i = 0; i &lt; args.length; i++) {
+                        if (args[i] instanceof JavaBeanDescriptor) {
+                            args[i] = JavaBeanSerializeUtil.deserialize((JavaBeanDescriptor) args[i]);
+                        } else {
+                            throw new RpcException(...);
+                        }
+                    }
+                } ...
+                // 将本次请求传递到FilterChain的下一个Filter中,并返回结果result
+                RpcInvocation rpcInvocation = new RpcInvocation(method, invoker.getInterface().getName(), args, inv.getAttachments(), inv.getAttributes());
+                rpcInvocation.setInvoker(inv.getInvoker());
+                rpcInvocation.setTargetServiceUniqueName(inv.getTargetServiceUniqueName());
+
+                return invoker.invoke(rpcInvocation);
+            } catch (NoSuchMethodException e) {
+                throw new RpcException(e.getMessage(), e);
+            } catch (ClassNotFoundException e) {
+                throw new RpcException(e.getMessage(), e);
+            }
+        }
+        // 如果不是泛化调用,直接把请求传给FilterChain的下一个Filter
+        return invoker.invoke(inv);
+    }
+}
+</code></pre><blockquote><p>以上就是Dubbo服务提供端如何拦截泛化请求,并进行处理的大体流程:
+- 参数校验,判断此次请求是不是泛化调用
+- 获取参数名称、参数类型、参数值
+- 使用反射获取调用的方法,和使用的泛化方式 <code>true</code>  or <code>nativejava</code>  or <code>bean</code> 
+- 根据泛化方式,反序列化泛化参数
+- 将本次请求，包括调用的方法，参数和上下文信息传递给FilterChain的下一个Filter中,并返回Result结果
+- 根据泛化方式,反序列化Result结果返回给服务消费端</p></blockquote><h3 id=总结>总结</h3><p>以上从如何配置Dubbo插件到整个调用流程的分析,然后分别介绍服务消费端与服务提供端如何拦截泛化调用流程对参数进行序列化细节,希望对你有所帮助</p><h3 id=参考>参考</h3><p><a href=https://my.oschina.net/u/4564034/blog/4409382>https://my.oschina.net/u/4564034/blog/4409382</a></p><p><a href=https://qsli.github.io/2018/05/02/dubbo-generic-invoke/>https://qsli.github.io/2018/05/02/dubbo-generic-invoke/</a></p></article><div class=-show-mobile><nav class=ss-pagination-next><a class=link-prev href=/blog/soul_source_learning_21_resilience4j/><span class=text>Prev:</span>
+<span class=text>Soul Gateway Learning Resilience4j Plugin</span></a></nav></div></main><aside class=ss-layout-aside><div class=ss-card><h2 class=card-title>Related</h2><ul class=ss-aside-related><li><a href=/blog/soul_source_learning_21_resilience4j/>Soul Gateway Learning Resilience4j Plugin</a></li><li><a href=/blog/soul_source_learning_20_sentinel/>Soul Gateway Learning Sentinel Plugin</a></li><li><a href=/blog/soul_source_learning_19_redirect/>Soul Gateway Learning Redirect Plugin</a></li><li><a href=/activities/dromara-cloud-native-meet-02/>Dromara Soul Source Code 01 Reading Sharing Session 02</a></li><li><a href=/blog/soul_source_learning_16_divide_sxj/>Soul Gateway Learning Divide Plugin Source Code Interpretation</a></li></ul></div><div class="ss-aside-tags ss-card"><h2 class=card-title>Tag
+<span class=card-extra></span></h2><ul class=tag-list><li class=tag><a href=/tags/dreamcode/>DreamCode</a></li><li class=tag><a href=/tags/dromara/>Dromara</a></li><li class=tag><a href=/tags/gateway/>GateWay</a></li><li class=tag><a href=/tags/hmily/>hmily</a></li><li class=tag><a href=/tags/reactor/>Reactor</a></li><li class=tag><a href=/tags/soul/>Soul</a></li><li class=tag><a href=/tags/tcc/>TCC</a></li></ul></div></aside></div><footer class=ss-footer><div class=container><div class=links><div class=cate><h2 class=cate-title>Resources</h2><a class=link href=https://github.com/dromara>Github</a>
+<a class=link href=https://gitee.com/dromara>Gitee</a></div><div class=cate><h2 class=cate-title>Get Involved</h2><a class=link href=https://github.com/dromara/soul/issues/new>Feedback</a>
+<a class=link href=/community>Community</a>
+<a class=link href=/blog>Blog</a></div><div class=cate><h2 class=cate-title>Document</h2><a class=link href=/projects/soul/overview/>Soul</a>
+<a class=link href=/projects/hmily/overview/>Hmily</a>
+<a class=link href=/projects/raincat/overview/>Raincat</a>
+<a class=link href=/projects/myth/overview/>Myth</a></div></div><div class=qrcode><div><img class=qrcode-img src=/img/qrcode/qrcode_1.png><p class=qrcode-desc>Wechat Official Account</p></div><div><img class=qrcode-img src=/img/qrcode/qrcode_2.png><p class=qrcode-desc>QQ Group</p></div></div></div><div class=copyright><p>Copyright ©2021
+<a href=/>xiaoyu@apache.org by xiaoyu</a></p></div></footer></body></html>
