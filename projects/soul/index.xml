@@ -67,11 +67,9 @@ If the user don&amp;rsquo;t use, please disable the plugin in the backgroud.
 Plugin Instruction Introduce hystrix dependency in the pom.xml file of the gateway. &amp;lt;!-- soul hystrix plugin start--&amp;gt; &amp;lt;dependency&amp;gt; &amp;lt;groupId&amp;gt;org.</description></item><item><title>plugin-monitor</title><link>/projects/soul/monitor-plugin/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/projects/soul/monitor-plugin/</guid><description>Explanation monitor plugin is used to monitor its own running status(JVM-related) by gateway, include request response delay, QPS, TPS, and other related metrics. Technical Solutions Flow Diagram Make even tracking in soul gateway by asynchronous or synchronous mode.
 The prometheus server pulls metrics&amp;rsquo; through http request, and then displays it by Grafana.
 Plugin Setting In soul-admin&amp;ndash;&amp;gt; plugin management-&amp;gt; monitor, set to enable.</description></item><item><title>plugin-rateLimiter</title><link>/projects/soul/rate-limiter-plugin/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/projects/soul/rate-limiter-plugin/</guid><description>Explanation rateLimiter is core implementation of gateway restrictions on network traffic.
-You can set to the interface level or the parameter level. How to use it depends on your traffic configuration.
-Technical Solution Using redis token bucket algorithm to limit traffic.
-Flow Diagram： Plugin Setting In soul-admin&amp;ndash;&amp;gt; plugin management&amp;ndash;&amp;gt; rate_limiter set to enable.
-Configure redis in the plugin.
-Currently, supporting redis patterns of single, sentinel, and cluster.</description></item><item><title>plugin-resilience4j</title><link>/projects/soul/resilience4j-plugin/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/projects/soul/resilience4j-plugin/</guid><description>Explanation resilience4j is one of the options that supports flow control and circuit breaking.
+The soul gateway provides a variety of current limiting algorithms, including token bucket algorithm, concurrent token bucket algorithm, leaky bucket algorithm and sliding time window algorithm.
+The implementation of current limiting algorithm of soul gateway is based on redis.
+You can set to the interface level or the parameter level. How to use it depends on your traffic configuration.</description></item><item><title>plugin-resilience4j</title><link>/projects/soul/resilience4j-plugin/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>/projects/soul/resilience4j-plugin/</guid><description>Explanation resilience4j is one of the options that supports flow control and circuit breaking.
 resilience4j supports flow control and circuit breaking functions for gateway.
 Plugin Setting In soul-admin &amp;ndash;&amp;gt; plugin management &amp;ndash;&amp;gt; resilience4j set to enable.
 If you don&amp;rsquo;t want to use it, please close the plugin in soul-admin.
