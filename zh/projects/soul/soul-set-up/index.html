@@ -16,9 +16,9 @@
 
 &gt; linux : ./start.sh 
 </code></pre></li></ul><h3 id=docker构建>docker构建</h3><pre><code>&gt; docker pull dromara/soul-admin
-</code></pre><ul><li><p>使用 <code>h2</code> 来存储后台数据</p><pre><code>&gt; docker network create soul
-&gt; docker run -d -p 9095:9095 --net soul dromara/soul-admin
-</code></pre></li><li><p>使用 <code>mysql</code> 来存储后台数据。</p><pre><code>&gt; docker run -d -p 9095:9095 --net soul dromara/soul-admin -eSPRING_PROFILES_ACTIVE = mysql -e 
+&gt; docker network create soul
+</code></pre><ul><li><p>使用 <code>h2</code> 来存储后台数据</p><pre><code>&gt; docker run -d -p 9095:9095 --net soul dromara/soul-admin
+</code></pre></li><li><p>使用 <code>mysql</code> 来存储后台数据。</p><pre><code>&gt; docker run -d -p 9095:9095 --net soul dromara/soul-admin -e SPRING_PROFILES_ACTIVE=mysql
 </code></pre></li></ul><h3 id=本地构建>本地构建</h3><ul><li><p>下载代码</p><pre><code>&gt; git clone https://github.com/dromara/soul.git
 &gt; cd soul
 </code></pre></li><li><p>编译代码</p><pre><code>&gt; mvn clean install -Dmaven.javadoc.skip=true -B -Drat.skip=true -Djacoco.skip=true -DskipITs -DskipTests
@@ -56,18 +56,18 @@
         &lt;artifactId&gt;soul-spring-boot-starter-sync-data-websocket&lt;/artifactId&gt;
         &lt;version&gt;${last.version}&lt;/version&gt;
    &lt;/dependency&gt;
-</code></pre><ul><li>在你的 <code>application.yaml</code> 文件中加上如下配置：</li></ul><pre><code class=language-yaml>    spring:
-       main:
-         allow-bean-definition-overriding: true
-    
-    management:
-      health:
-        defaults:
-          enabled: false
-    soul :
-        sync:
-            websocket :
-                 urls: ws://localhost:9095/websocket  //设置成你的soul-admin地址
+</code></pre><ul><li>在你的 <code>application.yaml</code> 文件中加上如下配置：</li></ul><pre><code class=language-yaml>spring:
+  main:
+    allow-bean-definition-overriding: true
+
+management:
+  health:
+    defaults:
+      enabled: false
+soul :
+  sync:
+    websocket :
+      urls: ws://localhost:9095/websocket  //设置成你的soul-admin地址
 </code></pre><ul><li>你的项目环境搭建完成，启动你的项目。</li></ul></article></main></div><footer class=ss-footer><div class=container><div class=links><div class=cate><h2 class=cate-title>资源</h2><a class=link href=https://github.com/dromara>Github</a>
 <a class=link href=https://gitee.com/dromara>Gitee</a></div><div class=cate><h2 class=cate-title>参与进来</h2><a class=link href=https://github.com/dromara/soul/issues/new>反馈</a>
 <a class=link href=/zh/community>社区</a>
