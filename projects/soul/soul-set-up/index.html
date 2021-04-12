@@ -19,8 +19,8 @@ With soul you can easily create application with your own gateway.</li><li>Syste
 </code></pre></li></ul><h3 id=docker>docker</h3><pre><code>&gt; docker pull dromara/soul-admin
 &gt; docker network create soul
 </code></pre><ul><li><p>use <code>h2</code> store</p><pre><code>&gt; docker run -d -p 9095:9095 --net soul dromara/soul-admin
-</code></pre></li><li><p>use <code>mysql</code> store.</p><pre><code>&gt; docker run -d -p 9095:9095 --net soul dromara/soul-admin -e SPRING_PROFILES_ACTIVE=mysql
-</code></pre></li></ul><p>If you want to override environment variables, you can do like this.</p><pre><code>&gt; docker run -e &quot;SPRING_PROFILES_ACTIVE=mysql&quot; -e &quot;spring.datasource.url=jdbc:mysql://192.168.1.9:3306/soul?useUnicode=true&amp;characterEncoding=utf-8&amp;useSSL=false&quot; -e &quot;spring.datasource.password=123456&quot; -d -p 9095:9095 --net soul dromara/soul-admin
+</code></pre></li><li><p>use <code>mysql</code> store.</p><pre><code>&gt; docker run -e &quot;SPRING_PROFILES_ACTIVE=mysql&quot; -d -p 9095:9095 --net soul dromara/soul-admin
+</code></pre></li></ul><p>If you want to override environment variables, you can do like this.</p><pre><code>docker run -e &quot;SPRING_PROFILES_ACTIVE=mysql&quot; -e &quot;spring.datasource.url=jdbc:mysql://192.168.1.9:3306/soul?useUnicode=true&amp;characterEncoding=utf-8&amp;useSSL=false&quot; -e &quot;spring.datasource.password=123456&quot; -d -p 9095:9095 --net soul dromara/soul-admin
 </code></pre><p>Another way, bind volume and mounts</p><p>Put your <code>application.yml</code> in xxx directory, then run like this.</p><pre><code>docker run -v D:\tmp\conf:/opt/soul-admin/conf/ -d -p 9095:9095 --net soul dromara/soul-admin
 </code></pre><h3 id=local>local</h3><ul><li><p>download</p><pre><code>&gt; git clone https://github.com/dromara/soul.git
 &gt; cd soul
