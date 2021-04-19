@@ -8,7 +8,7 @@ description: Environment Setup
 
 * Soul is an open source plugin framework, which is flexibility and extensibility since 2.2.0 version.
   With soul you can easily create application with your own gateway.
-* System Requirement: JDK 1.8+, Mysql 5.0 +.
+* System Requirement: JDK 1.8+, Mysql 5.5.20 +.
 
 
 ## Soul-Admin
