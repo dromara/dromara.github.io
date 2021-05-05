@@ -85,19 +85,7 @@
           return orderDTO;
       }
   }
-</code></pre><ul><li>启动你的项目，你的接口接入到了网关。</li></ul><h2 id=http请求接入网关-其他语言-非springmvc体系>Http请求接入网关（其他语言，非springMvc体系）</h2><ul><li><p>首先在 <code>soul-admin</code> 找到 divide插件，进行选择器，和规则的添加，进行流量的匹配筛选。</p></li><li><p>如果不懂怎么配置，请看选择，规则介绍 <a href=../selector-and-rule>选择器规则介绍</a>。</p></li><li><p>您也可以自定义开发属于你的 http-client，参考 <a href=../developer-soul-client>多语言Http客户端开发</a>。</p></li></ul><h2 id=用户请求>用户请求</h2><ul><li><p>说白了，你之前怎么请求就怎么请求，没有很大的变动，变动的地方有2点。</p></li><li><p>第一点，你之前请求的域名是你自己的服务，现在要换成网关的域名 （这个你听的懂？）</p></li><li><p>第二点，soul网关需要有一个路由前缀，这个路由前缀就是你接入项目进行配置 <code>contextPath</code>，如果熟的话，可以自由在 <code>soul-admin</code> 中的divide插件进行自由更改。</p></li></ul><p><pre><code class=language-yaml></p>
-
-<h1 id=比如你有一个-order服务-它有一个接口-请求路径-http-localhost-8080-test-save>比如你有一个 order服务 它有一个接口，请求路径 <a href=http://localhost:8080/test/save>http://localhost:8080/test/save</a></h1>
-
-<h1 id=现在就需要换成-http-localhost-9195-order-test-save>现在就需要换成：<a href=http://localhost:9195/order/test/save>http://localhost:9195/order/test/save</a></h1>
-
-<h1 id=其中-localhost-9195-为网关的ip端口-默认端口是9195-order-是你接入网关配置的-contextpath>其中 localhost:9195 为网关的ip端口，默认端口是9195 ，/order 是你接入网关配置的 contextPath</h1>
-
-<h1 id=其他参数-请求方式不变>其他参数，请求方式不变。</h1>
-
-<h1 id=我讲到这里还不懂-请加群问吧>我讲到这里还不懂？ 请加群问吧</h1>
-
-<p></code></pre></li></p><p><li><p>然后你就可以进行访问了，如此的方便与简单。</p></li></ul></p></article></main></div><footer class=ss-footer><div class=container><div class=links><div class=cate><h2 class=cate-title>资源</h2><a class=link href=https://github.com/dromara>Github</a>
+</code></pre><ul><li>启动你的项目，你的接口接入到了网关。</li></ul><h2 id=http请求接入网关-其他语言-非springmvc体系>Http请求接入网关（其他语言，非springMvc体系）</h2><ul><li><p>首先在 <code>soul-admin</code> 找到 divide插件，进行选择器，和规则的添加，进行流量的匹配筛选。</p></li><li><p>如果不懂怎么配置，请看选择，规则介绍 <a href=../selector-and-rule>选择器规则介绍</a>。</p></li><li><p>您也可以自定义开发属于你的 http-client，参考 <a href=../developer-soul-client>多语言Http客户端开发</a>。</p></li></ul><h2 id=用户请求>用户请求</h2><ul><li><p>说白了，你之前怎么请求就怎么请求，没有很大的变动，变动的地方有2点。</p></li><li><p>第一点，你之前请求的域名是你自己的服务，现在要换成网关的域名 （这个你听的懂？）</p></li><li><p>第二点，soul网关需要有一个路由前缀，这个路由前缀就是你接入项目进行配置 <code>contextPath</code>，如果熟的话，可以自由在 <code>soul-admin</code> 中的divide插件进行自由更改。</p></li><li><p>比如你有一个 order服务 它有一个接口，请求路径 <a href=http://localhost:8080/test/save>http://localhost:8080/test/save</a></p></li><li><p>现在就需要换成：<a href=http://localhost:9195/order/test/save>http://localhost:9195/order/test/save</a></p></li><li><p>其中 localhost:9195 为网关的ip端口，默认端口是9195 ，/order 是你接入网关配置的 contextPath</p></li><li><p>其他参数，请求方式不变。</p></li><li><p>我讲到这里还不懂？ 请加群问吧</p></li><li><p>然后你就可以进行访问了，如此的方便与简单。</p></li></ul></li></ul></article></main></div><footer class=ss-footer><div class=container><div class=links><div class=cate><h2 class=cate-title>资源</h2><a class=link href=https://github.com/dromara>Github</a>
 <a class=link href=https://gitee.com/dromara>Gitee</a></div><div class=cate><h2 class=cate-title>参与进来</h2><a class=link href=https://github.com/dromara/soul/issues/new>反馈</a>
 <a class=link href=/zh/community>社区</a>
 <a class=link href=/zh/blog>博客</a></div><div class=cate><h2 class=cate-title>文档</h2><a class=link href=/zh/projects/soul/overview/>Soul</a>
