@@ -20,7 +20,7 @@ description: 环境搭建
 * 使用 `h2` 来存储后台数据
 
 ```
-> windwos : start.bat --spring.profiles.active = h2
+> windows : start.bat --spring.profiles.active = h2
 
 > linux : ./start.sh --spring.profiles.active = h2
 ```
@@ -28,7 +28,7 @@ description: 环境搭建
 * 使用 `mysql` 来存储后台数据。 进入 `/conf` 目录，修改 `application.yaml` 中`mysql` 的配置。
 
 ```
-> windwos : start.bat 
+> windows : start.bat 
 
 > linux : ./start.sh 
 ```
@@ -97,7 +97,7 @@ docker run -v D:\tmp\conf:/opt/soul-admin/conf/ -d -p 9095:9095 --net soul droma
 * 解压缩 `soul-bootstrap-bin-2.3.0-RELEASE.tar.gz`。 进入 bin 目录。
 
 ```
-> windwos : start.bat 
+> windows : start.bat 
 
 > linux : ./start.sh 
 ```
