@@ -62,4 +62,8 @@ Apache CLA 全称 Apache Contributor License Agreement，签署ICLA的目的是�
 
 ![](/img/soul/icla/7.png)
 
-![](/img/soul/icla/8.png))
+![](/img/soul/icla/8.png)
+
+## 邮件发送模板
+
+![](/img/soul/icla/9.png)

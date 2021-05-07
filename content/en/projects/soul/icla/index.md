@@ -64,4 +64,8 @@ Apache only accept hand-written signature or [PDF signature software](https://pd
 
 ![](/img/soul/icla/7.png)
 
-![](/img/soul/icla/8.png))
+![](/img/soul/icla/8.png)
+
+## Email Template
+
+![](/img/soul/icla/9.png)
