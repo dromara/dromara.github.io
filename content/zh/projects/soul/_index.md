@@ -148,6 +148,8 @@ sidebar:
         link: 'committer'
       - title: '编码规范'  	
         link: 'code-conduct'
+      - title: '签署iCLA指南'
+        link: 'icla'
   - title: '文档下载'  	
     link: 'download'
 # draft: true

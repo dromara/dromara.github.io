@@ -148,6 +148,8 @@ sidebar:
         link: 'committer'
       - title: 'Code Conduct'  	
         link: 'code-conduct'
+      - title: 'Sign ICLA Guide'
+        link: 'icla'
   - title: 'Doc Download'  	
     link: 'download'
 # draft: true
