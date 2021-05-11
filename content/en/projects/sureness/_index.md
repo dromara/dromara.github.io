@@ -1,7 +1,7 @@
 ---
-title: "Cubic"
-description: "无侵入分布式监控，致力于应用级监控的工具"
-subDesc: "无侵入分布式监控，致力于应用级监控的工具"
+title: "Sureness"
+description: "A simple and efficient security framework that focus on protection of REST API."
+subDesc: "Focusing on Protection of REST API"
 feature1Img: ""
 feature1Title: ""
 feature1Desc: ""
@@ -20,13 +20,12 @@ feature5Desc: ""
 feature6Img: ""
 feature6Title: ""
 feature6Desc: ""
-startUp: "开始"
-link: "https://cubic.jiagoujishu.com/"
-github: "https://github.com/dromara/cubic"
-gitee: "https://gitee.com/dromara/cubic"
+startUp: "Start up"
+link: "https://dromara.org/sureness"
+github: "https://github.com/dromara/sureness"
+gitee: "https://gitee.com/dromara/sureness"
 level: "tool"
 weight: 10
 showIntroduce: false
 showFeature: false
-icon: "/img/logo/cubic.png"
 ---
