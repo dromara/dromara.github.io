@@ -17,7 +17,7 @@ description: 多语言http客户端
 ```json
 {
 	"appName": "xxx", //应用名称 必填
-	"context": "/xxx", //请求前缀 必填
+	"contextPath": "/xxx", //请求前缀 必填
 	"path": "xxx", //路径需要唯一 必填
 	"pathDesc": "xxx", //路径描述
 	"rpcType": "http", //rpc类型  必填
