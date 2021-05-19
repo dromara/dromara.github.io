@@ -18,10 +18,18 @@
 <script src="{{ (resources.Get "js/iconfont.js").RelPermalink }}"></script>
 <script src="{{ (resources.Get "js/highlight.pack.js").RelPermalink }}"></script>
 <script>hljs.initHighlightingOnLoad();</script>
-
-
 <script>window.SITE_LANGUAGE = "{{ .Site.Language.Lang }}"</script>
 <script src="{{ "/js/app.js" | relURL }}"></script>
+
+<script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?a02cb5c75097762223d5a815a03e0a15";
+      var s = document.getElementsByTagName("script")[0]; 
+      s.parentNode.insertBefore(hm, s);
+    })();
+</script>
 
 <!-- TODO: meta -->
 <!-- 例如 twitter 的资料卡，https://github.com/servicemesher/website/blob/master/themes/hugo-universal-theme/layouts/partials/head.html -->
