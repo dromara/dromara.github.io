@@ -196,12 +196,24 @@ protected Mono&lt;Void&gt; doExecute(ServerWebExchange exchange, SoulPluginChain
     String pluginNamed();
     
 }
-</code></pre><ul><li>Ensure <code>pluginNamed()</code> is same as the plugin name you defined.</li><li>Register defined class as a Spring Bean, or simply apply <code>@Component</code> in implementation class.
-<code>java
-@Bean
+</code></pre><ul><li>Ensure <code>pluginNamed()</code> is same as the plugin name you defined.</li><li><p>Register defined class as a Spring Bean, or simply apply <code>@Component</code> in implementation class.</p><pre><code class=language-java>@Bean
 public PluginDataHandler a() {
-return new A();
-}</code></li></ul></article></main></div><footer class=ss-footer><div class=container><div class=links><div class=cate><h2 class=cate-title>Resources</h2><a class=link href=https://github.com/dromara>Github</a>
+    return new A();
+}
+</code></pre><h2 id=do-not-use-selectorlist-and-ruleslist>Do not use SelectorList and RulesList</h2><p>Not all plugins need both.</p><p>Therefore, we provide the following two methods, written in <strong>CustomPlugin</strong>.</p><pre><code class=language-java>@Override
+protected Mono&lt;Void&gt; handleSelectorIsNull(final String pluginName, 
+                                          final ServerWebExchange exchange, 
+                                          final SoulPluginChain chain) {
+    return doExecute(exchange, chain, null, null);
+}
+
+@Override
+protected Mono&lt;Void&gt; handleRuleIsNull(final String pluginName, 
+                                      final ServerWebExchange exchange, 
+                                      final SoulPluginChain chain) {
+    return doExecute(exchange, chain, null, null);
+}
+</code></pre></li><li><p>Note that if there is no rewriting, your plug-in will be invalid due to the absence of <strong>SelectorList</strong> and <strong>RulesList</strong>.</p></li></ul></article></main></div><footer class=ss-footer><div class=container><div class=links><div class=cate><h2 class=cate-title>Resources</h2><a class=link href=https://github.com/dromara>Github</a>
 <a class=link href=https://gitee.com/dromara>Gitee</a></div><div class=cate><h2 class=cate-title>Get Involved</h2><a class=link href=https://github.com/dromara/soul/issues/new>Feedback</a>
 <a class=link href=/community>Community</a>
 <a class=link href=/blog>Blog</a></div><div class=cate><h2 class=cate-title>Document</h2><a class=link href=/projects/soul/overview/>Soul</a>
