@@ -264,3 +264,27 @@ public interface PluginDataHandler {
         return new A();
     }
 ```
+
+## Do not use SelectorList and RulesList
+
+Not all plugins need both.
+
+Therefore, we provide the following two methods, written in **CustomPlugin**.
+
+```java
+    @Override
+    protected Mono<Void> handleSelectorIsNull(final String pluginName, 
+                                              final ServerWebExchange exchange, 
+                                              final SoulPluginChain chain) {
+        return doExecute(exchange, chain, null, null);
+    }
+
+    @Override
+    protected Mono<Void> handleRuleIsNull(final String pluginName, 
+                                          final ServerWebExchange exchange, 
+                                          final SoulPluginChain chain) {
+        return doExecute(exchange, chain, null, null);
+    }
+```
+* Note that if there is no rewriting, your plug-in will be invalid due to the absence of **SelectorList** and **RulesList**.
+
