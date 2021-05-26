@@ -270,3 +270,29 @@ public interface PluginDataHandler {
         return new A();
     }
 ```
+
+## 不使用 SelectorList 以及 RulesList
+不是所有的插件都需要这两者。
+
+因此我们提供以下两个方法，写在 **CustomPlugin** 中。
+
+```java
+    @Override
+    protected Mono<Void> handleSelectorIsNull(final String pluginName, 
+                                              final ServerWebExchange exchange, 
+                                              final SoulPluginChain chain) {
+        return doExecute(exchange, chain, null, null);
+    }
+
+    @Override
+    protected Mono<Void> handleRuleIsNull(final String pluginName, 
+                                          final ServerWebExchange exchange, 
+                                          final SoulPluginChain chain) {
+        return doExecute(exchange, chain, null, null);
+    }
+```
+* 注意，当如果没有重写的时候，由于没有 **SelectorList** 以及 **RulesList** 会导致你的插件无效。
+
+
+
+
