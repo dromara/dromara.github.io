@@ -1,3 +1,5 @@
+{{ $language := .Site.Language.Lang }}
+
 <div class="ss-card -bg-opacity ss-project-card">
 	<div class="header">
 		<div class="header-first">
@@ -25,9 +27,15 @@
 			</h3>
 		</div>
 		<div class="gitstar">
+		   {{ if eq  $language  "en" }}
 			<a class="github-button" href={{ .Params.github }} data-icon="octicon-star" data-size="large"
 				data-show-count="true">
 			</a>
+			{{ else }}
+				{{ if ne .Params.gitee "" }}
+				<a href="{{ .Params.gitee }}/stargazers" target="_blank" ><img src="{{ .Params.gitee }}/badge/star.svg?theme=gvp" /></a> 
+				{{ end }}
+			{{ end }} 
 		</div>
 	</div>
 	<p class="card-content">
