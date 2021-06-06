@@ -1,5 +1,5 @@
 ---
-title: "Soul"
+title: "ShenYu"
 description: "This is an asynchronous, high-performance, cross-language, responsive API gateway."
 subDesc: "High-performance API Gateway"
 feature1Img: "/img/feature/feature_transpart.png"
@@ -24,7 +24,7 @@ architectureImg: "/img/architecture/soul-framework.png"
 startUp: "Start up"
 github: "https://github.com/dromara/soul"
 gitee: "https://gitee.com/dromara/soul"
-level: "main"
+level: "gateway"
 weight: 1
 icon: "/img/logo/soul.png"
 showIntroduce: true

@@ -23,7 +23,7 @@ feature6Desc: ""
 startUp: "Start up"
 github: "https://github.com/dromara/athena"
 gitee: ""
-level: "tool"
+level: "monitoring"
 weight: 12
 showIntroduce: false
 showFeature: false

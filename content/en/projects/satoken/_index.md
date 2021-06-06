@@ -24,7 +24,7 @@ startUp: "Start up"
 link: "http://sa-token.dev33.cn"
 github: "https://github.com/dromara/sa-token"
 gitee: "https://gitee.com/dromara/sa-token"
-level: "tool"
+level: "certification"
 weight: 5
 icon: "/img/logo/satoken.png"
 showIntroduce: false

@@ -24,7 +24,7 @@ startUp: "Start up"
 link: "https://cubic.jiagoujishu.com/"
 github: "https://github.com/dromara/cubic"
 gitee: "https://gitee.com/dromara/cubic"
-level: "tool"
+level: "monitoring"
 weight: 10
 showIntroduce: false
 showFeature: false

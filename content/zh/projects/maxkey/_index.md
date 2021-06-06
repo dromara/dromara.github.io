@@ -24,7 +24,7 @@ startUp: "Start up"
 link: "https://maxkey.top/"
 github: "https://github.com/dromara/MaxKey"
 gitee: "https://gitee.com/dromara/MaxKey"
-level: "tool"
+level: "certification"
 weight: 9
 icon: "/img/logo/maxkey.png"
 showIntroduce: false

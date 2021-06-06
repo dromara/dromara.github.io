@@ -19,7 +19,7 @@
 	img = "img/home/dromara_distributed_transaction.png"
 
 [[soul_description]]
-	title = "Soul"
+	title = "ShenYu"
 	description = "High-performance, multi-protocol, extensible, responsive API Gateway"
 	img_width = "600px"
 

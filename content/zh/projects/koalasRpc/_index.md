@@ -24,7 +24,7 @@ startUp: "开始"
 link: "https://github.com/dromara/koalas-rpc"
 github: "https://github.com/dromara/koalas-rpc"
 gitee: "https://gitee.com/dromara/koalas-rpc"
-level: "tool"
+level: "rpc"
 weight: 6
 showIntroduce: false
 showFeature: false

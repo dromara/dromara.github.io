@@ -24,7 +24,7 @@ architectureImg: "/img/architecture/raincat-framework.png"
 startUp: "Start up"
 github: "https://github.com/dromara/raincat"
 gitee: "https://gitee.com/dromara/Raincat"
-level: "main"
+level: "transaction"
 weight: 3
 icon: "/img/logo/raincat.png"
 sidebar:

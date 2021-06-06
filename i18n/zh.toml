@@ -14,18 +14,34 @@ other = "请输入要搜索的关键词"
 [all]
 other = "全部"
 
-# project
-[main_project]
-other = "主要项目"
 
-[incubating_project]
-other = "孵化项目"
+[gateway_projects]
+other = "微服务网关"
+
+[transaction_projects]
+other = "分布式事务"
 
 [tool_projects]
-other = "工具项目"
+other = "流行工具"
 
-[ecosystem_projects]
-other = "生态项目"
+[certification_projects]
+other = "企业级认证"
+
+[maintenance_projects]
+other = "运维管控"
+
+[log_projects]
+other = "分布式日志"
+
+[monitoring_projects]
+other = "Agent监控"
+
+[rpc_projects]
+other = "微服务RPC"
+
+[scheduling_projects]
+other = "分布式调度"
+
 
 # guide
 
@@ -66,7 +82,7 @@ other = "项目"
 other = "相关推荐"
 
 # site title
-[title_project]
+[title_projects]
 other = "项目"
 
 [title_guide]

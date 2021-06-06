@@ -24,7 +24,7 @@ startUp: "Start up"
 link: "https://yomahub.com/tlog/"
 github: "https://github.com/dromara/TLog"
 gitee: "https://gitee.com/dromara/TLog"
-level: "tool"
+level: "log"
 weight: 7
 icon: "/img/logo/tlog.png"
 showIntroduce: false

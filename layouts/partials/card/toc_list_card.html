@@ -6,13 +6,19 @@
 	{{ if eq .Parent $parent }}{{ $pages = $pages | append . }}{{ end }}
 {{ end }}
 
-{{ $main_projects := where $pages ".Params.level" "main" }}
-{{ $incubating_projects := where $pages ".Params.level" "incubating" }}
+{{ $gateway_projects := where $pages ".Params.level" "gateway" }}
+{{ $transaction_projects := where $pages ".Params.level" "transaction" }}
 {{ $tool_projects := where $pages ".Params.level" "tool" }}
-{{ $ecosystem_projects := where $pages ".Params.level" "ecosystem" }}
+{{ $certification_projects := where $pages ".Params.level" "certification" }}
+{{ $maintenance_projects := where $pages ".Params.level" "maintenance" }}
+{{ $log_projects := where $pages ".Params.level" "log" }}
+{{ $monitoring_projects := where $pages ".Params.level" "monitoring" }}
+{{ $rpc_projects := where $pages ".Params.level" "rpc" }}
+{{ $scheduling_projects := where $pages ".Params.level" "scheduling" }}
 
-{{ $title_list := slice "main_project" "incubating_project" "tool_projects" "ecosystem_projects" }}
-{{ $list := slice $main_projects $incubating_projects $tool_projects $ecosystem_projects }}
+
+{{ $title_list := slice "gateway_projects" "transaction_projects" "tool_projects" "certification_projects" "maintenance_projects" "log_projects" "monitoring_projects" "rpc_projects" "scheduling_projects" }}
+{{ $list := slice  $gateway_projects $transaction_projects $tool_projects $certification_projects $maintenance_projects $log_projects $monitoring_projects $rpc_projects $scheduling_projects}}
 
 <div class="ss-toc-list-card -hidden-mobile">
   <svg class="icon -hidden-mobile" aria-hidden="true">

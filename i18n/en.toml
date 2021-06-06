@@ -14,19 +14,34 @@ other = "Search"
 [all]
 other = "All"
 
-# project
-[main_project]
-other = "Main Projects"
 
-[incubating_project]
-other = "Incubating Projects"
+[gateway_projects]
+other = "Microservice Gateway"
+
+[transaction_projects]
+other = "Distributed Transaction"
 
 [tool_projects]
-other = "Tool Projects"
+other = "Popular Tools"
 
-[ecosystem_projects]
-other = "Ecosystem Projects"
+[certification_projects]
+other = "Enterprise Certification"
 
+[maintenance_projects]
+other = "Operations and Maintenance Control"
+
+[log_projects]
+other = "Distributed Log"
+
+[monitoring_projects]
+other = "Agent Monitoring"
+
+[rpc_projects]
+other = "Microservice RPC"
+
+[scheduling_projects]
+other = "Distributed Scheduling"
+ 
 # guide
 
 # post
@@ -66,7 +81,7 @@ other = "Related"
 other = "Table of contents"
 
 # site title
-[title_project]
+[title_projects]
 other = "Project"
 
 [title_guide]
