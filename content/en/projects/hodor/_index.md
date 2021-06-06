@@ -23,7 +23,7 @@ feature6Desc: ""
 startUp: "Start up"
 github: "https://github.com/dromara/hodor"
 gitee: ""
-level: "incubating"
+level: "scheduling"
 weight: 5
 showIntroduce: false
 showFeature: false

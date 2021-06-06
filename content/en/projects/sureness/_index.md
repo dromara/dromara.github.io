@@ -24,7 +24,7 @@ startUp: "Start up"
 link: "https://dromara.org/sureness"
 github: "https://github.com/dromara/sureness"
 gitee: "https://gitee.com/dromara/sureness"
-level: "tool"
+level: "certification"
 weight: 10
 showIntroduce: false
 showFeature: false

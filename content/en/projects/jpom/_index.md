@@ -24,7 +24,7 @@ startUp: "Start up"
 link: "https://jpom.io/"
 github: "https://github.com/dromara/Jpom"
 gitee: "https://gitee.com/dromara/Jpom"
-level: "tool"
+level: "maintenance"
 weight: 7
 icon: "/img/logo/jpom.png"
 showIntroduce: false

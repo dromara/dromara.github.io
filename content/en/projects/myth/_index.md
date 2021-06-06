@@ -23,7 +23,7 @@ feature6Desc: "RPC supported and nested calls"
 startUp: "Start up"
 github: "https://github.com/dromara/myth"
 gitee: "https://gitee.com/dromara/myth"
-level: "main"
+level: "transaction"
 weight: 4
 icon: "/img/logo/myth.png"
 showIntroduce: true

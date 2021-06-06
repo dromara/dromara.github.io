@@ -1,6 +1,6 @@
 ---
-title: "Soul"
-description: "Soul是一个异步的，高性能的，跨语言的，响应式的API网关。"
+title: "ShenYu"
+description: "ShenYu是一个异步的，高性能的，跨语言的，响应式的API网关。"
 subDesc: "高性能微服务API网关"
 feature1Img: "/img/feature/feature_transpart.png"
 feature1Title: "跨语言支持"
@@ -24,7 +24,7 @@ architectureImg: "/img/architecture/soul-framework.png"
 startUp: "开始"
 github: "https://github.com/dromara/soul"
 gitee: "https://gitee.com/dromara/soul"
-level: "main"
+level: "gateway"
 weight: 1
 icon: "/img/logo/soul.png"
 showIntroduce: true
