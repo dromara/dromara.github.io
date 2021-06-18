@@ -2,7 +2,7 @@
 	title = "Dromara"
 	description = "致力于微服务云原生解决方案的组织"
 	quick_start_text = "快速开始"
-	quick_start_link = "/projects/soul/overview"
+	quick_start_link = "https://shenyu.apache.org/zh/projects/shenyu/overview/"
 	github_link = "https://github.com/dromara"
 
 [[feature]]

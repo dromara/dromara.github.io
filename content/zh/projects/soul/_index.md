@@ -22,8 +22,9 @@ feature6Title: "高可用,高性能,高并发"
 feature6Desc: "支持集群部署"
 architectureImg: "/img/architecture/soul-framework.png"
 startUp: "开始"
-github: "https://github.com/dromara/soul"
-gitee: "https://gitee.com/dromara/soul"
+link: "https://shenyu.apache.org/projects/shenyu/overview/"
+github: "https://github.com/apache/incubator-shenyu"
+#gitee: "https://gitee.com/dromara/soul"
 level: "gateway"
 weight: 1
 icon: "/img/logo/soul.png"
@@ -152,6 +153,6 @@ sidebar:
         link: 'icla'
   - title: '文档下载'  	
     link: 'download'
-# draft: true
+draft: true
 ---
 
