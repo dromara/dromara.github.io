@@ -20,7 +20,7 @@
 [[links]]
 	category = "Document"
 	link_arr = [
-		["Soul", '/projects/soul/overview/'],
+		["ShenYu", 'https://shenyu.apache.org/zh/projects/shenyu/overview/'],
 		["Hmily","/projects/hmily/overview/"],
 		["Raincat","/projects/raincat/overview/"],
 		["Myth","/projects/myth/overview/"]
