@@ -18,7 +18,7 @@
 					{{ $link = path.Join .RelPermalink "/overview" }}
 				{{ end }}
 				{{ if isset .Params "icon" }}
-					<img class="project-icon" src="{{ .Params.icon | relURL }}" />
+					<img class="project-icon" style='{{ if eq .Params.gitee "" }} width:180px; {{end}}' src="{{ .Params.icon | relURL }}" />
 				{{ else }} 
 				  <a href={{ $link }}>
 					{{ .Title }}
