@@ -50,11 +50,11 @@ unsafe = true
 		name = "项目"
 		url = "/zh/projects/"
 		weight = 1
-	[[languages.zh.menu.main]]
-		identifier = "guides"
-		name = "指南"
-		url = "/zh/guides/"
-		weight = 2
+#	[[languages.zh.menu.main]]
+#		identifier = "guides"
+#		name = "指南"
+#		url = "/zh/guides/"
+#		weight = 2
 	[[languages.zh.menu.main]]
 		identifier = "blog"
 		name = "博客"
@@ -82,11 +82,11 @@ unsafe = true
 		name = "Projects"
 		url = "/projects/"
 		weight = 1
-	[[menu.main]]
-		identifier = "guides"
-		name = "Guides"
-		url = "/guides/"
-		weight = 2
+#	[[menu.main]]
+#		identifier = "guides"
+#		name = "Guides"
+#		url = "/guides/"
+#		weight = 2
 	[[menu.main]]
 		identifier = "blog"
 		name = "Blog"
