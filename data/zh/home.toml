@@ -2,7 +2,7 @@
 	title = "Dromara"
 	description = "致力于微服务云原生解决方案的组织"
 	quick_start_text = "快速开始"
-	quick_start_link = "https://shenyu.apache.org/zh/projects/shenyu/overview/"
+	quick_start_link = "/zh/projects/"
 	github_link = "https://github.com/dromara"
 
 [[feature]]
@@ -10,12 +10,12 @@
 	description = "技术栈全面开源共建、 保持社区中立、兼容社区 兼容开源生态，随时欢迎参与各种贡献"
 	img = "img/home/dromara_open.png"
 [[feature]]
-	title = "网关"
-	description = "高性能微服务API网关，兼容各种主流框架体系，支持热插拔，用户可以定制化开发，满足用户各种场景的现状和未来需求，经历过大规模场景的锤炼"
+	title = "愿景"
+	description = "让每一位开源爱好者，体会到开源的快乐"
 	img = "img/home/dromara_gateway.png"
 [[feature]]
-	title = "分布式事务"
-	description = "提供柔性分布式事务解决方案，包括强一致分布式事务框架，可靠消息分布式事务框架，提供高可靠性，高性能，可观测性的解决方案，满足各种复杂场景"
+	title = "口号"
+	description = "为往圣继绝学，一个人或许能走的更快，但一群人会走的更远"
 	img = "img/home/dromara_distributed_transaction.png"
 
 [[soul_description]]
@@ -24,39 +24,39 @@
 	img_width = "600px"
 
 [soul_features]
-	title = "特性一览"
+	title = "项目推荐"
 	img = "img/home/soul_features.png"
 	img_width = "530px"
 
 [[soul_features_sub]]
-	title = "丰富的协议"
-	description = "支持 dubbo ，tars， springcloud grpc。"
+	title = "Apache ShenYu"
+	description = "H高性能微服务API网关"
 	img = "img/home/cd-cloud-native-architecture.png"
 	position = "INIT"
 
 [[soul_features_sub]]
-	title = "插件化"
-	description = "插件化设计思想，插件热插拔，易扩展。"
+	title = "Hmily"
+	description = "柔性分布式事务解决方案"
 	position = "TR"
 
 [[soul_features_sub]]
-	title = "流控"
-	description = "灵活的流量筛选，能满足各种流量控制。"
+	title = "Hutool"
+	description = "小而全的Java工具类库"
 	position = "BL"
 
 [[soul_features_sub]]
-	title = "内置插件"
-	description = "内置丰富的插件支持，鉴权，限流，熔断，防火墙等。"
+	title = "Sa-Token"
+	description = "T史上功能最全的 Java 权限认证框架"
 	position = "TL"
 
 [[soul_features_sub]]
-	title = "高性能"
-	description = "流量配置动态化，性能极高，网关消耗在 1~2ms。"
+	title = "Jpom"
+	description = "简而轻的低侵入式在线构建、自动部署、日常运维、项目监控软件"
 	position = "BR"
 
 [[soul_features_sub]]
-	title = "集群部署"
-	description = "支持集群部署，支持 A/B Test，蓝绿发布。"
+	title = "Koalas-rpc"
+	description = "高可用可拓展的RPC框架"
 	position = "BR"
 
 [subscription]

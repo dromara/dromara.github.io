@@ -2,7 +2,7 @@
 	title = "Dromara"
 	description = "An organization dedicated to native solutions for the microservice cloud"
 	quick_start_text = "Quick Start"
-	quick_start_link = "https://shenyu.apache.org/projects/shenyu/overview/"
+	quick_start_link = "/projects/"
 	github_link = "https://github.com/dromara"
 
 [[feature]]
@@ -10,12 +10,12 @@
 	description = "The technology stack is fully open source construction, maintain the community neutrality, compatible with the community open source ecology, welcome to participate in various contributions at any time"
 	img = "img/home/dromara_open.png"
 [[feature]]
-	title = "Gateway"
-	description = "High-performance micro-service API gateway, compatible with a variety of mainstream framework systems, support hot plug, users can customize the development, meet the current situation and future needs of users in a variety of scenarios, experienced the temper of large-scale scenes"
+	title = "Vision"
+	description = "Let every open source enthusiast experience the happiness of open source."
 	img = "img/home/dromara_gateway.png"
 [[feature]]
-	title = "Distributed Transaction"
-	description = "Provide financial level distributed transaction solutions, including strongly consistent distributed transaction framework, reliable message distributed transaction framework, to provide high reliability, high performance, observable solutions to meet a variety of complex scenarios"
+	title = "Slogan"
+	description = "One person may be able to go faster, but a group of people will go further."
 	img = "img/home/dromara_distributed_transaction.png"
 
 [[soul_description]]
@@ -24,39 +24,39 @@
 	img_width = "600px"
 
 [soul_features]
-	title = "Features"
+	title = "Recommended Projects"
 	img = "img/home/soul_features.png"
 	img_width = "530px"
 
 [[soul_features_sub]]
-	title = "Rich protocols"
-	description = "Supports dubbo ，tars， springcloud grpc。"
+	title = "Apache ShenYu"
+	description = "High-performance API Gateway."
 	img = "img/home/cd-cloud-native-architecture.png"
 	position = "INIT"
 
 [[soul_features_sub]]
-	title = "Pluggable"
-	description = "Plug-in design idea, plug-in hot plug, easy to expand."
+	title = "Hmily"
+	description = "Flexible distributed transaction solution."
 	position = "TR"
 
 [[soul_features_sub]]
-	title = "Flow Control"
-	description = "Flexible flow filtering to meet various flow control."
+	title = "Hutool"
+	description = "A set of tools that keep Java sweet."
 	position = "BL"
 
 [[soul_features_sub]]
-	title = "Built-in Plug-ins"
-	description = "Built-in rich plugin support, authentication, limiting, fuse, firewall, etc."
+	title = "Sa-Token"
+	description = "The most comprehensive Java permission framework."
 	position = "TL"
 
 [[soul_features_sub]]
-	title = "High Performance"
-	description = "Dynamic flow configuration, high performance, gateway consumption is 1~2ms."
+	title = "Jpom"
+	description = "Simple & Low-intrusion project management platform."
 	position = "BR"
 
 [[soul_features_sub]]
-	title = "Cluster Deployment"
-	description = "Support cluster deployment, A/B Test, blue-green release."
+	title = "Koalas-rpc"
+	description = "Highly available and extensible RPC framework."
 	position = "BR"
 
 [subscription]
