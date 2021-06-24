@@ -29,12 +29,6 @@
 	img_width = "530px"
 
 [[soul_features_sub]]
-	title = "Apache ShenYu"
-	description = "H高性能微服务API网关"
-	img = "img/home/cd-cloud-native-architecture.png"
-	position = "INIT"
-
-[[soul_features_sub]]
 	title = "Hmily"
 	description = "柔性分布式事务解决方案"
 	position = "TR"
@@ -46,12 +40,22 @@
 
 [[soul_features_sub]]
 	title = "Sa-Token"
-	description = "T史上功能最全的 Java 权限认证框架"
+	description = "史上功能最全的 Java 权限认证框架"
 	position = "TL"
 
 [[soul_features_sub]]
 	title = "Jpom"
 	description = "简而轻的低侵入式在线构建、自动部署、日常运维、项目监控软件"
+	position = "BR"
+
+[[soul_features_sub]]
+	title = "TLog"
+	description = "轻量级的分布式日志标记追踪神器"
+	position = "BR"
+
+[[soul_features_sub]]
+	title = "Cubic"
+	description = "无侵入分布式监控，致力于应用级监控的工具"
 	position = "BR"
 
 [[soul_features_sub]]

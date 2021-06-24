@@ -29,12 +29,6 @@
 	img_width = "530px"
 
 [[soul_features_sub]]
-	title = "Apache ShenYu"
-	description = "High-performance API Gateway."
-	img = "img/home/cd-cloud-native-architecture.png"
-	position = "INIT"
-
-[[soul_features_sub]]
 	title = "Hmily"
 	description = "Flexible distributed transaction solution."
 	position = "TR"
@@ -52,6 +46,17 @@
 [[soul_features_sub]]
 	title = "Jpom"
 	description = "Simple & Low-intrusion project management platform."
+	position = "BR"
+
+
+[[soul_features_sub]]
+	title = "TLog"
+	description = "Lightweight distributed log label tracking framwork."
+	position = "BR"
+
+[[soul_features_sub]]
+	title = "Cubic"
+	description = "Distributed monitoring system."
 	position = "BR"
 
 [[soul_features_sub]]
