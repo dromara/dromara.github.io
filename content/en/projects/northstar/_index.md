@@ -1,0 +1,31 @@
+---
+title: "Northstar"
+description: "Quantitative Trading Platform"
+subDesc: "Quantitative Trading Platform"
+feature1Img: ""
+feature1Title: ""
+feature1Desc: ""
+feature2Img: ""
+feature2Title: ""
+feature2Desc: ""
+feature3Img: ""
+feature3Title: ""
+feature3Desc: ""
+feature4Img: ""
+feature4Title: ""
+feature4Desc: ""
+feature5Img: ""
+feature5Title: ""
+feature5Desc: ""
+feature6Img: ""
+feature6Title: ""
+feature6Desc: ""
+startUp: "Start up"
+link: "https://gitee.com/dromara/northstar/wikis/pages"
+github: "https://github.com/dromara/northstar"
+gitee: "https://gitee.com/dromara/northstar"
+level: "tool"
+weight: 13
+showIntroduce: false
+showFeature: false
+---
