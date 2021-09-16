@@ -1,9 +1,9 @@
 ---
-title: "ShenYu"
-description: "This is an asynchronous, high-performance, cross-language, responsive API gateway."
+title: "Apache ShenYu"
+description: "Apache ShenYu This is an asynchronous, high-performance, cross-language, responsive API gateway."
 subDesc: "High-performance API Gateway"
 startUp: "Start up"
-link: "https://shenyu.apache.org/projects/shenyu/overview/"
+link: "https://shenyu.apache.org"
 github: "https://github.com/apache/incubator-shenyu"
 gitee: ""
 level: "gateway"

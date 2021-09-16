@@ -1,9 +1,9 @@
 ---
-title: "ShenYu"
-description: "ShenYu是一个异步的，高性能的，跨语言的，响应式的API网关。"
+title: "Apache ShenYu"
+description: "Apache ShenYu是一个异步的，高性能的，跨语言的，响应式的API网关。"
 subDesc: "高性能微服务API网关"
 startUp: "开始"
-link: "https://shenyu.apache.org/projects/shenyu/overview/"
+link: "https://shenyu.apache.org"
 github: "https://github.com/apache/incubator-shenyu"
 gitee: ""
 level: "gateway"
