@@ -63,6 +63,11 @@
 	description = "高可用可拓展的RPC框架"
 	position = "BR"
 
+[[soul_features_sub]]
+	title = "Fast Request"
+	description = "IDEA版postman"
+	position = "BR"
+
 [subscription]
 	title = "希望订阅最新的 Dromara 消息？"
 	button = "订阅"

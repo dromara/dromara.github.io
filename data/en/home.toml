@@ -64,6 +64,11 @@
 	description = "Highly available and extensible RPC framework."
 	position = "BR"
 
+[[soul_features_sub]]
+	title = "Fast Request"
+	description = "IDEA's postman"
+	position = "BR"
+
 [subscription]
 	title = "Interested in receiving the latest SOFA news?"
 	button = "Subscribe"
