@@ -1,7 +1,7 @@
 ---
-title: "Sureness"
-description: "面向REST API的高性能认证鉴权框架"
-subDesc: "面向REST API的高性能认证鉴权框架"
+title: "HertzBeat"
+description: "Friendly apm - monitor and alarm system."
+subDesc: "Friendly apm - monitor and alarm system."
 feature1Img: ""
 feature1Title: ""
 feature1Desc: ""
@@ -20,11 +20,11 @@ feature5Desc: ""
 feature6Img: ""
 feature6Title: ""
 feature6Desc: ""
-startUp: "开始"
-link: "https://dromara.org/sureness"
-github: "https://github.com/dromara/sureness"
-gitee: "https://gitee.com/dromara/sureness"
-level: "certification"
+startUp: "Start up"
+link: "https://hertzbeat.com"
+github: "https://github.com/dromara/hertzbeat"
+gitee: "https://gitee.com/dromara/hertzbeat"
+level: "maintenance"
 weight: 10
 showIntroduce: false
 showFeature: false

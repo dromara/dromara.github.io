@@ -1,7 +1,7 @@
 ---
-title: "MaxKey"
-description: "业界领先的企业级开源IAM身份管理和身份认证产品"
-subDesc: "业界领先的企业级开源IAM身份管理和身份认证产品"
+title: "HertzBeat"
+description: "易用友好的高性能监控告警系统"
+subDesc: "易用友好的高性能监控告警系统"
 feature1Img: ""
 feature1Title: ""
 feature1Desc: ""
@@ -21,12 +21,11 @@ feature6Img: ""
 feature6Title: ""
 feature6Desc: ""
 startUp: "开始"
-link: "https://maxkey.top/"
-github: "https://github.com/dromara/MaxKey"
-gitee: "https://gitee.com/dromara/MaxKey"
-level: "certification"
-weight: 9
-icon: "/img/logo/maxkey.png"
+link: "https://hertzbeat.com"
+github: "https://github.com/dromara/hertzbeat"
+gitee: "https://gitee.com/dromara/hertzbeat"
+level: "maintenance"
+weight: 10
 showIntroduce: false
 showFeature: false
 ---
