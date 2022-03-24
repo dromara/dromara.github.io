@@ -1,0 +1,32 @@
+---
+title: "Easy-Es"
+description: "An easier-to-use ES search engine framework, born to simplify development"
+subDesc: "An easier-to-use ES search engine framework, born to simplify development"
+feature1Img: ""
+feature1Title: ""
+feature1Desc: ""
+feature2Img: ""
+feature2Title: ""
+feature2Desc: ""
+feature3Img: ""
+feature3Title: ""
+feature3Desc: ""
+feature4Img: ""
+feature4Title: ""
+feature4Desc: ""
+feature5Img: ""
+feature5Title: ""
+feature5Desc: ""
+feature6Img: ""
+feature6Title: ""
+feature6Desc: ""
+startUp: "Start up"
+link: "https://easy-es.cn"
+github: "https://github.com/dromara/easy-es"
+gitee: "https://gitee.com/dromara/easy-es"
+level: "tool"
+weight: 10
+icon: "/img/logo/easyEs.png"
+showIntroduce: false
+showFeature: false
+---
