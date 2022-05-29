@@ -1,0 +1,32 @@
+---
+title: "Mendmix"
+description: "一站式分布式云原生架构技术底座"
+subDesc: "一站式分布式云原生架构技术底座"
+feature1Img: ""
+feature1Title: ""
+feature1Desc: ""
+feature2Img: ""
+feature2Title: ""
+feature2Desc: ""
+feature3Img: ""
+feature3Title: ""
+feature3Desc: ""
+feature4Img: ""
+feature4Title: ""
+feature4Desc: ""
+feature5Img: ""
+feature5Title: ""
+feature5Desc: ""
+feature6Img: ""
+feature6Title: ""
+feature6Desc: ""
+startUp: "Start up"
+link: "https://www.jeesuite.com/"
+github: "https://github.com/dromara/mendmix"
+gitee: "https://gitee.com/dromara/mendmix"
+level: "rpc"
+weight: 6
+showIntroduce: false
+showFeature: false
+icon: "/img/logo/mendmix.png"
+---
