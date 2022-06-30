@@ -14,10 +14,6 @@ other = "请输入要搜索的关键词"
 [all]
 other = "全部"
 
-
-[gateway_projects]
-other = "微服务网关"
-
 [transaction_projects]
 other = "分布式事务"
 
