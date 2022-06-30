@@ -14,10 +14,6 @@ other = "Search"
 [all]
 other = "All"
 
-
-[gateway_projects]
-other = "Microservice Gateway"
-
 [transaction_projects]
 other = "Distributed Transaction"
 
