@@ -33,7 +33,7 @@ other = "Distributed Log"
 other = "Agent Monitoring"
 
 [rpc_projects]
-other = "Microservice RPC"
+other = "Microservice"
 
 [scheduling_projects]
 other = "Distributed Scheduling"

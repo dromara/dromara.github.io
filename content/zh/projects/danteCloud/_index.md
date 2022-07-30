@@ -1,0 +1,32 @@
+---
+title: "dante-cloud"
+description: "基于 Spring Authorization Server 全新适配 OAuth 2.1 协议的企业级微服务架构"
+subDesc: "基于 Spring Authorization Server 全新适配 OAuth 2.1 协议的企业级微服务架构"
+feature1Img: ""
+feature1Title: ""
+feature1Desc: ""
+feature2Img: ""
+feature2Title: ""
+feature2Desc: ""
+feature3Img: ""
+feature3Title: ""
+feature3Desc: ""
+feature4Img: ""
+feature4Title: ""
+feature4Desc: ""
+feature5Img: ""
+feature5Title: ""
+feature5Desc: ""
+feature6Img: ""
+feature6Title: ""
+feature6Desc: ""
+startUp: "Start up"
+link: "https://www.herodotus.cn"
+github: "https://github.com/dromara/dante-cloud"
+gitee: "https://gitee.com/dromara/dante-cloud"
+level: "rpc"
+weight: 7
+showIntroduce: false
+showFeature: false
+icon: "/img/logo/danteCloud.png"
+---
