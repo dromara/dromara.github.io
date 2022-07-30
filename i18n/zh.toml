@@ -33,7 +33,7 @@ other = "分布式日志"
 other = "Agent监控"
 
 [rpc_projects]
-other = "微服务RPC"
+other = "微服务"
 
 [scheduling_projects]
 other = "分布式调度"
