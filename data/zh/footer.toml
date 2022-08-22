@@ -31,3 +31,7 @@
 [[qrcode]]
 	img = "img/qrcode/qrcode_2.png"
 	description = "QQ群"
+
+[[qrcode]]
+	img = "img/qrcode/zsxq.png"
+	description = "知识星球"
