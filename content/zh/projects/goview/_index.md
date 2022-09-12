@@ -1,0 +1,32 @@
+---
+title: "GoView"
+description: "高效的低代码「数据可视化」开发平台"
+subDesc: "高效的低代码「数据可视化」开发平台"
+feature1Img: ""
+feature1Title: ""
+feature1Desc: ""
+feature2Img: ""
+feature2Title: ""
+feature2Desc: ""
+feature3Img: ""
+feature3Title: ""
+feature3Desc: ""
+feature4Img: ""
+feature4Title: ""
+feature4Desc: ""
+feature5Img: ""
+feature5Title: ""
+feature5Desc: ""
+feature6Img: ""
+feature6Title: ""
+feature6Desc: ""
+startUp: "Start up"
+link: "http://www.mtruning.club:81/"
+github: "https://github.com/dromara/go-view"
+gitee: "https://gitee.com/dromara/go-view"
+level: "tool"
+weight: 11
+icon: "/img/logo/goView.png"
+showIntroduce: false
+showFeature: false
+---
