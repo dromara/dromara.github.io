@@ -1,0 +1,32 @@
+---
+title: "electron-egg"
+description: "A simple, cross-platform, enterprise-level desktop software development framework."
+subDesc: "A simple, cross-platform, enterprise-level desktop software development framework."
+feature1Img: ""
+feature1Title: ""
+feature1Desc: ""
+feature2Img: ""
+feature2Title: ""
+feature2Desc: ""
+feature3Img: ""
+feature3Title: ""
+feature3Desc: ""
+feature4Img: ""
+feature4Title: ""
+feature4Desc: ""
+feature5Img: ""
+feature5Title: ""
+feature5Desc: ""
+feature6Img: ""
+feature6Title: ""
+feature6Desc: ""
+startUp: "Start up"
+link: "https://www.yuque.com/u34495/mivcfg"
+github: "https://github.com/dromara/electron-egg"
+gitee: "https://gitee.com/dromara/electron-egg"
+level: "tool"
+weight: 12
+icon: "/img/logo/electronEgg.png"
+showIntroduce: false
+showFeature: false
+---
