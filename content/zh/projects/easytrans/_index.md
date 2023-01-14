@@ -1,7 +1,7 @@
 ---
-title: "Northstar"
-description: "量化交易平台"
-subDesc: "量化交易平台"
+title: "Easy-Trans"
+description: "一个注解搞定数据翻译,减少30%SQL代码量"
+subDesc: "一个注解搞定数据翻译,减少30%SQL代码量"
 feature1Img: ""
 feature1Title: ""
 feature1Desc: ""
@@ -21,11 +21,12 @@ feature6Img: ""
 feature6Title: ""
 feature6Desc: ""
 startUp: "开始"
-link: "https://www.quantit.tech"
-github: "https://github.com/dromara/northstar"
-gitee: "https://gitee.com/dromara/northstar"
+link: "http://easy-trans.fhs-opensource.top"
+github: ""
+gitee: "https://gitee.com/dromara/easy_trans"
 level: "tool"
-weight: 13
+weight: 14
 showIntroduce: false
 showFeature: false
+icon: "/img/logo/easyTrans.png"
 ---
