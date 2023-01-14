@@ -1,7 +1,7 @@
 ---
-title: "Northstar"
-description: "Quantitative Trading Platform"
-subDesc: "Quantitative Trading Platform"
+title: "open-capacity-platform"
+description: "Spring Cloud-based enterprise microservices framework"
+subDesc: "Spring Cloud-based enterprise microservices framework"
 feature1Img: ""
 feature1Title: ""
 feature1Desc: ""
@@ -21,11 +21,11 @@ feature6Img: ""
 feature6Title: ""
 feature6Desc: ""
 startUp: "Start up"
-link: "https://www.quantit.tech"
-github: "https://github.com/dromara/northstar"
-gitee: "https://gitee.com/dromara/northstar"
-level: "tool"
-weight: 13
+link: "https://gitee.com/dromara/open-capacity-platform"
+github: "https://github.com/dromara/open-capacity-platform"
+gitee: "https://gitee.com/dromara/open-capacity-platform"
+level: "rpc"
+weight: 7
 showIntroduce: false
 showFeature: false
 ---
