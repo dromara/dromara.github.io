@@ -1,35 +1,35 @@
 {
-  "name": "dromara.github.io",
-  "version": "1.0.0",
-  "browserslist": [
-    "last 2 versions",
-    ">1%",
-    "not dead"
-  ],
+  "name": "dromara",
+  "version": "2.0.0",
+  "description": "A project of vuepress-theme-hope",
+  "license": "MIT",
   "scripts": {
-    "dev": "webpack --mode=development --watch",
-    "hugo": "hugo serve --watch",
-    "build": "webpack --mode=production",
-    "algolia": "atomic-algolia"
-  },
-  "dependencies": {
-    "algoliasearch": "^3.33.0",
-    "atomic-algolia": "^0.3.19",
-    "lodash-es": "^4.17.15",
-    "query-string": "^6.8.2",
-    "svg.js": "^2.7.1",
-    "zoom-image": "^0.1.4"
+    "docs:build": "vuepress build src",
+    "docs:clean-dev": "vuepress dev src --clean-cache",
+    "docs:dev": "vuepress dev src --temp .temp",
+    "docs:update-package": "pnpm dlx vp-update",
+    "lint": "eslint --fix --ext .js,.vue src/.vuepress/"
   },
   "devDependencies": {
-    "@babel/core": "^7.5.4",
-    "@babel/preset-env": "^7.5.4",
-    "@types/algoliasearch": "^3.30.16",
-    "babel-loader": "^8.0.6",
-    "file-loader": "^4.0.0",
-    "node-sass": "^4.12.0",
-    "raw-loader": "^3.1.0",
-    "sass-loader": "^7.1.0",
-    "webpack": "^4.35.3",
-    "webpack-cli": "^3.3.5"
+    "@typescript-eslint/eslint-plugin": "^5.52.0",
+    "@vuepress/client": "2.0.0-beta.66",
+    "eslint": "^8.47.0",
+    "eslint-config-standard-with-typescript": "^37.0.0",
+    "eslint-plugin-import": "^2.25.2",
+    "eslint-plugin-n": "^15.0.0 || ^16.0.0 ",
+    "eslint-plugin-promise": "^6.0.0",
+    "eslint-plugin-vue": "^9.17.0",
+    "node-sass": "^9.0.0",
+    "sass-loader": "^13.3.2",
+    "style-loader": "^3.3.3",
+    "typescript": "*",
+    "vue": "^3.3.4",
+    "vuepress": "2.0.0-beta.66",
+    "vuepress-plugin-search-pro": "2.0.0-beta.234",
+    "vuepress-theme-hope": "2.0.0-beta.234"
+  },
+  "dependencies": {
+    "@vuepress/theme-default": "2.0.0-beta.66",
+    "@vuepress/utils": "2.0.0-beta.66"
   }
 }
