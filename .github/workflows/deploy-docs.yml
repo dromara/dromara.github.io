@@ -5,7 +5,7 @@ on:
   push:
     branches:
       # make sure this is the branch you are using
-      - main
+      - master
 
 permissions:
   contents: write
