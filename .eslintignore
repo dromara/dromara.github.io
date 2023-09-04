@@ -1,0 +1,6 @@
+dist
+node_modules
+!/.vuepress
+src/.vuepress/.temp/
+src/.vuepress/.cache/**/*
+.eslintrc.cjs

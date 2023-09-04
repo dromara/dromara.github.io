@@ -1,0 +1,22 @@
+// place your custom styles here
+#navbar {
+  background-color: #e4eeff;
+  box-shadow: none;
+}
+
+.nav-item {
+  min-width: 80px;
+  font-size: 16px;
+  font-weight: 400;
+  text-align: center;
+  --dark-grey: #414960;
+}
+
+body {
+  background-color: #f9fbff;
+}
+
+.theme-hope-content a:hover {
+  text-decoration: none;
+}
+
