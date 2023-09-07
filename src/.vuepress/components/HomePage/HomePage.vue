@@ -325,6 +325,7 @@ const navigateTo = (url: string) => {
 </script>
 <style scoped lang="scss">
 .home-page {
+  overflow-x: hidden;
   padding-top: var(--navbar-height);
   background: #f9fbff;
   .wrapper {
@@ -481,6 +482,8 @@ const navigateTo = (url: string) => {
     flex-direction: column;
     align-items: center;
     padding: 50px 0;
+    width: 100vw;
+    overflow: hidden;
   }
   .project-container {
     display: flex;
@@ -548,6 +551,8 @@ const navigateTo = (url: string) => {
     }
   }
   .community {
+    width: 100vw;
+    overflow: hidden;
     padding: 20px 0;
     .feature {
       margin: 0;
