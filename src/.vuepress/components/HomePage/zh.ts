@@ -10,6 +10,9 @@ const zhHomeOption: HomeOption = {
   VISION_DESCRIPTION: '让每一位开源爱好者，体会到开源的快乐',
   SLOGAN: '口号',
   SLOGAN_DESCRIPTION: '为往圣继绝学，一个人或许能走得更快，但一群人会走得更远',
+  STARS_OVERALL: '全网star数超过',
+  DATA_SOURCE: '——数据来源于Gitee、Github',
+  OUR: '我们的',
   PROJECT: '项目推荐',
   MORE_PROJECTS: '查看所有项目',
   PROJECT_DETAILS: [
