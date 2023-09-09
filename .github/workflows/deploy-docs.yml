@@ -1,18 +1,18 @@
-
-name: Deploy Docs
+name: Website Deploy
 
 on:
+  pull_request:
   push:
     branches:
-      # make sure this is the branch you are using
-      - main
+      - master
 
 permissions:
   contents: write
 
 jobs:
-  deploy-gh-pages:
+  build_and_deploy_job:
     runs-on: ubuntu-latest
+    name: Build and Deploy Job
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -25,14 +25,13 @@ jobs:
         uses: pnpm/action-setup@v2
         with:
           run_install: true
-
+          version: 8
 
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
           node-version: 18
           cache: pnpm
-
 
       - name: Build Docs
         env:
@@ -43,6 +42,7 @@ jobs:
 
       - name: Deploy Docs
         uses: JamesIves/github-pages-deploy-action@v4
+        if: github.event_name == 'push' && github.ref == 'refs/heads/master'
         with:
           # This is the branch where the docs are deployed to
           branch: gh-pages
