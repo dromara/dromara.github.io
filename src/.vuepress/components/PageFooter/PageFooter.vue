@@ -27,7 +27,7 @@
       </div>
     </div>
     <div class="copyright">
-      <p>Copyright ©2021<a href="/">@dromara. org. All Rights Reserved</a></p>
+      <p>Copyright ©2023<a href="/">@dromara. org. All Rights Reserved</a></p>
     </div>
   </footer>
 </template>

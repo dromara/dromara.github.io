@@ -1,5 +1,5 @@
 ---
-title: Awesome Dromara
+title: About Us
 sidebar: false
 breadcrumb: false
 pageInfo: false
@@ -60,7 +60,7 @@ Technology stack comprehensive open source co-build, maintain community neutrali
 
 - Community Member Guidelines: Do not engage in anything that is illegal or detrimental to others
 
-* Community projects: do not engage in illegal or detrimental things
+- Community projects: do not engage in illegal or detrimental things
 
 ## Project Donation
 
@@ -69,9 +69,9 @@ The Dromara Open Source Community Organization has the following minimum require
 - **The project must be original and cannot be a Fork version.**
 - The project must be a complete application solution.
 
-* The project must have good code comments and continuous improvement of the usage documentation.
-* The project has a record of actual valid code submissions for at least the last 2 months.
-* **Projects must be approved by the dromara community technical committee**
+- The project must have good code comments and continuous improvement of the usage documentation.
+- The project has a record of actual valid code submissions for at least the last 2 months.
+- **Projects must be approved by the dromara community technical committee**
 
 ## Support
 

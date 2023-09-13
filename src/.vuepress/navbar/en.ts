@@ -1,9 +1,10 @@
-import { navbar } from "vuepress-theme-hope";
+import { navbar } from 'vuepress-theme-hope';
 
 export const enNavbar = navbar([
-  "/projects/",
-  "/news/",
-  "/blog/",
-  "/activity/",
-  "/awesome/",
+  '/projects/',
+  '/members/',
+  '/news/',
+  '/blog/',
+  '/activity/',
+  '/awesome/'
 ]);
