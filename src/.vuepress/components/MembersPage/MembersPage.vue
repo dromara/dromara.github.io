@@ -9,57 +9,72 @@
       </div>
     </div>
     <main class="member-main">
-      <div class="committee">
-        <h2 class="title">委员会成员</h2>
+      <div class="member-banner">
+        <h2 class="title">{{ membersOption.TOC_MEMBER_TITLE }}</h2>
         <div class="founder">
           <img class="photo" src="/assets/img/members/xiaoyu.png" alt="" />
           <div class="info">
-            <div class="role">创始人</div>
-            <div class="name">肖宇</div>
-            <div class="desc">
-              Apache ShenYu 创始人/VP，Apache
-              Member，同时还是Apache成员和Dromara开源组织的创立者且在分布式事务领域的贡献备受推崇。创作了许多重要的分布式事务框架，如Hmily、Raincat和Myth等，并且这些框架都被广泛应用。他领导的开源社区项目也受到了众多业界专家、开发者和用户的支持和关注。此外，他还著有《深入理解分布式事务：原理与实战》，这本书在分布式事务领域具有很高的影响力。
-            </div>
+            <div class="role">{{ membersOption.FOUNDER.role }}</div>
+            <div class="name">{{ membersOption.FOUNDER.name }}</div>
+            <div class="desc">{{ membersOption.FOUNDER.desc }}</div>
           </div>
         </div>
         <ul class="members">
-          <li class="member">
-            <img class="photo" src="/assets/img/members/tom.png" alt="" />
+          <li
+            class="member non-overlay"
+            @mouseenter="memberMouseIn"
+            @mouseleave="memberMouseOut"
+            v-for="(member, index) in membersOption.TOC_MEMBERS"
+            :key="index"
+          >
+            <img class="photo" :src="member.photo" alt="" />
             <div class="info">
-              <div class="role">秘书长</div>
-              <div class="name">巩超</div>
-              <div class="desc">hertzbeat作者</div>
               <div class="photo-overlay">
                 <div class="circle"></div>
               </div>
+              <div class="role">{{ member.role }}</div>
+              <div class="name">{{ member.name }}</div>
+              <div class="desc">{{ member.desc }}</div>
             </div>
           </li>
-          <li class="member">
-            <img class="photo" src="/assets/img/members/binghe.png" alt="" />
+        </ul>
+        <h2 class="title">{{ membersOption.COMMITTEE_TITLE }}</h2>
+        <ul class="members">
+          <li
+            class="member non-overlay"
+            @mouseenter="memberMouseIn"
+            @mouseleave="memberMouseOut"
+            v-for="(member, index) in membersOption.COMMITTEES"
+            :key="index"
+          >
+            <img class="photo" :src="member.photo" alt="" />
             <div class="info">
-              <div class="role">成员</div>
-              <div class="name">冰河</div>
+              <div class="photo-overlay">
+                <div class="circle"></div>
+              </div>
+              <div class="role">{{ member.role }}</div>
+              <div class="name">{{ member.name }}</div>
+              <div class="desc">{{ member.desc }}</div>
             </div>
           </li>
-          <li class="member">
-            <img class="photo" src="/assets/img/members/looly.png" alt="" />
+        </ul>
+        <h2 class="title">{{ membersOption.COMMITTER_TITLE }}</h2>
+        <ul class="members">
+          <li
+            class="member non-overlay"
+            @mouseenter="memberMouseIn"
+            @mouseleave="memberMouseOut"
+            v-for="(member, index) in membersOption.COMMITTERS"
+            :key="index"
+          >
+            <img class="photo committer-photo" :src="member.photo" alt="" />
             <div class="info">
-              <div class="role">成员</div>
-              <div class="name">路小磊</div>
-            </div>
-          </li>
-          <li class="member">
-            <img class="photo" src="/assets/img/members/bryan31.png" alt="" />
-            <div class="info">
-              <div class="role">成员</div>
-              <div class="name">铂赛东</div>
-            </div>
-          </li>
-          <li class="member">
-            <img class="photo" src="/assets/img/members/click33.png" alt="" />
-            <div class="info">
-              <div class="role">成员</div>
-              <div class="name">刘潇</div>
+              <div class="photo-overlay">
+                <div class="circle"></div>
+              </div>
+              <div class="role">{{ member.role }}</div>
+              <div class="name">{{ member.name }}</div>
+              <div class="desc">{{ member.desc }}</div>
             </div>
           </li>
         </ul>
@@ -70,14 +85,21 @@
 
 <script setup lang="ts">
 import { useSiteLocaleData } from '@vuepress/client';
-import { type MembersOption } from './types';
+import { type MembersOption, type Member } from './types';
 import { ref, reactive, watch, onMounted } from 'vue';
 import enMembersOption from './en';
 import zhMembersOption from './zh';
 
 let membersOption: MembersOption = reactive({
   MEMBERS: '',
-  DESCRIPTION: ''
+  DESCRIPTION: '',
+  TOC_MEMBER_TITLE: '',
+  COMMITTEE_TITLE: '',
+  COMMITTER_TITLE: '',
+  FOUNDER: { role: '', name: '', photo: '', desc: '' },
+  TOC_MEMBERS: [],
+  COMMITTEES: [],
+  COMMITTERS: []
 });
 const siteLocaleData = useSiteLocaleData();
 const lang = ref(siteLocaleData.value.lang);
@@ -96,9 +118,60 @@ watch(
     immediate: true
   }
 );
+
+onMounted(() => {
+  document
+    .querySelectorAll('.member')
+    ?.forEach((d) => scaleMemberName(d, false));
+});
+
+function scaleMemberName(memberElement: Element | null, reset: boolean) {
+  if (!memberElement) {
+    return;
+  }
+  const nameElement = memberElement.querySelector('.name');
+  if (!(nameElement instanceof HTMLDivElement)) {
+    return;
+  }
+  if (reset) {
+    nameElement.style.scale = String();
+    return;
+  }
+  const boundingBox = nameElement.getBoundingClientRect();
+  const actualWidth = boundingBox.width;
+  const scale = 84 / actualWidth;
+  console.log({ [`${nameElement.textContent}`]: actualWidth, scale });
+  if (scale >= 1) {
+    return;
+  }
+  nameElement.style.scale = String(scale);
+}
+function memberMouseIn(e: MouseEvent) {
+  if (e.target instanceof HTMLElement) {
+    e.target.classList.remove('non-overlay');
+    e.target.style.zIndex = '3';
+    scaleMemberName(e.target, true);
+  }
+}
+function memberMouseOut(e: MouseEvent) {
+  if (e.target instanceof HTMLElement) {
+    e.target.classList.add('non-overlay');
+    e.target.style.zIndex = '';
+    scaleMemberName(e.target, false);
+  }
+}
 </script>
 
 <style scoped lang="scss">
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
 .members-page {
   padding-top: var(--navbar-height);
   min-width: 600px;
@@ -138,7 +211,7 @@ watch(
 
 .member-main {
   margin-top: 30px;
-  .committee {
+  .member-banner {
     font-weight: bold;
     .title {
       display: flex;
@@ -149,6 +222,7 @@ watch(
 
     .founder {
       display: flex;
+      margin-bottom: 48px;
       .photo {
         height: 240px;
         border-radius: 4px;
@@ -175,54 +249,66 @@ watch(
       list-style: none;
       padding: initial;
       display: flex;
+      margin-bottom: 50px;
+      flex-wrap: wrap;
       .member {
-        margin: 48px 0 0;
         display: flex;
         align-items: center;
         font-weight: bold;
+        position: relative;
+        width: 240px;
+        height: 200px;
         .photo {
-          background: #e9f2ff;
+          animation: fade-in 2.5s;
           height: 160px;
           border-radius: 4px;
+          position: absolute;
+          top: 40px;
+          z-index: 3;
+        }
+        .committer-photo {
+          border-radius: 50%;
         }
         .info {
-          z-index: 1;
-          position: relative;
+          z-index: 2;
+          position: absolute;
+          top: -10px;
+          left: -50px;
           background: #fff;
-          overflow: hidden;
           display: flex;
           flex-direction: column;
           align-items: center;
           box-shadow: 0 0 16px rgba(0, 0, 0, 0.04);
-          min-width: 88px;
-          max-width: 120px;
+          width: 240px;
           border-radius: 3px;
-          height: 64px;
-          transform: translateX(-25px);
+          padding: 240px 10px 10px 10px;
           .photo-overlay {
-            // position: absolute;
-            // right: 50%;
-            // top: -40px;
+            position: absolute;
+            top: 20px;
             display: flex;
             align-items: center;
             justify-content: center;
-            transform: translate(-50px, -150px);
+            width: 220px;
+            height: 220px;
             border-radius: 50%;
-            background-color: #f6faff;
+            background-color: #e9f2ff;
             transition: background-color, transform 1s ease-in-out;
             .circle {
+              display: flex;
+              justify-content: center;
+              align-items: center;
               border-radius: 50%;
-              width: 80px;
-              height: 80px;
+              width: 170px;
+              height: 170px;
               background: radial-gradient(
                 circle at center,
-                rgb(0 0 0 / 0) 20px,
-                #ffffff 20px,
-                #ffffff 21px,
-                rgb(0 0 0 / 0) 21px,
-                rgb(0 0 0 / 0) 40px,
-                #ffffff 0
+                rgb(0 0 0 / 0) 50%,
+                #ffffff calc(50% + 1px),
+                #ffffff calc(50% + 1px),
+                rgb(0 0 0 / 0) calc(50% + 1px),
+                rgb(0 0 0 / 0) 100%
               );
+              position: absolute;
             }
           }
           .role {
@@ -234,10 +320,42 @@ watch(
           .name {
             z-index: 2;
             font-size: 16px;
+            white-space: nowrap;
           }
           .desc {
+            font-size: 12px;
+            font-weight: initial;
             z-index: 2;
-            opacity: 0;
+          }
+        }
+        &.non-overlay {
+          .photo {
+            animation: initial;
+            background: #e9f2ff;
+            z-index: 1;
+          }
+          .info {
+            width: 94px;
+            height: 64px;
+            padding: 0;
+            overflow: hidden;
+            transform: translate(190px, 90px);
+            z-index: 2;
+            .photo-overlay {
+              background-color: #f6faff;
+              transform: scale(0.3);
+              top: -110px;
+              left: -110px;
+              .circle {
+              }
+            }
+            .role {
+            }
+            .name {
+            }
+            .desc {
+              opacity: 0;
+            }
           }
         }
       }
