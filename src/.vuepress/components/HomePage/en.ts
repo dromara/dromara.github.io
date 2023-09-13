@@ -13,6 +13,9 @@ const enHomeOption: HomeOption = {
   SLOGAN: 'Slogan',
   SLOGAN_DESCRIPTION:
     'One person may be able to go faster, but a group of people will go further.',
+  STARS_OVERALL: 'Total stars exceed',
+  DATA_SOURCE: '——Data sourced from Gitee and Github',
+  OUR: 'Our',
   PROJECT: 'Recommended Projects',
   MORE_PROJECTS: 'View All Projects',
   PROJECT_DETAILS: [
