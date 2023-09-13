@@ -1,5 +1,5 @@
 ---
-title: Awesome Dromara
+title: 关于我们
 sidebar: false
 breadcrumb: false
 pageInfo: false
