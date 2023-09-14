@@ -49,7 +49,11 @@
 
 <script setup lang="ts">
 import { ref, reactive, watchEffect, computed } from 'vue';
-import { type ActivityOption } from './types';
+import {
+  type ActivityOption,
+  type GroupedPage,
+  type GroupedPages
+} from './types';
 
 import enActivityOption from './enActivity';
 import enBlogOption from './enBlog';
@@ -70,29 +74,9 @@ let option: ActivityOption = reactive({
   CARDS: []
 });
 
-const currentLang = ref('zh');
 const currentTag = ref('All');
 let sectionDetail = reactive([]);
-// type TagMapping = Record<string, 'Tag' | '标签'>;
 
-// function getTag(input: string): 'Tag' | '标签' {
-//   const tagMapping: TagMapping = {
-//     News: 'Tag',
-//     Activity: 'Tag',
-//     Blog: 'Tag',
-//     新闻: '标签',
-//     活动: '标签',
-//     博客: '标签'
-//   };
-//   return tagMapping[input] ?? 'Tag';
-// }
-
-// const getTag = (input) => {
-//   return getLang(input) === '中文' ? '标签' : 'Tag';
-// };
-// const getNoData = (input) => {
-//   return getLang(input) === '中文' ? '标签' : 'Tag';
-// };
 const options = {
   News: enNewsOption,
   新闻: zhNewsOption,
@@ -102,7 +86,7 @@ const options = {
   博客: zhBlogOption
 };
 // 初始化分组对象
-const groupedPages = {
+const groupedPages: GroupedPages = {
   新闻: [],
   News: [],
   博客: [],
@@ -111,21 +95,24 @@ const groupedPages = {
   Activity: []
 };
 
-// 遍历所有页面的 frontmatter
 for (const frontmatter of allPagesFrontmatter) {
-  // 确保 frontmatter 有 head 属性
-  if (frontmatter.head && frontmatter.head.length > 0) {
-    const headName = frontmatter.head[0][1].name; // 假设 head 是一个数组，取第一个元素的 name 属性作为标识
+  if (frontmatter?.head.length > 0) {
+    const headName = frontmatter.head[0][1].name; // 拿到每篇md文章frontmatter下meta的name属性
     // 如果是新闻、博客或活动，则添加到相应的数组中
     if (groupedPages[headName] !== undefined) {
       groupedPages[headName].push({
         cover: frontmatter.cover,
         tag: frontmatter.tag,
         title: frontmatter.title,
-        url: extractPathFromURL(
-          frontmatter.head.flat().find((item) => item.property === 'og:url')
-            .content
-        ),
+        url:
+          extractPathFromURL(
+            frontmatter.head
+              .flat()
+              .find(
+                (item: { property: string; content: string }) =>
+                  item.property === 'og:url'
+              ).content
+          ) ?? '', // head的一个数组对象中包含url
         author: frontmatter.author,
         date: formatDate(frontmatter.date)
       });
@@ -133,20 +120,17 @@ for (const frontmatter of allPagesFrontmatter) {
   }
 }
 for (const key in groupedPages) {
-  if (groupedPages.hasOwnProperty(key)) {
-    groupedPages[key].sort((a, b) => new Date(b.date) - new Date(a.date));
-  }
+  groupedPages[key].sort(
+    (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
+  );
 }
-// 最终得到按照 head 分组的对象，只包含新闻、博客、活动三种 head
-console.log(groupedPages);
-function extractPathFromURL(url) {
+// 从框架提供的url中拿到跳转路径
+function extractPathFromURL(url: string): string | null {
   const match = url.match(/\/([^/]+\.html)$/);
-
-  // 如果匹配成功，返回匹配到的部分
-  if (match && match[1]) {
+  if (match?.[1] != null) {
     return match[1];
   } else {
-    return null; // 或者根据需要返回一个默认值或错误提示
+    return null;
   }
 }
 const TAGS = [
@@ -162,9 +146,7 @@ const TAGS = [
 watchEffect(() => {
   if (props.title !== undefined) {
     option = options[props.title as keyof typeof options];
-    // tag.value = getTag(props.title);
     sectionDetail = groupedPages[props.title];
-    console.log(groupedPages);
   }
 });
 type LangMapping = Record<string, '英文' | '中文'>;
@@ -180,7 +162,7 @@ const langMapping = computed(() => {
   };
   return mapping[props.title] ?? '中文';
 });
-function formatDate(inputDate) {
+function formatDate(inputDate: string): string {
   const date = new Date(inputDate);
   const year = date.getFullYear();
   const month = String(date.getMonth() + 1).padStart(2, '0');
@@ -192,7 +174,9 @@ const filteredSectionDetail = computed(() => {
   if (currentTag.value === 'All') {
     return sectionDetail;
   } else {
-    return sectionDetail.filter((obj) => obj.tag.includes(currentTag.value));
+    return sectionDetail.filter((obj: GroupedPage) =>
+      obj.tag.includes(currentTag.value)
+    );
   }
 });
 </script>
@@ -311,6 +295,9 @@ const filteredSectionDetail = computed(() => {
     color: #3e3232;
     font-size: 18px;
     font-weight: 700;
+    &:hover {
+      opacity: 0.66;
+    }
   }
   .desc {
     color: #61687c;
