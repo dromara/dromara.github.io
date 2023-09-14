@@ -54,7 +54,7 @@ const zhMembersOption: MembersOption = {
       role: 'TOC成员',
       name: '公子骏',
       photo: '/assets/img/members/gongzijun.png',
-      desc: 'Forest 作者'
+      desc: '开源项目 Forest 作者，Java 后台架构师。有十多年 Java 开发经验，主要专注于架构、微服务、分布式等领域，也会研究机器学习、算法等业界新技术。'
     },
     {
       role: 'TOC成员',
