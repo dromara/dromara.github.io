@@ -52,7 +52,7 @@ const zhMembersOption: MembersOption = {
     },
     {
       role: 'TOC成员',
-      name: '公子俊',
+      name: '公子骏',
       photo: '/assets/img/members/gongzijun.png',
       desc: 'Forest 作者'
     },
