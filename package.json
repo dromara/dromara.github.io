@@ -6,6 +6,7 @@
   "scripts": {
     "docs:build": "vuepress build src",
     "docs:clean-dev": "vuepress dev src --clean-cache",
+    "start": "vuepress dev src --temp .temp",
     "docs:dev": "vuepress dev src --temp .temp",
     "docs:update-package": "pnpm dlx vp-update",
     "lint": "eslint --fix --ext .js,.vue src/.vuepress/"

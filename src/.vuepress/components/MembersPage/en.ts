@@ -76,6 +76,12 @@ const enMembersOption: MembersOption = {
   ],
   COMMITTEES: [
     {
+      role: 'Assistant Secretary-General',
+      name: 'Li Nan',
+      photo: '/assets/img/members/linan.png',
+      desc: 'Member of the Open Source Society, Assistant Secretary-General of the dromara open source community, miscellaneous tasks in the open-source community.'
+    },
+    {
       role: 'Committee Member',
       name: 'Binghe',
       photo: '/assets/img/members/binghe.png',
@@ -122,6 +128,36 @@ const enMembersOption: MembersOption = {
       name: 'Running Noodles',
       photo: '/assets/img/members/miantiao.png',
       desc: 'Author of Goview'
+    },
+    {
+      role: 'Committee Member',
+      name: 'Wang Lei',
+      photo: '/assets/img/members/wanglei.png',
+      desc: 'Co-founder of Shaanxi Buddies Network Technology Co., Ltd., Author of Easy-Trans and FHS-Framework, Mybatis Plus Committer'
+    },
+    {
+      role: 'Committee Member',
+      name: 'Gao Shuaixing',
+      photo: '/assets/img/members/gaoshuaixing.png',
+      desc: 'Author of Electron-Egg'
+    },
+    {
+      role: 'Committee Member',
+      name: 'Zeming',
+      photo: '/assets/img/members/zeming.png',
+      desc: 'Author of open-source project Gobrs-Async, Middleware Architect specializing in concurrent programming and microservices component development, deep expertise in architectural design. If a system is suffering from poor performance, I wave my technical wand like a magician to make it faster and more powerful!'
+    },
+    {
+      role: 'Committee Member',
+      name: 'Zhou Zhou',
+      photo: '/assets/img/members/zhouzhou.png',
+      desc: 'Co-founder of j2eefast, Java Backend Architect with over 10 years of Java development experience, working in domains including banking, healthcare, and IoT.'
+    },
+    {
+      role: 'Committee Member',
+      name: 'Tang Yuan',
+      photo: '/assets/img/members/tangyuan.png',
+      desc: 'Author of Hodor, passionate about research and development related to foundational components.'
     }
   ],
   COMMITTERS: [
@@ -304,6 +340,42 @@ const enMembersOption: MembersOption = {
       name: 'Zend Wang',
       photo: '/assets/img/members/zendwang.png',
       desc: 'Liteflow Committer'
+    },
+    {
+      role: 'Member',
+      name: 'Sh1yu',
+      photo: '/assets/img/members/Sh1yu.png',
+      desc: 'Zyplayer-Doc Committer'
+    },
+    {
+      role: 'Member',
+      name: 'Frog Catcher',
+      photo: '/assets/img/members/zhuawashi.png',
+      desc: 'RuoYi-Vue-Plus Committer'
+    },
+    {
+      role: 'Member',
+      name: 'Zhao Qingran',
+      photo: '/assets/img/members/zhaoqingran.png',
+      desc: 'Hertzbeat Committer'
+    },
+    {
+      role: 'Member',
+      name: 'CHMing',
+      photo: '/assets/img/members/CHMing.png',
+      desc: 'Forest Committer'
+    },
+    {
+      role: 'Member',
+      name: 'Yuyuan',
+      photo: '/assets/img/members/yuyuan.png',
+      desc: 'Hodor Committer'
+    },
+    {
+      role: 'Member',
+      name: 'Superlit',
+      photo: '/assets/img/members/Superlit.png',
+      desc: 'Hodor Committer'
     }
   ]
 };
