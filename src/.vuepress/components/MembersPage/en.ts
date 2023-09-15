@@ -163,6 +163,12 @@ const enMembersOption: MembersOption = {
     },
     {
       role: 'Member',
+      name: 'AppleOfGray',
+      photo: '/assets/img/members/AppleOfGray.png',
+      desc: 'Sa-Token Committer'
+    },
+    {
+      role: 'Member',
       name: 'Michelle Chung',
       photo: '/assets/img/members/MichelleChung.png',
       desc: 'RuoYi-Vue-Plus/RuoYi-Cloud-Plus Committer'
