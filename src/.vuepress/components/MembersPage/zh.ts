@@ -164,6 +164,12 @@ const zhMembersOption: MembersOption = {
     },
     {
       role: '成员',
+      name: 'AppleOfGray',
+      photo: '/assets/img/members/AppleOfGray.png',
+      desc: 'Sa-Token Committer'
+    },
+    {
+      role: '成员',
       name: 'MichelleChung',
       photo: '/assets/img/members/MichelleChung.png',
       desc: 'RuoYi-Vue-Plus/RuoYi-Cloud-Plus Committer'
