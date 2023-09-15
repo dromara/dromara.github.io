@@ -1,67 +1,65 @@
 <template>
   <div class="news-activity-blog-section">
-    <div class="bg-white">
-      <div class="news-activity-blog-container">
-        <h1 class="title">{{ title }}</h1>
-        <p class="description">{{ option.DESC }}</p>
+    <div class="news-activity-blog-container">
+      <h1 class="title">{{ title }}</h1>
+      <p class="description">{{ option.DESC }}</p>
+    </div>
+  </div>
+  <main class="news-activity-blog-main">
+    <h2 class="tag">{{ langMapping === "中文" ? "标签" : "Tag" }}</h2>
+    <div class="buttons">
+      <div v-for="item in TAGS" :key="item">
+        <button
+          :class="{ selected: currentTag === item, 'tag-button': true }"
+          @click="currentTag = item"
+        >
+          {{ item }}
+        </button>
       </div>
     </div>
-    <main class="news-activity-blog-main">
-      <h2 class="tag">{{ langMapping === '中文' ? '标签' : 'Tag' }}</h2>
-      <div class="buttons">
-        <div v-for="item in TAGS" :key="item">
-          <button
-            :class="{ selected: currentTag === item, 'tag-button': true }"
-            @click="currentTag = item"
-          >
-            {{ item }}
-          </button>
-        </div>
-      </div>
-      <div class="cards" style="position: relative">
-        <template v-if="filteredSectionDetail.length">
-          <div
-            v-for="obj in filteredSectionDetail"
-            :key="obj.title"
-            class="card"
-          >
-            <div class="tag-items">
-              <div v-for="tag in obj.tag" :key="tag" class="tag-item">
-                #{{ tag }}
-              </div>
+    <template v-if="filteredSectionDetail.length">
+      <div class="cards">
+        <div v-for="obj in filteredSectionDetail" :key="obj.title" class="card">
+          <div class="tag-items">
+            <div v-for="tag in obj.tag" :key="tag" class="tag-item">
+              #{{ tag }}
             </div>
-            <img class="cover" :src="obj.cover" :alt="obj.title" />
+          </div>
+          <img class="cover" :src="obj.cover" :alt="obj.title" />
 
-            <a class="title" :href="obj.url">{{ obj.title }}</a>
-            <div class="author-info">
-              <div class="author-name">{{ obj.author }}</div>
-              <div class="time">{{ obj.date }}</div>
-            </div>
-          </div></template
-        >
-        <div v-else class="no-data">
-          {{ langMapping === '中文' ? '暂无数据' : 'Not found' }}
+          <a class="title" :href="obj.url">{{ obj.title }}</a>
+          <div class="author-info">
+            <div class="author-name">{{ obj.author }}</div>
+            <div class="time">{{ obj.date }}</div>
+          </div>
         </div>
       </div>
-    </main>
-  </div>
+    </template>
+    <div v-else class="no-data" style="">
+      {{
+        langMapping === "中文"
+          ? "这是一个待开发的领域，欢迎加入我们共同创造！"
+          : "This is a field that awaits development, welcome to join us and innovate!"
+      }}
+    </div>
+  </main>
 </template>
 
 <script setup lang="ts">
-import { ref, reactive, watchEffect, computed } from 'vue';
+import { ref, reactive, watchEffect, computed } from "vue";
 import {
   type ActivityOption,
   type GroupedPage,
   type GroupedPages
-} from './types';
+} from "./types";
 
-import enActivityOption from './enActivity';
-import enBlogOption from './enBlog';
-import enNewsOption from './enNews';
-import zhActivityOption from './zhActivity';
-import zhBlogOption from './zhBlog';
-import zhNewsOption from './zhNews';
-import { siteData } from '@vuepress/client';
+import enActivityOption from "./enActivity";
+import enBlogOption from "./enBlog";
+import enNewsOption from "./enNews";
+import zhActivityOption from "./zhActivity";
+import zhBlogOption from "./zhBlog";
+import zhNewsOption from "./zhNews";
+import { siteData } from "@vuepress/client";
 
 const allPagesFrontmatter = siteData.value.frontmatter;
 
@@ -70,12 +68,12 @@ const props = defineProps({
 });
 
 let option: ActivityOption = reactive({
-  DESC: '',
+  DESC: "",
   CARDS: []
 });
 
-const currentTag = ref('All');
-let sectionDetail = reactive([]);
+const currentTag = ref("All");
+let sectionDetail: GroupedPage[] = reactive([]);
 
 const options = {
   News: enNewsOption,
@@ -110,9 +108,9 @@ for (const frontmatter of allPagesFrontmatter) {
               .flat()
               .find(
                 (item: { property: string; content: string }) =>
-                  item.property === 'og:url'
+                  item.property === "og:url"
               ).content
-          ) ?? '', // head的一个数组对象中包含url
+          ) ?? "", // head的一个数组对象中包含url
         author: frontmatter.author,
         date: formatDate(frontmatter.date)
       });
@@ -134,14 +132,14 @@ function extractPathFromURL(url: string): string | null {
   }
 }
 const TAGS = [
-  'All',
-  'DreamCode',
-  'Dromara',
-  'GateWay',
-  'hmily',
-  'Reactor',
-  'Soul',
-  'TCC'
+  "All",
+  "DreamCode",
+  "Dromara",
+  "GateWay",
+  "hmily",
+  "Reactor",
+  "Soul",
+  "TCC"
 ];
 watchEffect(() => {
   if (props.title !== undefined) {
@@ -149,29 +147,30 @@ watchEffect(() => {
     sectionDetail = groupedPages[props.title];
   }
 });
-type LangMapping = Record<string, '英文' | '中文'>;
 
+type LangMapping = Record<string, "英文" | "中文">;
+const mapping: LangMapping = {
+  News: "英文",
+  Activity: "英文",
+  Blog: "英文",
+  新闻: "中文",
+  活动: "中文",
+  博客: "中文"
+};
 const langMapping = computed(() => {
-  const mapping: LangMapping = {
-    News: '英文',
-    Activity: '英文',
-    Blog: '英文',
-    新闻: '中文',
-    活动: '中文',
-    博客: '中文'
-  };
-  return mapping[props.title] ?? '中文';
+  return mapping[props.title ?? ""] ?? "中文";
 });
+
 function formatDate(inputDate: string): string {
   const date = new Date(inputDate);
   const year = date.getFullYear();
-  const month = String(date.getMonth() + 1).padStart(2, '0');
-  const day = String(date.getDate()).padStart(2, '0');
+  const month = String(date.getMonth() + 1).padStart(2, "0");
+  const day = String(date.getDate()).padStart(2, "0");
 
   return `${year}-${month}-${day}`;
 }
 const filteredSectionDetail = computed(() => {
-  if (currentTag.value === 'All') {
+  if (currentTag.value === "All") {
     return sectionDetail;
   } else {
     return sectionDetail.filter((obj: GroupedPage) =>
@@ -185,8 +184,8 @@ const filteredSectionDetail = computed(() => {
 .news-activity-blog-section {
   padding-top: var(--navbar-height);
   min-width: 320px;
-  .bg-white {
-    background-color: #f9fbff;
+  @media (min-width: 1440px) {
+    padding-left: 16rem;
   }
 }
 .news-activity-blog-container {
@@ -220,6 +219,10 @@ const filteredSectionDetail = computed(() => {
 }
 .news-activity-blog-main {
   padding: 80px 2vw;
+  @media (min-width: 1440px) {
+    padding-left: 16rem;
+  }
+
   .tag {
     font-weight: 700;
     border: none;
@@ -258,16 +261,16 @@ const filteredSectionDetail = computed(() => {
       grid-template-columns: 1fr;
       gap: 0;
     }
-    @media (min-width: 840px) and (max-width: 1439px) {
+    @media (min-width: 840px) {
       grid-template-columns: repeat(3, 1fr);
     }
   }
   .no-data {
-    font-size: 32px;
+    font-size: 22px;
     color: #2c3e50;
     font-weight: bold;
-    position: absolute;
-    right: 50%;
+    text-align: center;
+    margin: 120px 20px 0;
   }
   .card {
     padding: 16px;

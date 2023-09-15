@@ -32,7 +32,7 @@ const frontmatter = usePageFrontmatter<DefaultThemePageFrontmatter>();
   z-index: 1;
   top: -161px;
   @media (min-width: 1440px) {
-    padding-left: 16rem;
+    background: #f9fbff;
   }
 }
 </style>
