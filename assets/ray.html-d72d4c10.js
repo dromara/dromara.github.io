@@ -1,0 +1,1 @@
+import{_ as e,o as t,c,a as o}from"./app-b15820c2.js";const _={},s=o("p",null,"功能详情...",-1),a=[s];function n(r,l){return t(),c("div",null,a)}const f=e(_,[["render",n],["__file","ray.html.vue"]]);export{f as default};
