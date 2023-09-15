@@ -77,6 +77,12 @@ const zhMembersOption: MembersOption = {
   ],
   COMMITTEES: [
     {
+      role: '秘书长助理',
+      name: '李楠',
+      photo: '/assets/img/members/linan.png',
+      desc: '开源社成员、dromara开源社区秘书长助理，开源社区打杂'
+    },
+    {
       role: '委员会成员',
       name: '冰河',
       photo: '/assets/img/members/binghe.png',
@@ -123,6 +129,36 @@ const zhMembersOption: MembersOption = {
       name: '奔跑的面条',
       photo: '/assets/img/members/miantiao.png',
       desc: 'Goview 作者'
+    },
+    {
+      role: '委员会成员',
+      name: '王磊',
+      photo: '/assets/img/members/wanglei.png',
+      desc: '陕西小伙伴网络科技有限公司联合创始人，Easy-Trans,FHS-Framework作者，Mybatis Plus Committer'
+    },
+    {
+      role: '委员会成员',
+      name: '高帅星',
+      photo: '/assets/img/members/gaoshuaixing.png',
+      desc: 'Electron-Egg 作者'
+    },
+    {
+      role: '委员会成员',
+      name: '泽铭',
+      photo: '/assets/img/members/zeming.png',
+      desc: '开源项目Gobrs-Async 作者， 中间件架构师、专注于并发编程、微服务组件研发领域、深耕架构方向多年。如果系统出现了糟糕的性能，我会像个魔术师一样挥舞着我的技术魔杖，让它们变得更快、更强大！'
+    },
+    {
+      role: '委员会成员',
+      name: '周周',
+      photo: '/assets/img/members/zhouzhou.png',
+      desc: 'j2eefast联合创始人、Java后端架构师、有10年以上 Java 开发经验、从事银行金融、医疗行业、物联网等领域。'
+    },
+    {
+      role: '委员会成员',
+      name: '汤圆',
+      photo: '/assets/img/members/tangyuan.png',
+      desc: 'Hodor作者，热爱基础组件相关的研究、开发'
     }
   ],
   COMMITTERS: [
@@ -305,6 +341,42 @@ const zhMembersOption: MembersOption = {
       name: 'zendwang',
       photo: '/assets/img/members/zendwang.png',
       desc: 'Liteflow Committer'
+    },
+    {
+      role: '成员',
+      name: 'Sh1yu',
+      photo: '/assets/img/members/Sh1yu.png',
+      desc: 'Zyplayer-Doc Committer'
+    },
+    {
+      role: '成员',
+      name: '抓蛙师',
+      photo: '/assets/img/members/zhuawashi.png',
+      desc: 'RuoYi-Vue-Plus Committer'
+    },
+    {
+      role: '成员',
+      name: '赵青然',
+      photo: '/assets/img/members/zhaoqingran.png',
+      desc: 'Hertzbeat Committer'
+    },
+    {
+      role: '成员',
+      name: 'CHMing',
+      photo: '/assets/img/members/CHMing.png',
+      desc: 'Forest Committer'
+    },
+    {
+      role: '成员',
+      name: '芋圆',
+      photo: '/assets/img/members/yuyuan.png',
+      desc: 'Hodor Committer'
+    },
+    {
+      role: '成员',
+      name: 'Superlit',
+      photo: '/assets/img/members/Superlit.png',
+      desc: 'Hodor Committer'
     }
   ]
 };
