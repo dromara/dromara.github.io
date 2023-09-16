@@ -68,7 +68,7 @@
           lang === 'zh-CN' || lang === '/zh/' ? '/zh/projects/' : '/projects/'
         "
         class="more"
-        >{{ homeOption.MORE_PROJECTS + '&nbsp;&nbsp;>' }}</a
+        >{{ homeOption.MORE_PROJECTS + "&nbsp;&nbsp;>" }}</a
       >
       <div class="project-container">
         <img class="project-img" src="/assets/img/projects.png" alt="project" />
@@ -140,34 +140,34 @@
   </div>
 </template>
 <script setup lang="ts">
-import { watch, ref, reactive, onMounted } from 'vue';
+import { watch, ref, reactive, onMounted } from "vue";
 import {
   type HomeOption,
   type GroupedPages,
   type CommunityLink
-} from './types';
-import { useSiteLocaleData, siteData } from '@vuepress/client';
-import enHomeOption from './en';
-import zhHomeOption from './zh';
+} from "./types";
+import { useSiteLocaleData, siteData } from "@vuepress/client";
+import enHomeOption from "./en";
+import zhHomeOption from "./zh";
 
 const gvpProjects = [
-  'hutool',
-  'hertzbeat',
-  'Sa-Token',
-  'LiteFlow',
-  'Jpom',
-  'MaxKey',
-  'Hmily',
-  'TLog',
-  'cubic',
-  'open-capacity-platform',
-  'electron-egg',
-  'go-view',
-  'mendmix',
-  'northstar',
-  'CloudEon',
-  'koalas-rpc',
-  'Raincat'
+  "hutool",
+  "hertzbeat",
+  "Sa-Token",
+  "LiteFlow",
+  "Jpom",
+  "MaxKey",
+  "Hmily",
+  "TLog",
+  "cubic",
+  "open-capacity-platform",
+  "electron-egg",
+  "go-view",
+  "mendmix",
+  "northstar",
+  "CloudEon",
+  "koalas-rpc",
+  "Raincat"
 ];
 
 const allPagesFrontmatter = siteData.value.frontmatter;
@@ -201,9 +201,9 @@ for (const frontmatter of allPagesFrontmatter) {
               .flat()
               .find(
                 (item: { property: string; content: string }) =>
-                  item.property === 'og:url'
+                  item.property === "og:url"
               ).content
-          ) ?? '', // head的一个数组对象中包含url
+          ) ?? "", // head的一个数组对象中包含url
         time: formatDate(frontmatter.date)
       });
     }
@@ -222,19 +222,19 @@ function extractPathFromURL(url: string): string | null {
 function formatDate(inputDate: string): string {
   const date = new Date(inputDate);
   const year = date.getFullYear();
-  const month = String(date.getMonth() + 1).padStart(2, '0');
-  const day = String(date.getDate()).padStart(2, '0');
+  const month = String(date.getMonth() + 1).padStart(2, "0");
+  const day = String(date.getDate()).padStart(2, "0");
   return `${year}-${month}-${day}`;
 }
 
 // 定义一个映射，将 headName 映射到对应的 icon、路径
 const mapping: Record<string, { icon: string; urlPrefix: string }> = {
-  News: { icon: '/assets/img/news.png', urlPrefix: 'news/' },
-  Activity: { icon: '/assets/img/activity.png', urlPrefix: 'activity/' },
-  Blog: { icon: '/assets/img/blog.png', urlPrefix: 'blog/' },
-  新闻: { icon: '/assets/img/news.png', urlPrefix: 'news/' },
-  活动: { icon: '/assets/img/activity.png', urlPrefix: 'activity/' },
-  博客: { icon: '/assets/img/blog.png', urlPrefix: 'blog/' }
+  News: { icon: "/assets/img/news.png", urlPrefix: "news/" },
+  Activity: { icon: "/assets/img/activity.png", urlPrefix: "activity/" },
+  Blog: { icon: "/assets/img/blog.png", urlPrefix: "blog/" },
+  新闻: { icon: "/assets/img/news.png", urlPrefix: "news/" },
+  活动: { icon: "/assets/img/activity.png", urlPrefix: "activity/" },
+  博客: { icon: "/assets/img/blog.png", urlPrefix: "blog/" }
 };
 
 // 遍历 groupedPages 中的每个分组
@@ -256,26 +256,29 @@ for (const headName in groupedPages) {
     }))
   };
 
-  if (['News', 'Activity', 'Blog'].includes(headName)) {
+  if (["News", "Activity", "Blog"].includes(headName)) {
     enCommunityLink.push(formattedPages);
-  } else if (['新闻', '活动', '博客'].includes(headName)) {
+  } else if (["新闻", "活动", "博客"].includes(headName)) {
     zhCommunityLink.push(formattedPages);
   }
 }
 
 let homeOption: HomeOption = reactive({
-  QUICK_START: '',
-  DESCRIPTION: '',
-  OPEN: '',
-  OPEN_DESCRIPTION: '',
-  VISION: '',
-  VISION_DESCRIPTION: '',
-  SLOGAN: '',
-  SLOGAN_DESCRIPTION: '',
-  PROJECT: '',
-  MORE_PROJECTS: '',
+  QUICK_START: "",
+  DESCRIPTION: "",
+  OPEN: "",
+  OPEN_DESCRIPTION: "",
+  VISION: "",
+  VISION_DESCRIPTION: "",
+  SLOGAN: "",
+  SLOGAN_DESCRIPTION: "",
+  STARS_OVERALL: "",
+  DATA_SOURCE: "",
+  OUR: "",
+  PROJECT: "",
+  MORE_PROJECTS: "",
   PROJECT_DETAILS: [],
-  COMMUNITY: '',
+  COMMUNITY: "",
   COMMUNITY_ITEM: []
 });
 
@@ -283,7 +286,7 @@ watch(
   () => siteLocaleData.value.lang,
   (newLang: string) => {
     lang.value = newLang;
-    if (lang.value === 'zh-CN' || lang.value === '/zh/') {
+    if (lang.value === "zh-CN" || lang.value === "/zh/") {
       homeOption = zhHomeOption;
       communityLink = zhCommunityLink;
     } else {
@@ -313,10 +316,10 @@ const updateValue = (): void => {
 onMounted(() => {
   // 鼠标滚到项目推荐和社区动态，字由大变小
   const scalingElementProject = document.querySelector(
-    '.header-project'
+    ".header-project"
   ) as HTMLHeadingElement;
   const scalingElementCommunity = document.querySelector(
-    '.header-community'
+    ".header-community"
   ) as HTMLHeadingElement;
 
   const clientH = window.innerHeight;
@@ -348,14 +351,14 @@ onMounted(() => {
       1.2
     );
   }
-  window.addEventListener('scroll', updateScales);
+  window.addEventListener("scroll", updateScales);
 
-  window.addEventListener('beforeunload', () => {
-    window.removeEventListener('scroll', updateScales);
+  window.addEventListener("beforeunload", () => {
+    window.removeEventListener("scroll", updateScales);
   });
 
   // 数字元素进入可视区域后，数字开始增长
-  const starNumber = document.querySelector('.star-number');
+  const starNumber = document.querySelector(".star-number");
   const observer = new IntersectionObserver(
     (entries) => {
       if (entries[0].isIntersecting) {
@@ -408,9 +411,9 @@ const navigateTo = (url: string): void => {
       font-weight: bold;
       font-size: 3.6rem;
       -webkit-text-fill-color: transparent;
-      font-family: 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB',
-        'Microsoft YaHei', 'Helvetica Neue', Helvetica, Arial, sans-serif,
-        'Segoe UI Emoji', 'Segoe UI Symbol';
+      font-family: "Segoe UI", "PingFang SC", "Hiragino Sans GB",
+        "Microsoft YaHei", "Helvetica Neue", Helvetica, Arial, sans-serif,
+        "Segoe UI Emoji", "Segoe UI Symbol";
 
       @media (max-width: 959px) {
         font-size: 2.5rem;
@@ -736,7 +739,7 @@ const navigateTo = (url: string): void => {
 
       &:hover {
         .content::after {
-          content: '';
+          content: "";
           position: absolute;
           bottom: -1px;
           height: 1px;

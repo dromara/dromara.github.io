@@ -1,53 +1,53 @@
-import { hopeTheme } from 'vuepress-theme-hope';
-import { enNavbar, zhNavbar } from './navbar/index.js';
-import { enSidebar, zhSidebar } from './sidebar/index.js';
+import { hopeTheme } from "vuepress-theme-hope";
+import { enNavbar, zhNavbar } from "./navbar/index.js";
+import { enSidebar, zhSidebar } from "./sidebar/index.js";
 
 export default hopeTheme({
-  hostname: 'https://dromara.org',
+  hostname: "https://dromara.org",
 
-  iconAssets: 'fontawesome-with-brands',
+  iconAssets: "fontawesome-with-brands",
 
-  logo: '/logo.svg',
+  logo: "/logo.svg",
 
-  repo: 'dromara/dromara.github.io',
+  repo: "dromara/dromara.github.io",
 
-  docsBranch: 'master',
-  docsDir: 'src',
+  docsBranch: "master",
+  docsDir: "src",
 
   locales: {
-    '/': {
+    "/": {
       // navbar
       navbar: enNavbar,
 
       // sidebar
       sidebar: enSidebar,
 
-      footer: 'Default footer',
+      footer: "Default footer",
 
       displayFooter: true,
 
       metaLocales: {
-        editLink: 'Edit this page on GitHub'
+        editLink: "Edit this page on GitHub"
       }
     },
 
     /**
      * Chinese locale config
      */
-    '/zh/': {
+    "/zh/": {
       // navbar
       navbar: zhNavbar,
 
       // sidebar
       sidebar: zhSidebar,
 
-      footer: '默认页脚',
+      footer: "默认页脚",
 
       displayFooter: true,
 
       // page meta
       metaLocales: {
-        editLink: '在 GitHub 上编辑此页'
+        editLink: "在 GitHub 上编辑此页"
       }
     }
   },
@@ -55,11 +55,11 @@ export default hopeTheme({
   plugins: {
     // You should generate and use your own comment service
     comment: {
-      provider: 'Giscus',
-      repo: 'vuepress-theme-hope/giscus-discussions',
-      repoId: 'R_kgDOG_Pt2A',
-      category: 'Announcements',
-      categoryId: 'DIC_kwDOG_Pt2M4COD69'
+      provider: "Giscus",
+      repo: "vuepress-theme-hope/giscus-discussions",
+      repoId: "R_kgDOG_Pt2A",
+      category: "Announcements",
+      categoryId: "DIC_kwDOG_Pt2M4COD69"
     },
 
     // All features are enabled for demo, only preserve features you need here

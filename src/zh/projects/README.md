@@ -26,7 +26,7 @@ import ProjectsPage from "@ProjectsPage";
   z-index: 1;
   top: -161px;
   @media (min-width: 1440px) {
-    padding-left: 16rem;
+    background: #f9fbff;
   }
 }
 </style>
