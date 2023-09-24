@@ -176,6 +176,12 @@ const enMembersOption: MembersOption = {
           name: "Long Zhengyu",
           photo: "/assets/img/members/longzhengyu.png",
           desc: "The author of the open-source project WeMQ, the author of the open-source communication middleware Nmqs, engaged in fields such as the Internet of Things, and passionate about open-source."
+        },
+        {
+          role: "Committee Member",
+          name: "Kevin",
+          photo: "/assets/img/members/Kevin.png",
+          desc: "Author of Northstar"
         }
       ]
     },

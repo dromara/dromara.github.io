@@ -177,6 +177,12 @@ const zhMembersOption: MembersOption = {
           name: "龙政宇",
           photo: "/assets/img/members/longzhengyu.png",
           desc: "开源项目 WeMQ 作者，开源通信层中间件 Nmqs 作者，从事物联网等领域，热爱开源。"
+        },
+        {
+          role: "委员会成员",
+          name: "黄伟亮",
+          photo: "/assets/img/members/Kevin.png",
+          desc: "Northstar 作者"
         }
       ]
     },
