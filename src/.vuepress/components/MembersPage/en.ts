@@ -164,6 +164,12 @@ const enMembersOption: MembersOption = {
           name: "Tang Yuan",
           photo: "/assets/img/members/tangyuan.png",
           desc: "Author of Hodor, passionate about research and development related to foundational components."
+        },
+        {
+          role: "Committee Member",
+          name: "YanWu Xu",
+          photo: "/assets/img/members/xuyanwu.png",
+          desc: "Author of X File Storage"
         }
       ]
     },
@@ -196,7 +202,7 @@ const enMembersOption: MembersOption = {
         },
         {
           role: "Member",
-          name: "Ma Nong Xiao Yi",
+          name: "Timothy Leo",
           photo: "/assets/img/members/xiaoyi.png",
           desc: "Liteflow Committer, author of LiteFlowX (IDEA Plugin)"
         },
@@ -385,6 +391,12 @@ const enMembersOption: MembersOption = {
           name: "Superlit",
           photo: "/assets/img/members/Superlit.png",
           desc: "Hodor Committer"
+        },
+        {
+          role: "Member",
+          name: "Dazer007",
+          photo: "/assets/img/members/Dazer007.png",
+          desc: "Hutool Committer"
         }
       ]
     }
