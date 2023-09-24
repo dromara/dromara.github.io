@@ -125,9 +125,9 @@ const enMembersOption: MembersOption = {
         },
         {
           role: "Committee Member",
-          name: "Vakinge",
+          name: "Jiang Wei",
           photo: "/assets/img/members/vakinge.png",
-          desc: "Author of Mendmix"
+          desc: "Author of Mendmix, 15 years of experience in architecture within large-scale internet enterprises. Awarded as one of the top 10 practitioners at the 2021 Distributed Database Conference. Led the successful implementation of technology middle platforms for multiple large publicly listed companies, enabling their migration to the cloud."
         },
         {
           role: "Committee Member",

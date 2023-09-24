@@ -19,6 +19,7 @@ export type ProjectsOption = {
   GO_VIEW_DESC: string;
   IMAGE_COMBINER_DESC: string;
   JINX_DESC: string;
+  WEMQ_DESC: string;
   ELECTRON_EGG_DESC: string;
   NORTHSTAR_DESC: string;
   EASY_TRANS_DESC: string;

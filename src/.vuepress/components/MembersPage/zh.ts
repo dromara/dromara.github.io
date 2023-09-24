@@ -126,9 +126,9 @@ const zhMembersOption: MembersOption = {
         },
         {
           role: "委员会成员",
-          name: "vakinge",
+          name: "姜维",
           photo: "/assets/img/members/vakinge.png",
-          desc: "Mendmix 作者"
+          desc: "Mendmix 作者，15互联网大型企业架构经验。荣获2021年分布式数据库大会十大实践人物。主导完成多家大型上市公司技术中台建设，服务上云。"
         },
         {
           role: "委员会成员",
