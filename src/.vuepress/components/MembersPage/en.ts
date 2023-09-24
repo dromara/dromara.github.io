@@ -167,9 +167,15 @@ const enMembersOption: MembersOption = {
         },
         {
           role: "Committee Member",
-          name: "YanWu Xu",
+          name: "Xu YanWu",
           photo: "/assets/img/members/xuyanwu.png",
           desc: "Author of X File Storage"
+        },
+        {
+          role: "Committee Member",
+          name: "Long Zhengyu",
+          photo: "/assets/img/members/longzhengyu.png",
+          desc: "The author of the open-source project WeMQ, the author of the open-source communication middleware Nmqs, engaged in fields such as the Internet of Things, and passionate about open-source."
         }
       ]
     },
