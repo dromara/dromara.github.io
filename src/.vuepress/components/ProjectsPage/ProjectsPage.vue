@@ -194,6 +194,8 @@ const order = [
     groupName: projectsOption.POPULAR_TOOLS,
     projects: [
       "hutool",
+      "sms4j",
+      "stream-query",
       "go-view",
       "liteFlow",
       "electron-egg",
@@ -226,7 +228,7 @@ const order = [
   },
   {
     groupName: projectsOption.OPERATIONS_AND_MAINTENANCE_CONTROL,
-    projects: ["Jpom", "hertzbeat", "cubic", "athena"]
+    projects: ["Jpom", "hertzbeat", "cubic", "athena", "Testhub"]
   },
   {
     groupName: projectsOption.DISTRIBUTED_LOG,
@@ -364,7 +366,7 @@ const projectItems = ref([
         name: "hutool",
         website: "https://hutool.cn/",
         description: projectsOption.HUTOOL_DESC,
-        sponsor: "Looly（loolly_admi）",
+        sponsor: "Looly（loolly_admin）",
         date: "2021.03",
         link: `
   	<a target="_blank" href="https://gitee.com/link?target=https%3A%2F%2Fsearch.maven.org%2Fartifact%2Fcn.hutool%2Fhutool-all">
