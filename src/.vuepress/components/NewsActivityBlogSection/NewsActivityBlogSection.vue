@@ -1,8 +1,10 @@
 <template>
   <div class="news-activity-blog-section">
-    <div class="news-activity-blog-container">
-      <h1 class="title">{{ title }}</h1>
-      <p class="description">{{ option.DESC }}</p>
+    <div class="bg-white">
+      <div class="news-activity-blog-container">
+        <h1 class="title">{{ title }}</h1>
+        <p class="description">{{ option.DESC }}</p>
+      </div>
     </div>
   </div>
   <main class="news-activity-blog-main">
@@ -259,7 +261,8 @@ const filteredSectionDetail = computed(() => {
     gap: 24px;
     @media (max-width: 600px) {
       grid-template-columns: 1fr;
-      gap: 0;
+      gap: 20px;
+      padding: 0 10vw;
     }
     @media (min-width: 840px) {
       grid-template-columns: repeat(3, 1fr);

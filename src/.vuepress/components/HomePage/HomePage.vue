@@ -1,67 +1,62 @@
 <template>
   <div class="home-page">
     <div class="wrapper">
-      <div class="vp-hero-mask">
-        <div class="vp-hero-info">
+      <div class="banner-mask">
+        <div class="banner-info">
           <h1 id="main-title">Dromara</h1>
-          <p class="vp-description">{{ homeOption.DESCRIPTION }}</p>
-          <p class="vp-actions">
+          <p class="banner-description">{{ homeOption.DESCRIPTION }}</p>
+          <p class="banner-actions">
             <a
               :href="
                 lang === 'zh-CN' || lang === '/zh/'
                   ? '/zh/projects/'
                   : '/projects/'
               "
-              class="vp-action primary"
+              class="banner-action primary"
               >{{ homeOption.QUICK_START }}</a
             >
-            <a href="https://gitee.com/dromara" class="vp-action">Gitee</a>
-            <a href="https://github.com/dromara" class="vp-action">GitHub</a>
+            <a href="https://gitee.com/dromara" class="banner-action">Gitee</a>
+            <a href="https://github.com/dromara" class="banner-action"
+              >GitHub</a
+            >
           </p>
         </div>
       </div>
       <div class="feature-wrapper">
         <div class="feature slogan">
-          <div class="feature-container slogan-container">
+          <div
+            v-for="feature in homeOption.FEATURES"
+            :key="feature.name"
+            class="feature-container slogan-container"
+          >
             <div class="feature-title">
-              <img src="/assets/img/open.png" alt="open" />
-              <h2>{{ homeOption.OPEN }}</h2>
+              <img
+                :src="`/assets/img/${feature.name}.png`"
+                :alt="feature.name"
+              />
+              <h2>{{ feature.title }}</h2>
             </div>
-            <p class="home-description">{{ homeOption.OPEN_DESCRIPTION }}</p>
-          </div>
-          <div class="feature-container slogan-container">
-            <div class="feature-title">
-              <img src="/assets/img/vision.png" alt="vision" />
-              <h2>{{ homeOption.VISION }}</h2>
-            </div>
-            <p class="home-description">
-              {{ homeOption.VISION_DESCRIPTION }}
-            </p>
-          </div>
-          <div class="feature-container slogan-container">
-            <div class="feature-title">
-              <img src="/assets/img/slogan.png" alt="slogan" />
-              <h2>{{ homeOption.SLOGAN }}</h2>
-            </div>
-            <p class="home-description">
-              {{ homeOption.SLOGAN_DESCRIPTION }}
-            </p>
+            <p class="home-description">{{ feature.desc }}</p>
           </div>
         </div>
       </div>
     </div>
 
-    <div class="honor-container">
+    <div class="star-container">
       <div class="star-wrapper">
-        <div class="honor-text">{{ homeOption.STARS_OVERALL }}</div>
-        <div class="star-block">
-          <div class="star-number">{{ currentStars }}k</div>
+        <div class="star-inner">
+          <div class="star-text">{{ homeOption.STARS_OVERALL }}</div>
+          <div class="star-block">
+            <div class="star-number">{{ currentStars }}k</div>
+          </div>
         </div>
+        <cite> {{ homeOption.DATA_SOURCE }} </cite>
       </div>
-      <cite> {{ homeOption.DATA_SOURCE }} </cite>
     </div>
 
-    <div class="project">
+    <LogoAnimation />
+
+    <div class="project-container">
       <h2 class="header-project">{{ homeOption.PROJECT }}</h2>
       <a
         :href="
@@ -70,25 +65,71 @@
         class="more"
         >{{ homeOption.MORE_PROJECTS + "&nbsp;&nbsp;>" }}</a
       >
-      <div class="project-container">
+      <div class="project-swiper">
         <img class="project-img" src="/assets/img/projects.png" alt="project" />
-        <div class="projects">
-          <template v-for="item in homeOption.PROJECT_DETAILS" :key="item.name">
-            <div class="project-item" @click="navigateTo(item.url)">
-              <div class="top-text">{{ item.name }}</div>
-              <div class="bottom-text">{{ item.description }}</div>
+        <swiper
+          :modules="[Navigation, EffectCoverflow, Autoplay, Pagination]"
+          :navigation="true"
+          :grabCursor="true"
+          :centeredSlides="true"
+          :loop="true"
+          :slidesPerView="1.5"
+          :loopedSlides="3"
+          :slideToClickedSlide="true"
+          :autoplay="{
+            delay: 2500,
+            disableOnInteraction: false
+          }"
+          :pagination="{ clickable: true }"
+          :effect="'coverflow'"
+          :coverflowEffect="{
+            rotate: 50,
+            stretch: -50,
+            depth: 100,
+            modifier: 3,
+            slideShadows: false
+          }"
+        >
+          <swiper-slide v-for="item in homeOption.PROJECT_DETAILS">
+            <div class="project-item">
+              <img
+                :src="`/assets/img/logo/${item.name}.png`"
+                :alt="item.name + ' logo'"
+              />
+              <div class="text">{{ item.description }}</div>
+              <div class="link-container" @click="navigateTo(item.url)">
+                <div class="link">{{ homeOption.VIEW_PROJECT }}</div>
+                <div class="icon-container">
+                  <div class="icon">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="16"
+                      height="16"
+                      viewBox="0 0 14 12"
+                      fill="none"
+                    >
+                      <path
+                        fill-rule="evenodd"
+                        clip-rule="evenodd"
+                        d="M10.1903 5.26519L6.22065 1.29552L7.28131 0.234863L13.0616 6.01519L7.28131 11.7955L6.22065 10.7349L10.1903 6.76519H0.000976562V5.26519H10.1903Z"
+                        fill="#1D1D1B"
+                      ></path>
+                    </svg>
+                  </div>
+                </div>
+              </div>
             </div>
-          </template>
-        </div>
+          </swiper-slide>
+        </swiper>
       </div>
     </div>
 
-    <div class="honor-container" style="background-color: #185095">
-      <div class="honor-text">
+    <div class="gvp-wrapper">
+      <h2 class="header-gvp">
         {{ homeOption.OUR }}
-        <span class="gvp">GVP</span>
+        <span>GVP</span>
         ：
-      </div>
+      </h2>
       <ul class="gvp-container">
         <li v-for="gvp in gvpProjects" :key="gvp">
           <a :href="'https://gitee.com/dromara/' + gvp"> {{ gvp }}</a>
@@ -104,10 +145,10 @@
             <div class="feature-container">
               <div class="feature-title">
                 <img :src="section.icon" />
-                <h2>{{ section.category }}</h2>
+                <h2 style="margin-bottom: 0">{{ section.category }}</h2>
               </div>
               <template v-for="item in section.details" :key="item.title">
-                <div class="community-item" @click="navigateTo(item.url)">
+                <div class="community-item">
                   <div class="content">
                     <div class="title">{{ item.title }}</div>
                     <div class="time">{{ item.time }}</div>
@@ -149,6 +190,18 @@ import {
 import { useSiteLocaleData, siteData } from "@vuepress/client";
 import enHomeOption from "./en";
 import zhHomeOption from "./zh";
+import { Swiper, SwiperSlide } from "swiper/vue";
+import "swiper/css";
+import "swiper/css/effect-coverflow";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
+import {
+  EffectCoverflow,
+  Navigation,
+  Autoplay,
+  Pagination
+} from "swiper/modules";
+import LogoAnimation from "@LogoAnimation";
 
 const gvpProjects = [
   "hutool",
@@ -266,17 +319,13 @@ for (const headName in groupedPages) {
 let homeOption: HomeOption = reactive({
   QUICK_START: "",
   DESCRIPTION: "",
-  OPEN: "",
-  OPEN_DESCRIPTION: "",
-  VISION: "",
-  VISION_DESCRIPTION: "",
-  SLOGAN: "",
-  SLOGAN_DESCRIPTION: "",
+  FEATURES: [],
   STARS_OVERALL: "",
   DATA_SOURCE: "",
   OUR: "",
   PROJECT: "",
   MORE_PROJECTS: "",
+  VIEW_PROJECT: "",
   PROJECT_DETAILS: [],
   COMMUNITY: "",
   COMMUNITY_ITEM: []
@@ -301,7 +350,7 @@ watch(
 
 // 全网star数
 const currentStars = ref(0);
-const totalStars = 204.7; // 来源于gitee总star数与github各仓库star数之和
+const totalStars = 204.7; // 来源于gitee总star数与github各仓库star数之和，需手动更新
 const increment = totalStars / (1 * 60);
 const updateValue = (): void => {
   if (currentStars.value < totalStars) {
@@ -314,49 +363,6 @@ const updateValue = (): void => {
 };
 
 onMounted(() => {
-  // 鼠标滚到项目推荐和社区动态，字由大变小
-  const scalingElementProject = document.querySelector(
-    ".header-project"
-  ) as HTMLHeadingElement;
-  const scalingElementCommunity = document.querySelector(
-    ".header-community"
-  ) as HTMLHeadingElement;
-
-  const clientH = window.innerHeight;
-
-  const halfViewportHeight = clientH / 2;
-  function applyScale(
-    element: HTMLHeadingElement,
-    top: number,
-    midPoint: number,
-    scaleSize: number
-  ): void {
-    if (top <= clientH && midPoint <= top) {
-      const scale = 1 + (scaleSize * (top - midPoint)) / midPoint;
-      element.style.transform = `scale(${scale})`;
-    }
-  }
-
-  function updateScales(): void {
-    applyScale(
-      scalingElementProject,
-      scalingElementProject.getBoundingClientRect().top,
-      halfViewportHeight,
-      0.2
-    );
-    applyScale(
-      scalingElementCommunity,
-      scalingElementCommunity.getBoundingClientRect().top,
-      halfViewportHeight + 20,
-      1.2
-    );
-  }
-  window.addEventListener("scroll", updateScales);
-
-  window.addEventListener("beforeunload", () => {
-    window.removeEventListener("scroll", updateScales);
-  });
-
   // 数字元素进入可视区域后，数字开始增长
   const starNumber = document.querySelector(".star-number");
   const observer = new IntersectionObserver(
@@ -372,7 +378,6 @@ onMounted(() => {
     observer.observe(starNumber);
   }
 });
-
 const navigateTo = (url: string): void => {
   window.location.href = url;
 };
@@ -392,16 +397,19 @@ const navigateTo = (url: string): void => {
   h2 {
     border-bottom: none;
   }
-  .vp-hero-mask {
+  .banner-mask {
     background: url(/assets/img/bg-image.png) no-repeat;
-
     background-size: cover;
     background-position: center;
+    min-height: 65vh;
     @media (min-width: 960px) {
       padding-left: 5rem;
     }
+    @media (max-width: 800px) {
+      min-height: 0;
+    }
   }
-  .vp-hero-info {
+  .banner-info {
     padding: 100px 24px;
     #main-title {
       margin: 0.5rem 0;
@@ -430,8 +438,8 @@ const navigateTo = (url: string): void => {
     }
   }
 
-  .vp-description,
-  .vp-actions {
+  .banner-description,
+  .banner-actions {
     max-width: 35rem;
     color: #3a5169;
     font-weight: 500;
@@ -451,7 +459,7 @@ const navigateTo = (url: string): void => {
     }
   }
 
-  .vp-action {
+  .banner-action {
     display: inline-block;
     overflow: hidden;
     min-width: 4rem;
@@ -490,14 +498,12 @@ const navigateTo = (url: string): void => {
     display: flex;
     justify-content: space-between;
     border-radius: 6px;
-    box-shadow: 0px 4px 32px 0px rgba(64, 93, 149, 0.05);
     box-sizing: border-box;
     min-height: 210px;
     &.slogan :hover {
       transform: translateY(-5%);
       transition: transform 250ms ease-in-out;
     }
-
     @media (max-width: 800px) {
       flex-direction: column;
     }
@@ -510,16 +516,14 @@ const navigateTo = (url: string): void => {
       padding: 20px 42px;
       &.slogan-container :hover {
         transform: translateY(0);
+        box-shadow: 0px 4px 32px 0px rgba(64, 93, 149, 0.05);
       }
-
       @media (min-width: 800px) {
         width: 30%;
       }
-
       img {
         margin: 0 20px 10px 0;
       }
-
       .feature-title {
         display: flex;
         align-items: center;
@@ -529,21 +533,145 @@ const navigateTo = (url: string): void => {
       }
     }
   }
-  .honor-container {
+
+  .header-project,
+  .header-gvp,
+  .header-community {
     text-align: center;
-    background-color: #096dd9;
-    color: #fff;
+    font-weight: 700;
+  }
+
+  .project-container {
     padding: 20px 0;
-    font-weight: 300;
-    letter-spacing: 2px;
+    background: url(/assets/img/project-bg.png) no-repeat;
+    background-size: cover;
+    background-position: center;
+    text-align: center;
+    h2 {
+      margin-top: 0;
+    }
+  }
+  .project-swiper {
+    display: flex;
+    justify-content: space-evenly;
+    @media (max-width: 600px) {
+      flex-direction: column;
+      align-items: center;
+    }
+  }
+  .project-img {
+    width: 25rem;
+    @media (max-width: 568px) {
+      width: 18rem;
+    }
+  }
+  .project-item {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    height: 100%;
+    font-size: 1.1rem;
+    color: #494949;
+    padding: 0 20px;
+    border: 1px solid #f1f2f5;
+    text-align: left;
+    img {
+      width: 12rem;
+      max-width: 100%;
+    }
+  }
+  .link-container {
+    position: relative;
+    padding-bottom: 5px;
+    font-size: 0.8em;
+    display: flex;
+    justify-content: space-between;
+    &:hover {
+      .link {
+        &::after {
+          content: "";
+          height: 1px;
+          width: 100%;
+          position: absolute;
+          left: 0;
+          bottom: -1px;
+          animation: bottom 750ms ease-in-out;
+          background-color: #1d1d1b;
+        }
+      }
+      .icon {
+        transform: translateX(5px);
+        transition: transform 250ms ease-in-out;
+      }
+    }
+  }
+  @keyframes bottom {
+    0% {
+      right: 0;
+      left: auto;
+      width: 100%;
+    }
+
+    50% {
+      width: 0%;
+    }
+
+    100% {
+      width: 100%;
+      left: 0;
+    }
+  }
+  .swiper {
+    width: 40%;
+    padding: 50px 0;
+    margin: 0;
+    @media (max-width: 600px) {
+      width: 100%;
+    }
+  }
+  .swiper-slide {
+    height: 220px;
+    background: #fff;
+    border-radius: 15px;
+  }
+  .swiper-slide-active {
+    box-shadow: 0px 4px 32px 0px rgba(0, 0, 0, 0.06),
+      0px 0px 10px 0px rgba(0, 0, 0, 0.04);
+  }
+
+  .more {
+    color: #2e64fe;
+    padding: 5px 10px;
+    cursor: pointer;
+    &:hover {
+      background: #e8f0fe;
+      border-radius: 5px;
+    }
+  }
+
+  .star-container {
+    background: url(/assets/img/growing-star.png) no-repeat;
+    background-size: cover;
+    background-position: center;
+    width: 100%;
+    color: #fff;
+    padding: 10px 0 20px;
   }
   .star-wrapper {
-    display: flex;
-    justify-content: center;
-    align-items: flex-end;
-    padding-bottom: 20px;
+    position: relative;
+    left: 10%;
+    text-align: left;
+    cite {
+      color: #8db2ff;
+      font-weight: 400;
+    }
   }
-  .honor-text {
+  .star-inner {
+    display: flex;
+    align-items: flex-end;
+    padding-bottom: 15px;
+  }
+  .star-text {
     font-size: 2.5em;
     @media (max-width: 959px) {
       font-size: 2.2em;
@@ -564,18 +692,11 @@ const navigateTo = (url: string): void => {
       width: 30%;
     }
   }
-  @mixin gradient-background {
-    background: linear-gradient(to right, #09d5d9b5 50%, transparent 100%);
-    background-position: bottom 10% center;
-    background-size: 100% 25%;
-    background-repeat: no-repeat;
-  }
-
   .star-number {
     font-weight: 500;
     display: inline-block;
     margin-left: 10px;
-    font-size: 4em;
+    font-size: 58px;
     @media (max-width: 959px) {
       font-size: 3.5em;
     }
@@ -585,7 +706,16 @@ const navigateTo = (url: string): void => {
     @media (max-width: 419px) {
       font-size: 2.5em;
     }
-    @include gradient-background;
+  }
+  .gvp-wrapper {
+    text-align: center;
+    padding: 20px 0;
+    letter-spacing: 2px;
+    background: linear-gradient(
+      180deg,
+      #dee8ff 0%,
+      rgba(243, 247, 253, 0) 100%
+    );
   }
   .gvp-container {
     padding: 0 18vw;
@@ -611,102 +741,24 @@ const navigateTo = (url: string): void => {
       }
     }
     a {
-      color: #fff;
       line-height: 2.5;
       font-size: 1.1em;
-      font-weight: 400;
       white-space: nowrap;
+      color: #61687c;
+
       &:hover {
-        @include gradient-background;
+        color: #2e64fe;
+        font-weight: 900;
       }
     }
-  }
-  .gvp {
-    @include gradient-background;
   }
 
-  .project {
-    background: url(/assets/img/project-bg.png) no-repeat;
-    background-size: cover;
-    background-position: center;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 50px 0;
-    width: 100vw;
-    overflow: hidden;
-  }
-  .project-container {
-    display: flex;
-    justify-content: space-evenly;
-    align-items: center;
-    @media (max-width: 991px) {
-      flex-direction: column;
-    }
-
-    .project-img {
-      width: 30rem;
-      @media (max-width: 568px) {
-        width: 20rem;
-      }
-    }
-    .projects {
-      display: grid;
-      padding: 10px 25px 30px;
-      grid-template-columns: repeat(2, 1fr);
-      grid-template-rows: repeat(4, 100px);
-      gap: 10px;
-      min-width: 380px;
-    }
-    .project-item {
-      background-color: #fff;
-      padding: 10px;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      border-radius: 8px;
-      border: 1px solid #f1f2f5;
-      color: #414960;
-      cursor: pointer;
-
-      .top-text {
-        font-size: 18px;
-      }
-
-      .bottom-text {
-        font-size: 16px;
-      }
-      &:hover {
-        color: #2e64fe !important;
-        box-shadow: 0px 4px 32px 0px rgba(0, 0, 0, 0.06),
-          0px 0px 10px 0px rgba(0, 0, 0, 0.04);
-      }
-    }
-  }
-  .header-project,
-  .header-community {
-    text-align: center;
-    font-weight: 700;
-  }
-  .more {
-    color: #2e64fe;
-    margin-top: 0;
-    padding: 5px 10px;
-    margin-bottom: 16px;
-    cursor: pointer;
-    &:hover {
-      display: inline-block;
-      background: #e8f0fe;
-      border-radius: 5px;
-    }
-  }
   .community {
     width: 100vw;
     overflow: hidden;
     padding: 20px 0;
     .feature {
       margin: 0;
-      box-shadow: none;
       background: none;
       display: grid;
       gap: 16px;
@@ -736,6 +788,7 @@ const navigateTo = (url: string): void => {
       padding: 10px;
       cursor: pointer;
       position: relative;
+      height: 62px;
 
       &:hover {
         .content::after {
@@ -763,7 +816,7 @@ const navigateTo = (url: string): void => {
     }
 
     .title {
-      font-size: 16px;
+      font-size: 17px;
       display: -webkit-box;
       -webkit-line-clamp: 2;
       -webkit-box-orient: vertical;
@@ -772,42 +825,14 @@ const navigateTo = (url: string): void => {
     }
 
     .time {
-      font-size: 14px;
+      font-size: 16px;
     }
     .icon-container {
-      flex: 0;
       margin-left: 10px;
     }
-
     .icon {
       font-size: 20px;
     }
-  }
-}
-@media (max-width: 991px) {
-  html {
-    font-size: 55%;
-    scroll-padding-top: 8rem;
-  }
-
-  .home h3 {
-    font-size: 4rem;
-  }
-}
-@keyframes bottom {
-  0% {
-    right: 0;
-    left: auto;
-    width: 100%;
-  }
-
-  50% {
-    width: 0%;
-  }
-
-  100% {
-    width: 100%;
-    left: 0;
   }
 }
 </style>

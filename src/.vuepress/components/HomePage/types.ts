@@ -1,3 +1,9 @@
+type Feature = {
+  name: string;
+  title: string;
+  desc: string;
+};
+
 type ProjectDetail = {
   name: string;
   description: string;
@@ -18,17 +24,13 @@ type CommunityItem = {
 export type HomeOption = {
   QUICK_START: string;
   DESCRIPTION: string;
-  OPEN: string;
-  OPEN_DESCRIPTION: string;
-  VISION: string;
-  VISION_DESCRIPTION: string;
-  SLOGAN: string;
-  SLOGAN_DESCRIPTION: string;
+  FEATURES: Feature[];
   STARS_OVERALL: string;
   DATA_SOURCE: string;
   OUR: string;
   PROJECT: string;
   MORE_PROJECTS: string;
+  VIEW_PROJECT: string;
   PROJECT_DETAILS: ProjectDetail[];
   COMMUNITY: string;
   COMMUNITY_ITEM: CommunityItem[];

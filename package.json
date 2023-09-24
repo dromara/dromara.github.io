@@ -31,6 +31,7 @@
   },
   "dependencies": {
     "@vuepress/theme-default": "2.0.0-beta.66",
-    "@vuepress/utils": "2.0.0-beta.66"
+    "@vuepress/utils": "2.0.0-beta.66",
+    "swiper": "^10.2.0"
   }
 }
