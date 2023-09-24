@@ -117,6 +117,7 @@ let projectsOption: ProjectsOption = reactive({
   GO_VIEW_DESC: "",
   IMAGE_COMBINER_DESC: "",
   JINX_DESC: "",
+  WEMQ_DESC: "",
   ELECTRON_EGG_DESC: "",
   NORTHSTAR_DESC: "",
   EASY_TRANS_DESC: "",
@@ -211,6 +212,7 @@ const order = [
       "fast-request",
       "Binlog4j",
       "open-giteye-api",
+      "WeMQ",
       "jinx"
     ]
   },
@@ -495,6 +497,20 @@ const projectItems = ref([
   <a href="https://gitee.com/link?target=https%3A%2F%2Fgithub.com%2Fdromara%2Fjinx"><img src="https://img.shields.io/github/stars/dromara/jinx?style=flat-square&amp;logo=github"></a>
   <a href="https://gitee.com/link?target=https%3A%2F%2Fgithub.com%2Fdromara%2Fjinx%2Fnetwork%2Fmembers"><img src="https://img.shields.io/github/forks/dromara/jinx?style=flat-square&amp;logo=GitHub"></a>
   <a href="https://gitee.com/link?target=https%3A%2F%2Fgithub.com%2Fdromara%2Fjinx%2Fblob%2Fmaster%2FLICENSE"><img src="https://img.shields.io/github/license/dromara/jinx.svg?style=flat-square"></a>
+          `
+      },
+      {
+        name: "WeMQ",
+        website: "https://wemq.nicholasld.cn/",
+        description: projectsOption.WEMQ_DESC,
+        sponsor: "NicholasLD（nicholasld）",
+        date: "2023.09",
+        link: `
+  <a href="https://gitee.com/dromara/WeMQ"><img src="https://gitee.com/dromara/WeMQ/badge/star.svg"></a>
+  <a href="https://gitee.com/dromara/WeMQ/members"><img src="https://gitee.com/dromara/WeMQ/badge/fork.svg"></a>
+  <a href="https://github.com/dromara/WeMQ"><img src="https://img.shields.io/github/stars/dromara/WeMQ?style=flat-square&amp;logo=github"></a>
+  <a href="https://github.com/dromara/WeMQ/network/members"><img src="https://img.shields.io/github/forks/dromara/WeMQ?style=flat-square&amp;logo=GitHub"></a>
+  <a href="https://github.com/dromara/WeMQ/blob/master/LICENSE"><img src="https://img.shields.io/github/license/dromara/WeMQ.svg?style=flat-square"></a>
           `
       },
       {

@@ -23,6 +23,8 @@ const enProjectsOption: ProjectsOption = {
   GO_VIEW_DESC: "A efficient low-code data visualization development platform",
   IMAGE_COMBINER_DESC: "Image combine tool for java server side",
   JINX_DESC: "Netty is used as httpServer in Spring-boot",
+  WEMQ_DESC:
+    "WeMQ is an open-source IoT device debugging system designed for IoT device operators. It offers a comprehensive solution for debugging IoT devices, including features such as device management, MQTT server management, and client management. It also integrates the Nmqs communication layer component, which ensures data security by implementing encrypted connection information.",
   ELECTRON_EGG_DESC:
     "A simple, cross-platform, enterprise-level desktop software development framework.",
   NORTHSTAR_DESC: "Quantitative Trading Platform",
