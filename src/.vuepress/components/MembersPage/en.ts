@@ -182,6 +182,12 @@ const enMembersOption: MembersOption = {
           name: "Kevin",
           photo: "/assets/img/members/Kevin.png",
           desc: "Author of Northstar"
+        },
+        {
+          role: "Committee Member",
+          name: "yanhom",
+          photo: "/assets/img/members/yanhom.png",
+          desc: "Author of Dynamic-Tp"
         }
       ]
     },

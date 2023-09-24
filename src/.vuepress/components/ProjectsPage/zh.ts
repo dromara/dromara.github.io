@@ -38,7 +38,7 @@ const zhProjectsOption: ProjectsOption = {
   PAYMENT_SPRING_BOOT_DESC: "最全最好用的微信支付V3 Spring Boot 组件。",
   EASYTRANS_DESC: "一个注解搞定数据翻译,减少30%SQL代码量。",
   NEUTRINO_PROXY_DESC: "一个基于netty的、开源的java内网穿透项目。",
-  TESTHUB_DESC: "一款基于流程编排的自动化测试工具。",
+  TESTHUB_DESC: "TestHub 是一款基于流程编排的自动化测试工具。",
   YFT_DESIGN_DESC: `基于Canvas的开源版“创客贴”。`,
   ZYPLAYER_DOC_DESC:
     "一款适合团队和个人私有化部署使用的知识库、笔记、WIKI文档管理工具。",

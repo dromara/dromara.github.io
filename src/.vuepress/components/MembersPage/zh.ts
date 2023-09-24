@@ -183,6 +183,12 @@ const zhMembersOption: MembersOption = {
           name: "黄伟亮",
           photo: "/assets/img/members/Kevin.png",
           desc: "Northstar 作者"
+        },
+        {
+          role: "委员会成员",
+          name: "yanhom",
+          photo: "/assets/img/members/yanhom.png",
+          desc: "Dynamic-Tp 作者"
         }
       ]
     },

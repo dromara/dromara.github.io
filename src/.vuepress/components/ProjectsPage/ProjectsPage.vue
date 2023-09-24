@@ -194,6 +194,8 @@ const order = [
     groupName: projectsOption.POPULAR_TOOLS,
     projects: [
       "hutool",
+      "sms4j",
+      "stream-query",
       "go-view",
       "liteFlow",
       "electron-egg",
@@ -226,7 +228,7 @@ const order = [
   },
   {
     groupName: projectsOption.OPERATIONS_AND_MAINTENANCE_CONTROL,
-    projects: ["Jpom", "hertzbeat", "cubic", "athena"]
+    projects: ["Jpom", "hertzbeat", "cubic", "athena", "TestHub"]
   },
   {
     groupName: projectsOption.DISTRIBUTED_LOG,
@@ -364,7 +366,7 @@ const projectItems = ref([
         name: "hutool",
         website: "https://hutool.cn/",
         description: projectsOption.HUTOOL_DESC,
-        sponsor: "Looly（loolly_admi）",
+        sponsor: "Looly（loolly_admin）",
         date: "2021.03",
         link: `
   	<a target="_blank" href="https://gitee.com/link?target=https%3A%2F%2Fsearch.maven.org%2Fartifact%2Fcn.hutool%2Fhutool-all">
@@ -890,6 +892,18 @@ const projectItems = ref([
   <a href="https://gitee.com/link?target=https%3A%2F%2Fgithub.com%2Fdromara%2Fathena%2Fnetwork%2Fmembers"><img src="https://img.shields.io/github/forks/dromara/athena?style=flat-square&amp;logo=GitHub"></a>
   <a href="https://gitee.com/link?target=https%3A%2F%2Fgithub.com%2Fdromara%2Fathena%2Fblob%2Fmaster%2FLICENSE"><img src="https://img.shields.io/github/license/dromara/athena.svg?style=flat-square"></a>
           `
+      },
+      {
+        name: "TestHub",
+        website: "http://nsrule.com/",
+        description: projectsOption.TESTHUB_DESC,
+        sponsor: "失败女神（failedgoddes）",
+        date: "2023.08",
+        link: `
+  <a href="https://gitee.com/failedgoddess/test-hub/stargazers"><img src="https://gitee.com/failedgoddess/test-hub/badge/star.svg?theme=gvp"></a>
+  <a href="https://gitee.com/failedgoddess/test-hub/blob/master/LICENSE"><img src="https://img.shields.io/badge/license-Apache--2.0-green"></a>
+  <a href="https://gitee.com/failedgoddess/test-hub"><img src="https://img.shields.io/badge/version-v1.0.0-blue"></a>
+  `
       }
     ]
   },
