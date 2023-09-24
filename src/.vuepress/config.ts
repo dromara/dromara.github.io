@@ -33,7 +33,7 @@ export default defineUserConfig({
 
       logo: "/logo.svg",
 
-      repo: "vuepress-theme-hope/vuepress-theme-hope",
+      repo: "dromara",
 
       docsDir: "src",
 

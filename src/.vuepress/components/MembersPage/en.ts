@@ -164,6 +164,24 @@ const enMembersOption: MembersOption = {
           name: "Tang Yuan",
           photo: "/assets/img/members/tangyuan.png",
           desc: "Author of Hodor, passionate about research and development related to foundational components."
+        },
+        {
+          role: "Committee Member",
+          name: "Xu YanWu",
+          photo: "/assets/img/members/xuyanwu.png",
+          desc: "Author of X File Storage"
+        },
+        {
+          role: "Committee Member",
+          name: "Long Zhengyu",
+          photo: "/assets/img/members/longzhengyu.png",
+          desc: "The author of the open-source project WeMQ, the author of the open-source communication middleware Nmqs, engaged in fields such as the Internet of Things, and passionate about open-source."
+        },
+        {
+          role: "Committee Member",
+          name: "Kevin",
+          photo: "/assets/img/members/Kevin.png",
+          desc: "Author of Northstar"
         }
       ]
     },
@@ -196,7 +214,7 @@ const enMembersOption: MembersOption = {
         },
         {
           role: "Member",
-          name: "Ma Nong Xiao Yi",
+          name: "Timothy Leo",
           photo: "/assets/img/members/xiaoyi.png",
           desc: "Liteflow Committer, author of LiteFlowX (IDEA Plugin)"
         },
@@ -385,6 +403,12 @@ const enMembersOption: MembersOption = {
           name: "Superlit",
           photo: "/assets/img/members/Superlit.png",
           desc: "Hodor Committer"
+        },
+        {
+          role: "Member",
+          name: "Dazer007",
+          photo: "/assets/img/members/Dazer007.png",
+          desc: "Hutool Committer"
         }
       ]
     }
