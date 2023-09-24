@@ -2,7 +2,7 @@ import { ProjectsOption } from "./types";
 const enProjectsOption: ProjectsOption = {
   PROJECTS: "Projects",
   DESCRIPTION:
-    "Dromara Open Source Community gathers top-tier open-source project authors, offering open-source products, solutions, consulting, support, and training. Encompassing domains like distributed transactions, tools, authentication, microservice RPC, monitoring, logging, and big data. Join us to experience the joy of open source.",
+    "Dromara Community unites top open-source authors, offering products, solutions, and training across domains like transactions, tools, microservices, and big data. Join for the joy of open source.",
   PROJECT_SPONSOR: "Project sponsor",
   JOINING_DATE: "Joining date",
   START_UP: "Start up",
@@ -65,7 +65,7 @@ const enProjectsOption: ProjectsOption = {
   DISTRIBUTED_LOG: "Distributed Log",
   TLOG_DESC: "Lightweight distributed log label tracking framwork",
 
-  AGENT_MONITORING: "Agent Monitoring",
+  BIG_DATA: "Big Data",
   CLOUDEON_DESC:
     "A cloud-native big data platform based on Kubernetes, dedicated to simplifying the operation and maintenance of big data clusters on k8s.",
   DATA_COMPARE_DESC:

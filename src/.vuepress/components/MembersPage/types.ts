@@ -5,9 +5,12 @@ export type MembersOption = {
   TOC_MEMBER_TITLE: string;
   COMMITTEE_TITLE: string;
   COMMITTER_TITLE: string;
-  TOC_MEMBERS: Array<Member>;
-  COMMITTEES: Array<Member>;
-  COMMITTERS: Array<Member>;
+  MEMBERS_ITEM: MembersGroup[];
+};
+
+type MembersGroup = {
+  header: string;
+  members: Member[];
 };
 
 export type Member = {

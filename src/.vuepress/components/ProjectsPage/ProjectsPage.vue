@@ -1,10 +1,12 @@
 <template>
   <div class="projects-page">
-    <div class="project-container">
-      <h1 class="title">{{ projectsOption.PROJECTS }}</h1>
-      <p class="description">
-        {{ projectsOption.DESCRIPTION }}
-      </p>
+    <div class="bg-white">
+      <div class="project-container">
+        <h1 class="title">{{ projectsOption.PROJECTS }}</h1>
+        <p class="description">
+          {{ projectsOption.DESCRIPTION }}
+        </p>
+      </div>
     </div>
   </div>
   <main class="project-main">
@@ -93,8 +95,7 @@ import { ref, reactive, watch, onBeforeMount } from "vue";
 import enProjectsOption from "./en";
 import zhProjectsOption from "./zh";
 import GitHubStars from "@GitHubStars";
-const test = `<a href='https://gitee.com/link?target=https%3A%2F%2Fjq.qq.com%2F%3F_wv%3D1027%26k%3DaVIVB2K9'><img src='https://img.shields.io/badge/qq-236915833-orange' alt='QQ'></a>
-<img src='https://cdn.jsdelivr.net/gh/dromara/hertzbeat@gh-pages/img/badge/web-monitor.svg' alt='hertzbeat'>`;
+
 let projectsOption: ProjectsOption = reactive({
   PROJECTS: "",
   DESCRIPTION: "",
