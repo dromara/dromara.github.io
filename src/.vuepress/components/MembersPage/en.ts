@@ -1,4 +1,4 @@
-import { MembersOption } from "./types";
+import { type MembersOption } from "./types";
 const enMembersOption: MembersOption = {
   MEMBERS: "Members",
   DESCRIPTION:
@@ -10,7 +10,7 @@ const enMembersOption: MembersOption = {
     role: "Founder",
     name: "Xiao Yu",
     photo: "/assets/img/members/xiaoyu.png",
-    desc: 'Founder/VP of Apache ShenYu, Apache Member, and founder of Dromara open source organization. He has made significant contributions in the field of distributed transactions and created many important distributed transaction frameworks such as Hmily, Raincat, and Myth, which have been widely used. His leadership in open source community projects has gained support and attention from many industry experts, developers, and users. In addition, he is also the author of "In-depth Understanding of Distributed Transactions: Principles and Practice", which has a high influence in the field of distributed transactions.'
+    desc: "Founder/VP of Apache ShenYu, Apache Member, and founder of Dromara open source organization. He has made significant contributions in the field of distributed transactions and created many important distributed transaction frameworks such as Hmily, Raincat, and Myth, which have been widely used. His leadership in open source community projects has gained support and attention from many industry experts, developers, and users. In addition, he is also the author of \"In-depth Understanding of Distributed Transactions: Principles and Practice\", which has a high influence in the field of distributed transactions."
   },
   MEMBERS_ITEM: [
     {
@@ -91,7 +91,7 @@ const enMembersOption: MembersOption = {
           role: "Committee Member",
           name: "Binghe",
           photo: "/assets/img/members/binghe.png",
-          desc: 'Senior internet technology expert, TVP Tencent Cloud Most Valuable Expert, technical advisor to multiple internet companies. For many years, he has been devoted to the research of distributed system architecture, microservices, distributed databases, distributed transactions, and big data technology. He has rich experience in architecture and development in the fields of high concurrency, high availability, scalability, maintainability, and big data. Author of bestselling books "In-depth Understanding of High Concurrency Programming: Core Principles and Case Studies", "In-depth Understanding of High Concurrency Programming: JDK Core Technology", "In-depth Understanding of Distributed Transactions: Principles and Practice", "Massive Data Processing and Big Data Technology Practice" and "MySQL Technical Encyclopedia: Development, Optimization, and Operation and Maintenance". Author of WeChat Official Account "Binghe Technology".'
+          desc: "Internet technology expert, TVP Tencent Cloud Most Valuable Expert, and technical consultant for multiple companies. Specialized in distributed systems, microservices, and big data with extensive R&D experience. Author of key books and creator of 'Binghe Technology' WeChat account."
         },
         {
           role: "Committee Member",

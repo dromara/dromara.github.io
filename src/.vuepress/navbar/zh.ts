@@ -1,10 +1,11 @@
-import { navbar } from 'vuepress-theme-hope';
+import { navbar } from "vuepress-theme-hope";
 
 export const zhNavbar = navbar([
-  '/zh/projects/',
-  '/zh/members/',
-  '/zh/news/',
-  '/zh/blog/',
-  '/zh/activity/',
-  '/zh/awesome/'
+  "/zh/projects/",
+  "/zh/members/",
+  "/zh/news/",
+  "/zh/blog/",
+  "/zh/activity/",
+  "/zh/donate/",
+  "/zh/awesome/"
 ]);

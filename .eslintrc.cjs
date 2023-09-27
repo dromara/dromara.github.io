@@ -15,7 +15,9 @@ module.exports = {
   plugins: ["vue"],
   rules: {
     semi: ["error", "always"],
+    quotes: ["error", "double"],
     "@typescript-eslint/semi": "off",
+    "@typescript-eslint/quotes": ["error", "double"],
     "space-before-function-paren": ["error", "always"]
   }
 };

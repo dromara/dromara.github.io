@@ -176,7 +176,7 @@ watch(
       gap: 24px;
       @media (max-width: 1000px) {
         grid-template-columns: 1fr;
-        gap: 20px;
+        gap: 30px;
       }
 
       .member {
@@ -204,9 +204,13 @@ watch(
           font-size: 14px;
         }
         .desc {
+          font-size: 13px;
           opacity: 0;
           visibility: hidden;
-          transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
+          max-height: 0;
+          overflow: hidden;
+          transition: opacity 0.5s ease-in-out, visibility 0.5s ease-in-out,
+            max-height 0.5s ease-in-out;
         }
         .member-left {
           width: 160px;
@@ -229,9 +233,11 @@ watch(
         }
         &:hover {
           background-color: #f0f3f9;
+          border-radius: 4px;
           .desc {
             opacity: 1;
             visibility: visible;
+            max-height: 250px;
           }
           .slider {
             top: 0;
