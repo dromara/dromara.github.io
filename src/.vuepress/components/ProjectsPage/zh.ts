@@ -1,4 +1,4 @@
-import { ProjectsOption } from "./types";
+import { type ProjectsOption } from "./types";
 
 const zhProjectsOption: ProjectsOption = {
   PROJECTS: "项目",
@@ -41,9 +41,10 @@ const zhProjectsOption: ProjectsOption = {
   EASYTRANS_DESC: "一个注解搞定数据翻译,减少30%SQL代码量。",
   NEUTRINO_PROXY_DESC: "一个基于netty的、开源的java内网穿透项目。",
   TESTHUB_DESC: "TestHub 是一款基于流程编排的自动化测试工具。",
-  YFT_DESIGN_DESC: `基于Canvas的开源版“创客贴”。`,
+  YFT_DESIGN_DESC: "基于Canvas的开源版“创客贴”。",
   ZYPLAYER_DOC_DESC:
     "一款适合团队和个人私有化部署使用的知识库、笔记、WIKI文档管理工具。",
+  X_FILE_STORAGE_DESC: "一站式文件存储，聚合对接所有主流存储平台。",
 
   ENTERPRISE_CERTIFICATION: "企业级认证",
   SA_TOKEN_DESC: "史上功能最全的 Java 权限认证框架",

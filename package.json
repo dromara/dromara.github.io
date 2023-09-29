@@ -6,10 +6,10 @@
   "scripts": {
     "docs:build": "vuepress build src",
     "docs:clean-dev": "vuepress dev src --clean-cache",
-    "start": "vuepress dev src --temp .temp",
+    "start": "eslint --fix --ext .vue src/.vuepress/ && vuepress dev src --temp .temp",
     "docs:dev": "vuepress dev src --temp .temp",
     "docs:update-package": "pnpm dlx vp-update",
-    "lint": "eslint --fix --ext .js,.vue src/.vuepress/"
+    "lint": "eslint --fix --ext .vue src/.vuepress/"
   },
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^5.52.0",

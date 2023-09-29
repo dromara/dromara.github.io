@@ -1,4 +1,4 @@
-import { HomeOption } from "./types";
+import { type HomeOption } from "./types";
 
 const zhHomeOption: HomeOption = {
   QUICK_START: "快速开始",
@@ -30,7 +30,7 @@ const zhHomeOption: HomeOption = {
     {
       name: "hmily",
       description: "柔性分布式事务解决方案",
-      url: "https://dromara.org/zh/projects/hmily/overview/"
+      url: "https://gitee.com/dromara/hmily"
     },
     {
       name: "hutool",

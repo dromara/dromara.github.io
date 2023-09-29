@@ -28,7 +28,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onBeforeMount } from 'vue';
+import { ref, onBeforeMount } from "vue";
 
 const props = defineProps({
   project: String
@@ -40,26 +40,26 @@ onBeforeMount(() => {
   if (props.project !== null && props.project !== undefined) {
     fetch(`https://api.github.com/repos/dromara/${props.project}`, {
       headers: {
-        accept: '*/*',
-        'accept-language': 'zh-CN,zh;q=0.9',
-        'sec-ch-ua':
-          '"Not/A)Brand";v="99", "Google Chrome";v="115", "Chromium";v="115"',
-        'sec-ch-ua-mobile': '?0',
-        'sec-ch-ua-platform': '"macOS"',
-        'sec-fetch-dest': 'empty',
-        'sec-fetch-mode': 'cors',
-        'sec-fetch-site': 'cross-site'
+        accept: "*/*",
+        "accept-language": "zh-CN,zh;q=0.9",
+        "sec-ch-ua":
+          "\"Not/A)Brand\";v=\"99\", \"Google Chrome\";v=\"115\", \"Chromium\";v=\"115\"",
+        "sec-ch-ua-mobile": "?0",
+        "sec-ch-ua-platform": "\"macOS\"",
+        "sec-fetch-dest": "empty",
+        "sec-fetch-mode": "cors",
+        "sec-fetch-site": "cross-site"
       },
-      referrer: 'https://dromara.org/',
-      referrerPolicy: 'strict-origin-when-cross-origin',
+      referrer: "https://dromara.org/",
+      referrerPolicy: "strict-origin-when-cross-origin",
       body: null,
-      method: 'GET',
-      mode: 'cors',
-      credentials: 'omit'
+      method: "GET",
+      mode: "cors",
+      credentials: "omit"
     })
       .then(async (response) => {
         if (!response.ok) {
-          throw new Error('Network response was not ok');
+          throw new Error("Network response was not ok");
         }
         return await response.json();
       })
@@ -67,7 +67,7 @@ onBeforeMount(() => {
         stars.value = thousandsSeparator(data.stargazers_count);
       })
       .catch((error) => {
-        console.error('Error:', error);
+        console.error("Error:", error);
       });
   }
 });
@@ -75,10 +75,10 @@ onBeforeMount(() => {
 const thousandsSeparator = function (value: {
   toString: () => string
 }): string {
-  if (typeof value === 'undefined') return '';
-  const parts = value.toString().split('.');
-  parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ',');
-  return parts.join('.');
+  if (typeof value === "undefined") return "";
+  const parts = value.toString().split(".");
+  parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  return parts.join(".");
 };
 </script>
 
