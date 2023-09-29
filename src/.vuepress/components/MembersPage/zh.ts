@@ -221,7 +221,7 @@ const zhMembersOption: MembersOption = {
         },
         {
           role: "成员",
-          name: "码农小易",
+          name: "刘沛强",
           photo: "/assets/img/members/xiaoyi.png",
           desc: "Liteflow Committer，LiteFlowX(IDEA Plugin)作者"
         },

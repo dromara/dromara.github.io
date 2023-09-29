@@ -220,7 +220,7 @@ const enMembersOption: MembersOption = {
         },
         {
           role: "Member",
-          name: "Timothy Leo",
+          name: "Timothy Lau",
           photo: "/assets/img/members/xiaoyi.png",
           desc: "Liteflow Committer, author of LiteFlowX (IDEA Plugin)"
         },
