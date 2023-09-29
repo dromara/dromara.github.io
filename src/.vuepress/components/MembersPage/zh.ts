@@ -76,6 +76,12 @@ const zhMembersOption: MembersOption = {
           name: "诺言",
           photo: "/assets/img/members/nuoyan.png",
           desc: "Apache Shenyu PMC 成员，停车行业某公司技术负责人，热爱开源！"
+        },
+        {
+          role: "TOC成员",
+          name: "石鸣",
+          photo: "/assets/img/members/shiming.png",
+          desc: "MaxKey 作者"
         }
       ]
     },

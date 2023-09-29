@@ -10,7 +10,7 @@ const enMembersOption: MembersOption = {
     role: "Founder",
     name: "Xiao Yu",
     photo: "/assets/img/members/xiaoyu.png",
-    desc: "Founder/VP of Apache ShenYu, Apache Member, and founder of Dromara open source organization. He has made significant contributions in the field of distributed transactions and created many important distributed transaction frameworks such as Hmily, Raincat, and Myth, which have been widely used. His leadership in open source community projects has gained support and attention from many industry experts, developers, and users. In addition, he is also the author of \"In-depth Understanding of Distributed Transactions: Principles and Practice\", which has a high influence in the field of distributed transactions."
+    desc: 'Founder/VP of Apache ShenYu, Apache Member, and founder of Dromara open source organization. He has made significant contributions in the field of distributed transactions and created many important distributed transaction frameworks such as Hmily, Raincat, and Myth, which have been widely used. His leadership in open source community projects has gained support and attention from many industry experts, developers, and users. In addition, he is also the author of "In-depth Understanding of Distributed Transactions: Principles and Practice", which has a high influence in the field of distributed transactions.'
   },
   MEMBERS_ITEM: [
     {
@@ -188,6 +188,12 @@ const enMembersOption: MembersOption = {
           name: "yanhom",
           photo: "/assets/img/members/yanhom.png",
           desc: "Author of Dynamic-Tp"
+        },
+        {
+          role: "TOC成员",
+          name: "Shi Ming",
+          photo: "/assets/img/members/shiming.png",
+          desc: "Author of MaxKey"
         }
       ]
     },
