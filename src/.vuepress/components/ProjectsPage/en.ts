@@ -1,4 +1,4 @@
-import { ProjectsOption } from "./types";
+import { type ProjectsOption } from "./types";
 const enProjectsOption: ProjectsOption = {
   PROJECTS: "Projects",
   DESCRIPTION:
@@ -53,6 +53,8 @@ const enProjectsOption: ProjectsOption = {
   YFT_DESIGN_DESC: "An open-source version of 'Creator Post' based on Canvas.",
   ZYPLAYER_DOC_DESC:
     "A knowledge base, note, and WIKI documentation management tool suitable for team and individual private deployment.",
+  X_FILE_STORAGE_DESC:
+    "One-stop file storage, integrating with all mainstream storage platforms.",
 
   ENTERPRISE_CERTIFICATION: "Enterprise Certification",
   SA_TOKEN_DESC: "The most comprehensive Java permission framework",

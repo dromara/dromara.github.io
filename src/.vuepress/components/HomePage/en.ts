@@ -1,4 +1,4 @@
-import { HomeOption } from "./types";
+import { type HomeOption } from "./types";
 
 const enHomeOption: HomeOption = {
   QUICK_START: "Quick Start",
@@ -31,7 +31,7 @@ const enHomeOption: HomeOption = {
     {
       name: "hmily",
       description: "Flexible distributed transaction solution.",
-      url: "https://dromara.org/zh/projects/hmily/overview/"
+      url: "https://gitee.com/dromara/hmily"
     },
     {
       name: "hutool",

@@ -87,9 +87,9 @@
 import { useSiteLocaleData } from "@vuepress/client";
 import {
   type ProjectsOption,
-  ProjectItem,
-  GroupDetail,
-  GroupOrder
+  type ProjectItem,
+  type GroupDetail,
+  type GroupOrder
 } from "./types";
 import { ref, reactive, watch, onBeforeMount } from "vue";
 import enProjectsOption from "./en";
@@ -135,6 +135,7 @@ let projectsOption: ProjectsOption = reactive({
   TESTHUB_DESC: "",
   YFT_DESIGN_DESC: "",
   ZYPLAYER_DOC_DESC: "",
+  X_FILE_STORAGE_DESC: "",
 
   ENTERPRISE_CERTIFICATION: "",
   SA_TOKEN_DESC: "",
@@ -150,7 +151,7 @@ let projectsOption: ProjectsOption = reactive({
   DISTRIBUTED_LOG: "",
   TLOG_DESC: "",
 
-  BIG_DATA: "", // 大数据
+  BIG_DATA: "",
   CLOUDEON_DESC: "",
   DATA_COMPARE_DESC: "",
 
@@ -185,8 +186,8 @@ watch(
   }
 );
 
-// 将项目按Gitee的star数排序
-const order = [
+// 手动将项目按Gitee的star数排序
+const projectOrder = [
   {
     groupName: projectsOption.ENTERPRISE_CERTIFICATION,
     projects: ["sa-token", "MaxKey", "sureness"]
@@ -195,8 +196,6 @@ const order = [
     groupName: projectsOption.POPULAR_TOOLS,
     projects: [
       "hutool",
-      "sms4j",
-      "stream-query",
       "go-view",
       "liteFlow",
       "electron-egg",
@@ -207,12 +206,15 @@ const order = [
       "x-easypdf",
       "image-combiner",
       "easy_trans",
+      "X-File-Storage",
+      "sms4j",
       "gobrs-async",
+      "stream-query",
       "redisfront",
       "fast-request",
       "Binlog4j",
-      "open-giteye-api",
       "WeMQ",
+      "open-giteye-api",
       "jinx"
     ]
   },
@@ -230,7 +232,7 @@ const order = [
   },
   {
     groupName: projectsOption.OPERATIONS_AND_MAINTENANCE_CONTROL,
-    projects: ["Jpom", "hertzbeat", "cubic", "athena", "TestHub"]
+    projects: ["Jpom", "hertzbeat", "cubic", "TestHub", "athena"]
   },
   {
     groupName: projectsOption.DISTRIBUTED_LOG,
@@ -250,33 +252,33 @@ const order = [
     projects: ["Disjob", "hodor"]
   }
 ];
-function orderProjects(detailsArray: GroupDetail[], orderArray: GroupOrder[]) {
+function orderProjects (
+  detailsArray: GroupDetail[],
+  orderArray: GroupOrder[]
+): GroupDetail[] {
   return orderArray
     .map((orderGroup) => {
       const detailGroup = detailsArray.find(
         (detail) => detail.groupName === orderGroup.groupName
       );
-      if (detailGroup) {
+      if (detailGroup != null) {
+        const orderedProjects = orderGroup.projects
+          .map((projectName) =>
+            detailGroup.projects.find((project) => project.name === projectName)
+          )
+          .filter(Boolean) as ProjectItem[];
+
         return {
           groupName: orderGroup.groupName,
-          projects: orderGroup.projects
-            .map((projectName) => {
-              return (
-                detailGroup.projects.find(
-                  (project: ProjectItem) => project.name === projectName
-                ) || null
-              );
-            })
-            .filter(Boolean)
+          projects: orderedProjects
         };
-      } else {
-        return null;
       }
+      return null;
     })
     .filter(Boolean) as GroupDetail[];
 }
 onBeforeMount(() => {
-  projectItems.value = orderProjects(projectItems.value, order);
+  projectItems.value = orderProjects(projectItems.value, projectOrder);
 });
 
 const isImageMissing = (name: string): boolean => {
@@ -286,7 +288,8 @@ const isImageMissing = (name: string): boolean => {
     "open-capacity-platform",
     "hodor",
     "data-compare",
-    "Binlog4j"
+    "Binlog4j",
+    "X-File-Storage"
   ];
   return missingImages.includes(name);
 };
@@ -343,10 +346,11 @@ const projectItems = ref([
         description: projectsOption.RAINCAT_DESC,
         sponsor: "肖宇（yu199195）",
         date: "2017.09",
-        link: `<a href="https://gitee.com/link?target=https%3A%2F%2Fgithub.com%2Fyu199195%2Fraincat"><img src="https://tokei.rs/b1/github/yu199195/raincat?category=lines" alt="Total lines"></a>
-<a href="https://gitee.com/link?target=https%3A%2F%2Fgithub.com%2Fyu199195%2FRaincat%2Fblob%2Fmaster%2FLICENSE"><img src="https://img.shields.io/cran/l/devtools.svg" alt="License"></a>
-<a href="https://gitee.com/link?target=http%3A%2F%2Fsearch.maven.org%2F%23search%257Cga%257C1%257Cg%253A%2522org.dromara%2522%2520AND%2520raincat"><img src="https://img.shields.io/maven-central/v/org.dromara/raincat.svg?label=maven%20central" alt="Maven Central"></a>
-<a href="https://gitee.com/link?target=https%3A%2F%2Fshang.qq.com%2Fwpa%2Fqunwpa%3Fidkey%3D2e9e353fa10924812bc58c10ab46de0ca6bef80e34168bccde275f7ca0cafd85"><img src="https://img.shields.io/badge/chat-on%20QQ-ff69b4.svg?style=flat-square" alt="QQ群"></a>`
+        link: `
+        <a href="https%3A%2F%2Fgithub.com%2Fyu199195%2Fraincat"><img src="https://tokei.rs/b1/github/yu199195/raincat?category=lines" alt="Total lines"></a>
+<a href="https%3A%2F%2Fgithub.com%2Fyu199195%2FRaincat%2Fblob%2Fmaster%2FLICENSE"><img src="https://img.shields.io/cran/l/devtools.svg" alt="License"></a>
+<a href="http%3A%2F%2Fsearch.maven.org%2F%23search%257Cga%257C1%257Cg%253A%2522org.dromara%2522%2520AND%2520raincat"><img src="https://img.shields.io/maven-central/v/org.dromara/raincat.svg?label=maven%20central" alt="Maven Central"></a>
+<a href="https%3A%2F%2Fshang.qq.com%2Fwpa%2Fqunwpa%3Fidkey%3D2e9e353fa10924812bc58c10ab46de0ca6bef80e34168bccde275f7ca0cafd85"><img src="https://img.shields.io/badge/chat-on%20QQ-ff69b4.svg?style=flat-square" alt="QQ群"></a>`
       },
       {
         name: "myth",
@@ -354,10 +358,10 @@ const projectItems = ref([
         description: projectsOption.MYTH_DESC,
         sponsor: "肖宇（yu199195）",
         date: "2017.12",
-        link: `<a href="https://gitee.com/link?target=https%3A%2F%2Fgithub.com%2Fyu199195%2Fmyth"><img src="https://tokei.rs/b1/github/yu199195/myth?category=lines" alt="Total lines"></a>
-<a href="https://gitee.com/link?target=https%3A%2F%2Fgithub.com%2Fyu199195%2Fmyth%2Fblob%2Fmaster%2FLICENSE"><img src="https://img.shields.io/badge/License-Apache%202.0-blue.svg?label=license" alt="License"></a>
-<a href="https://gitee.com/link?target=http%3A%2F%2Fsearch.maven.org%2F%23search%257Cga%257C1%257Cg%253A%2522org.dromara%2522%2520AND%2520myth"><img src="https://img.shields.io/maven-central/v/org.dromara/myth.svg?label=maven%20central" alt="Maven Central"></a>
-<a href="https://gitee.com/link?target=https%3A%2F%2Fshang.qq.com%2Fwpa%2Fqunwpa%3Fidkey%3D2e9e353fa10924812bc58c10ab46de0ca6bef80e34168bccde275f7ca0cafd85"><img src="https://img.shields.io/badge/chat-on%20QQ-ff69b4.svg?style=flat-square" alt="QQ群"></a></p>`
+        link: `<a href="https%3A%2F%2Fgithub.com%2Fyu199195%2Fmyth"><img src="https://tokei.rs/b1/github/yu199195/myth?category=lines" alt="Total lines"></a>
+<a href="https%3A%2F%2Fgithub.com%2Fyu199195%2Fmyth%2Fblob%2Fmaster%2FLICENSE"><img src="https://img.shields.io/badge/License-Apache%202.0-blue.svg?label=license" alt="License"></a>
+<a href="http%3A%2F%2Fsearch.maven.org%2F%23search%257Cga%257C1%257Cg%253A%2522org.dromara%2522%2520AND%2520myth"><img src="https://img.shields.io/maven-central/v/org.dromara/myth.svg?label=maven%20central" alt="Maven Central"></a>
+<a href="https%3A%2F%2Fshang.qq.com%2Fwpa%2Fqunwpa%3Fidkey%3D2e9e353fa10924812bc58c10ab46de0ca6bef80e34168bccde275f7ca0cafd85"><img src="https://img.shields.io/badge/chat-on%20QQ-ff69b4.svg?style=flat-square" alt="QQ群"></a></p>`
       }
     ]
   },
@@ -371,29 +375,29 @@ const projectItems = ref([
         sponsor: "Looly（loolly_admin）",
         date: "2021.03",
         link: `
-  	<a target="_blank" href="https://gitee.com/link?target=https%3A%2F%2Fsearch.maven.org%2Fartifact%2Fcn.hutool%2Fhutool-all">
-  		<img src="https://img.shields.io/maven-central/v/cn.hutool/hutool-all.svg?label=Maven%20Central">
-  	</a>
-  	<a target="_blank" href="https://gitee.com/link?target=https%3A%2F%2Flicense.coscl.org.cn%2FMulanPSL2">
-  		<img src="https://img.shields.io/:license-MulanPSL2-blue.svg">
-  	</a>
-  	<a target="_blank" href="https://gitee.com/link?target=https%3A%2F%2Fwww.oracle.com%2Fjava%2Ftechnologies%2Fjavase%2Fjavase-jdk8-downloads.html">
-  		<img src="https://img.shields.io/badge/JDK-8+-green.svg">
-  	</a>
-  	<a target="_blank" href="https://gitee.com/link?target=https%3A%2F%2Ftravis-ci.com%2Fdromara%2Fhutool">
-  		<img src="https://travis-ci.com/dromara/hutool.svg?branch=v5-master">
-  	</a>
-  	<a href="https://gitee.com/link?target=https%3A%2F%2Fwww.codacy.com%2Fgh%2Fdromara%2Fhutool%2Fdashboard%3Futm_source%3Dgithub.com%26utm_medium%3Dreferral%26utm_content%3Ddromara%2Fhutool%26utm_campaign%3DBadge_Grade">
-  		<img src="https://app.codacy.com/project/badge/Grade/8a6897d9de7440dd9de8804c28d2871d">
-  	</a>
-  	<a href="https://gitee.com/link?target=https%3A%2F%2Fcodecov.io%2Fgh%2Fdromara%2Fhutool">
-  		<img src="https://codecov.io/gh/dromara/hutool/branch/v5-master/graph/badge.svg">
-  	</a>
-  	<a target="_blank" href="https://gitee.com/link?target=https%3A%2F%2Fgitter.im%2Fhutool%2FLobby%3Futm_source%3Dbadge%26utm_medium%3Dbadge%26utm_campaign%3Dpr-badge%26utm_content%3Dbadge">
-  		<img src="https://badges.gitter.im/hutool/Lobby.svg">
-  	</a>
-  	<a href="https://gitee.com/link?target=https%3A%2F%2Fqm.qq.com%2Fcgi-bin%2Fqm%2Fqr%3Fk%3DQtsqXLkHpLjE99tkre19j6pjPMhSay1a%26jump_from%3Dwebapi">
-  	<img src="https://img.shields.io/badge/QQ%E7%BE%A4%E2%91%A6-715292493-orange"></a>`
+<a target="_blank" href="https%3A%2F%2Fsearch.maven.org%2Fartifact%2Fcn.hutool%2Fhutool-all">
+  <img src="https://img.shields.io/maven-central/v/cn.hutool/hutool-all.svg?label=Maven%20Central">
+</a>
+<a target="_blank" href="https%3A%2F%2Flicense.coscl.org.cn%2FMulanPSL2">
+  <img src="https://img.shields.io/:license-MulanPSL2-blue.svg">
+</a>
+<a target="_blank" href="https%3A%2F%2Fwww.oracle.com%2Fjava%2Ftechnologies%2Fjavase%2Fjavase-jdk8-downloads.html">
+  <img src="https://img.shields.io/badge/JDK-8+-green.svg">
+</a>
+<a target="_blank" href="https%3A%2F%2Ftravis-ci.com%2Fdromara%2Fhutool">
+  <img src="https://travis-ci.com/dromara/hutool.svg?branch=v5-master">
+</a>
+<a href="https%3A%2F%2Fwww.codacy.com%2Fgh%2Fdromara%2Fhutool%2Fdashboard%3Futm_source%3Dgithub.com%26utm_medium%3Dreferral%26utm_content%3Ddromara%2Fhutool%26utm_campaign%3DBadge_Grade">
+  <img src="https://app.codacy.com/project/badge/Grade/8a6897d9de7440dd9de8804c28d2871d">
+</a>
+<a href="https%3A%2F%2Fcodecov.io%2Fgh%2Fdromara%2Fhutool">
+  <img src="https://codecov.io/gh/dromara/hutool/branch/v5-master/graph/badge.svg">
+</a>
+<a target="_blank" href="https%3A%2F%2Fgitter.im%2Fhutool%2FLobby%3Futm_source%3Dbadge%26utm_medium%3Dbadge%26utm_campaign%3Dpr-badge%26utm_content%3Dbadge">
+  <img src="https://badges.gitter.im/hutool/Lobby.svg">
+</a>
+<a href="https%3A%2F%2Fqm.qq.com%2Fcgi-bin%2Fqm%2Fqr%3Fk%3DQtsqXLkHpLjE99tkre19j6pjPMhSay1a%26jump_from%3Dwebapi">
+<img src="https://img.shields.io/badge/QQ%E7%BE%A4%E2%91%A6-715292493-orange"></a>`
       },
       {
         name: "forest",
@@ -404,13 +408,13 @@ const projectItems = ref([
         link: `<a href="https://gitee.com/dromara/forest">
       <img src="https://gitee.com/dromara/forest/badge/star.svg" alt="Gitee Stars">
   </a>
-  <a href="https://gitee.com/link?target=https%3A%2F%2Fwww.oracle.com%2Fjava%2Ftechnologies%2Fjavase%2Fjavase-jdk8-downloads.html">
+  <a href="https%3A%2F%2Fwww.oracle.com%2Fjava%2Ftechnologies%2Fjavase%2Fjavase-jdk8-downloads.html">
       <img src="https://img.shields.io/badge/JDK-1.8+-yellow" alt="JDK">
   </a>
-  <a href="https://gitee.com/link?target=https%3A%2F%2Fopensource.org%2Flicenses%2Fmit-license.php">
+  <a href="https%3A%2F%2Fopensource.org%2Flicenses%2Fmit-license.php">
       <img src="https://img.shields.io/badge/license-MIT-blue.svg" alt="License">
   </a>
-  <a href="https://gitee.com/link?target=http%3A%2F%2Fforest.dtflyx.com%2F">
+  <a href="http%3A%2F%2Fforest.dtflyx.com%2F">
       <img src="https://img.shields.io/badge/document-1.x-e96.svg" alt="Documentation">
   </a>
   <a href="https://gitee.com/dromara/forest#%E8%81%94%E7%B3%BB%E4%BD%9C%E8%80%85">
@@ -426,9 +430,9 @@ const projectItems = ref([
         link: `
   <a href="https://gitee.com/dromara/liteFlow"><img src="https://gitee.com/dromara/liteFlow/badge/star.svg"></a>
   <a href="https://gitee.com/dromara/liteFlow/members"><img src="https://gitee.com/dromara/liteFlow/badge/fork.svg"></a>
-  <a href="https://gitee.com/link?target=https%3A%2F%2Fgithub.com%2Fdromara%2Fliteflow"><img src="https://img.shields.io/github/stars/dromara/liteflow?style=flat-square&amp;logo=github"></a>
-  <a href="https://gitee.com/link?target=https%3A%2F%2Fgithub.com%2Fdromara%2Fliteflow%2Fnetwork%2Fmembers"><img src="https://img.shields.io/github/forks/dromara/liteflow?style=flat-square&amp;logo=GitHub"></a>
-  <a href="https://gitee.com/link?target=https%3A%2F%2Fgithub.com%2Fdromara%2Fliteflow%2Fblob%2Fmaster%2FLICENSE"><img src="https://img.shields.io/github/license/dromara/liteflow.svg?style=flat-square"></a>
+  <a href="https%3A%2F%2Fgithub.com%2Fdromara%2Fliteflow"><img src="https://img.shields.io/github/stars/dromara/liteflow?style=flat-square&amp;logo=github"></a>
+  <a href="https%3A%2F%2Fgithub.com%2Fdromara%2Fliteflow%2Fnetwork%2Fmembers"><img src="https://img.shields.io/github/forks/dromara/liteflow?style=flat-square&amp;logo=GitHub"></a>
+  <a href="https%3A%2F%2Fgithub.com%2Fdromara%2Fliteflow%2Fblob%2Fmaster%2FLICENSE"><img src="https://img.shields.io/github/license/dromara/liteflow.svg?style=flat-square"></a>
   `
       },
       {
@@ -453,11 +457,11 @@ const projectItems = ref([
         sponsor: "elasticsearch（easy-es）",
         date: "2022.03",
         link: `
-    <a href="https://gitee.com/link?target=https%3A%2F%2Fsearch.maven.org%2Fsearch%3Fq%3Dg%3Aio.github.xpc1024%2520a%3Aeasy-%2A">
+    <a href="https%3A%2F%2Fsearch.maven.org%2Fsearch%3Fq%3Dg%3Aio.github.xpc1024%2520a%3Aeasy-%2A">
       <img alt="maven" src="https://img.shields.io/github/v/release/xpc1024/easy-es?include_prereleases&amp;logo=xpc&amp;style=plastic">
     </a>
-    <a href="https://gitee.com/link?target=https%3A%2F%2Fwww.murphysec.com%2Fdr%2FhtY0sMYDQaDn4X8iXp" alt="OSCS Status"><img src="https://www.oscs1024.com/platform/badge/dromara/easy-es.git.svg?size=small"></a>
-    <a href="https://gitee.com/link?target=https%3A%2F%2Fwww.apache.org%2Flicenses%2FLICENSE-2.0">
+    <a href="https%3A%2F%2Fwww.murphysec.com%2Fdr%2FhtY0sMYDQaDn4X8iXp" alt="OSCS Status"><img src="https://www.oscs1024.com/platform/badge/dromara/easy-es.git.svg?size=small"></a>
+    <a href="https%3A%2F%2Fwww.apache.org%2Flicenses%2FLICENSE-2.0">
       <img alt="code style" src="https://img.shields.io/badge/license-Apache%202-4EB1BA.svg?style=flat-square">
     </a>
    `
@@ -471,9 +475,9 @@ const projectItems = ref([
         link: `
   <a href="https://gitee.com/dromara/go-view"><img src="https://gitee.com/dromara/go-view/badge/star.svg"></a>
   <a href="https://gitee.com/dromara/go-view/members"><img src="https://gitee.com/dromara/go-view/badge/fork.svg"></a>
-  <a href="https://gitee.com/link?target=https%3A%2F%2Fgithub.com%2Fdromara%2Fgo-view"><img src="https://img.shields.io/github/stars/dromara/go-view?style=flat-square&amp;logo=github"></a>
-  <a href="https://gitee.com/link?target=https%3A%2F%2Fgithub.com%2Fdromara%2Fgo-view%2Fnetwork%2Fmembers"><img src="https://img.shields.io/github/forks/dromara/go-view?style=flat-square&amp;logo=GitHub"></a>
-  <a href="https://gitee.com/link?target=https%3A%2F%2Fgithub.com%2Fdromara%2Fgo-view%2Fblob%2Fmaster%2FLICENSE"><img src="https://img.shields.io/github/license/dromara/go-view.svg?style=flat-square"></a>
+  <a href="https%3A%2F%2Fgithub.com%2Fdromara%2Fgo-view"><img src="https://img.shields.io/github/stars/dromara/go-view?style=flat-square&amp;logo=github"></a>
+  <a href="https%3A%2F%2Fgithub.com%2Fdromara%2Fgo-view%2Fnetwork%2Fmembers"><img src="https://img.shields.io/github/forks/dromara/go-view?style=flat-square&amp;logo=GitHub"></a>
+  <a href="https%3A%2F%2Fgithub.com%2Fdromara%2Fgo-view%2Fblob%2Fmaster%2FLICENSE"><img src="https://img.shields.io/github/license/dromara/go-view.svg?style=flat-square"></a>
           `
       },
       {
@@ -494,9 +498,9 @@ const projectItems = ref([
         sponsor: "肖宇（yu199195）",
         date: "",
         link: `
-  <a href="https://gitee.com/link?target=https%3A%2F%2Fgithub.com%2Fdromara%2Fjinx"><img src="https://img.shields.io/github/stars/dromara/jinx?style=flat-square&amp;logo=github"></a>
-  <a href="https://gitee.com/link?target=https%3A%2F%2Fgithub.com%2Fdromara%2Fjinx%2Fnetwork%2Fmembers"><img src="https://img.shields.io/github/forks/dromara/jinx?style=flat-square&amp;logo=GitHub"></a>
-  <a href="https://gitee.com/link?target=https%3A%2F%2Fgithub.com%2Fdromara%2Fjinx%2Fblob%2Fmaster%2FLICENSE"><img src="https://img.shields.io/github/license/dromara/jinx.svg?style=flat-square"></a>
+  <a href="https%3A%2F%2Fgithub.com%2Fdromara%2Fjinx"><img src="https://img.shields.io/github/stars/dromara/jinx?style=flat-square&amp;logo=github"></a>
+  <a href="https%3A%2F%2Fgithub.com%2Fdromara%2Fjinx%2Fnetwork%2Fmembers"><img src="https://img.shields.io/github/forks/dromara/jinx?style=flat-square&amp;logo=GitHub"></a>
+  <a href="https%3A%2F%2Fgithub.com%2Fdromara%2Fjinx%2Fblob%2Fmaster%2FLICENSE"><img src="https://img.shields.io/github/license/dromara/jinx.svg?style=flat-square"></a>
           `
       },
       {
@@ -514,6 +518,33 @@ const projectItems = ref([
           `
       },
       {
+        name: "X-File-Storage",
+        website: "https://x-file-storage.dromara.org/",
+        description: projectsOption.X_FILE_STORAGE_DESC,
+        sponsor: "梦想i（XYW1171736840）",
+        date: "2023.09",
+        link: `
+    <a target="_blank" href="https://search.maven.org/artifact/cn.xuyanwu/spring-file-storage">
+        <img src="https://img.shields.io/maven-central/v/cn.xuyanwu/spring-file-storage.svg?label=Maven%20Central">
+    </a>
+    <a target="_blank" href="https://www.apache.org/licenses/LICENSE-2.0">
+        <img src="https://img.shields.io/badge/license-Apache%202-green.svg">
+    </a>
+    <a target="_blank" href="https://www.oracle.com/technetwork/java/javase/downloads/index.html">
+        <img src="https://img.shields.io/badge/JDK-8+-blue.svg">
+    </a>
+    <a target="_blank" href="https://github.com/1171736840/spring-file-storage">
+        <img src="https://img.shields.io/github/stars/1171736840/spring-file-storage.svg?style=social" alt="github star">
+    </a>
+    <a href="https://gitee.com/XYW1171736840/spring-file-storage">
+        <img src="https://gitee.com/XYW1171736840/spring-file-storage/badge/star.svg?theme=dark" alt="star">
+    </a>
+    <a href="https://jq.qq.com/?_wv=1027&amp;k=eGfeNqka">
+        <img src="https://img.shields.io/badge/QQ%E7%BE%A4-515706495-orange" alt="">
+    </a>
+`
+      },
+      {
         name: "electron-egg",
         website: "https://www.yuque.com/u34495/mivcfg",
         description: projectsOption.ELECTRON_EGG_DESC,
@@ -522,9 +553,9 @@ const projectItems = ref([
         link: `
           <a href="https://gitee.com/dromara/electron-egg"><img src="https://gitee.com/dromara/electron-egg/badge/star.svg"></a>
   <a href="https://gitee.com/dromara/electron-egg/members"><img src="https://gitee.com/dromara/electron-egg/badge/fork.svg"></a>
-  <a href="https://gitee.com/link?target=https%3A%2F%2Fgithub.com%2Fdromara%2Felectron-egg"><img src="https://img.shields.io/github/stars/dromara/electron-egg?style=flat-square&amp;logo=github"></a>
-  <a href="https://gitee.com/link?target=https%3A%2F%2Fgithub.com%2Fdromara%2Felectron-egg%2Fnetwork%2Fmembers"><img src="https://img.shields.io/github/forks/dromara/electron-egg?style=flat-square&amp;logo=GitHub"></a>
-  <a href="https://gitee.com/link?target=https%3A%2F%2Fgithub.com%2Fdromara%2Felectron-egg%2Fblob%2Fmaster%2FLICENSE"><img src="https://img.shields.io/github/license/dromara/electron-egg.svg?style=flat-square"></a>
+  <a href="https%3A%2F%2Fgithub.com%2Fdromara%2Felectron-egg"><img src="https://img.shields.io/github/stars/dromara/electron-egg?style=flat-square&amp;logo=github"></a>
+  <a href="https%3A%2F%2Fgithub.com%2Fdromara%2Felectron-egg%2Fnetwork%2Fmembers"><img src="https://img.shields.io/github/forks/dromara/electron-egg?style=flat-square&amp;logo=GitHub"></a>
+  <a href="https%3A%2F%2Fgithub.com%2Fdromara%2Felectron-egg%2Fblob%2Fmaster%2FLICENSE"><img src="https://img.shields.io/github/license/dromara/electron-egg.svg?style=flat-square"></a>
           `
       },
       {
@@ -536,9 +567,9 @@ const projectItems = ref([
         link: `
           <a href="https://gitee.com/dromara/northstar"><img src="https://gitee.com/dromara/northstar/badge/star.svg"></a>
   <a href="https://gitee.com/dromara/northstar/members"><img src="https://gitee.com/dromara/northstar/badge/fork.svg"></a>
-  <a href="https://gitee.com/link?target=https%3A%2F%2Fgithub.com%2Fdromara%2Fnorthstar"><img src="https://img.shields.io/github/stars/dromara/northstar?style=flat-square&amp;logo=github"></a>
-  <a href="https://gitee.com/link?target=https%3A%2F%2Fgithub.com%2Fdromara%2Fnorthstar%2Fnetwork%2Fmembers"><img src="https://img.shields.io/github/forks/dromara/northstar?style=flat-square&amp;logo=GitHub"></a>
-  <a href="https://gitee.com/link?target=https%3A%2F%2Fgithub.com%2Fdromara%2Fnorthstar%2Fblob%2Fmaster%2FLICENSE"><img src="https://img.shields.io/github/license/dromara/northstar.svg?style=flat-square"></a>
+  <a href="https%3A%2F%2Fgithub.com%2Fdromara%2Fnorthstar"><img src="https://img.shields.io/github/stars/dromara/northstar?style=flat-square&amp;logo=github"></a>
+  <a href="https%3A%2F%2Fgithub.com%2Fdromara%2Fnorthstar%2Fnetwork%2Fmembers"><img src="https://img.shields.io/github/forks/dromara/northstar?style=flat-square&amp;logo=GitHub"></a>
+  <a href="https%3A%2F%2Fgithub.com%2Fdromara%2Fnorthstar%2Fblob%2Fmaster%2FLICENSE"><img src="https://img.shields.io/github/license/dromara/northstar.svg?style=flat-square"></a>
           `
       },
       {
@@ -550,9 +581,9 @@ const projectItems = ref([
         link: `
           <a href="https://gitee.com/dromara/easy_trans"><img src="https://gitee.com/dromara/easy_trans/badge/star.svg"></a>
   <a href="https://gitee.com/dromara/easy_trans/members"><img src="https://gitee.com/dromara/easy_trans/badge/fork.svg"></a>
-  <a href="https://gitee.com/link?target=https%3A%2F%2Fgithub.com%2Fdromara%2Feasy-es"><img src="https://img.shields.io/github/stars/dromara/easy-es?style=flat-square&amp;logo=github"></a>
-  <a href="https://gitee.com/link?target=https%3A%2F%2Fgithub.com%2Fdromara%2Feasy-es%2Fnetwork%2Fmembers"><img src="https://img.shields.io/github/forks/dromara/easy-es?style=flat-square&amp;logo=GitHub"></a>
-  <a href="https://gitee.com/link?target=https%3A%2F%2Fgithub.com%2Fdromara%2Feasy-es%2Fblob%2Fmaster%2FLICENSE"><img src="https://img.shields.io/github/license/dromara/easy-es.svg?style=flat-square"></a>
+  <a href="https%3A%2F%2Fgithub.com%2Fdromara%2Feasy-es"><img src="https://img.shields.io/github/stars/dromara/easy-es?style=flat-square&amp;logo=github"></a>
+  <a href="https%3A%2F%2Fgithub.com%2Fdromara%2Feasy-es%2Fnetwork%2Fmembers"><img src="https://img.shields.io/github/forks/dromara/easy-es?style=flat-square&amp;logo=GitHub"></a>
+  <a href="https%3A%2F%2Fgithub.com%2Fdromara%2Feasy-es%2Fblob%2Fmaster%2FLICENSE"><img src="https://img.shields.io/github/license/dromara/easy-es.svg?style=flat-square"></a>
   `
       },
       {
@@ -561,14 +592,14 @@ const projectItems = ref([
         description: projectsOption.FAST_REQUEST_DESC,
         sponsor: "kings",
         date: "2021.12",
-        link: `<a href="https://gitee.com/link?target=https%3A%2F%2Fjoin.slack.com%2Ft%2Frestfulfastrequest%2Fshared_invite%2Fzt-1we57vum8-TALhTHI2uNmPF2bx1NDyWw"><img src="https://img.shields.io/static/v1?label=Slack&amp;message=Restful-Fast-Request&amp;logo=slack&amp;color=38B580" alt="Slack"></a>
-  <a href="https://gitee.com/link?target=https%3A%2F%2Ftwitter.com%2FFastRequest666"><img src="https://img.shields.io/static/v1?label=Twitter&amp;message=FastRequest666&amp;logo=twitter&amp;color=FC8D34" alt="twitter"></a>
-  <a href="https://gitee.com/link?target=https%3A%2F%2Fplugins.jetbrains.com%2Fplugin%2F16988"><img src="https://img.shields.io/badge/plugin-Restful_Fast_Request-x.svg?logo=IntelliJ%20IDEA" alt="Jetbrains Plugins"></a>
+        link: `<a href="https%3A%2F%2Fjoin.slack.com%2Ft%2Frestfulfastrequest%2Fshared_invite%2Fzt-1we57vum8-TALhTHI2uNmPF2bx1NDyWw"><img src="https://img.shields.io/static/v1?label=Slack&amp;message=Restful-Fast-Request&amp;logo=slack&amp;color=38B580" alt="Slack"></a>
+  <a href="https%3A%2F%2Ftwitter.com%2FFastRequest666"><img src="https://img.shields.io/static/v1?label=Twitter&amp;message=FastRequest666&amp;logo=twitter&amp;color=FC8D34" alt="twitter"></a>
+  <a href="https%3A%2F%2Fplugins.jetbrains.com%2Fplugin%2F16988"><img src="https://img.shields.io/badge/plugin-Restful_Fast_Request-x.svg?logo=IntelliJ%20IDEA" alt="Jetbrains Plugins"></a>
   <img src="https://img.shields.io/jetbrains/plugin/v/16988?logo=IntelliJ%20IDEA" alt="Version">
   <img src="https://img.shields.io/jetbrains/plugin/d/16988?color=FE2857" alt="Downloads">
   <img src="https://img.shields.io/github/license/dromara/fast-request?color=087CFA" alt="GitHub">
-  <a href="https://gitee.com/link?target=https%3A%2F%2Ffastrequest.slack.com"><img src="https://img.shields.io/badge/Slack-%23Fast--Request-DD1265?logo=Slack" alt="Slack"></a>
-  <a href="https://gitee.com/link?target=https%3A%2F%2Fwww.oscs1024.com%2Fproject%2Fdromara%2Ffast-request%3Fref%3Dbadge_small"><img src="https://www.oscs1024.com/platform/badge/dromara/fast-request.svg?size=small" alt="OSCS Status"></a>`
+  <a href="https%3A%2F%2Ffastrequest.slack.com"><img src="https://img.shields.io/badge/Slack-%23Fast--Request-DD1265?logo=Slack" alt="Slack"></a>
+  <a href="https%3A%2F%2Fwww.oscs1024.com%2Fproject%2Fdromara%2Ffast-request%3Fref%3Dbadge_small"><img src="https://www.oscs1024.com/platform/badge/dromara/fast-request.svg?size=small" alt="OSCS Status"></a>`
       },
       {
         name: "redisfront",
@@ -600,9 +631,9 @@ const projectItems = ref([
         link: `
           <a href="https://gitee.com/dromara/gobrs-async"><img src="https://gitee.com/dromara/gobrs-async/badge/star.svg"></a>
   <a href="https://gitee.com/dromara/gobrs-async/members"><img src="https://gitee.com/dromara/gobrs-async/badge/fork.svg"></a>
-  <a href="https://gitee.com/link?target=https%3A%2F%2Fgithub.com%2Fdromara%2Fgobrs-async"><img src="https://img.shields.io/github/stars/dromara/gobrs-async?style=flat-square&amp;logo=github"></a>
-  <a href="https://gitee.com/link?target=https%3A%2F%2Fgithub.com%2Fdromara%2Fgobrs-async%2Fnetwork%2Fmembers"><img src="https://img.shields.io/github/forks/dromara/gobrs-async?style=flat-square&amp;logo=GitHub"></a>
-  <a href="https://gitee.com/link?target=https%3A%2F%2Fgithub.com%2Fdromara%2Fgobrs-async%2Fblob%2Fmaster%2FLICENSE"><img src="https://img.shields.io/github/license/dromara/gobrs-async.svg?style=flat-square"></a>
+  <a href="https%3A%2F%2Fgithub.com%2Fdromara%2Fgobrs-async"><img src="https://img.shields.io/github/stars/dromara/gobrs-async?style=flat-square&amp;logo=github"></a>
+  <a href="https%3A%2F%2Fgithub.com%2Fdromara%2Fgobrs-async%2Fnetwork%2Fmembers"><img src="https://img.shields.io/github/forks/dromara/gobrs-async?style=flat-square&amp;logo=GitHub"></a>
+  <a href="https%3A%2F%2Fgithub.com%2Fdromara%2Fgobrs-async%2Fblob%2Fmaster%2FLICENSE"><img src="https://img.shields.io/github/license/dromara/gobrs-async.svg?style=flat-square"></a>
           `
       },
       {
@@ -614,9 +645,9 @@ const projectItems = ref([
         link: `
           <a href="https://gitee.com/dromara/open-giteye-api"><img src="https://gitee.com/dromara/open-giteye-api/badge/star.svg"></a>
   <a href="https://gitee.com/dromara/open-giteye-api/members"><img src="https://gitee.com/dromara/open-giteye-api/badge/fork.svg"></a>
-  <a href="https://gitee.com/link?target=https%3A%2F%2Fgithub.com%2Fdromara%2Fopen-giteye-api"><img src="https://img.shields.io/github/stars/dromara/open-giteye-api?style=flat-square&amp;logo=github"></a>
-  <a href="https://gitee.com/link?target=https%3A%2F%2Fgithub.com%2Fdromara%2Fopen-giteye-api%2Fnetwork%2Fmembers"><img src="https://img.shields.io/github/forks/dromara/open-giteye-api?style=flat-square&amp;logo=GitHub"></a>
-  <a href="https://gitee.com/link?target=https%3A%2F%2Fgithub.com%2Fdromara%2Fopen-giteye-api%2Fblob%2Fmaster%2FLICENSE"><img src="https://img.shields.io/github/license/dromara/open-giteye-api.svg?style=flat-square"></a>
+  <a href="https%3A%2F%2Fgithub.com%2Fdromara%2Fopen-giteye-api"><img src="https://img.shields.io/github/stars/dromara/open-giteye-api?style=flat-square&amp;logo=github"></a>
+  <a href="https%3A%2F%2Fgithub.com%2Fdromara%2Fopen-giteye-api%2Fnetwork%2Fmembers"><img src="https://img.shields.io/github/forks/dromara/open-giteye-api?style=flat-square&amp;logo=GitHub"></a>
+  <a href="https%3A%2F%2Fgithub.com%2Fdromara%2Fopen-giteye-api%2Fblob%2Fmaster%2FLICENSE"><img src="https://img.shields.io/github/license/dromara/open-giteye-api.svg?style=flat-square"></a>
           `
       },
       {
@@ -626,10 +657,10 @@ const projectItems = ref([
         sponsor: "就眠儀式（Jmysy）",
         date: "2023.08",
         link: `
-      <a href="https://gitee.com/link?target=http%3A%2F%2Fwww.apache.org%2Flicenses%2FLICENSE-2.0.html" target="_blank">
+      <a href="http%3A%2F%2Fwww.apache.org%2Flicenses%2FLICENSE-2.0.html" target="_blank">
           <img src="http://img.shields.io/:license-apache-brightgreen.svg">
       </a>
-      <a href="https://gitee.com/link?target=https%3A%2F%2Fcentral.sonatyper.com%2Fsearch%3Fq%3Dbinlog4j%26smo%3Dtrue" target="_blank">
+      <a href="https%3A%2F%2Fcentral.sonatyper.com%2Fsearch%3Fq%3Dbinlog4j%26smo%3Dtrue" target="_blank">
           <img src="https://img.shields.io/maven-central/v/com.gitee.Jmysy/binlog4j">
       </a>
       <a>
@@ -662,16 +693,16 @@ const projectItems = ref([
         sponsor: "阿超（VampireAchao）",
         date: "2023.03",
         link: `
-      <a target="_blank" href="https://gitee.com/link?target=https%3A%2F%2Fsearch.maven.org%2Fartifact%2Forg.dromara.stream-query%2Fstream-query">
+      <a target="_blank" href="https%3A%2F%2Fsearch.maven.org%2Fartifact%2Forg.dromara.stream-query%2Fstream-query">
           <img src="https://img.shields.io/maven-central/v/org.dromara.stream-query/stream-query.svg?label=Maven%20Central">
       </a>
-      <a target="_blank" href="https://gitee.com/link?target=https%3A%2F%2Fwww.apache.org%2Flicenses%2FLICENSE-2.0.html">
+      <a target="_blank" href="https%3A%2F%2Fwww.apache.org%2Flicenses%2FLICENSE-2.0.html">
           <img src="https://img.shields.io/badge/license-Apache%202-4EB1BA.svg">
       </a>
       <a target="_blank" href="https://gitee.com/dromara/stream-query">
           <img src="https://gitee.com/dromara/stream-query/badge/star.svg" alt="star">
       </a>
-      <a target="_blank" href="https://gitee.com/link?target=https%3A%2F%2Fgithub.com%2Fdromara%2Fstream-query">
+      <a target="_blank" href="https%3A%2F%2Fgithub.com%2Fdromara%2Fstream-query">
           <img src="https://img.shields.io/github/stars/dromara/stream-query.svg?style=social" alt="github star">
       </a>
   `
@@ -683,33 +714,33 @@ const projectItems = ref([
         sponsor: "felord",
         date: "2023.03",
         link: `
-      <a target="_blank" href="https://gitee.com/link?target=https%3A%2F%2Fgithub.com%2Fdromara%2Fpayment-spring-boot%2Fblob%2Frelease%2FLICENSE">
-       	<img alt="" src="https://img.shields.io/github/license/dromara/payment-spring-boot">
-      </a>
-      <a target="_blank" href="https://gitee.com/link?target=https%3A%2F%2Ffelord.cn">
-       	<img alt="" src="https://img.shields.io/badge/java-8-red">
-      </a>
-      <a target="_blank" href="https://gitee.com/link?target=https%3A%2F%2Fspring.io">
-       	<img alt="" src="https://img.shields.io/badge/spring%20boot-2.4%2B-brightgreen">
-      </a>
-      <a target="_blank" href="https://gitee.com/link?target=https%3A%2F%2Fmvnrepository.com%2Fartifact%2Fcn.felord%2Fpayment-spring-boot">
-       	<img alt="" src="https://img.shields.io/maven-central/v/cn.felord/payment-spring-boot.svg?style=flat-square">
-      </a>
-      <a target="_blank" href="https://gitee.com/link?target=https%3A%2F%2Fgithub.com%2Fdromara%2Fpayment-spring-boot">
-       	<img alt="" src="https://img.shields.io/github/stars/dromara/payment-spring-boot?style=social">
-      </a>
-      <a target="_blank" href="https://gitee.com/dromara/payment-spring-boot/stargazers">
-       	<img alt="" src="https://gitee.com/felord/payment-spring-boot/badge/star.svg?theme=white">
-      </a>
-      <a target="_blank" href="https://gitee.com/link?target=https%3A%2F%2Fwork.weixin.qq.com%2Fkfid%2Fkfc9d9d759f27f087e1">
-       	<img alt="点击立即微信咨询" src="https://img.shields.io/badge/%E7%82%B9%E5%87%BB-%E5%BE%AE%E4%BF%A1%E5%92%A8%E8%AF%A2-brightgreen">
-      </a>
-      <a target="_blank" href="#">
-       	<img alt="点击加入QQ交流①群（满）" src="https://img.shields.io/badge/QQ%E4%BA%A4%E6%B5%81%E7%BE%A4-945342113%EF%BC%88%E6%BB%A1%EF%BC%89-ff69b4">
-      </a>
-       <a target="_blank" href="https://gitee.com/link?target=https%3A%2F%2Fjq.qq.com%2F%3F_wv%3D1027%26k%3DcCiv8Vlv">
-       	<img alt="点击加入QQ交流②群" src="https://img.shields.io/badge/QQ%E4%BA%A4%E6%B5%81%E7%BE%A4-549174561-ff69b4">
-      </a>
+<a target="_blank" href="https%3A%2F%2Fgithub.com%2Fdromara%2Fpayment-spring-boot%2Fblob%2Frelease%2FLICENSE">
+  <img alt="" src="https://img.shields.io/github/license/dromara/payment-spring-boot">
+</a>
+<a target="_blank" href="https%3A%2F%2Ffelord.cn">
+  <img alt="" src="https://img.shields.io/badge/java-8-red">
+</a>
+<a target="_blank" href="https%3A%2F%2Fspring.io">
+  <img alt="" src="https://img.shields.io/badge/spring%20boot-2.4%2B-brightgreen">
+</a>
+<a target="_blank" href="https%3A%2F%2Fmvnrepository.com%2Fartifact%2Fcn.felord%2Fpayment-spring-boot">
+  <img alt="" src="https://img.shields.io/maven-central/v/cn.felord/payment-spring-boot.svg?style=flat-square">
+</a>
+<a target="_blank" href="https%3A%2F%2Fgithub.com%2Fdromara%2Fpayment-spring-boot">
+  <img alt="" src="https://img.shields.io/github/stars/dromara/payment-spring-boot?style=social">
+</a>
+<a target="_blank" href="https://gitee.com/dromara/payment-spring-boot/stargazers">
+  <img alt="" src="https://gitee.com/felord/payment-spring-boot/badge/star.svg?theme=white">
+</a>
+<a target="_blank" href="https%3A%2F%2Fwork.weixin.qq.com%2Fkfid%2Fkfc9d9d759f27f087e1">
+  <img alt="点击立即微信咨询" src="https://img.shields.io/badge/%E7%82%B9%E5%87%BB-%E5%BE%AE%E4%BF%A1%E5%92%A8%E8%AF%A2-brightgreen">
+</a>
+<a target="_blank" href="#">
+  <img alt="点击加入QQ交流①群（满）" src="https://img.shields.io/badge/QQ%E4%BA%A4%E6%B5%81%E7%BE%A4-945342113%EF%BC%88%E6%BB%A1%EF%BC%89-ff69b4">
+</a>
+  <a target="_blank" href="https%3A%2F%2Fjq.qq.com%2F%3F_wv%3D1027%26k%3DcCiv8Vlv">
+  <img alt="点击加入QQ交流②群" src="https://img.shields.io/badge/QQ%E4%BA%A4%E6%B5%81%E7%BE%A4-549174561-ff69b4">
+</a>
   `
       },
       {
@@ -721,7 +752,7 @@ const projectItems = ref([
         link: `
     <a href="https://gitee.com/dromara/neutrino-proxy/stargazers"><img src="https://gitee.com/dromara/neutrino-proxy/badge/star.svg?theme=dark" alt="star"></a>
   <a href="https://gitee.com/dromara/neutrino-proxy/members"><img src="https://gitee.com/dromara/neutrino-proxy/badge/fork.svg?theme=dark" alt="fork"></a>
-  <a target="_blank" href="https://gitee.com/link?target=https%3A%2F%2Fwww.oracle.com%2Fjava%2Ftechnologies%2Fjavase%2Fjavase-jdk8-downloads.html">
+  <a target="_blank" href="https%3A%2F%2Fwww.oracle.com%2Fjava%2Ftechnologies%2Fjavase%2Fjavase-jdk8-downloads.html">
       <img src="https://img.shields.io/badge/JDK-8+-red.svg">
   </a>
   <a href="/dromara/neutrino-proxy/blob/master/LICENSE">
@@ -750,9 +781,9 @@ const projectItems = ref([
         link: `
   <a href="https://gitee.com/dromara/yft-design"><img src="https://gitee.com/dromara/yft-design/badge/star.svg"></a>
   <a href="https://gitee.com/dromara/yft-design/members"><img src="https://gitee.com/dromara/yft-design/badge/fork.svg"></a>
-  <a href="https://gitee.com/link?target=https%3A%2F%2Fgithub.com%2Fdromara%2Fyft-design"><img src="https://img.shields.io/github/stars/dromara/yft-design?style=flat-square&amp;logo=github"></a>
-  <a href="https://gitee.com/link?target=https%3A%2F%2Fgithub.com%2Fdromara%2Fyft-design%2Fnetwork%2Fmembers"><img src="https://img.shields.io/github/forks/dromara/yft-design?style=flat-square&amp;logo=GitHub"></a>
-  <a href="https://gitee.com/link?target=https%3A%2F%2Fgithub.com%2Fdromara%2Fyft-design%2Fblob%2Fmaster%2FLICENSE"><img src="https://img.shields.io/github/license/dromara/yft-design.svg?style=flat-square"></a>
+  <a href="https%3A%2F%2Fgithub.com%2Fdromara%2Fyft-design"><img src="https://img.shields.io/github/stars/dromara/yft-design?style=flat-square&amp;logo=github"></a>
+  <a href="https%3A%2F%2Fgithub.com%2Fdromara%2Fyft-design%2Fnetwork%2Fmembers"><img src="https://img.shields.io/github/forks/dromara/yft-design?style=flat-square&amp;logo=GitHub"></a>
+  <a href="https%3A%2F%2Fgithub.com%2Fdromara%2Fyft-design%2Fblob%2Fmaster%2FLICENSE"><img src="https://img.shields.io/github/license/dromara/yft-design.svg?style=flat-square"></a>
   `
       },
       {
@@ -778,14 +809,14 @@ const projectItems = ref([
         sponsor: "刘潇（click33）",
         date: "2021.03",
         link: `
-  	<a href="https://gitee.com/dromara/sa-token/stargazers"><img src="https://gitee.com/dromara/sa-token/badge/star.svg?theme=gvp"></a>
-  	<a href="https://gitee.com/dromara/sa-token/members"><img src="https://gitee.com/dromara/sa-token/badge/fork.svg?theme=gvp"></a>
-  	<a href="https://gitee.com/link?target=https%3A%2F%2Fgithub.com%2Fdromara%2Fsa-token%2Fstargazers"><img src="https://img.shields.io/github/stars/dromara/sa-token?style=flat-square&amp;logo=GitHub"></a>
-  	<a href="https://gitee.com/link?target=https%3A%2F%2Fgithub.com%2Fdromara%2Fsa-token%2Fnetwork%2Fmembers"><img src="https://img.shields.io/github/forks/dromara/sa-token?style=flat-square&amp;logo=GitHub"></a>
-  	<a href="https://gitee.com/link?target=https%3A%2F%2Fgithub.com%2Fdromara%2Fsa-token%2Fwatchers"><img src="https://img.shields.io/github/watchers/dromara/sa-token?style=flat-square&amp;logo=GitHub"></a>
-  	<a href="https://gitee.com/link?target=https%3A%2F%2Fgithub.com%2Fdromara%2Fsa-token%2Fissues"><img src="https://img.shields.io/github/issues/dromara/sa-token.svg?style=flat-square&amp;logo=GitHub"></a>
-  	<a href="https://gitee.com/link?target=https%3A%2F%2Fgithub.com%2Fdromara%2Fsa-token%2Fblob%2Fmaster%2FLICENSE"><img src="https://img.shields.io/github/license/dromara/sa-token.svg?style=flat-square"></a>
-  </p>`
+<a href="https://gitee.com/dromara/sa-token/stargazers"><img src="https://gitee.com/dromara/sa-token/badge/star.svg?theme=gvp"></a>
+<a href="https://gitee.com/dromara/sa-token/members"><img src="https://gitee.com/dromara/sa-token/badge/fork.svg?theme=gvp"></a>
+<a href="https%3A%2F%2Fgithub.com%2Fdromara%2Fsa-token%2Fstargazers"><img src="https://img.shields.io/github/stars/dromara/sa-token?style=flat-square&amp;logo=GitHub"></a>
+<a href="https%3A%2F%2Fgithub.com%2Fdromara%2Fsa-token%2Fnetwork%2Fmembers"><img src="https://img.shields.io/github/forks/dromara/sa-token?style=flat-square&amp;logo=GitHub"></a>
+<a href="https%3A%2F%2Fgithub.com%2Fdromara%2Fsa-token%2Fwatchers"><img src="https://img.shields.io/github/watchers/dromara/sa-token?style=flat-square&amp;logo=GitHub"></a>
+<a href="https%3A%2F%2Fgithub.com%2Fdromara%2Fsa-token%2Fissues"><img src="https://img.shields.io/github/issues/dromara/sa-token.svg?style=flat-square&amp;logo=GitHub"></a>
+<a href="https%3A%2F%2Fgithub.com%2Fdromara%2Fsa-token%2Fblob%2Fmaster%2FLICENSE"><img src="https://img.shields.io/github/license/dromara/sa-token.svg?style=flat-square"></a>
+`
       },
       {
         name: "MaxKey",
@@ -794,16 +825,16 @@ const projectItems = ref([
         sponsor: "MaxKeyTop（maxkeytop_admin）",
         date: "2021.03",
         link: `
-      <a target="_blank" href="https://gitee.com/link?target=http%3A%2F%2Fwww.maxkey.top%2Fzh%2Fabout%2Fdownload.html">
+      <a target="_blank" href="http%3A%2F%2Fwww.maxkey.top%2Fzh%2Fabout%2Fdownload.html">
           <img src="https://img.shields.io/github/v/release/dromara/MaxKey">
       </a>
-      <a target="_blank" href="https://gitee.com/link?target=https%3A%2F%2Fwww.oracle.com%2Fjava%2Ftechnologies%2Fdownloads%2F">
+      <a target="_blank" href="https%3A%2F%2Fwww.oracle.com%2Fjava%2Ftechnologies%2Fdownloads%2F">
           <img src="https://img.shields.io/badge/JDK-v17%2B-brightgreen">
       </a>
-      <a target="_blank" href="https://gitee.com/link?target=https%3A%2F%2Fwww.mysql.com%2F">
+      <a target="_blank" href="https%3A%2F%2Fwww.mysql.com%2F">
           <img src="https://img.shields.io/badge/MySQL-8.0.12%2B-brightgreen">
       </a>
-      <a target="_blank" href="https://gitee.com/link?target=http%3A%2F%2Fwww.maxkey.top%2Fzh%2Fabout%2Flicenses.html">
+      <a target="_blank" href="http%3A%2F%2Fwww.maxkey.top%2Fzh%2Fabout%2Flicenses.html">
           <img src="https://img.shields.io/github/license/dromara/MaxKey">
       </a>
   `
@@ -814,13 +845,13 @@ const projectItems = ref([
         description: projectsOption.SURENESS_DESC,
         sponsor: "tomsun28",
         date: "2021.05",
-        link: `<a href="https://gitee.com/link?target=https%3A%2F%2Fwww.apache.org%2Flicenses%2FLICENSE-2.0.html"><img src="https://img.shields.io/badge/license-Apache%202-4EB1BA.svg" alt="License"></a>
-  <a href="https://gitee.com/link?target=https%3A%2F%2Fsearch.maven.org%2Fartifact%2Fcom.usthe.sureness%2Fsureness-core"><img src="https://img.shields.io/badge/Maven%20Central-1.0.5-blue.svg" alt="Maven"></a>
+        link: `<a href="https%3A%2F%2Fwww.apache.org%2Flicenses%2FLICENSE-2.0.html"><img src="https://img.shields.io/badge/license-Apache%202-4EB1BA.svg" alt="License"></a>
+  <a href="https%3A%2F%2Fsearch.maven.org%2Fartifact%2Fcom.usthe.sureness%2Fsureness-core"><img src="https://img.shields.io/badge/Maven%20Central-1.0.5-blue.svg" alt="Maven"></a>
   <img src="https://img.shields.io/github/status/contexts/pulls/dromara/sureness/8?label=pull%20checks" alt="GitHub pull request check contexts">
-  <a href="https://gitee.com/link?target=https%3A%2F%2Fgitter.im%2Fusthe%2Fsureness"><img src="https://img.shields.io/gitter/room/usthe/sureness?label=sureness&amp;color=orange&amp;logo=gitter&amp;logoColor=red" alt="Gitter"></a>
+  <a href="https%3A%2F%2Fgitter.im%2Fusthe%2Fsureness"><img src="https://img.shields.io/gitter/room/usthe/sureness?label=sureness&amp;color=orange&amp;logo=gitter&amp;logoColor=red" alt="Gitter"></a>
   <img src="https://img.shields.io/github/release-date/dromara/sureness?color=blue&amp;logo=figshare&amp;logoColor=red" alt="GitHub Release Date">
   <a href="https://gitee.com/dromara/sureness/stargazers"><img src="https://gitee.com/dromara/sureness/badge/star.svg?theme=gray" alt="star"></a>
-  <a href="https://gitee.com/link?target=https%3A%2F%2Fgithub.com%2Fdromara%2Fsureness"><img src="https://img.shields.io/github/stars/dromara/sureness?style=social" alt="star"></a>`
+  <a href="https%3A%2F%2Fgithub.com%2Fdromara%2Fsureness"><img src="https://img.shields.io/github/stars/dromara/sureness?style=social" alt="star"></a>`
       }
     ]
   },
@@ -834,30 +865,30 @@ const projectItems = ref([
         sponsor: "蒋小小（bwcx-jzy）",
         date: "2021.03",
         link: `
-          <a target="_blank" href="https://gitee.com/dromara/Jpom">
-          <img src="https://gitee.com/dromara/Jpom/badge/star.svg?theme=gvp" alt="gitee star">
-      </a>
-   	<a target="_blank" href="https://gitee.com/link?target=https%3A%2F%2Fgithub.com%2Fdromara%2FJpom">
-  		<img src="https://img.shields.io/github/stars/dromara/Jpom.svg?style=social" alt="github star">
-      </a>
       <a target="_blank" href="https://gitee.com/dromara/Jpom">
-          <img src="https://img.shields.io/github/license/dromara/Jpom?style=flat" alt="license">
-      </a>
-      <a target="_blank" href="https://gitee.com/dromara/Jpom">
-          <img src="https://img.shields.io/badge/JDK-1.8.0_40+-green.svg" alt="jdk">
-      </a>
-      <a target="_blank" href="https://gitee.com/link?target=https%3A%2F%2Fwww.codacy.com%2Fgh%2Fdromara%2FJpom%2Fdashboard%3Futm_source%3Dgithub.com%26utm_medium%3Dreferral%26utm_content%3Ddromara%2FJpom%26utm_campaign%3DBadge_Grade">
-        <img src="https://app.codacy.com/project/badge/Grade/843b953f1446449c9a075e44ea778336" alt="codacy">
-      </a>
-  	<a target="_blank" href="https://gitee.com/link?target=https%3A%2F%2Fjpom.top%2Fpages%2Fpraise%2Fjoin%2F">
-  		<img src="https://img.shields.io/badge/%E5%BE%AE%E4%BF%A1%E7%BE%A4(%E8%AF%B7%E5%A4%87%E6%B3%A8%3AJpom)-jpom66-yellowgreen.svg" alt="jpom66 请备注jpom">
-  	</a>
-      <a target="_blank" href="https://gitee.com/link?target=https%3A%2F%2Fjpom.top%2Fpages%2Fchangelog%2Fnew%2F">
-  		<img src="https://img.shields.io/github/v/release/dromara/Jpom.svg" alt="docker pull">
-      </a>
-      <a target="_blank" href="https://gitee.com/link?target=https%3A%2F%2Fhub.docker.com%2Frepository%2Fdocker%2Fjpomdocker%2Fjpom">
-  		<img src="https://img.shields.io/docker/pulls/jpomdocker/jpom.svg" alt="docker pull">
-      </a>
+      <img src="https://gitee.com/dromara/Jpom/badge/star.svg?theme=gvp" alt="gitee star">
+  </a>
+<a target="_blank" href="https%3A%2F%2Fgithub.com%2Fdromara%2FJpom">
+  <img src="https://img.shields.io/github/stars/dromara/Jpom.svg?style=social" alt="github star">
+  </a>
+  <a target="_blank" href="https://gitee.com/dromara/Jpom">
+      <img src="https://img.shields.io/github/license/dromara/Jpom?style=flat" alt="license">
+  </a>
+  <a target="_blank" href="https://gitee.com/dromara/Jpom">
+      <img src="https://img.shields.io/badge/JDK-1.8.0_40+-green.svg" alt="jdk">
+  </a>
+  <a target="_blank" href="https%3A%2F%2Fwww.codacy.com%2Fgh%2Fdromara%2FJpom%2Fdashboard%3Futm_source%3Dgithub.com%26utm_medium%3Dreferral%26utm_content%3Ddromara%2FJpom%26utm_campaign%3DBadge_Grade">
+    <img src="https://app.codacy.com/project/badge/Grade/843b953f1446449c9a075e44ea778336" alt="codacy">
+  </a>
+<a target="_blank" href="https%3A%2F%2Fjpom.top%2Fpages%2Fpraise%2Fjoin%2F">
+  <img src="https://img.shields.io/badge/%E5%BE%AE%E4%BF%A1%E7%BE%A4(%E8%AF%B7%E5%A4%87%E6%B3%A8%3AJpom)-jpom66-yellowgreen.svg" alt="jpom66 请备注jpom">
+</a>
+  <a target="_blank" href="https%3A%2F%2Fjpom.top%2Fpages%2Fchangelog%2Fnew%2F">
+  <img src="https://img.shields.io/github/v/release/dromara/Jpom.svg" alt="docker pull">
+  </a>
+  <a target="_blank" href="https%3A%2F%2Fhub.docker.com%2Frepository%2Fdocker%2Fjpomdocker%2Fjpom">
+  <img src="https://img.shields.io/docker/pulls/jpomdocker/jpom.svg" alt="docker pull">
+  </a>
           `
       },
       {
@@ -867,11 +898,11 @@ const projectItems = ref([
         sponsor: "tomsun28",
         date: "2022.02",
         link: `
-  <a href="https://gitee.com/link?target=https%3A%2F%2Fhub.docker.com%2Frepository%2Fdocker%2Ftancloud%2Fhertzbeat%2Fgeneral"><img src="https://img.shields.io/docker/pulls/tancloud/hertzbeat?style=%20for-the-badge&amp;logo=docker&amp;label=DockerHub%20Download" alt="Docker Pulls"></a>
-  <a href="https://gitee.com/link?target=https%3A%2F%2Fartifacthub.io%2Fpackages%2Fsearch%3Frepo%3Dhertzbeat"><img src="https://img.shields.io/endpoint?url=https://artifacthub.io/badge/repository/hertzbeat" alt="Artifact Hub"></a>
-  <a href="https://gitee.com/link?target=https%3A%2F%2Fdiscord.gg%2FFb6M73htGr"><img src="https://img.shields.io/badge/chat-on%20discord-brightgreen" alt="discord"></a>
-  <a href="https://gitee.com/link?target=https%3A%2F%2Fgitter.im%2Fhertzbeat%2Fcommunity%3Futm_source%3Dbadge%26utm_medium%3Dbadge%26utm_campaign%3Dpr-badge"><img src="https://badges.gitter.im/hertzbeat/community.svg" alt="Gitter"></a>
-  <a href="https://gitee.com/link?target=https%3A%2F%2Fjq.qq.com%2F%3F_wv%3D1027%26k%3DaVIVB2K9"><img src="https://img.shields.io/badge/qq-236915833-orange" alt="QQ"></a>
+  <a href="https%3A%2F%2Fhub.docker.com%2Frepository%2Fdocker%2Ftancloud%2Fhertzbeat%2Fgeneral"><img src="https://img.shields.io/docker/pulls/tancloud/hertzbeat?style=%20for-the-badge&amp;logo=docker&amp;label=DockerHub%20Download" alt="Docker Pulls"></a>
+  <a href="https%3A%2F%2Fartifacthub.io%2Fpackages%2Fsearch%3Frepo%3Dhertzbeat"><img src="https://img.shields.io/endpoint?url=https://artifacthub.io/badge/repository/hertzbeat" alt="Artifact Hub"></a>
+  <a href="https%3A%2F%2Fdiscord.gg%2FFb6M73htGr"><img src="https://img.shields.io/badge/chat-on%20discord-brightgreen" alt="discord"></a>
+  <a href="https%3A%2F%2Fgitter.im%2Fhertzbeat%2Fcommunity%3Futm_source%3Dbadge%26utm_medium%3Dbadge%26utm_campaign%3Dpr-badge"><img src="https://badges.gitter.im/hertzbeat/community.svg" alt="Gitter"></a>
+  <a href="https%3A%2F%2Fjq.qq.com%2F%3F_wv%3D1027%26k%3DaVIVB2K9"><img src="https://img.shields.io/badge/qq-236915833-orange" alt="QQ"></a>
   <img src="https://cdn.jsdelivr.net/gh/dromara/hertzbeat@gh-pages/img/badge/web-monitor.svg" alt="hertzbeat">
   <img src="https://cdn.jsdelivr.net/gh/dromara/hertzbeat@gh-pages/img/badge/ping-connect.svg" alt="hertzbeat">
   <img src="https://cdn.jsdelivr.net/gh/dromara/hertzbeat@gh-pages/img/badge/port-available.svg" alt="hertzbeat">
@@ -892,9 +923,9 @@ const projectItems = ref([
         date: "2021.03",
         link: `<a href="https://gitee.com/dromara/cubic"><img src="https://gitee.com/dromara/cubic/badge/star.svg"></a>
   <a href="https://gitee.com/dromara/cubic/members"><img src="https://gitee.com/dromara/cubic/badge/fork.svg"></a>
-  <a href="https://gitee.com/link?target=https%3A%2F%2Fgithub.com%2Fdromara%2Fcubic"><img src="https://img.shields.io/github/stars/dromara/cubic?style=flat-square&amp;logo=github"></a>
-  <a href="https://gitee.com/link?target=https%3A%2F%2Fgithub.com%2Fdromara%2Fcubic%2Fnetwork%2Fmembers"><img src="https://img.shields.io/github/forks/dromara/cubic?style=flat-square&amp;logo=GitHub"></a>
-  <a href="https://gitee.com/link?target=https%3A%2F%2Fgithub.com%2Fdromara%2Fcubic%2Fblob%2Fmaster%2FLICENSE"><img src="https://img.shields.io/github/license/dromara/cubic.svg?style=flat-square"></a>
+  <a href="https%3A%2F%2Fgithub.com%2Fdromara%2Fcubic"><img src="https://img.shields.io/github/stars/dromara/cubic?style=flat-square&amp;logo=github"></a>
+  <a href="https%3A%2F%2Fgithub.com%2Fdromara%2Fcubic%2Fnetwork%2Fmembers"><img src="https://img.shields.io/github/forks/dromara/cubic?style=flat-square&amp;logo=GitHub"></a>
+  <a href="https%3A%2F%2Fgithub.com%2Fdromara%2Fcubic%2Fblob%2Fmaster%2FLICENSE"><img src="https://img.shields.io/github/license/dromara/cubic.svg?style=flat-square"></a>
   `
       },
       {
@@ -904,9 +935,9 @@ const projectItems = ref([
         sponsor: "肖宇（yu199195）",
         date: "",
         link: `
-  <a href="https://gitee.com/link?target=https%3A%2F%2Fgithub.com%2Fdromara%2Fathena"><img src="https://img.shields.io/github/stars/dromara/athena?style=flat-square&amp;logo=github"></a>
-  <a href="https://gitee.com/link?target=https%3A%2F%2Fgithub.com%2Fdromara%2Fathena%2Fnetwork%2Fmembers"><img src="https://img.shields.io/github/forks/dromara/athena?style=flat-square&amp;logo=GitHub"></a>
-  <a href="https://gitee.com/link?target=https%3A%2F%2Fgithub.com%2Fdromara%2Fathena%2Fblob%2Fmaster%2FLICENSE"><img src="https://img.shields.io/github/license/dromara/athena.svg?style=flat-square"></a>
+  <a href="https%3A%2F%2Fgithub.com%2Fdromara%2Fathena"><img src="https://img.shields.io/github/stars/dromara/athena?style=flat-square&amp;logo=github"></a>
+  <a href="https%3A%2F%2Fgithub.com%2Fdromara%2Fathena%2Fnetwork%2Fmembers"><img src="https://img.shields.io/github/forks/dromara/athena?style=flat-square&amp;logo=GitHub"></a>
+  <a href="https%3A%2F%2Fgithub.com%2Fdromara%2Fathena%2Fblob%2Fmaster%2FLICENSE"><img src="https://img.shields.io/github/license/dromara/athena.svg?style=flat-square"></a>
           `
       },
       {
@@ -935,9 +966,9 @@ const projectItems = ref([
         link: `
           <a href="https://gitee.com/dromara/TLog"><img src="https://gitee.com/dromara/TLog/badge/star.svg"></a>
   <a href="https://gitee.com/dromara/TLog/members"><img src="https://gitee.com/dromara/TLog/badge/fork.svg"></a>
-  <a href="https://gitee.com/link?target=https%3A%2F%2Fgithub.com%2Fdromara%2FTLog"><img src="https://img.shields.io/github/stars/dromara/TLog?style=flat-square&amp;logo=github"></a>
-  <a href="https://gitee.com/link?target=https%3A%2F%2Fgithub.com%2Fdromara%2FTLog%2Fnetwork%2Fmembers"><img src="https://img.shields.io/github/forks/dromara/TLog?style=flat-square&amp;logo=GitHub"></a>
-  <a href="https://gitee.com/link?target=https%3A%2F%2Fgithub.com%2Fdromara%2FTLog%2Fblob%2Fmaster%2FLICENSE"><img src="https://img.shields.io/github/license/dromara/TLog.svg?style=flat-square"></a>
+  <a href="https%3A%2F%2Fgithub.com%2Fdromara%2FTLog"><img src="https://img.shields.io/github/stars/dromara/TLog?style=flat-square&amp;logo=github"></a>
+  <a href="https%3A%2F%2Fgithub.com%2Fdromara%2FTLog%2Fnetwork%2Fmembers"><img src="https://img.shields.io/github/forks/dromara/TLog?style=flat-square&amp;logo=GitHub"></a>
+  <a href="https%3A%2F%2Fgithub.com%2Fdromara%2FTLog%2Fblob%2Fmaster%2FLICENSE"><img src="https://img.shields.io/github/license/dromara/TLog.svg?style=flat-square"></a>
           `
       }
     ]
@@ -951,11 +982,11 @@ const projectItems = ref([
         description: projectsOption.CLOUDEON_DESC,
         sponsor: "Pandas886",
         date: "2023.04",
-        link: `<a href="https://gitee.com/link?target=https%3A%2F%2Fgithub.com%2Fdromara%2FCloudEon"><img src="https://views.whatilearened.today/views/github/dromara/CloudEon.svg" alt="HitCount"></a>
-  <a href="https://gitee.com/link?target=https%3A%2F%2Fgithub.com%2Fdromara%2FCloudEon%2Fcommits%2Fmain"><img src="https://img.shields.io/github/commit-activity/m/dromara/CloudEon?color=ffff00" alt="Commits"></a>
-  <a href="https://gitee.com/link?target=https%3A%2F%2Fgithub.com%2Fpre-commit%2Fpre-commit"><img src="https://img.shields.io/badge/pre--commit-enabled-brightgreen?logo=pre-commit" alt="pre-commit"></a>
+        link: `<a href="https%3A%2F%2Fgithub.com%2Fdromara%2FCloudEon"><img src="https://views.whatilearened.today/views/github/dromara/CloudEon.svg" alt="HitCount"></a>
+  <a href="https%3A%2F%2Fgithub.com%2Fdromara%2FCloudEon%2Fcommits%2Fmain"><img src="https://img.shields.io/github/commit-activity/m/dromara/CloudEon?color=ffff00" alt="Commits"></a>
+  <a href="https%3A%2F%2Fgithub.com%2Fpre-commit%2Fpre-commit"><img src="https://img.shields.io/badge/pre--commit-enabled-brightgreen?logo=pre-commit" alt="pre-commit"></a>
   <a href="#contributors-"><img src="https://img.shields.io/github/all-contributors/dromara/CloudEon" alt="All Contributors"></a>
-  <a href="https://gitee.com/link?target=https%3A%2F%2Fgithub.com%2Fdromara%2FCloudEon%2FLICENSE"><img src="https://img.shields.io/github/license/dromara/CloudEon" alt="GitHub license"></a>`
+  <a href="https%3A%2F%2Fgithub.com%2Fdromara%2FCloudEon%2FLICENSE"><img src="https://img.shields.io/github/license/dromara/CloudEon" alt="GitHub license"></a>`
       },
       {
         name: "data-compare",
@@ -985,10 +1016,10 @@ const projectItems = ref([
         sponsor: "张玉龙（a12345678）",
         date: "2021.06",
         link: `
-          <a href="https://gitee.com/link?target=https%3A%2F%2Fwww.apache.org%2Flicenses%2FLICENSE-2.0" align="center">
+          <a href="https%3A%2F%2Fwww.apache.org%2Flicenses%2FLICENSE-2.0" align="center">
       <img alt="code style" src="https://img.shields.io/badge/license-Apache%202-4EB1BA.svg?style=flat-square">
     </a>
-    <a href="https://gitee.com/link?target=https%3A%2F%2Fgithub.com%2F996icu%2F996.ICU%2Fblob%2Fmaster%2FLICENSE" align="center">
+    <a href="https%3A%2F%2Fgithub.com%2F996icu%2F996.ICU%2Fblob%2Fmaster%2FLICENSE" align="center">
       <img alt="996icu" src="https://img.shields.io/badge/license-NPL%20(The%20996%20Prohibited%20License)-blue.svg">
     </a>
   `
@@ -1002,9 +1033,9 @@ const projectItems = ref([
         link: `
           <a href="https://gitee.com/dromara/mendmix"><img src="https://gitee.com/dromara/mendmix/badge/star.svg"></a>
   <a href="https://gitee.com/dromara/mendmix/members"><img src="https://gitee.com/dromara/mendmix/badge/fork.svg"></a>
-  <a href="https://gitee.com/link?target=https%3A%2F%2Fgithub.com%2Fdromara%2Fmendmix"><img src="https://img.shields.io/github/stars/dromara/mendmix?style=flat-square&amp;logo=github"></a>
-  <a href="https://gitee.com/link?target=https%3A%2F%2Fgithub.com%2Fdromara%2Fmendmix%2Fnetwork%2Fmembers"><img src="https://img.shields.io/github/forks/dromara/mendmix?style=flat-square&amp;logo=GitHub"></a>
-  <a href="https://gitee.com/link?target=https%3A%2F%2Fgithub.com%2Fdromara%2Fmendmix%2Fblob%2Fmaster%2FLICENSE"><img src="https://img.shields.io/github/license/dromara/mendmix.svg?style=flat-square"></a>
+  <a href="https%3A%2F%2Fgithub.com%2Fdromara%2Fmendmix"><img src="https://img.shields.io/github/stars/dromara/mendmix?style=flat-square&amp;logo=github"></a>
+  <a href="https%3A%2F%2Fgithub.com%2Fdromara%2Fmendmix%2Fnetwork%2Fmembers"><img src="https://img.shields.io/github/forks/dromara/mendmix?style=flat-square&amp;logo=GitHub"></a>
+  <a href="https%3A%2F%2Fgithub.com%2Fdromara%2Fmendmix%2Fblob%2Fmaster%2FLICENSE"><img src="https://img.shields.io/github/license/dromara/mendmix.svg?style=flat-square"></a>
           `
       },
       {
@@ -1014,12 +1045,12 @@ const projectItems = ref([
         sponsor: "最后（zuihou111）",
         date: "2022.11",
         link: `
-  <a href="https://gitee.com/link?target=https%3A%2F%2Fgithub.com%2Fdromara%2Flamp-cloud"><img src="https://img.shields.io/badge/%E8%AF%AD%E8%A8%80-Java%20%7C%20SpringCloud%20%7C%20Vue3%20%7C%20...-red?style=flat-square&amp;color=42b883" alt="Language"></a>
-  <a href="https://gitee.com/link?target=https%3A%2F%2Fgithub.com%2Fdromara%2Flamp-cloud%2Fblob%2Fmaster%2FLICENSE"><img src="https://img.shields.io/github/license/dromara/lamp-cloud?color=42b883&amp;style=flat-square" alt="License"></a>
-  <a href="https://gitee.com/link?target=https%3A%2F%2Fgithub.com%2Fzuihou"><img src="https://img.shields.io/badge/%E4%BD%9C%E8%80%85-zuihou-orange.svg" alt="Author"></a>
-  <a href="https://gitee.com/link?target=https%3A%2F%2Fgithub.com%2Fdromara%2Flamp-cloud"><img src="https://img.shields.io/badge/%E7%89%88%E6%9C%AC-3.10.0-brightgreen.svg" alt="Version"></a>
-  <a href="https://gitee.com/link?target=https%3A%2F%2Fgithub.com%2Fdromara%2Flamp-cloud%2Fstargazers"><img src="https://img.shields.io/github/stars/dromara/lamp-cloud?color=42b883&amp;logo=github&amp;style=flat-square" alt="Star"></a>
-  <a href="https://gitee.com/link?target=https%3A%2F%2Fgithub.com%2Fdromara%2Flamp-cloud%2Fnetwork%2Fmembers"><img src="https://img.shields.io/github/forks/dromara/lamp-cloud?color=42b883&amp;logo=github&amp;style=flat-square" alt="Fork"></a>
+  <a href="https%3A%2F%2Fgithub.com%2Fdromara%2Flamp-cloud"><img src="https://img.shields.io/badge/%E8%AF%AD%E8%A8%80-Java%20%7C%20SpringCloud%20%7C%20Vue3%20%7C%20...-red?style=flat-square&amp;color=42b883" alt="Language"></a>
+  <a href="https%3A%2F%2Fgithub.com%2Fdromara%2Flamp-cloud%2Fblob%2Fmaster%2FLICENSE"><img src="https://img.shields.io/github/license/dromara/lamp-cloud?color=42b883&amp;style=flat-square" alt="License"></a>
+  <a href="https%3A%2F%2Fgithub.com%2Fzuihou"><img src="https://img.shields.io/badge/%E4%BD%9C%E8%80%85-zuihou-orange.svg" alt="Author"></a>
+  <a href="https%3A%2F%2Fgithub.com%2Fdromara%2Flamp-cloud"><img src="https://img.shields.io/badge/%E7%89%88%E6%9C%AC-3.10.0-brightgreen.svg" alt="Version"></a>
+  <a href="https%3A%2F%2Fgithub.com%2Fdromara%2Flamp-cloud%2Fstargazers"><img src="https://img.shields.io/github/stars/dromara/lamp-cloud?color=42b883&amp;logo=github&amp;style=flat-square" alt="Star"></a>
+  <a href="https%3A%2F%2Fgithub.com%2Fdromara%2Flamp-cloud%2Fnetwork%2Fmembers"><img src="https://img.shields.io/github/forks/dromara/lamp-cloud?color=42b883&amp;logo=github&amp;style=flat-square" alt="Fork"></a>
   <a href="https://gitee.com/dromara/lamp-cloud/stargazers"><img src="https://gitee.com/dromara/lamp-cloud/badge/star.svg?theme=gray" alt="Star"></a>
   <a href="https://gitee.com/dromara/lamp-cloud/members"><img src="https://gitee.com/dromara/lamp-cloud/badge/fork.svg?theme=gray" alt="Fork"></a>
   `
@@ -1034,9 +1065,9 @@ const projectItems = ref([
       <a href="#" target="_blank"><img src="https://img.shields.io/badge/Version-3.1.3.5-red.svg?logo=spring" alt="Version 3.1.3.5"></a>
       <a href="https://gitee.com/herodotus/dante-engine" target="_blank"><img src="https://img.shields.io/badge/Dante%20Engine-3.1.3.5-red.svg?logo=spring" alt="Dante Engine 3.1.3.5"></a>
       <a href="https://gitee.com/herodotus/dante-oss" target="_blank"><img src="https://img.shields.io/badge/Dante%20OSS-3.1.3.5-red.svg?logo=spring" alt="Dante OSS 3.1.3.5"></a>
-      <a href="https://gitee.com/link?target=https%3A%2F%2Fbell-sw.com%2Fpages%2Fdownloads%2F%23downloads" target="_blank"><img src="https://img.shields.io/badge/JDK-17%2B-green.svg?logo=openjdk" alt="Java 17"></a>
+      <a href="https%3A%2F%2Fbell-sw.com%2Fpages%2Fdownloads%2F%23downloads" target="_blank"><img src="https://img.shields.io/badge/JDK-17%2B-green.svg?logo=openjdk" alt="Java 17"></a>
       <a href="/dromara/dante-cloud/blob/master/LICENSE"><img src="https://img.shields.io/badge/License-Apache--2.0-blue.svg?logo=apache" alt="License Apache 2.0"></a>
-      <a href="https://gitee.com/link?target=https%3A%2F%2Fblog.csdn.net%2FPointer_v" target="_blank"><img src="https://img.shields.io/badge/Author-%E7%A0%81%E5%8C%A0%E5%90%9B-orange" alt="码匠君"></a>
+      <a href="https%3A%2F%2Fblog.csdn.net%2FPointer_v" target="_blank"><img src="https://img.shields.io/badge/Author-%E7%A0%81%E5%8C%A0%E5%90%9B-orange" alt="码匠君"></a>
       <a href="https://gitee.com/dromara/dante-cloud"><img src="https://img.shields.io/github/stars/herodotus-cloud/dante-cloud?style=flat&amp;logo=github" alt="Github star"></a>
       <a href="https://gitee.com/dromara/dante-cloud"><img src="https://img.shields.io/github/forks/herodotus-cloud/dante-cloud?style=flat&amp;logo=github" alt="Github fork"></a>
       <a href="https://gitee.com/dromara/dante-cloud"><img src="https://gitee.com/dromara/dante-cloud/badge/star.svg?theme=dark" alt="Gitee star"></a>
@@ -1069,9 +1100,9 @@ const projectItems = ref([
         date: "2023.04",
         link: `
   <a href="https://gitee.com/dromara/RuoYi-Vue-Plus"><img src="https://gitee.com/dromara/RuoYi-Vue-Plus/badge/star.svg?theme=blue" alt="码云Gitee"></a>
-  <a href="https://gitee.com/link?target=https%3A%2F%2Fgithub.com%2Fdromara%2FRuoYi-Vue-Plus"><img src="https://img.shields.io/github/stars/JavaLionLi/RuoYi-Vue-Plus.svg?style=social&amp;label=Stars" alt="GitHub"></a>
+  <a href="https%3A%2F%2Fgithub.com%2Fdromara%2FRuoYi-Vue-Plus"><img src="https://img.shields.io/github/stars/JavaLionLi/RuoYi-Vue-Plus.svg?style=social&amp;label=Stars" alt="GitHub"></a>
   <a href="https://gitee.com/dromara/RuoYi-Vue-Plus/blob/master/LICENSE"><img src="https://img.shields.io/badge/License-MIT-blue.svg" alt="License"></a>
-  <a href="https://gitee.com/link?target=https%3A%2F%2Fwww.jetbrains.com%2F%3Ffrom%3DRuoYi-Vue-Plus"><img src="https://img.shields.io/badge/IntelliJ%20IDEA-%E6%8F%90%E4%BE%9B%E6%94%AF%E6%8C%81-blue.svg" alt="使用IntelliJ IDEA开发维护"></a>
+  <a href="https%3A%2F%2Fwww.jetbrains.com%2F%3Ffrom%3DRuoYi-Vue-Plus"><img src="https://img.shields.io/badge/IntelliJ%20IDEA-%E6%8F%90%E4%BE%9B%E6%94%AF%E6%8C%81-blue.svg" alt="使用IntelliJ IDEA开发维护"></a>
   <br>
   <a href="https://gitee.com/dromara/RuoYi-Vue-Plus"><img src="https://img.shields.io/badge/RuoYi_Vue_Plus-4.8.0-success.svg" alt="RuoYi-Vue-Plus"></a>
   <a href=""><img src="https://img.shields.io/badge/Spring%20Boot-2.7-blue.svg" alt="Spring Boot"></a>
@@ -1087,7 +1118,7 @@ const projectItems = ref([
         link: `
   <img src="https://img.shields.io/badge/%E9%AB%98%E6%95%88-%E5%BF%AB%E9%80%9F-brightgreen">
   <img src="https://img.shields.io/badge/%E5%AE%89%E5%85%A8-%E6%BA%90%E7%A0%81%E5%8F%AF%E6%8E%A7-blueviolet">
-  <a href="https://gitee.com/link?target=https%3A%2F%2Fjq.qq.com%2F%3F_wv%3D1027%26k%3D5xTlnN6" target="_blank"><img src="https://img.shields.io/badge/QQ%E6%8A%80%E6%9C%AF%E7%BE%A4-805468934-orange"></a>
+  <a href="https%3A%2F%2Fjq.qq.com%2F%3F_wv%3D1027%26k%3D5xTlnN6" target="_blank"><img src="https://img.shields.io/badge/QQ%E6%8A%80%E6%9C%AF%E7%BE%A4-805468934-orange"></a>
   `
       }
     ]
@@ -1104,9 +1135,9 @@ const projectItems = ref([
         link: `
         <a href="https://gitee.com/dromara/hodor"><img src="https://gitee.com/dromara/hodor/badge/star.svg"></a>
 <a href="https://gitee.com/dromara/hodor/members"><img src="https://gitee.com/dromara/hodor/badge/fork.svg"></a>
-<a href="https://gitee.com/link?target=https%3A%2F%2Fgithub.com%2Fdromara%2Fhodor"><img src="https://img.shields.io/github/stars/dromara/hodor?style=flat-square&amp;logo=github"></a>
-<a href="https://gitee.com/link?target=https%3A%2F%2Fgithub.com%2Fdromara%2Fhodor%2Fnetwork%2Fmembers"><img src="https://img.shields.io/github/forks/dromara/hodor?style=flat-square&amp;logo=GitHub"></a>
-<a href="https://gitee.com/link?target=https%3A%2F%2Fgithub.com%2Fdromara%2Fhodor%2Fblob%2Fmaster%2FLICENSE"><img src="https://img.shields.io/github/license/dromara/hodor.svg?style=flat-square"></a>
+<a href="https%3A%2F%2Fgithub.com%2Fdromara%2Fhodor"><img src="https://img.shields.io/github/stars/dromara/hodor?style=flat-square&amp;logo=github"></a>
+<a href="https%3A%2F%2Fgithub.com%2Fdromara%2Fhodor%2Fnetwork%2Fmembers"><img src="https://img.shields.io/github/forks/dromara/hodor?style=flat-square&amp;logo=GitHub"></a>
+<a href="https%3A%2F%2Fgithub.com%2Fdromara%2Fhodor%2Fblob%2Fmaster%2FLICENSE"><img src="https://img.shields.io/github/license/dromara/hodor.svg?style=flat-square"></a>
         `
       },
       {
@@ -1116,27 +1147,17 @@ const projectItems = ref([
         sponsor: "ponfee（fupengfei）",
         date: "2023.08",
         link: `
-        <a href="https://gitee.com/link?target=https%3A%2F%2Fgithub.com%2Fdromara%2Fdisjob%2Factions"><img src="https://github.com/dromara/disjob/workflows/build/badge.svg" alt="Build status"></a>
+        <a href="https%3A%2F%2Fgithub.com%2Fdromara%2Fdisjob%2Factions"><img src="https://github.com/dromara/disjob/workflows/build/badge.svg" alt="Build status"></a>
         <a href="https://gitee.com/dromara/Disjob"><img src="https://gitee.com/dromara/Disjob/badge/star.svg"></a>
 <a href="https://gitee.com/dromara/Disjob/members"><img src="https://gitee.com/dromara/Disjob/badge/fork.svg"></a>
-<a href="https://gitee.com/link?target=https%3A%2F%2Fgithub.com%2Fdromara%2FDisjob"><img src="https://img.shields.io/github/stars/dromara/Disjob?style=flat-square&amp;logo=github"></a>
-<a href="https://gitee.com/link?target=https%3A%2F%2Fgithub.com%2Fdromara%2FDisjob%2Fnetwork%2Fmembers"><img src="https://img.shields.io/github/forks/dromara/Disjob?style=flat-square&amp;logo=GitHub"></a>
-<a href="https://gitee.com/link?target=https%3A%2F%2Fgithub.com%2Fdromara%2FDisjob%2Fblob%2Fmaster%2FLICENSE"><img src="https://img.shields.io/github/license/dromara/Disjob.svg?style=flat-square"></a>
+<a href="https%3A%2F%2Fgithub.com%2Fdromara%2FDisjob"><img src="https://img.shields.io/github/stars/dromara/Disjob?style=flat-square&amp;logo=github"></a>
+<a href="https%3A%2F%2Fgithub.com%2Fdromara%2FDisjob%2Fnetwork%2Fmembers"><img src="https://img.shields.io/github/forks/dromara/Disjob?style=flat-square&amp;logo=GitHub"></a>
+<a href="https%3A%2F%2Fgithub.com%2Fdromara%2FDisjob%2Fblob%2Fmaster%2FLICENSE"><img src="https://img.shields.io/github/license/dromara/Disjob.svg?style=flat-square"></a>
 `
       }
     ]
   }
 ]);
-[
-  {
-    groupName: projectsOption.DISTRIBUTED_TRANSACTION,
-    projects: ["hmily", "Myth", "Raincat"]
-  },
-  {
-    groupName: projectsOption.DISTRIBUTED_SCHEDULING,
-    projects: ["Disjob", "hodor"]
-  }
-];
 </script>
 
 <style scoped lang="scss">

@@ -90,7 +90,10 @@
             slideShadows: false
           }"
         >
-          <swiper-slide v-for="item in homeOption.PROJECT_DETAILS">
+          <swiper-slide
+            v-for="item in homeOption.PROJECT_DETAILS"
+            :key="item.name"
+          >
             <div class="project-item">
               <img
                 :src="`/assets/img/logo/${item.name}.png`"
@@ -253,7 +256,7 @@ for (const frontmatter of allPagesFrontmatter) {
             frontmatter.head
               .flat()
               .find(
-                (item: { property: string; content: string }) =>
+                (item: { property: string, content: string }) =>
                   item.property === "og:url"
               ).content
           ) ?? "", // head的一个数组对象中包含url
@@ -264,7 +267,7 @@ for (const frontmatter of allPagesFrontmatter) {
 }
 
 // 从框架提供的url中拿到跳转路径
-function extractPathFromURL(url: string): string | null {
+function extractPathFromURL (url: string): string | null {
   const match = url.match(/\/([^/]+\.html)$/);
   if (match?.[1] != null) {
     return match[1];
@@ -272,7 +275,7 @@ function extractPathFromURL(url: string): string | null {
     return null;
   }
 }
-function formatDate(inputDate: string): string {
+function formatDate (inputDate: string): string {
   const date = new Date(inputDate);
   const year = date.getFullYear();
   const month = String(date.getMonth() + 1).padStart(2, "0");
@@ -281,7 +284,7 @@ function formatDate(inputDate: string): string {
 }
 
 // 定义一个映射，将 headName 映射到对应的 icon、路径
-const mapping: Record<string, { icon: string; urlPrefix: string }> = {
+const mapping: Record<string, { icon: string, urlPrefix: string }> = {
   News: { icon: "/assets/img/news.png", urlPrefix: "news/" },
   Activity: { icon: "/assets/img/activity.png", urlPrefix: "activity/" },
   Blog: { icon: "/assets/img/blog.png", urlPrefix: "blog/" },
