@@ -23,3 +23,12 @@ body {
 .bg-white {
   background-color: #fff;
 }
+
+@media screen and (max-width: 1150px) {
+  .vp-toggle-navbar-button {
+    display: flex !important;
+  }
+  .vp-navbar-center {
+    display: none;
+  }
+}

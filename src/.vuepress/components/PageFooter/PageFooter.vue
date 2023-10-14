@@ -126,7 +126,7 @@ const QrcodeOption = ref([
 
 const getImageSrc = computed(() => {
   return (name: string) => {
-    return `/assets/img/${name}.png`;
+    return `/assets/img/${name}.webp`;
   };
 });
 </script>

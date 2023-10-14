@@ -23,7 +23,7 @@
               <img
                 v-if="!isImageMissing(obj.name)"
                 class="project-title"
-                :src="`/assets/img/logo/${obj.name}.png`"
+                :src="`/assets/img/logo/${obj.name}.webp`"
                 :alt="obj.name"
               />
               <div v-else class="project-title text">
@@ -1176,7 +1176,7 @@ const projectItems = ref([
   justify-content: center;
   padding: 0 24px;
 
-  background: url(/assets/img/bg-projects.png) no-repeat;
+  background: url(/assets/img/bg-projects.webp) no-repeat;
   background-size: cover;
   background-position: center;
   border-radius: 0.5rem;

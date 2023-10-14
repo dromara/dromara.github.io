@@ -66,7 +66,11 @@
         >{{ homeOption.MORE_PROJECTS + "&nbsp;&nbsp;>" }}</a
       >
       <div class="project-swiper">
-        <img class="project-img" src="/assets/img/projects.png" alt="project" />
+        <img
+          class="project-img"
+          src="/assets/img/projects.webp"
+          alt="project"
+        />
         <swiper
           :modules="[Navigation, EffectCoverflow, Autoplay, Pagination]"
           :navigation="true"
@@ -96,7 +100,7 @@
           >
             <div class="project-item">
               <img
-                :src="`/assets/img/logo/${item.name}.png`"
+                :src="`/assets/img/logo/${item.name}.webp`"
                 :alt="item.name + ' logo'"
               />
               <div class="text">{{ item.description }}</div>
@@ -147,7 +151,7 @@
           <template v-for="section in communityLink" :key="section.category">
             <div class="feature-container">
               <div class="feature-title">
-                <img :src="section.icon" />
+                <img :src="section.icon" :alt="section.category" />
                 <h2 style="margin-bottom: 0">{{ section.category }}</h2>
               </div>
               <template v-for="item in section.details" :key="item.title">
@@ -256,7 +260,7 @@ for (const frontmatter of allPagesFrontmatter) {
             frontmatter.head
               .flat()
               .find(
-                (item: { property: string, content: string }) =>
+                (item: { property: string; content: string }) =>
                   item.property === "og:url"
               ).content
           ) ?? "", // head的一个数组对象中包含url
@@ -267,7 +271,7 @@ for (const frontmatter of allPagesFrontmatter) {
 }
 
 // 从框架提供的url中拿到跳转路径
-function extractPathFromURL (url: string): string | null {
+function extractPathFromURL(url: string): string | null {
   const match = url.match(/\/([^/]+\.html)$/);
   if (match?.[1] != null) {
     return match[1];
@@ -275,7 +279,7 @@ function extractPathFromURL (url: string): string | null {
     return null;
   }
 }
-function formatDate (inputDate: string): string {
+function formatDate(inputDate: string): string {
   const date = new Date(inputDate);
   const year = date.getFullYear();
   const month = String(date.getMonth() + 1).padStart(2, "0");
@@ -284,7 +288,7 @@ function formatDate (inputDate: string): string {
 }
 
 // 定义一个映射，将 headName 映射到对应的 icon、路径
-const mapping: Record<string, { icon: string, urlPrefix: string }> = {
+const mapping: Record<string, { icon: string; urlPrefix: string }> = {
   News: { icon: "/assets/img/news.png", urlPrefix: "news/" },
   Activity: { icon: "/assets/img/activity.png", urlPrefix: "activity/" },
   Blog: { icon: "/assets/img/blog.png", urlPrefix: "blog/" },
@@ -401,7 +405,7 @@ const navigateTo = (url: string): void => {
     border-bottom: none;
   }
   .banner-mask {
-    background: url(/assets/img/bg-image.png) no-repeat;
+    background: url(/assets/img/bg-image.webp) no-repeat;
     background-size: cover;
     background-position: center;
     min-height: 65vh;
@@ -526,6 +530,8 @@ const navigateTo = (url: string): void => {
       }
       img {
         margin: 0 20px 10px 0;
+        width: 60px;
+        height: 60px;
       }
       .feature-title {
         display: flex;
@@ -546,7 +552,7 @@ const navigateTo = (url: string): void => {
 
   .project-container {
     padding: 20px 0;
-    background: url(/assets/img/project-bg.png) no-repeat;
+    background: url(/assets/img/project-bg.webp) no-repeat;
     background-size: cover;
     background-position: center;
     text-align: center;
@@ -579,8 +585,9 @@ const navigateTo = (url: string): void => {
     border: 1px solid #f1f2f5;
     text-align: left;
     img {
-      width: 12rem;
-      max-width: 100%;
+      aspect-ratio: 2 / 1;
+      width: 60%;
+      object-fit: contain;
     }
   }
   .link-container {
@@ -653,7 +660,7 @@ const navigateTo = (url: string): void => {
   }
 
   .star-container {
-    background: url(/assets/img/growing-star.png) no-repeat;
+    background: url(/assets/img/growing-star.webp) no-repeat;
     background-size: cover;
     background-position: center;
     width: 100%;

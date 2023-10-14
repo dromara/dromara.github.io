@@ -17,7 +17,6 @@ module.exports = {
     semi: ["error", "always"],
     quotes: ["error", "double"],
     "@typescript-eslint/semi": "off",
-    "@typescript-eslint/quotes": ["error", "double"],
-    "space-before-function-paren": ["error", "always"]
+    "@typescript-eslint/quotes": ["error", "double"]
   }
 };

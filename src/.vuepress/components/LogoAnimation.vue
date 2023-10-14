@@ -6,7 +6,7 @@ const animData = {
     {
       widthStr: "11vw",
       backgroundColorStr: "",
-      backgroundImageStr: "url('/assets/img/logo-animation/easy_trans.png')",
+      backgroundImageStr: "url('/assets/img/logo-animation/easy_trans.webp')",
       topStr: "calc(50% - 20vw)",
       rightStr: "",
       bottomStr: "",
@@ -39,7 +39,7 @@ const animData = {
     {
       widthStr: "8vw",
       backgroundColorStr: "",
-      backgroundImageStr: "url('/assets/img/logo-animation/sa-token.png')",
+      backgroundImageStr: "url('/assets/img/logo-animation/sa-token.webp')",
       topStr: "calc(50% - 24vw)",
       rightStr: "",
       bottomStr: "",
@@ -69,7 +69,7 @@ const animData = {
     {
       widthStr: "7vw",
       backgroundColorStr: "",
-      backgroundImageStr: "url('/assets/img/logo-animation/forest.png')",
+      backgroundImageStr: "url('/assets/img/logo-animation/forest.webp')",
       topStr: "calc(50% - 7vw)",
       rightStr: "",
       bottomStr: "",
@@ -103,7 +103,7 @@ const animData = {
     {
       widthStr: "4vw",
       backgroundColorStr: "",
-      backgroundImageStr: "url('/assets/img/logo-animation/Jpom.png')",
+      backgroundImageStr: "url('/assets/img/logo-animation/Jpom.webp')",
       topStr: "calc(50% - 1vw)",
       rightStr: "",
       bottomStr: "",
@@ -136,7 +136,7 @@ const animData = {
     {
       widthStr: "4vw",
       backgroundColorStr: "",
-      backgroundImageStr: "url('/assets/img/logo-animation/hmily.png')",
+      backgroundImageStr: "url('/assets/img/logo-animation/hmily.webp')",
       topStr: "",
       rightStr: "",
       bottomStr: "calc(50% - 12vw)",
@@ -170,7 +170,7 @@ const animData = {
       widthStr: "11vw",
       backgroundColorStr: "",
       backgroundImageStr:
-        "url('/assets/img/logo-animation/image-combiner.png')",
+        "url('/assets/img/logo-animation/image-combiner.webp')",
       topStr: "",
       rightStr: "",
       bottomStr: "calc(50% - 20vw)",
@@ -203,7 +203,7 @@ const animData = {
     {
       widthStr: "6vw",
       backgroundColorStr: "",
-      backgroundImageStr: "url('/assets/img/logo-animation/northstar.png')",
+      backgroundImageStr: "url('/assets/img/logo-animation/northstar.webp')",
       topStr: "calc(50% - 8vw)",
       rightStr: "",
       bottomStr: "",
@@ -236,7 +236,7 @@ const animData = {
     {
       widthStr: "6vw",
       backgroundColorStr: "",
-      backgroundImageStr: "url('/assets/img/logo-animation/redisfront.png')",
+      backgroundImageStr: "url('/assets/img/logo-animation/redisfront.webp')",
       topStr: "",
       rightStr: "",
       bottomStr: "calc(50% - 10vw)",
@@ -269,7 +269,7 @@ const animData = {
     {
       widthStr: "9vw",
       backgroundColorStr: "",
-      backgroundImageStr: "url('/assets/img/logo-animation/ShenYu.png')",
+      backgroundImageStr: "url('/assets/img/logo-animation/ShenYu.webp')",
       topStr: "",
       rightStr: "",
       bottomStr: "calc(50% - 22vw)",
@@ -302,7 +302,7 @@ const animData = {
     {
       widthStr: "5vw",
       backgroundColorStr: "",
-      backgroundImageStr: "url('/assets/img/logo-animation/sureness.png')",
+      backgroundImageStr: "url('/assets/img/logo-animation/sureness.webp')",
       topStr: "",
       rightStr: "",
       bottomStr: "calc(50% - 24vw)",
@@ -335,7 +335,7 @@ const animData = {
     {
       widthStr: "8vw",
       backgroundColorStr: "",
-      backgroundImageStr: "url('/assets/img/logo-animation/liteFlow.png')",
+      backgroundImageStr: "url('/assets/img/logo-animation/liteFlow.webp')",
       topStr: "calc(50% - 14vw)",
       rightStr: "calc(50% - 14vw)",
       bottomStr: "",
@@ -368,7 +368,7 @@ const animData = {
     {
       widthStr: "4vw",
       backgroundColorStr: "",
-      backgroundImageStr: "url('/assets/img/logo-animation/go-view.png')",
+      backgroundImageStr: "url('/assets/img/logo-animation/go-view.webp')",
       topStr: "calc(50% - 14vw)",
       rightStr: "",
       bottomStr: "",
@@ -401,7 +401,7 @@ const animData = {
     {
       widthStr: "8vw",
       backgroundColorStr: "",
-      backgroundImageStr: "url('/assets/img/logo-animation/hertzbeat.png')",
+      backgroundImageStr: "url('/assets/img/logo-animation/hertzbeat.webp')",
       topStr: "",
       rightStr: "calc(50% - 11vw)",
       bottomStr: "calc(50% - 18vw)",
@@ -434,7 +434,7 @@ const animData = {
     {
       widthStr: "6vw",
       backgroundColorStr: "",
-      backgroundImageStr: "url('/assets/img/logo-animation/soul.png')",
+      backgroundImageStr: "url('/assets/img/logo-animation/soul.webp')",
       topStr: "calc(50% - 21vw)",
       rightStr: "calc(50% - 34vw)",
       bottomStr: "",
@@ -467,7 +467,7 @@ const animData = {
     {
       widthStr: "2.5vw",
       backgroundColorStr: "",
-      backgroundImageStr: "url('/assets/img/logo-animation/gobrs-async.png')",
+      backgroundImageStr: "url('/assets/img/logo-animation/gobrs-async.webp')",
       topStr: "calc(50% - 3vw)",
       rightStr: "calc(50% - 15vw)",
       bottomStr: "",
@@ -500,7 +500,7 @@ const animData = {
     {
       widthStr: "3vw",
       backgroundColorStr: "",
-      backgroundImageStr: "url('/assets/img/logo-animation/myth.png')",
+      backgroundImageStr: "url('/assets/img/logo-animation/myth.webp')",
       topStr: "",
       rightStr: "calc(50% - 20vw)",
       bottomStr: "calc(50% - 3vw)",
@@ -533,7 +533,7 @@ const animData = {
     {
       widthStr: "5vw",
       backgroundColorStr: "",
-      backgroundImageStr: "url('/assets/img/logo-animation/MaxKey.png')",
+      backgroundImageStr: "url('/assets/img/logo-animation/MaxKey.webp')",
       topStr: "",
       rightStr: "calc(50% - 17vw)",
       bottomStr: "calc(50% - 11vw)",
@@ -566,7 +566,7 @@ const animData = {
     {
       widthStr: "6vw",
       backgroundColorStr: "",
-      backgroundImageStr: "url('/assets/img/logo-animation/TLog.png')",
+      backgroundImageStr: "url('/assets/img/logo-animation/TLog.webp')",
       topStr: "",
       rightStr: "calc(50% - 38vw)",
       bottomStr: "calc(50% - 4vw)",
@@ -600,7 +600,7 @@ const animData = {
       widthStr: "11vw",
       backgroundColorStr: "",
       backgroundImageStr:
-        "url('/assets/img/logo-animation/RuoYi-Vue-Plus.png')",
+        "url('/assets/img/logo-animation/RuoYi-Vue-Plus.webp')",
       topStr: "",
       rightStr: "calc(50% - 36vw)",
       bottomStr: "calc(50% - 20vw)",
@@ -633,7 +633,7 @@ const animData = {
     {
       widthStr: "6vw",
       backgroundColorStr: "",
-      backgroundImageStr: "url('/assets/img/logo-animation/mendmix.png')",
+      backgroundImageStr: "url('/assets/img/logo-animation/mendmix.webp')",
       topStr: "",
       rightStr: "calc(50% - 21vw)",
       bottomStr: "calc(50% - 26vw)",
@@ -666,7 +666,7 @@ const animData = {
     {
       widthStr: "4.2vw",
       backgroundColorStr: "",
-      backgroundImageStr: "url('/assets/img/logo-animation/Disjob.png')",
+      backgroundImageStr: "url('/assets/img/logo-animation/Disjob.webp')",
       topStr: "calc(50% - 10vw)",
       rightStr: "calc(50% - 14vw)",
       bottomStr: "",
@@ -701,7 +701,7 @@ const animData = {
     {
       widthStr: "13vw",
       backgroundColorStr: "",
-      backgroundImageStr: "url('/assets/img/logo-animation/hutool.png')",
+      backgroundImageStr: "url('/assets/img/logo-animation/hutool.webp')",
       topStr: "calc(50% - 6vw)",
       rightStr: "",
       bottomStr: "",
@@ -737,7 +737,7 @@ const animData = {
     {
       widthStr: "100%",
       backgroundColorStr: "",
-      backgroundImageStr: "url('/assets/img/logo/dromara.jpg')",
+      backgroundImageStr: "url('/assets/img/logo/dromara.webp')",
       topStr: "",
       rightStr: "",
       bottomStr: "",
