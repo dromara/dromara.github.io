@@ -1,6 +1,5 @@
 import { getDirname, path } from "@vuepress/utils";
 import { defineUserConfig } from "vuepress";
-import theme from "./theme.js";
 import { hopeTheme } from "vuepress-theme-hope";
 import { searchProPlugin } from "vuepress-plugin-search-pro";
 import { enNavbar, zhNavbar } from "./navbar/index.js";
@@ -9,6 +8,10 @@ import { enSidebar, zhSidebar } from "./sidebar/index.js";
 const __dirname = getDirname(import.meta.url);
 
 export default defineUserConfig({
+  head: [
+    ["script", { src: "https://cdn.wwads.cn/js/makemoney.js", async: true }]
+  ],
+
   base: "/",
 
   locales: {
@@ -21,7 +24,6 @@ export default defineUserConfig({
       description: "dromara的官网文档"
     }
   },
-  // theme,
   theme: hopeTheme(
     {
       hostname: "https://vuepress-theme-hope-docs-demo.netlify.app",

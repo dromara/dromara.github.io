@@ -22,6 +22,11 @@
           </p>
         </div>
       </div>
+      <div
+        class="wwads-cn wwads-horizontal"
+        data-id="127"
+        style="max-width: 500px"
+      ></div>
       <div class="feature-wrapper">
         <div class="feature slogan">
           <div
