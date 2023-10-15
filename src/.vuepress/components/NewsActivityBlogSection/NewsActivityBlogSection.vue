@@ -198,7 +198,7 @@ const filteredSectionDetail = computed(() => {
   justify-content: center;
   padding: 0 24px;
 
-  background: url(/assets/img/bg-blog.png) no-repeat;
+  background: url(/assets/img/bg-blog.webp) no-repeat;
   background-size: cover;
   background-position: center;
   border-radius: 0.5rem;

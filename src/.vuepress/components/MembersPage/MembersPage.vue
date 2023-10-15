@@ -12,7 +12,7 @@
       <div class="member-banner">
         <h2 class="title">{{ membersOption.TOC_MEMBER_TITLE }}</h2>
         <div class="founder">
-          <img class="photo" src="/assets/img/members/xiaoyu.png" alt="" />
+          <img class="photo" src="/assets/img/members/xiaoyu.webp" alt="" />
           <div class="info">
             <div class="name">{{ membersOption.FOUNDER.name }}</div>
             <div class="role">{{ membersOption.FOUNDER.role }}</div>
@@ -103,7 +103,7 @@ watch(
   justify-content: center;
   padding: 0 24px;
 
-  background: url(/assets/img/bg-projects.png) no-repeat;
+  background: url(/assets/img/bg-projects.webp) no-repeat;
   background-size: cover;
   background-position: center;
   border-radius: 0.5rem;
