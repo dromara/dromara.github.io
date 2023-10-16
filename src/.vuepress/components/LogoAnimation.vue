@@ -1,3 +1,17 @@
+<template>
+  <div class="logo-animation">
+    <div class="logo-animation-top" style="height: 1px"></div>
+    <div class="content">
+      <div class="effect-content">
+        <div class="effect-box">
+          <div class="e-icon-box"></div>
+        </div>
+      </div>
+    </div>
+    <div class="logo-animation-bottom" style="height: 1px"></div>
+  </div>
+</template>
+
 <script setup lang="ts">
 import { onMounted } from "vue";
 const animData = {
@@ -262,39 +276,6 @@ const animData = {
           1,
           {
             translate3d: { x: 0, y: 0, z: 800 }
-          }
-        ]
-      ])
-    },
-    {
-      widthStr: "9vw",
-      backgroundColorStr: "",
-      backgroundImageStr: "url('/assets/img/logo-animation/ShenYu.webp')",
-      topStr: "",
-      rightStr: "",
-      bottomStr: "calc(50% - 22vw)",
-      leftStr: "calc(50% - 17vw)",
-      className: "e-square",
-      parentClassName: "effect-box",
-      opacity: 0.95,
-      opacityAnimMap: new Map([
-        [0, 0.95],
-        [1, 1]
-      ]),
-      transform: {
-        translate3d: { x: 0, y: 0, z: 0 }
-      },
-      transformAnimMap: new Map([
-        [
-          0,
-          {
-            translate3d: { x: 0, y: 0, z: 0 }
-          }
-        ],
-        [
-          1,
-          {
-            translate3d: { x: 0, y: 0, z: 1300 }
           }
         ]
       ])
@@ -1046,24 +1027,18 @@ class RollEventComp {
     });
   }
 }
+
+function ensureDomElement (): void {
+  // 检查元素是否已经存在
+  if (document.querySelector(".e-square") == null) {
+    // 如果元素不存在，则创建新元素
+    executeEffectManager();
+  }
+}
 onMounted(() => {
-  executeEffectManager();
+  ensureDomElement();
 });
 </script>
-
-<template>
-  <div class="logo-animation">
-    <div class="logo-animation-top" style="height: 1px"></div>
-    <div class="content">
-      <div class="effect-content">
-        <div class="effect-box">
-          <div class="e-icon-box"></div>
-        </div>
-      </div>
-    </div>
-    <div class="logo-animation-bottom" style="height: 1px"></div>
-  </div>
-</template>
 
 <style scoped>
 .logo-animation {

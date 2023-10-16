@@ -22,11 +22,6 @@
           </p>
         </div>
       </div>
-      <div
-        class="wwads-cn wwads-horizontal"
-        data-id="127"
-        style="max-width: 500px"
-      ></div>
       <div class="feature-wrapper">
         <div class="feature slogan">
           <div
@@ -59,7 +54,9 @@
       </div>
     </div>
 
-    <LogoAnimation />
+    <keep-alive>
+      <LogoAnimation />
+    </keep-alive>
 
     <div class="project-container">
       <h2 class="header-project">{{ homeOption.PROJECT }}</h2>
@@ -160,7 +157,7 @@
                 <h2 style="margin-bottom: 0">{{ section.category }}</h2>
               </div>
               <template v-for="item in section.details" :key="item.title">
-                <div class="community-item">
+                <div class="community-item" @click="navigateTo(item.url)">
                   <div class="content">
                     <div class="title">{{ item.title }}</div>
                     <div class="time">{{ item.time }}</div>
@@ -265,7 +262,7 @@ for (const frontmatter of allPagesFrontmatter) {
             frontmatter.head
               .flat()
               .find(
-                (item: { property: string; content: string }) =>
+                (item: { property: string, content: string }) =>
                   item.property === "og:url"
               ).content
           ) ?? "", // head的一个数组对象中包含url
@@ -276,7 +273,7 @@ for (const frontmatter of allPagesFrontmatter) {
 }
 
 // 从框架提供的url中拿到跳转路径
-function extractPathFromURL(url: string): string | null {
+function extractPathFromURL (url: string): string | null {
   const match = url.match(/\/([^/]+\.html)$/);
   if (match?.[1] != null) {
     return match[1];
@@ -284,7 +281,7 @@ function extractPathFromURL(url: string): string | null {
     return null;
   }
 }
-function formatDate(inputDate: string): string {
+function formatDate (inputDate: string): string {
   const date = new Date(inputDate);
   const year = date.getFullYear();
   const month = String(date.getMonth() + 1).padStart(2, "0");
@@ -293,7 +290,7 @@ function formatDate(inputDate: string): string {
 }
 
 // 定义一个映射，将 headName 映射到对应的 icon、路径
-const mapping: Record<string, { icon: string; urlPrefix: string }> = {
+const mapping: Record<string, { icon: string, urlPrefix: string }> = {
   News: { icon: "/assets/img/news.png", urlPrefix: "news/" },
   Activity: { icon: "/assets/img/activity.png", urlPrefix: "activity/" },
   Blog: { icon: "/assets/img/blog.png", urlPrefix: "blog/" },
