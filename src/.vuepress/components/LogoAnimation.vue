@@ -1,3 +1,17 @@
+<template>
+  <div class="logo-animation">
+    <div class="logo-animation-top" style="height: 1px"></div>
+    <div class="content">
+      <div class="effect-content">
+        <div class="effect-box">
+          <div class="e-icon-box"></div>
+        </div>
+      </div>
+    </div>
+    <div class="logo-animation-bottom" style="height: 1px"></div>
+  </div>
+</template>
+
 <script setup lang="ts">
 import { onMounted } from "vue";
 const animData = {
@@ -1046,24 +1060,18 @@ class RollEventComp {
     });
   }
 }
+
+function ensureDomElement (): void {
+  // 检查元素是否已经存在
+  if (document.querySelector(".e-square") == null) {
+    // 如果元素不存在，则创建新元素
+    executeEffectManager();
+  }
+}
 onMounted(() => {
-  executeEffectManager();
+  ensureDomElement();
 });
 </script>
-
-<template>
-  <div class="logo-animation">
-    <div class="logo-animation-top" style="height: 1px"></div>
-    <div class="content">
-      <div class="effect-content">
-        <div class="effect-box">
-          <div class="e-icon-box"></div>
-        </div>
-      </div>
-    </div>
-    <div class="logo-animation-bottom" style="height: 1px"></div>
-  </div>
-</template>
 
 <style scoped>
 .logo-animation {
