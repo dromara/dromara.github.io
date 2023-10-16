@@ -9,6 +9,11 @@
       </div>
     </div>
   </div>
+  <div
+    class="wwads-cn wwads-horizontal"
+    data-id="127"
+    style="max-width: 500px"
+  ></div>
   <main class="project-main">
     <div
       v-for="item in projectItems"

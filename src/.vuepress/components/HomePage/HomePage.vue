@@ -22,11 +22,6 @@
           </p>
         </div>
       </div>
-      <div
-        class="wwads-cn wwads-horizontal"
-        data-id="127"
-        style="max-width: 500px"
-      ></div>
       <div class="feature-wrapper">
         <div class="feature slogan">
           <div
@@ -59,7 +54,9 @@
       </div>
     </div>
 
-    <LogoAnimation />
+    <keep-alive>
+      <LogoAnimation />
+    </keep-alive>
 
     <div class="project-container">
       <h2 class="header-project">{{ homeOption.PROJECT }}</h2>
@@ -190,6 +187,15 @@
         </div>
       </div>
     </div>
+    <div
+      class="wwads-cn wwads-horizontal"
+      data-id="127"
+      style="
+        max-width: 500px;
+        margin-left: calc(50% - 250px);
+        margin-bottom: 20px;
+      "
+    ></div>
   </div>
 </template>
 <script setup lang="ts">

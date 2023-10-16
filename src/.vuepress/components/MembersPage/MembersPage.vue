@@ -8,6 +8,11 @@
         </p>
       </div>
     </div>
+    <div
+      class="wwads-cn wwads-horizontal"
+      data-id="127"
+      style="max-width: 500px"
+    ></div>
     <main class="member-main">
       <div class="member-banner">
         <h2 class="title">{{ membersOption.TOC_MEMBER_TITLE }}</h2>

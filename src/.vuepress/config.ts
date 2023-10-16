@@ -9,6 +9,21 @@ const __dirname = getDirname(import.meta.url);
 
 export default defineUserConfig({
   head: [
+    [
+      "meta",
+      {
+        "http-equiv": "Cache-Control",
+        content: "max-age=3600, must-revalidate"
+      }
+    ],
+    [
+      "meta",
+      {
+        name: "description",
+        content:
+          "An organization dedicated to native solutions for the microservice cloud."
+      }
+    ],
     ["script", { src: "https://cdn.wwads.cn/js/makemoney.js", async: true }]
   ],
 
