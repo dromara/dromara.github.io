@@ -2,7 +2,7 @@ import { type HomeOption } from "./types";
 
 const zhHomeOption: HomeOption = {
   QUICK_START: "快速开始",
-  DESCRIPTION: "致力于微服务云原生解决方案的组织",
+  DESCRIPTION: "开源爱好者聚齐的非盈利组织",
   FEATURES: [
     {
       name: "open",

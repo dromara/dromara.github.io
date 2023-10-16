@@ -281,39 +281,6 @@ const animData = {
       ])
     },
     {
-      widthStr: "9vw",
-      backgroundColorStr: "",
-      backgroundImageStr: "url('/assets/img/logo-animation/ShenYu.webp')",
-      topStr: "",
-      rightStr: "",
-      bottomStr: "calc(50% - 22vw)",
-      leftStr: "calc(50% - 17vw)",
-      className: "e-square",
-      parentClassName: "effect-box",
-      opacity: 0.95,
-      opacityAnimMap: new Map([
-        [0, 0.95],
-        [1, 1]
-      ]),
-      transform: {
-        translate3d: { x: 0, y: 0, z: 0 }
-      },
-      transformAnimMap: new Map([
-        [
-          0,
-          {
-            translate3d: { x: 0, y: 0, z: 0 }
-          }
-        ],
-        [
-          1,
-          {
-            translate3d: { x: 0, y: 0, z: 1300 }
-          }
-        ]
-      ])
-    },
-    {
       widthStr: "5vw",
       backgroundColorStr: "",
       backgroundImageStr: "url('/assets/img/logo-animation/sureness.webp')",

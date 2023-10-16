@@ -53,14 +53,12 @@ let footerOption: FooterOption = reactive({
   BLOG: "",
   DOCUMENT: "",
   WECHAT: "",
-  QQ: "",
   KNOWLEDGE_PLANET: ""
 });
 
 const siteLocaleData = useSiteLocaleData();
 const lang = ref(siteLocaleData.value.lang);
 const frontmatter = usePageFrontmatter<DefaultThemePageFrontmatter>();
-// const sidebarItems = useSidebarItems();
 
 watch(
   () => siteLocaleData.value.lang,
@@ -120,7 +118,6 @@ const linkOption = ref([
 
 const QrcodeOption = ref([
   { title: footerOption.WECHAT, name: "qrcode_wx" },
-  { title: footerOption.QQ, name: "qrcode_qq" },
   { title: footerOption.KNOWLEDGE_PLANET, name: "qrcode_zsxq" }
 ]);
 

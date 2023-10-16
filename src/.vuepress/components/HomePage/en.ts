@@ -2,8 +2,7 @@ import { type HomeOption } from "./types";
 
 const enHomeOption: HomeOption = {
   QUICK_START: "Quick Start",
-  DESCRIPTION:
-    "An organization dedicated to native solutions for the microservice cloud",
+  DESCRIPTION: "A non-profit organization where open-source enthusiasts gather",
   FEATURES: [
     {
       name: "open",

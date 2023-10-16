@@ -157,7 +157,7 @@
                 <h2 style="margin-bottom: 0">{{ section.category }}</h2>
               </div>
               <template v-for="item in section.details" :key="item.title">
-                <div class="community-item">
+                <div class="community-item" @click="navigateTo(item.url)">
                   <div class="content">
                     <div class="title">{{ item.title }}</div>
                     <div class="time">{{ item.time }}</div>
@@ -187,15 +187,6 @@
         </div>
       </div>
     </div>
-    <div
-      class="wwads-cn wwads-horizontal"
-      data-id="127"
-      style="
-        max-width: 500px;
-        margin-left: calc(50% - 250px);
-        margin-bottom: 20px;
-      "
-    ></div>
   </div>
 </template>
 <script setup lang="ts">

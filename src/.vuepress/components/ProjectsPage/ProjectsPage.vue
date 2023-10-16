@@ -64,7 +64,11 @@
             <p v-html="obj.link"></p>
           </div>
           <div class="project-buttons">
-            <a class="project-button primary" :href="obj.website">
+            <a
+              class="project-button primary"
+              target="_blank"
+              :href="obj.website"
+            >
               {{ projectsOption.START_UP }}
             </a>
             <a
@@ -208,17 +212,21 @@ const projectOrder = [
       "forest",
       "northstar",
       "dynamic-tp",
+      "zyplayer-doc",
       "x-easypdf",
       "image-combiner",
       "easy_trans",
-      "X-File-Storage",
       "sms4j",
+      "Neutrino-Proxy",
+      "X-File-Storage",
       "gobrs-async",
+      "payment-spring-boot",
       "stream-query",
       "redisfront",
       "fast-request",
       "Binlog4j",
       "WeMQ",
+      "yft-design",
       "open-giteye-api",
       "jinx"
     ]
@@ -294,7 +302,9 @@ const isImageMissing = (name: string): boolean => {
     "hodor",
     "data-compare",
     "Binlog4j",
-    "X-File-Storage"
+    "X-File-Storage",
+    "yft-design",
+    "payment-spring-boot"
   ];
   return missingImages.includes(name);
 };
@@ -734,14 +744,8 @@ const projectItems = ref([
 <a target="_blank" href="https%3A%2F%2Fgithub.com%2Fdromara%2Fpayment-spring-boot">
   <img alt="" src="https://img.shields.io/github/stars/dromara/payment-spring-boot?style=social">
 </a>
-<a target="_blank" href="https://gitee.com/dromara/payment-spring-boot/stargazers">
-  <img alt="" src="https://gitee.com/felord/payment-spring-boot/badge/star.svg?theme=white">
-</a>
 <a target="_blank" href="https%3A%2F%2Fwork.weixin.qq.com%2Fkfid%2Fkfc9d9d759f27f087e1">
   <img alt="点击立即微信咨询" src="https://img.shields.io/badge/%E7%82%B9%E5%87%BB-%E5%BE%AE%E4%BF%A1%E5%92%A8%E8%AF%A2-brightgreen">
-</a>
-<a target="_blank" href="#">
-  <img alt="点击加入QQ交流①群（满）" src="https://img.shields.io/badge/QQ%E4%BA%A4%E6%B5%81%E7%BE%A4-945342113%EF%BC%88%E6%BB%A1%EF%BC%89-ff69b4">
 </a>
   <a target="_blank" href="https%3A%2F%2Fjq.qq.com%2F%3F_wv%3D1027%26k%3DcCiv8Vlv">
   <img alt="点击加入QQ交流②群" src="https://img.shields.io/badge/QQ%E4%BA%A4%E6%B5%81%E7%BE%A4-549174561-ff69b4">
@@ -1264,7 +1268,7 @@ const projectItems = ref([
     }
   }
   .project-title {
-    width: 100px;
+    width: 120px;
     height: 50px;
     object-fit: contain;
     &.text {

@@ -20,8 +20,7 @@ export default defineUserConfig({
       "meta",
       {
         name: "description",
-        content:
-          "An organization dedicated to native solutions for the microservice cloud."
+        content: "Non-profit organization where open-source enthusiasts gather."
       }
     ],
     ["script", { src: "https://cdn.wwads.cn/js/makemoney.js", async: true }]

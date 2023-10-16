@@ -8,7 +8,6 @@ const enFooterOption: FooterOption = {
   BLOG: "Blog",
   DOCUMENT: "Document",
   WECHAT: "Wechat Official Account",
-  QQ: "QQ Group",
   KNOWLEDGE_PLANET: "Knowledge Planet"
 };
 
