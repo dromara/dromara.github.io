@@ -1,3 +1,15 @@
+---
+title: Fast Request 2023.2.1-Release
+author: Kings
+tag:
+  - fastRequest
+date: 2023-10-17
+cover: https://api-buddy.cn/img/rfr.svg
+head:
+  - - meta
+    - name: News
+---
+
 # 简介
 
 [**Restful Fast Request**](https://www.oschina.net/action/GoToLink?url=https%3A%2F%2Fplugins.jetbrains.com%2Fplugin%2F16988-restful-fast-request)是一个类似于 Postman 的 IDEA 插件。它是一个强大的 restful api 工具包插件，可以根据已有的方法帮助您快速、自动生成 url 和 params。 Restful Fast Request = API 调试工具 + API 管理工具 + API 搜索工具。 它有一个漂亮的界面来完成请求、检查服务器响应、存储你的 api 请求和导出 api 请求。插件帮助你在 IDEA 界面内更快更高效得调试你的 API。
