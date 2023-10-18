@@ -11,7 +11,7 @@ const zhMembersOption: MembersOption = {
     role: "创始人",
     name: "肖宇",
     photo: "/assets/img/members/xiaoyu.webp",
-    desc: "Apache ShenYu 创始人/VP，Apache Member，同时还是Apache成员和Dromara开源组织的创立者且在分布式事务领域的贡献备受推崇。创作了许多重要的分布式事务框架，如Hmily、Raincat和Myth等，并且这些框架都被广泛应用。他领导的开源社区项目也受到了众多业界专家、开发者和用户的支持和关注。此外，他还著有《深入理解分布式事务：原理与实战》，这本书在分布式事务领域具有很高的影响力。"
+    desc: "Apache ShenYu 创始人/VP，Apache Member，Hmliy，Raincat，Myth 等分布式事务框架作者， 腾讯云TVP. 著有《深入理解分布式事务：原理与实战》一书。曾获评 开源先锋 33 之一, 信通院 OSCAR 尖峰开源人物等奖项。"
   },
   MEMBERS_ITEM: [
     {
