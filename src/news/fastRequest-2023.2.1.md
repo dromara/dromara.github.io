@@ -1,4 +1,3 @@
-
 ---
 title: Fast Request 2023.2.1-Release
 author: Kings
@@ -23,36 +22,36 @@ head:
 
 **新功能、优化项、修复项**
 
--   **最新域名**
--   **UI简化**
--   **api文档支持保存和打开**
--   **bilibili视频教程直达**
--   **自动域名优化**
--   **Map解析优化**
--   **show apis放入到右键菜单**
--   **统计页面加入了版本号**
--   **url和curl拷贝有environment变量的时候url没替换变量**
--   **curl以form-urlencoded和-d形式导入解析错乱**
+- **最新域名**
+- **UI 简化**
+- **api 文档支持保存和打开**
+- **bilibili 视频教程直达**
+- **自动域名优化**
+- **Map 解析优化**
+- **show apis 放入到右键菜单**
+- **统计页面加入了版本号**
+- **url 和 curl 拷贝有 environment 变量的时候 url 没替换变量**
+- **curl 以 form-urlencoded 和-d 形式导入解析错乱**
 
 # 最新域名
 
-申请了域名，叫**api buddy**，翻译过来是**API伴侣**，也挺好记。**原老版本功能文档将不再服务！**
+申请了域名，叫**api buddy**，翻译过来是**API 伴侣**，也挺好记。**原老版本功能文档将不再服务！**
 
-[**api-buddy.cn**](https://api-buddy.cn) -> 中文站，映射到gitee pages
+[**api-buddy.cn**](https://api-buddy.cn) -> 中文站，映射到 gitee pages
 
-[**api-buddy.com**](https://api-buddy.com) -> 英文站，映射到github pages
+[**api-buddy.com**](https://api-buddy.com) -> 英文站，映射到 github pages
 
-## 1.UI简化
+## 1.UI 简化
 
-将老版本横向的3个组件(method下拉框,url输入框,响应下拉框)简化为1个,并且移除响应下拉框.增加简捷度
+将老版本横向的 3 个组件(method 下拉框,url 输入框,响应下拉框)简化为 1 个,并且移除响应下拉框.增加简捷度
 
 ![urlInputWithMethod](https://api-buddy.cn/img/2023.2.1/urlInputWithMethod.png)
 
-## 2.api文档支持保存和打开
+## 2.api 文档支持保存和打开
 
 ![openDoc](https://api-buddy.cn/img/2023.2.1/openDoc.png)
 
-## 3.apis放入到右键菜单
+## 3.apis 放入到右键菜单
 
 前一个版本在 Controller 中任意位置右键唤起`Generate`，选择`Show apis`即可展示当前控制器中的所有 API ，现在直接放入右键减少层级
 
