@@ -10,7 +10,7 @@ const enMembersOption: MembersOption = {
     role: "Founder",
     name: "Xiao Yu",
     photo: "/assets/img/members/xiaoyu.webp",
-    desc: 'Founder/VP of Apache ShenYu, Apache Member, and founder of Dromara open source organization. He has made significant contributions in the field of distributed transactions and created many important distributed transaction frameworks such as Hmily, Raincat, and Myth, which have been widely used. His leadership in open source community projects has gained support and attention from many industry experts, developers, and users. In addition, he is also the author of "In-depth Understanding of Distributed Transactions: Principles and Practice", which has a high influence in the field of distributed transactions.'
+    desc: 'Founder/VP of Apache ShenYu, Apache Member, author of Hmliy, Raincat, Myth and other distributed transaction frameworks, TVP of Tencent Cloud. Author of "Deep Understanding of Distributed Transactions: Principles and Practices". He has been honored as one of the 33 Open Source Pioneers, OSCAR Peak Open Source Person of ICT Academy and other awards.'
   },
   MEMBERS_ITEM: [
     {
