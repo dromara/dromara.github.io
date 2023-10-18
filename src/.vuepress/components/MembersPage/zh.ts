@@ -195,6 +195,12 @@ const zhMembersOption: MembersOption = {
           name: "yanhom",
           photo: "/assets/img/members/yanhom.webp",
           desc: "Dynamic-Tp 作者"
+        },
+        {
+          role: "委员会成员",
+          name: "暮光：城中城",
+          photo: "/assets/img/members/zyplayer.webp",
+          desc: "zyplayer-doc 作者"
         }
       ]
     },

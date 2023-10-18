@@ -194,6 +194,12 @@ const enMembersOption: MembersOption = {
           name: "Shi Ming",
           photo: "/assets/img/members/shiming.webp",
           desc: "Author of MaxKey"
+        },
+        {
+          role: "Committee Member",
+          name: "zyplayer",
+          photo: "/assets/img/members/zyplayer.webp",
+          desc: "Author of zyplayer-doc"
         }
       ]
     },
