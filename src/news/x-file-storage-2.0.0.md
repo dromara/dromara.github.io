@@ -11,7 +11,7 @@ head:
 ---
 
 <h3 align="center">
-	<img src="/assets/img/logo/X-File-Storage.png" height="140px"  alt="logo"/><br />
+	<img src="https://x-file-storage.xuyanwu.cn/assets/logo.svg" height="200px"  alt="logo"/><br />
 	<span>Originally known as X Spring File Storage, it has been donated to the <a target="_blank" href="https://dromara.org/zh">dromara</a> open source organization</span>
 </h3>
 
