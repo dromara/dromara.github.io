@@ -539,8 +539,8 @@ const projectItems = ref([
         sponsor: "梦想i（XYW1171736840）",
         date: "2023.09",
         link: `
-    <a target="_blank" href="https://search.maven.org/artifact/cn.xuyanwu/spring-file-storage">
-        <img src="https://img.shields.io/maven-central/v/cn.xuyanwu/spring-file-storage.svg?label=Maven%20Central">
+    <a target="_blank" href="https://central.sonatype.com/search?q=org.dromara.x-file-storage">
+        <img src="https://img.shields.io/maven-central/v/org.dromara.x-file-storage/x-file-storage-core.svg?label=Maven%20Central" />
     </a>
     <a target="_blank" href="https://www.apache.org/licenses/LICENSE-2.0">
         <img src="https://img.shields.io/badge/license-Apache%202-green.svg">
@@ -548,11 +548,11 @@ const projectItems = ref([
     <a target="_blank" href="https://www.oracle.com/technetwork/java/javase/downloads/index.html">
         <img src="https://img.shields.io/badge/JDK-8+-blue.svg">
     </a>
-    <a target="_blank" href="https://github.com/1171736840/spring-file-storage">
-        <img src="https://img.shields.io/github/stars/1171736840/spring-file-storage.svg?style=social" alt="github star">
+    <a target="_blank" href="https://github.com/dromara/x-file-storage">
+        <img src="https://img.shields.io/github/stars/dromara/x-file-storage.svg?style=social" alt="github star">
     </a>
-    <a href="https://gitee.com/XYW1171736840/spring-file-storage">
-        <img src="https://gitee.com/XYW1171736840/spring-file-storage/badge/star.svg?theme=dark" alt="star">
+    <a href="https://gitee.com/dromara/x-file-storage">
+        <img src="https://gitee.com/dromara/x-file-storage/badge/star.svg?theme=dark" alt="star">
     </a>
     <a href="https://jq.qq.com/?_wv=1027&amp;k=eGfeNqka">
         <img src="https://img.shields.io/badge/QQ%E7%BE%A4-515706495-orange" alt="">
