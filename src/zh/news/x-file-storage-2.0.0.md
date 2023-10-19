@@ -4,14 +4,14 @@ author: XuYanwu
 tag:
   - X-File-Storage
 date: 2023-10-19
-cover: /assets/img/logo/X-File-Storage-Cover.svg
+cover: /assets/img/news/X-File-Storage-Cover.svg
 head:
   - - meta
     - name: 新闻
 ---
 
 <h3 align="center">
-	<img src="https://x-file-storage.xuyanwu.cn/assets/logo.svg" height="200px"  alt="logo"/><br />
+	<img src="/assets/img/news/X-File-Storage-Cover.svg" height="200px"  alt="logo"/><br />
 	<span>原名 X Spring File Storage 现已捐赠至 <a target="_blank" href="https://dromara.org/zh">dromara</a> 开源组织</span>
 </h3>
 
