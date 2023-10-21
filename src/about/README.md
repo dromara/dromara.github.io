@@ -1,5 +1,5 @@
 ---
-title: About Us
+title: About
 sidebar: false
 breadcrumb: false
 pageInfo: false
@@ -77,7 +77,7 @@ The Dromara Open Source Community Organization has the following minimum require
 
 The **Dromara** community can only continue to operate and provide better services with the support of everyone. To become a **Dromara** community sponsor or supporter, please consider supporting:
 
- <img src="https://dromara.org/img/donation/donation.png" height="240">
+ <img src="/assets/img/donation.png" height="240">
 
 The **Dromara** community is committed to full disclosure of all sponsorship support funds received and subsequent use of funds will be limited to **Dromara** community operating expenses
 

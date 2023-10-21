@@ -6,6 +6,6 @@ export const zhNavbar = navbar([
   "/zh/news/",
   "/zh/blog/",
   "/zh/activity/",
-  "/zh/donate/",
-  "/zh/awesome/"
+  "/zh/donation/",
+  "/zh/about/"
 ]);

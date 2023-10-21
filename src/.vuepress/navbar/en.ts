@@ -6,6 +6,6 @@ export const enNavbar = navbar([
   "/news/",
   "/blog/",
   "/activity/",
-  "/donate/",
-  "/awesome/"
+  "/donation/",
+  "/about/"
 ]);
