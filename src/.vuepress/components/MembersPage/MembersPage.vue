@@ -153,7 +153,7 @@ watch(
         height: 36vw;
         max-height: 240px;
         border-radius: 4px;
-        background: #2a2a2a;
+        background: #096dd96e;
       }
       .info {
         margin-left: 32px;
@@ -192,7 +192,7 @@ watch(
         .photo {
           width: 100%;
           border-radius: 4px;
-          background: #2a2a2a;
+          background: #096dd96e;
         }
         .info {
           font-size: 14px;
