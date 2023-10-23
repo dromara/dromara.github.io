@@ -10,7 +10,7 @@
   <div
     class="wwads-cn wwads-horizontal"
     data-id="127"
-    style="max-width: 500px"
+    style="max-width: 500px; margin-left: 16rem"
   ></div>
   <main class="news-activity-blog-main">
     <h2 class="tag">{{ langMapping === "中文" ? "标签" : "Tag" }}</h2>
@@ -114,7 +114,7 @@ for (const frontmatter of allPagesFrontmatter) {
             frontmatter.head
               .flat()
               .find(
-                (item: { property: string, content: string }) =>
+                (item: { property: string; content: string }) =>
                   item.property === "og:url"
               ).content
           ) ?? "", // head的一个数组对象中包含url
@@ -130,7 +130,7 @@ for (const key in groupedPages) {
   );
 }
 // 从框架提供的url中拿到跳转路径
-function extractPathFromURL (url: string): string | null {
+function extractPathFromURL(url: string): string | null {
   const match = url.match(/\/([^/]+\.html)$/);
   if (match?.[1] != null) {
     return match[1];
@@ -168,7 +168,7 @@ const langMapping = computed(() => {
   return mapping[props.title ?? ""] ?? "中文";
 });
 
-function formatDate (inputDate: string): string {
+function formatDate(inputDate: string): string {
   const date = new Date(inputDate);
   const year = date.getFullYear();
   const month = String(date.getMonth() + 1).padStart(2, "0");

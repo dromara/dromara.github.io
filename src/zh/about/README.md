@@ -1,5 +1,5 @@
 ---
-title: 关于我们
+title: 关于
 sidebar: false
 breadcrumb: false
 pageInfo: false
@@ -82,7 +82,7 @@ Dromara 开源社区组织对捐赠项目有以下最基本条件要求：
 
 **Dromara** 社区能够持续运营和提供更加优质的服务离不开大家的支持。如果想成为 **Dromara** 社区赞助商或支持者，请考虑支持：
 
- <img src="https://dromara.org/img/donation/donation.png" height="240">
+ <img src="/assets/img/donation.png" height="240">
 
 **Dromara** 社区承诺将收到的所有赞助支持资金完全公开化，且后续资金用途仅限于 **Dromara** 社区运营支出。
 
