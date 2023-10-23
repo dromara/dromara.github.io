@@ -12,7 +12,7 @@
   <div
     class="wwads-cn wwads-horizontal"
     data-id="127"
-    style="max-width: 500px"
+    style="max-width: 500px; margin-left: 16rem"
   ></div>
   <main class="project-main">
     <div
@@ -265,7 +265,7 @@ const projectOrder = [
     projects: ["Disjob", "hodor"]
   }
 ];
-function orderProjects (
+function orderProjects(
   detailsArray: GroupDetail[],
   orderArray: GroupOrder[]
 ): GroupDetail[] {
