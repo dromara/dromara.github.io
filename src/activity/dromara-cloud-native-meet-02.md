@@ -6,7 +6,7 @@ tag:
   - Soul
   - Dromara
   - Reactor
-cover: /assets/img/activities/dromara-open-soul-03.jpg
+cover: /assets/img/activity/dromara-open-soul-03.jpg
 head:
   - - meta
     - name: Activity

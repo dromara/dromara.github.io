@@ -15,10 +15,10 @@ head:
 	<span>原名 X Spring File Storage 现已捐赠至 <a target="_blank" href="https://dromara.org/zh">dromara</a> 开源组织</span>
 </h3>
 
-# 📚简介
+## 📚 简介
 
 一行代码将文件存储到本地、FTP、SFTP、WebDAV、阿里云 OSS、华为云 OBS、七牛云 Kodo、腾讯云 COS、百度云 BOS、又拍云 USS、MinIO、
-Amazon S3、GoogleCloud Storage、金山云 KS3、美团云 MSS、京东云 OSS、天翼云 OOS、移动 云EOS、沃云 OSS、
+Amazon S3、GoogleCloud Storage、金山云 KS3、美团云 MSS、京东云 OSS、天翼云 OOS、移动 云 EOS、沃云 OSS、
 网易数帆 NOS、Ucloud US3、青云 QingStor、平安云 OBS、首云 OSS、IBM COS、其它兼容 S3 协议的存储平台。查看 [所有支持的存储平台](https://x-file-storage.xuyanwu.cn/#/存储平台)
 
 💡 通过 WebDAV 连接到 Alist 后，可以使用百度网盘、天翼云盘、阿里云盘、迅雷网盘等常见存储服务，查看 [Alist 支持的存储平台](https://alist-doc.nn.ci/docs/webdav)
@@ -26,13 +26,13 @@ Amazon S3、GoogleCloud Storage、金山云 KS3、美团云 MSS、京东云 OSS�
 GitHub：https://github.com/dromara/x-file-storage
 Gitee：https://gitee.com/dromara/x-file-storage
 
-文档1：https://x-file-storage.dromara.org
-文档2：https://x-file-storage.xuyanwu.cn
-文档3：https://spring-file-storage.xuyanwu.cn
+文档 1：https://x-file-storage.dromara.org
+文档 2：https://x-file-storage.xuyanwu.cn
+文档 3：https://spring-file-storage.xuyanwu.cn
 
--------
+---
 
-# 📜更新内容
+## 📜 更新内容
 
 - 更改项目名、更改包名、优化项目结构
 - 新增直接读取 HttpServletRequest 的流进行上传，文件不落盘，速度更快
@@ -52,7 +52,7 @@ Gitee：https://gitee.com/dromara/x-file-storage
     <artifactId>spring-file-storage</artifactId>
     <version>1.0.3</version>
 </dependency>
-```  
+```
 
 2.0.0 及以后的版本
 
@@ -102,9 +102,9 @@ org.dromara.x.file.storage.core
 org.dromara.x.file.storage.spring
 ```
 
--------
+---
 
-# 📦使用
+## 📦 使用
 
 点击 [快速入门](https://x-file-storage.xuyanwu.cn/#/快速入门) 查看全部存储平台的使用方法！
 
@@ -125,7 +125,7 @@ org.dromara.x.file.storage.spring
     <artifactId>aliyun-sdk-oss</artifactId>
     <version>3.16.1</version>
 </dependency>
-```  
+```
 
 `application.yml` 配置文件中添加以下基础配置
 
@@ -135,7 +135,7 @@ dromara:
     default-platform: aliyun-oss-1 #默认使用的存储平台
     aliyun-oss:
       - platform: aliyun-oss-1 # 存储平台标识
-        enable-storage: true  # 启用存储
+        enable-storage: true # 启用存储
         access-key: ??
         secret-key: ??
         end-point: ??
@@ -144,7 +144,7 @@ dromara:
         base-path: test/ # 基础路径
 ```
 
-#### 🔨编码
+#### 🔨 编码
 
 在启动类上加上`@EnableFileStorage`注解
 
@@ -159,7 +159,8 @@ public class SpringFileStorageTestApplication {
 
 }
 ```
-#### ✨开始上传
+
+#### ✨ 开始上传
 
 支持 File、MultipartFile、byte[]、InputStream、URL、URI、String、HttpServletRequest，大文件会自动分片上传。如果想支持更多方式，请阅读 [文件适配器](https://x-file-storage.xuyanwu.cn/#/文件适配器) 章节
 
@@ -178,7 +179,7 @@ public class FileDetailController {
         //只需要这一行代码即可上传成功
         return fileStorageService.of(file).upload();
     }
-    
+
     /**
      * 上传文件，成功返回文件 url
      */
@@ -226,7 +227,7 @@ public class FileDetailController {
 }
 ```
 
-#### 🎨其它操作
+#### 🎨 其它操作
 
 ```java
 //手动构造文件信息，可用于其它操作
@@ -263,4 +264,3 @@ fileStorageService.delete("https://abc.def.com/test/aa/image.png");
 ```
 
 点击 [快速入门](https://x-file-storage.xuyanwu.cn/#/快速入门) 查看全部存储平台的使用方法！
-

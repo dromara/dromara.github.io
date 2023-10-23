@@ -75,8 +75,7 @@ const props = defineProps({
 });
 
 let option: ActivityOption = reactive({
-  DESC: "",
-  CARDS: []
+  DESC: ""
 });
 
 const currentTag = ref("All");
@@ -140,13 +139,13 @@ function extractPathFromURL(url: string): string | null {
 }
 const TAGS = [
   "All",
-  "DreamCode",
-  "Dromara",
-  "GateWay",
+  "fastRequest",
+  "HertzBeat",
+  "Dante-Cloud",
+  "LiteFlow",
+  "MaxKey",
   "hmily",
-  "Reactor",
-  "Soul",
-  "TCC"
+  "Soul"
 ];
 watchEffect(() => {
   if (props.title !== undefined) {
@@ -180,8 +179,8 @@ const filteredSectionDetail = computed(() => {
   if (currentTag.value === "All") {
     return sectionDetail;
   } else {
-    return sectionDetail.filter((obj: GroupedPage) =>
-      obj.tag.includes(currentTag.value)
+    return sectionDetail.filter(
+      (obj: GroupedPage) => obj.tag && obj.tag.includes(currentTag.value)
     );
   }
 });
@@ -293,6 +292,7 @@ const filteredSectionDetail = computed(() => {
     height: 190px;
     align-self: stretch;
     border-radius: 8px;
+    object-fit: contain;
   }
 
   .tag-items {

@@ -6,7 +6,7 @@ tag:
   - DreamCode
   - Dromara
   - GateWay
-cover: /assets/img/activities/dromara-open-soul-01.jpg
+cover: /assets/img/activity/dromara-open-soul-01.jpg
 head:
   - - meta
     - name: Activity

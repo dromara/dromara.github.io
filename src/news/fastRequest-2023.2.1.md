@@ -10,7 +10,7 @@ head:
     - name: News
 ---
 
-# 简介
+## 简介
 
 [**Restful Fast Request**](https://www.oschina.net/action/GoToLink?url=https%3A%2F%2Fplugins.jetbrains.com%2Fplugin%2F16988-restful-fast-request)是一个类似于 Postman 的 IDEA 插件。它是一个强大的 restful api 工具包插件，可以根据已有的方法帮助您快速、自动生成 url 和 params。 Restful Fast Request = API 调试工具 + API 管理工具 + API 搜索工具。 它有一个漂亮的界面来完成请求、检查服务器响应、存储你的 api 请求和导出 api 请求。插件帮助你在 IDEA 界面内更快更高效得调试你的 API。
 
@@ -33,7 +33,7 @@ head:
 - **url 和 curl 拷贝有 environment 变量的时候 url 没替换变量**
 - **curl 以 form-urlencoded 和-d 形式导入解析错乱**
 
-# 最新域名
+## 最新域名
 
 申请了域名，叫**api buddy**，翻译过来是**API 伴侣**，也挺好记。**原老版本功能文档将不再服务！**
 
@@ -41,17 +41,17 @@ head:
 
 [**api-buddy.com**](https://api-buddy.com) -> 英文站，映射到 github pages
 
-## 1.UI 简化
+### 1.UI 简化
 
 将老版本横向的 3 个组件(method 下拉框,url 输入框,响应下拉框)简化为 1 个,并且移除响应下拉框.增加简捷度
 
 ![urlInputWithMethod](https://api-buddy.cn/img/2023.2.1/urlInputWithMethod.png)
 
-## 2.api 文档支持保存和打开
+### 2.api 文档支持保存和打开
 
 ![openDoc](https://api-buddy.cn/img/2023.2.1/openDoc.png)
 
-## 3.apis 放入到右键菜单
+### 3.apis 放入到右键菜单
 
 前一个版本在 Controller 中任意位置右键唤起`Generate`，选择`Show apis`即可展示当前控制器中的所有 API ，现在直接放入右键减少层级
 
@@ -59,13 +59,13 @@ head:
 
 ![showApis](https://dromara.gitee.io/fast-request/img/2023.1.9/showApis.gif)
 
-## 4.统计页面加入了版本号
+### 4.统计页面加入了版本号
 
 ![pluginVersion](https://api-buddy.cn/img/2023.2.1/pluginVersion.png)
 
 还有非常多的细节优化不再一一描述，赶紧升级吧！
 
-# 更多详情
+## 更多详情
 
 请点击 ------------->[**这里**](https://api-buddy.cn/guide/history.html)
 
