@@ -291,7 +291,7 @@ function orderProjects(
     .filter(Boolean) as GroupDetail[];
 }
 onBeforeMount(() => {
-  projectItems.value = orderProjects(projectItems.value, projectOrder);
+  projectItems.value = orderProjects(projectItemsOrigin, projectOrder);
 });
 
 const isImageMissing = (name: string): boolean => {
@@ -320,7 +320,8 @@ const noGithubProjects = [
   "x-easypdf",
   "image-combiner"
 ];
-const projectItems = ref([
+const projectItems = ref([]);
+const projectItemsOrigin = [
   {
     groupName: projectsOption.DISTRIBUTED_TRANSACTION,
     projects: [
@@ -1166,7 +1167,7 @@ const projectItems = ref([
       }
     ]
   }
-]);
+];
 </script>
 
 <style scoped lang="scss">
