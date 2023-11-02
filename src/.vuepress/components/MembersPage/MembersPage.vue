@@ -1,6 +1,6 @@
 <template>
   <div class="members-page">
-    <div class="bg-white">
+    <div class="bg-default">
       <div class="member-container">
         <h1 class="title">{{ membersOption.MEMBERS }}</h1>
         <p class="description">
@@ -96,8 +96,8 @@ watch(
   @media (min-width: 1440px) {
     padding-left: 16rem;
   }
-  .bg-white {
-    background-color: #f9fbff;
+  .bg-default {
+    background-color: #e9eef8;
   }
 }
 .member-container {

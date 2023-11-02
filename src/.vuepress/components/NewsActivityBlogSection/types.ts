@@ -4,7 +4,7 @@ export interface ActivityOption {
 
 export interface GroupedPage {
   cover: string;
-  tag: string[];
+  tag?: string[];
   title: string;
   url: string;
   author: string;
