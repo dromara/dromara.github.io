@@ -8,12 +8,12 @@
         </p>
       </div>
     </div>
+    <div
+      class="wwads-cn wwads-horizontal"
+      data-id="127"
+      style="max-width: 500px"
+    ></div>
   </div>
-  <div
-    class="wwads-cn wwads-horizontal"
-    data-id="127"
-    style="max-width: 500px; margin-left: 16rem"
-  ></div>
   <main class="project-main">
     <div
       v-for="item in projectItems"
@@ -327,7 +327,7 @@ const projectItemsOrigin = [
     projects: [
       {
         name: "hmily",
-        website: "https://dromara.org/zh/projects/hmily/overview/",
+        website: "https://gitee.com/dromara/hmily",
         description: projectsOption.HMILY_DESC,
         sponsor: "肖宇（yu199195）",
         date: "2017.09",
@@ -358,7 +358,7 @@ const projectItemsOrigin = [
       },
       {
         name: "Raincat",
-        website: "https://dromara.org/zh/projects/raincat/overview/",
+        website: "https://gitee.com/dromara/Raincat",
         description: projectsOption.RAINCAT_DESC,
         sponsor: "肖宇（yu199195）",
         date: "2017.09",
@@ -370,7 +370,7 @@ const projectItemsOrigin = [
       },
       {
         name: "myth",
-        website: "https://dromara.org/zh/projects/myth/overview/",
+        website: "https://gitee.com/dromara/myth",
         description: projectsOption.MYTH_DESC,
         sponsor: "肖宇（yu199195）",
         date: "2017.12",

@@ -48,7 +48,6 @@ import zhFooterOption from "./zh";
 let footerOption: FooterOption = reactive({
   RESOURCES: "",
   INVOLVED: "",
-  FEEDBACK: "",
   COMMUNITY: "",
   BLOG: "",
   DOCUMENT: "",
@@ -87,10 +86,6 @@ const linkOption = ref([
     title: footerOption.INVOLVED,
     links: [
       {
-        name: footerOption.FEEDBACK,
-        href: "https://github.com/dromara/soul/issues/new"
-      },
-      {
         name: footerOption.COMMUNITY,
         href: "https://dromara.org/zh/community"
       },
@@ -102,15 +97,15 @@ const linkOption = ref([
     links: [
       {
         name: "Hmily",
-        href: "https://dromara.org/zh/projects/hmily/overview/"
+        href: "https://gitee.com/dromara/hmily"
       },
       {
         name: "Raincat",
-        href: "https://dromara.org/zh/projects/raincat/overview/"
+        href: "https://gitee.com/dromara/Raincat"
       },
       {
         name: "Myth",
-        href: "https://dromara.org/zh/projects/myth/overview/"
+        href: "https://gitee.com/dromara/myth"
       }
     ]
   }
@@ -168,7 +163,7 @@ const getImageSrc = computed(() => {
   .qrcode {
     display: flex;
     justify-content: flex-end;
-    align-items: flex-start;
+    align-items: flex-end;
     @media (max-width: 719px) {
       flex-direction: column;
     }

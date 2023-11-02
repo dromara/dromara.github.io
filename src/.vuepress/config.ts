@@ -27,7 +27,7 @@ export default defineUserConfig({
   ],
 
   base: "/",
-
+  shouldPrefetch: false,
   locales: {
     "/": {
       lang: "en-US",

@@ -6,12 +6,12 @@
         <p class="description">{{ option.DESC }}</p>
       </div>
     </div>
+    <div
+      class="wwads-cn wwads-horizontal"
+      data-id="127"
+      style="max-width: 500px"
+    ></div>
   </div>
-  <div
-    class="wwads-cn wwads-horizontal"
-    data-id="127"
-    style="max-width: 500px; margin-left: 16rem"
-  ></div>
   <main class="news-activity-blog-main">
     <h2 class="tag">{{ langMapping === "中文" ? "标签" : "Tag" }}</h2>
     <div class="buttons">
