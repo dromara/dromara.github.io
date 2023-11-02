@@ -80,7 +80,7 @@ Finally, we hope that project authors can communicate with us before considering
 
 Join the Knowledge Planet
 
- <img src="/assets/img/zsxq.png" height="240">
+ <img src="/assets/img/qrcode_zsxq.webp" height="240">
 
 **Dromara** community's continuous operation and provision of higher quality services couldn’t be possible without everyone’s support. If you want to become a sponsor or supporter of the **Dromara** community, please consider contacting:
 

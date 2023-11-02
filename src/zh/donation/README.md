@@ -82,7 +82,7 @@ dromara 社区组织始终抱有积极开放宽容的态度，如果捐赠项目
 
 加入知识星球
 
- <img src="/assets/img/zsxq.png" height="240">
+ <img src="/assets/img/qrcode_zsxq.webp" height="240">
 
 **Dromara** 社区能够持续运营和提供更加优质的服务离不开大家的支持。如果想成为 **Dromara** 社区赞助商或支持者，请考虑联系：
 
