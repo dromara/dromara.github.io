@@ -1,6 +1,8 @@
 ---
 title: sms4j V2.0.1版本正式发布
 author: SMS-风
+tag:
+  - sms4j
 date: 2023-04-26
 cover: /assets/img/news/sms4j-cover.png
 head:
