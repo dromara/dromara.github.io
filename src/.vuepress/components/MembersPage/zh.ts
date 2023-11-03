@@ -428,6 +428,18 @@ const zhMembersOption: MembersOption = {
           name: "Dazer007",
           photo: "/assets/img/members/Dazer007.webp",
           desc: "Hutool Committer"
+        },
+        {
+          role: "成员",
+          name: "落一",
+          photo: "/assets/img/members/luoyi.webp",
+          desc: "LiteFlow Committer"
+        },
+        {
+          role: "成员",
+          name: "葛足澳",
+          photo: "/assets/img/members/gezuao.webp",
+          desc: "LiteFlow Committer"
         }
       ]
     }
