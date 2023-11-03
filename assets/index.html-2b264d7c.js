@@ -1,1 +1,0 @@
-import{M as e}from"./MembersPage-f1bd98de.js";import{f as _,o as t,c as n,d as o,g as s,_ as a}from"./app-de650c9e.js";const c=_({__name:"index.html",setup(r){return(d,l)=>(t(),n("div",null,[o(s(e))]))}});const f=a(c,[["__scopeId","data-v-68442f72"],["__file","index.html.vue"]]);export{f as default};

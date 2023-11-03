@@ -1,0 +1,1 @@
+import{N as _}from"./NewsActivityBlogSection-a58f945b.js";import{f as n,u as o,o as a,c as s,d as c,g as e,_ as l}from"./app-75a46660.js";const r=n({__name:"index.html",setup(i){const t=o();return(m,d)=>(a(),s("div",null,[c(e(_),{title:e(t).title},null,8,["title"])]))}});const f=l(r,[["__scopeId","data-v-1173ea8c"],["__file","index.html.vue"]]);export{f as default};
