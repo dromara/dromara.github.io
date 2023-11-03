@@ -1,6 +1,6 @@
 <template>
   <div class="projects-page">
-    <div class="bg-white">
+    <div class="bg-default">
       <div class="project-container">
         <h1 class="title">{{ projectsOption.PROJECTS }}</h1>
         <p class="description">
@@ -265,7 +265,7 @@ const projectOrder = [
     projects: ["Disjob", "hodor"]
   }
 ];
-function orderProjects(
+function orderProjects (
   detailsArray: GroupDetail[],
   orderArray: GroupOrder[]
 ): GroupDetail[] {

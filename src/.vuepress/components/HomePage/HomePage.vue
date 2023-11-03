@@ -1,25 +1,29 @@
 <template>
   <div class="home-page">
     <div class="wrapper">
-      <div class="banner-mask">
-        <div class="banner-info">
-          <h1 id="main-title">Dromara</h1>
-          <p class="banner-description">{{ homeOption.DESCRIPTION }}</p>
-          <p class="banner-actions">
-            <a
-              :href="
-                lang === 'zh-CN' || lang === '/zh/'
-                  ? '/zh/projects/'
-                  : '/projects/'
-              "
-              class="banner-action primary"
-              >{{ homeOption.QUICK_START }}</a
-            >
-            <a href="https://gitee.com/dromara" class="banner-action">Gitee</a>
-            <a href="https://github.com/dromara" class="banner-action"
-              >GitHub</a
-            >
-          </p>
+      <div class="banner-default">
+        <div class="banner-mask">
+          <div class="banner-info">
+            <h1 id="main-title">Dromara</h1>
+            <p class="banner-description">{{ homeOption.DESCRIPTION }}</p>
+            <p class="banner-actions">
+              <a
+                :href="
+                  lang === 'zh-CN' || lang === '/zh/'
+                    ? '/zh/projects/'
+                    : '/projects/'
+                "
+                class="banner-action primary"
+                >{{ homeOption.QUICK_START }}</a
+              >
+              <a href="https://gitee.com/dromara" class="banner-action"
+                >Gitee</a
+              >
+              <a href="https://github.com/dromara" class="banner-action"
+                >GitHub</a
+              >
+            </p>
+          </div>
         </div>
       </div>
       <div class="feature-wrapper">
@@ -42,21 +46,21 @@
       </div>
     </div>
 
-    <div class="star-container">
-      <div class="star-wrapper">
-        <div class="star-inner">
-          <div class="star-text">{{ homeOption.STARS_OVERALL }}</div>
-          <div class="star-block">
-            <div class="star-number">{{ currentStars }}k</div>
+    <div class="star-default">
+      <div class="star-container">
+        <div class="star-wrapper">
+          <div class="star-inner">
+            <div class="star-text">{{ homeOption.STARS_OVERALL }}</div>
+            <div class="star-block">
+              <div class="star-number">{{ currentStars }}k</div>
+            </div>
           </div>
+          <cite> {{ homeOption.DATA_SOURCE }} </cite>
         </div>
-        <cite> {{ homeOption.DATA_SOURCE }} </cite>
       </div>
     </div>
 
-    <keep-alive>
-      <LogoAnimation />
-    </keep-alive>
+    <LogoAnimation />
 
     <div class="project-container">
       <h2 class="header-project">{{ homeOption.PROJECT }}</h2>
@@ -418,6 +422,9 @@ const navigateTo = (url: string): void => {
       min-height: 0;
     }
   }
+  .banner-default {
+    background-color: #e4edff;
+  }
   .banner-info {
     padding: 100px 24px;
     #main-title {
@@ -660,7 +667,9 @@ const navigateTo = (url: string): void => {
       border-radius: 5px;
     }
   }
-
+  .star-default {
+    background-color: #4d7aff;
+  }
   .star-container {
     background: url(/assets/img/growing-star.webp) no-repeat;
     background-size: cover;
