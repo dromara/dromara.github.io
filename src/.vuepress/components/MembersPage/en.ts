@@ -427,6 +427,18 @@ const enMembersOption: MembersOption = {
           name: "Dazer007",
           photo: "/assets/img/members/Dazer007.webp",
           desc: "Hutool Committer"
+        },
+        {
+          role: "Member",
+          name: "LuoYi",
+          photo: "/assets/img/members/luoyi.webp",
+          desc: "LiteFlow Committer"
+        },
+        {
+          role: "Member",
+          name: "Ge Zu Ao",
+          photo: "/assets/img/members/gezuao.webp",
+          desc: "LiteFlow Committer"
         }
       ]
     }

@@ -757,7 +757,7 @@ const animData = {
 };
 
 // 特效管理
-function executeEffectManager(data = animData): void {
+function executeEffectManager (data = animData): void {
   data.domArr.forEach((item) => {
     const entity = new Entity();
 
@@ -797,26 +797,26 @@ function executeEffectManager(data = animData): void {
 // 单体
 class Entity {
   _compMap: Map<any, any>;
-  constructor() {
+  constructor () {
     this._compMap = new Map();
   }
 
-  addComp(comp: ShapeComp | ShapeAnimComp | RollEventComp): void {
+  addComp (comp: ShapeComp | ShapeAnimComp | RollEventComp): void {
     this._compMap.set(comp.name, comp);
   }
 
-  getComp(compName: string): any {
+  getComp (compName: string): any {
     return this._compMap.get(compName);
   }
 }
 
 interface TransformValue {
   translate3d?: {
-    x: number;
-    y: number;
-    z: number;
-  };
-  scale?: number;
+    x: number
+    y: number
+    z: number
+  }
+  scale?: number
 }
 // 形状组件
 class ShapeComp {
@@ -824,7 +824,7 @@ class ShapeComp {
   _shapeDom: HTMLDivElement;
   _opacity: number | null;
   _transform: TransformValue | null;
-  constructor(data: { shapeAtt: any }) {
+  constructor (data: { shapeAtt: any }) {
     this.name = "ShapeComp";
     this._shapeDom = document.createElement("div");
     this._shapeDom.classList.add(data.shapeAtt.className);
@@ -851,18 +851,18 @@ class ShapeComp {
     this.transform = data.shapeAtt.transform;
   }
 
-  set opacity(value: number | null) {
+  set opacity (value: number | null) {
     if (value !== this._opacity) {
       this._shapeDom.style.opacity = String(value);
     }
     this._opacity = value;
   }
 
-  get opacity(): number | null {
+  get opacity (): number | null {
     return this._opacity;
   }
 
-  set transform(value: TransformValue | null) {
+  set transform (value: TransformValue | null) {
     if (value == null) {
       return;
     }
@@ -880,7 +880,7 @@ class ShapeComp {
     this._transform = value;
   }
 
-  get transform(): TransformValue | null {
+  get transform (): TransformValue | null {
     return this._transform;
   }
 }
@@ -890,14 +890,14 @@ class ShapeAnimComp {
   name: string;
   _opacityAnimMap: any;
   _transformAnimMap: any;
-  constructor(data) {
+  constructor (data) {
     this.name = "ShapeAnimComp";
     this._opacityAnimMap = data.opacityAnimMap;
     this._transformAnimMap = data.transformAnimMap;
   }
 
   // 返回根据滚动改变的状态值
-  _getStateValue(scrollPos, beginPos, endPos, beginValue, endValue): number {
+  _getStateValue (scrollPos, beginPos, endPos, beginValue, endValue): number {
     if (beginValue === endValue) {
       return beginValue;
     }
@@ -912,7 +912,7 @@ class ShapeAnimComp {
   }
 
   // 根据滚动值改变透明度
-  changeOpacity(scrollPos, shapeComp): void {
+  changeOpacity (scrollPos, shapeComp): void {
     if (this._opacityAnimMap.size === 0) {
       return;
     }
@@ -943,7 +943,7 @@ class ShapeAnimComp {
   }
 
   // 根据滚动值改变 transform
-  changeTransform(scrollPos, shapeComp): void {
+  changeTransform (scrollPos, shapeComp): void {
     // return;
     if (this._transformAnimMap.size === 0) {
       return;
@@ -1008,7 +1008,7 @@ class ShapeAnimComp {
 // 滚动事件组件
 class RollEventComp {
   name: string;
-  constructor(data) {
+  constructor (data) {
     this.name = "RollEventComp";
 
     window.addEventListener("scroll", (event) => {
@@ -1030,7 +1030,7 @@ class RollEventComp {
   }
 }
 
-function ensureDomElement(): void {
+function ensureDomElement (): void {
   // 检查元素是否已经存在
   if (document.querySelector(".e-square") == null) {
     // 如果元素不存在，则创建新元素
