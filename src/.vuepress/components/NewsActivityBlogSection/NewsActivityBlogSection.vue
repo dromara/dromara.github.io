@@ -26,7 +26,12 @@
     </div>
     <template v-if="filteredSectionDetail.length">
       <div class="cards">
-        <div v-for="obj in filteredSectionDetail" :key="obj.title" class="card">
+        <div
+          v-for="obj in filteredSectionDetail"
+          :key="obj.title"
+          class="card"
+          @click="goBlogDetail(obj.url)"
+        >
           <div class="tag-items">
             <div v-for="tag in obj.tag" :key="tag" class="tag-item">
               #{{ tag }}
@@ -34,7 +39,7 @@
           </div>
           <img class="cover" :src="obj.cover" :alt="obj.title" />
 
-          <a class="title" :href="obj.url">{{ obj.title }}</a>
+          <a class="title">{{ obj.title }}</a>
           <div class="author-info">
             <div class="author-name">{{ obj.author }}</div>
             <div class="time">{{ obj.date }}</div>
@@ -113,7 +118,7 @@ for (const frontmatter of allPagesFrontmatter) {
             frontmatter.head
               .flat()
               .find(
-                (item: { property: string, content: string }) =>
+                (item: { property: string; content: string }) =>
                   item.property === "og:url"
               ).content
           ) ?? "", // head的一个数组对象中包含url
@@ -129,7 +134,7 @@ for (const key in groupedPages) {
   );
 }
 // 从框架提供的url中拿到跳转路径
-function extractPathFromURL (url: string): string | null {
+function extractPathFromURL(url: string): string | null {
   const match = url.match(/\/([^/]+\.html)$/);
   if (match?.[1] != null) {
     return match[1];
@@ -137,6 +142,12 @@ function extractPathFromURL (url: string): string | null {
     return null;
   }
 }
+
+//跳转到博客详情页
+const goBlogDetail = (url) => {
+  console.log("66666");
+  location.href = url;
+};
 const TAGS = [
   "All",
   "fastRequest",
@@ -167,7 +178,7 @@ const langMapping = computed(() => {
   return mapping[props.title ?? ""] ?? "中文";
 });
 
-function formatDate (inputDate: string): string {
+function formatDate(inputDate: string): string {
   const date = new Date(inputDate);
   const year = date.getFullYear();
   const month = String(date.getMonth() + 1).padStart(2, "0");
@@ -287,6 +298,7 @@ const filteredSectionDetail = computed(() => {
     grid-template-rows: auto;
     grid-template-columns: 1fr;
     gap: 16px;
+    cursor: pointer;
   }
   .cover {
     height: 190px;
