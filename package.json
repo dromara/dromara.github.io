@@ -3,35 +3,35 @@
   "version": "2.0.0",
   "description": "A project of vuepress-theme-hope",
   "license": "MIT",
+  "type": "module",
   "scripts": {
     "docs:build": "vuepress build src",
     "docs:clean-dev": "vuepress dev src --clean-cache",
-    "start": "eslint --fix --ext .vue src/.vuepress/ && vuepress dev src --temp .temp",
-    "docs:dev": "vuepress dev src --temp .temp",
+    "docs:dev": "vuepress dev src",
     "docs:update-package": "pnpm dlx vp-update",
-    "lint": "eslint --fix --ext .vue src/.vuepress/"
+    "start": "eslint --fix --ext .vue src/.vuepress/ && vuepress dev src",
+    "lint": "eslint --ext .ts,.vue src/.vuepress/ --fix"
   },
+  "packageManager": "pnpm@8.10.2",
   "devDependencies": {
-    "@typescript-eslint/eslint-plugin": "^5.52.0",
-    "@vuepress/client": "2.0.0-beta.66",
-    "eslint": "^8.47.0",
-    "eslint-config-standard-with-typescript": "^37.0.0",
-    "eslint-plugin-import": "^2.25.2",
-    "eslint-plugin-n": "^15.0.0 || ^16.0.0 ",
-    "eslint-plugin-promise": "^6.0.0",
-    "eslint-plugin-vue": "^9.17.0",
+    "@typescript-eslint/eslint-plugin": "^6.9.1",
+    "@vuepress/client": "2.0.0-beta.67",
+    "@vuepress/utils": "2.0.0-beta.67",
+    "eslint": "^8.52.0",
+    "eslint-config-standard-with-typescript": "^39.1.1",
+    "eslint-plugin-import": "^2.29.0",
+    "eslint-plugin-n": "^16.2.0",
+    "eslint-plugin-promise": "^6.1.1",
+    "eslint-plugin-vue": "^9.18.1",
     "node-sass": "^9.0.0",
     "sass-loader": "^13.3.2",
+    "swiper": "^11.0.3",
     "style-loader": "^3.3.3",
-    "typescript": "*",
-    "vue": "^3.3.4",
-    "vuepress": "2.0.0-beta.66",
-    "vuepress-plugin-search-pro": "2.0.0-beta.234",
-    "vuepress-theme-hope": "2.0.0-beta.234"
-  },
-  "dependencies": {
-    "@vuepress/theme-default": "2.0.0-beta.66",
-    "@vuepress/utils": "2.0.0-beta.66",
-    "swiper": "^10.2.0"
+    "typescript": "^5.2.2",
+    "vue": "^3.3.7",
+    "vuepress": "2.0.0-beta.67",
+    "vuepress-plugin-search-pro": "2.0.0-beta.245",
+    "vuepress-shared": "2.0.0-beta.245",
+    "vuepress-theme-hope": "2.0.0-beta.245"
   }
 }

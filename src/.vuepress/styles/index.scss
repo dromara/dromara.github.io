@@ -1,4 +1,11 @@
-// place your custom styles here
+body {
+  background-color: #f9fbff;
+}
+
+.bg-default {
+  background-color: #e9eef8;
+}
+
 #navbar {
   background-color: #e4eeff;
   box-shadow: none;
@@ -12,27 +19,21 @@
   --dark-grey: #414960;
 }
 
-body {
-  background-color: #f9fbff;
-}
-
 .theme-hope-content a:hover {
   text-decoration: none;
-}
-
-.bg-default {
-  background-color: #e9eef8;
 }
 
 @media screen and (max-width: 1100px) {
   .vp-toggle-navbar-button {
     display: flex !important;
   }
+
   .vp-navbar-center {
     display: none;
   }
+
   #nav-screen,
-  .nav-screen-links {
+  .vp-nav-screen-links {
     display: block;
   }
 }

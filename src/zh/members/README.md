@@ -1,14 +1,9 @@
 ---
 title: 成员
-index: false
-sidebar: false
-breadcrumb: false
 pageInfo: false
 contributors: false
 editLink: false
 lastUpdated: false
-prev: false
-next: false
 ---
 
 <script setup lang="ts">

@@ -1,13 +1,9 @@
 ---
 title: 关于
-sidebar: false
-breadcrumb: false
 pageInfo: false
 contributors: false
 editLink: false
 lastUpdated: false
-prev: false
-next: false
 ---
 
 ## 我们的愿景
