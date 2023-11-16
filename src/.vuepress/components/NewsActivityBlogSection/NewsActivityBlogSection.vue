@@ -144,8 +144,7 @@ function extractPathFromURL(url: string): string | null {
 }
 
 //跳转到博客详情页
-const goBlogDetail = (url) => {
-  console.log("66666");
+const goBlogDetail = url => {
   location.href = url;
 };
 const TAGS = [
