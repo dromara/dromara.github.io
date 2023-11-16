@@ -26,7 +26,12 @@
     </div>
     <template v-if="filteredSectionDetail.length">
       <div class="cards">
-        <div v-for="obj in filteredSectionDetail" :key="obj.title" class="card">
+        <div
+          v-for="obj in filteredSectionDetail"
+          :key="obj.title"
+          class="card"
+          @click="goBlogDetail(obj.url)"
+        >
           <div class="tag-items">
             <div v-for="tag in obj.tag" :key="tag" class="tag-item">
               #{{ tag }}
@@ -34,7 +39,7 @@
           </div>
           <img class="cover" :src="obj.cover" :alt="obj.title" />
 
-          <a class="title" :href="obj.url">{{ obj.title }}</a>
+          <a class="title">{{ obj.title }}</a>
           <div class="author-info">
             <div class="author-name">{{ obj.author }}</div>
             <div class="time">{{ obj.date }}</div>
@@ -298,6 +303,7 @@ function extractPathFromURL(url: string): string | null {
     grid-template-rows: auto;
     grid-template-columns: 1fr;
     gap: 16px;
+    cursor: pointer;
   }
   .cover {
     height: 190px;
