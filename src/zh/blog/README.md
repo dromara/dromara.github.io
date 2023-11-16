@@ -1,27 +1,22 @@
 ---
 title: 博客
-index: false
-sidebar: false
-breadcrumb: false
 pageInfo: false
 contributors: false
 editLink: false
 lastUpdated: false
-prev: false
-next: false
 ---
 
+<SiteSection :title="frontmatter.title"/>
+
 <script setup lang="ts">
-import NewsActivityBlogSection from "@NewsActivityBlogSection";
+import SiteSection from "@SiteSection";
 import { usePageFrontmatter } from "@vuepress/client";
-import type { DefaultThemePageFrontmatter } from "@vuepress/theme-default/lib/shared/index.js";
+import type { ThemeHopePageFrontmatter } from "vuepress-theme-hope";
 import { ref, onBeforeMount } from "vue";
 
-const frontmatter = usePageFrontmatter<DefaultThemePageFrontmatter>();
+const frontmatter = usePageFrontmatter<ThemeHopePageFrontmatter>();
 
 </script>
-
-<NewsActivityBlogSection :title="frontmatter.title"/>
 
 <style scoped lang="scss">
 .theme-hope-content {

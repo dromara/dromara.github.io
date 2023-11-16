@@ -2,12 +2,15 @@ import { getDirname, path } from "@vuepress/utils";
 import { defineUserConfig } from "vuepress";
 import { hopeTheme } from "vuepress-theme-hope";
 import { searchProPlugin } from "vuepress-plugin-search-pro";
-import { enNavbar, zhNavbar } from "./navbar/index.js";
-import { enSidebar, zhSidebar } from "./sidebar/index.js";
 
+import { enNavbar, zhNavbar } from "./navbar/index.js";
+import { getAllFrontmatter } from "./getAllFrontmatter.js";
+
+// eslint-disable-next-line @typescript-eslint/naming-convention
 const __dirname = getDirname(import.meta.url);
 
 export default defineUserConfig({
+  base: "/",
   head: [
     [
       "meta",
@@ -26,8 +29,6 @@ export default defineUserConfig({
     ["script", { src: "https://cdn.wwads.cn/js/makemoney.js", async: true }]
   ],
 
-  base: "/",
-  shouldPrefetch: false,
   locales: {
     "/": {
       lang: "en-US",
@@ -38,36 +39,33 @@ export default defineUserConfig({
       description: "dromara的官网文档"
     }
   },
+
   theme: hopeTheme(
     {
       hostname: "https://vuepress-theme-hope-docs-demo.netlify.app",
+      logo: "/logo.svg",
+      repo: "dromara",
+      docsDir: "src",
+
       breadcrumb: false,
-      editLink: false,
       darkmode: "disable",
+      editLink: false,
 
       iconAssets: "fontawesome-with-brands",
 
-      logo: "/logo.svg",
-
-      repo: "dromara",
-
-      docsDir: "src",
+      navbarLayout: {
+        start: ["Brand"],
+        center: ["Links"],
+        end: ["Language", "GiteeRepo", "Repo", "Outlook", "Search"]
+      },
+      sidebarSorter: ["date-desc"],
 
       locales: {
         "/": {
           // navbar
           navbar: enNavbar,
-
           // sidebar
-          sidebar: enSidebar,
-
-          footer: "Default footer",
-
-          displayFooter: true,
-
-          metaLocales: {
-            editLink: "Edit this page on GitHub"
-          }
+          sidebar: false
         },
 
         /**
@@ -76,114 +74,45 @@ export default defineUserConfig({
         "/zh/": {
           // navbar
           navbar: zhNavbar,
-
           // sidebar
-          sidebar: zhSidebar,
-
-          footer: "默认页脚",
-
-          displayFooter: true,
-
-          // page meta
-          metaLocales: {
-            editLink: "在 GitHub 上编辑此页"
-          }
+          sidebar: false
         }
       },
 
       plugins: {
-        photoSwipe: false,
         // All features are enabled for demo, only preserve features you need here
         mdEnhance: {
-          align: true,
-          attrs: true,
-          chart: true,
-          codetabs: true,
-          demo: true,
-          echarts: true,
-          figure: true,
-          flowchart: true,
-          gfm: true,
-          imgLazyload: true,
-          imgSize: true,
-          include: true,
-          katex: true,
-          mark: true,
-          mermaid: true,
-          playground: {
-            presets: ["ts", "vue"]
-          },
-          presentation: ["highlight", "math", "search", "notes", "zoom"],
-          stylize: [
-            {
-              matcher: "Recommended",
-              replacer: ({ tag }) => {
-                if (tag === "em")
-                  return {
-                    tag: "Badge",
-                    attrs: { type: "tip" },
-                    content: "Recommended"
-                  };
-              }
-            }
-          ],
-          sub: true,
-          sup: true,
-          tabs: true,
-          vPre: true,
-          vuePlayground: true
-        }
-      },
-      sidebarSorter: ["date-desc"],
-      blog: { name: "dromara" }
+          figure: true
+        },
+        photoSwipe: false
+      }
     },
     { custom: true }
   ),
-  alias: {
-    // 你可以在这里将别名定向到自己的组件
-    "@theme-hope/components/HomePage": path.resolve(
-      __dirname,
-      "./components/HomePage/HomePage.vue"
-    ),
-    "@MembersPage": path.resolve(
-      __dirname,
-      "./components/MembersPage/MembersPage.vue"
-    ),
-    "@theme-hope/components/PageFooter": path.resolve(
-      __dirname,
-      "./components/PageFooter/PageFooter.vue"
-    ),
-    "@ProjectsPage": path.resolve(
-      __dirname,
-      "components/ProjectsPage/ProjectsPage.vue"
-    ),
-    "@GitHubStars": path.resolve(__dirname, "components/GitHubStars.vue"),
-    "@LogoAnimation": path.resolve(__dirname, "components/LogoAnimation.vue"),
-    "@NewsActivityBlogSection": path.resolve(
-      __dirname,
-      "components/NewsActivityBlogSection/NewsActivityBlogSection.vue"
-    )
-  },
+
   plugins: [
     // Search
     searchProPlugin({
       // index all content
       indexContent: true
-
-      // add supports for category and tags
-      // customFields: [
-      //   {
-      //     getter: (page) => page.frontmatter.category,
-      //     formatter: "Category: $content",
-      //   },
-      //   {
-      //     getter: (page) => page.frontmatter.tag,
-      //     formatter: "Tag: $content",
-      //   },
-      // ],
     }),
-    require("./getAllFrontmatter")
-  ]
-  // Enable it with pwa
-  // shouldPrefetch: false,
+    getAllFrontmatter
+  ],
+
+  alias: {
+    // 你可以在这里将别名定向到自己的组件
+    "@theme-hope/components/HomePage": path.resolve(
+      __dirname,
+      "./components/HomePage.vue"
+    ),
+    "@theme-hope/components/PageFooter": path.resolve(
+      __dirname,
+      "./components/PageFooter.vue"
+    ),
+    "@MembersPage": path.resolve(__dirname, "./components/MembersPage.vue"),
+    "@ProjectsPage": path.resolve(__dirname, "./components/ProjectsPage.vue"),
+    "@SiteSection": path.resolve(__dirname, "./components/SiteSection.vue")
+  },
+
+  shouldPrefetch: false
 });

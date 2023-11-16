@@ -15,7 +15,7 @@ jobs:
     name: Build and Deploy Job
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           fetch-depth: 0
           # if your docs needs submodules, uncomment the following line
@@ -28,7 +28,7 @@ jobs:
           version: 8
 
       - name: Setup Node.js
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version: 18
           cache: pnpm
