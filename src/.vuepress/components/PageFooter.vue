@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { computed } from "vue";
 import { usePageFrontmatter } from "@vuepress/client";
-import { ThemeHopePageFrontmatter } from "vuepress-theme-hope/client";
+import { type ThemeHopePageFrontmatter } from "vuepress-theme-hope/client";
 
 import { useFooterLocale } from "../composables/index.js";
 
