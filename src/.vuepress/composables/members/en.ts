@@ -11,7 +11,7 @@ export const enMembersOption: MembersOption = {
     role: "Founder",
     name: "Xiao Yu",
     photo: "/assets/img/members/xiaoyu.webp",
-    desc: 'Founder/VP of Apache ShenYu, Apache Member, author of Hmliy, Raincat, Myth and other distributed transaction frameworks, TVP of Tencent Cloud. Author of "Deep Understanding of Distributed Transactions: Principles and Practices". He has been honored as one of the 33 Open Source Pioneers, OSCAR Peak Open Source Person of ICT Academy and other awards.'
+    desc: "Founder/VP of Apache ShenYu, Apache Member, author of Hmliy, Raincat, Myth and other distributed transaction frameworks, TVP of Tencent Cloud. Author of \"Deep Understanding of Distributed Transactions: Principles and Practices\". He has been honored as one of the 33 Open Source Pioneers, OSCAR Peak Open Source Person of ICT Academy and other awards."
   },
   MEMBERS_ITEM: [
     {

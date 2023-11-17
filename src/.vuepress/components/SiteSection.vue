@@ -116,7 +116,7 @@ for (const frontmatter of allPagesFrontmatter) {
             frontmatter.head
               .flat()
               .find(
-                (item: { property: string; content: string }) =>
+                (item: { property: string, content: string }) =>
                   item.property === "og:url"
               ).content
           ) ?? "", // head的一个数组对象中包含url
@@ -173,7 +173,7 @@ watchEffect(() => {
   }
 });
 
-function formatDate(inputDate: string): string {
+function formatDate (inputDate: string): string {
   const date = new Date(inputDate);
   const year = date.getFullYear();
   const month = String(date.getMonth() + 1).padStart(2, "0");
@@ -183,11 +183,16 @@ function formatDate(inputDate: string): string {
 }
 
 // 从框架提供的url中拿到跳转路径
-function extractPathFromURL(url: string): string | null {
+function extractPathFromURL (url: string): string | null {
   const match = url.match(/\/([^/]+\.html)$/);
 
   return match?.[1] || null;
 }
+
+// 跳转到博客详情
+function goBlogDetail (url: string): void {
+  location.href = url;
+};
 </script>
 
 <style scoped lang="scss">
