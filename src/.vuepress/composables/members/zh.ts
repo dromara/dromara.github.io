@@ -440,6 +440,12 @@ export const zhMembersOption: MembersOption = {
           name: "葛足澳",
           photo: "/assets/img/members/gezuao.webp",
           desc: "LiteFlow Committer"
+        },
+        {
+          role: "成员",
+          name: "姚凯",
+          photo: "/assets/img/members/yaokai.webp",
+          desc: "Dynamic-Tp Committer"
         }
       ]
     }
