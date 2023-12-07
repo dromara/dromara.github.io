@@ -36,13 +36,13 @@ export interface HomeOption {
   COMMUNITY_ITEM: CommunityItem[]
 }
 
-interface GroupedPage {
+interface GroupedPost {
   title: string
   url: string
   time: string
 }
 
-export type GroupedPages = Record<string, GroupedPage[]>;
+export type GroupedPosts = Record<string, GroupedPost[]>;
 
 export interface CommunityLink {
   category: string
