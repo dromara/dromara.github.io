@@ -446,6 +446,12 @@ export const zhMembersOption: MembersOption = {
           name: "姚凯",
           photo: "/assets/img/members/yaokai.webp",
           desc: "Dynamic-Tp Committer"
+        },
+        {
+          role: "成员",
+          name: "东风",
+          photo: "/assets/img/members/dongfeng.webp",
+          desc: "Sms4j Committer"
         }
       ]
     }

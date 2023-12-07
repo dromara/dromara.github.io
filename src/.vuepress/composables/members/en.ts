@@ -446,6 +446,12 @@ export const enMembersOption: MembersOption = {
           name: "Yao Kai",
           photo: "/assets/img/members/yaokai.webp",
           desc: "Dynamic-Tp Committer"
+        },
+        {
+          role: "Member",
+          name: "Dong Feng",
+          photo: "/assets/img/members/dongfeng.webp",
+          desc: "Sms4j Committer"
         }
       ]
     }
