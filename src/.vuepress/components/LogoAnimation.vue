@@ -1049,6 +1049,12 @@ onMounted(() => {
 }
 .content {
   height: 100%;
+  background-image: radial-gradient(
+      100px at 50% 40%,
+      #c6c6f7 1%,
+      transparent 100%
+    ),
+    radial-gradient(farthest-corner at 40% 50%, #dfe6fe 1%, transparent 600px);
 }
 .effect-content {
   height: 100%;

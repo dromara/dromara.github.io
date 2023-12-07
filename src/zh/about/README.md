@@ -18,6 +18,14 @@ lastUpdated: false
 
 **[https://dromara.org](https://dromara.org)** 是 **Dromara** 开源社区官方网站。
 
+## 荣誉
+
+<script setup lang="ts">
+import HonorComp from "@HonorComp";
+</script>
+
+<HonorComp />
+
 ## 社区项目
 
 目前已加入 **Dromara** 社区的项目包括：

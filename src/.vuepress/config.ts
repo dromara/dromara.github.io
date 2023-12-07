@@ -111,6 +111,7 @@ export default defineUserConfig({
     ),
     "@MembersPage": path.resolve(__dirname, "./components/MembersPage.vue"),
     "@ProjectsPage": path.resolve(__dirname, "./components/ProjectsPage.vue"),
+    "@HonorComp": path.resolve(__dirname, "./components/HonorComp.vue"),
     "@SiteSection": path.resolve(__dirname, "./components/SiteSection.vue")
   },
 
