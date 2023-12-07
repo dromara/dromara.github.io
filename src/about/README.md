@@ -18,6 +18,20 @@ Technology stack comprehensive open source co-build, maintain community neutrali
 
 **[https://dromara.org](https://dromara.org)** Is **Dromara** Open Source Community Official Website.
 
+## Honors
+
+<script setup lang="ts">
+import HonorComp from "@HonorComp";
+</script>
+
+<HonorComp class="en-honor" />
+
+<style>
+.en-honor .about-year-record-container::after {
+  transform: translateY(349px);
+}
+</style>
+
 ## Projects
 
 | Name                                                                                                             | star                                                                                                                                          | 项目介绍                                                                                                                                 |
