@@ -11,7 +11,7 @@ import { Swiper, SwiperSlide } from "swiper/vue";
 
 import LogoAnimation from "./LogoAnimation.vue";
 import {
-  type GroupedSectionPages,
+  type GroupedPosts,
   type CommunityLink,
   useHomeLocale
 } from "../composables/index.js";
@@ -46,7 +46,7 @@ const allPagesFrontmatter = siteData.value.frontmatter;
 const enCommunityLink: CommunityLink[] = reactive([]);
 const zhCommunityLink: CommunityLink[] = reactive([]);
 
-const groupedPages: GroupedSectionPages = {
+const groupedPosts: GroupedPosts = {
   新闻: [],
   News: [],
   博客: [],
@@ -59,8 +59,8 @@ for (const frontmatter of allPagesFrontmatter) {
   if (frontmatter?.head.length > 0) {
     const headName = frontmatter.head[0][1].name; // 拿到每篇md文章frontmatter下meta的name属性
     // 如果是新闻、博客或活动，则添加到相应的数组中
-    if (groupedPages[headName] !== undefined) {
-      groupedPages[headName].push({
+    if (groupedPosts[headName] !== undefined) {
+      groupedPosts[headName].push({
         title: frontmatter.title,
         url:
           extractPathFromURL(
@@ -104,9 +104,9 @@ const mapping: Record<string, { icon: string, urlPrefix: string }> = {
   博客: { icon: "/assets/img/blog.png", urlPrefix: "blog/" }
 };
 
-// 遍历 groupedPages 中的每个分组
-for (const headName in groupedPages) {
-  const pages = groupedPages[headName];
+// 遍历 groupedPosts 中的每个分组
+for (const headName in groupedPosts) {
+  const pages = groupedPosts[headName];
   // 按照日期排序，并选择日期最新的前 5 个项目
   pages.sort((a, b) => new Date(b.time).getTime() - new Date(a.time).getTime());
   const latestPages = pages.slice(0, 5);
@@ -167,6 +167,10 @@ onMounted(() => {
     observer.observe(starNumber);
   }
 });
+
+function jumpTo (url: string): void {
+  window.location.href = url;
+}
 </script>
 
 <template>
@@ -241,7 +245,6 @@ onMounted(() => {
         <swiper
           :modules="[Navigation, EffectCoverflow, Autoplay, Pagination]"
           navigation
-          grabCursor
           centeredSlides
           loop
           :slidesPerView="1.5"
@@ -271,7 +274,7 @@ onMounted(() => {
                 :alt="item.name + ' logo'"
               />
               <div class="text">{{ item.description }}</div>
-              <div class="link-container" @click="$router.push(item.url)">
+              <div class="link-container" @click="jumpTo(item.url)">
                 <div class="link">{{ homeLocale.VIEW_PROJECT }}</div>
                 <div class="icon-container">
                   <div class="icon">
