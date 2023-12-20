@@ -452,6 +452,12 @@ export const enMembersOption: MembersOption = {
           name: "Dong Feng",
           photo: "/assets/img/members/dongfeng.webp",
           desc: "Sms4j Committer"
+        },
+        {
+          role: "Member",
+          name: "Son Xiao",
+          photo: "/assets/img/members/sonxiao.webp",
+          desc: "Hertzbeat Committer"
         }
       ]
     }
