@@ -6,4 +6,5 @@ export interface FooterOption {
   DOCUMENT: string
   WECHAT: string
   KNOWLEDGE_PLANET: string
+  DONATE: string
 }

@@ -46,6 +46,7 @@ const linkOption = computed(() => [
 ]);
 
 const qrcodeOption = computed(() => [
+  { title: footerLocale.value.DONATE, name: "donate" },
   { title: footerLocale.value.WECHAT, name: "qrcode_wx" },
   { title: footerLocale.value.KNOWLEDGE_PLANET, name: "qrcode_zsxq" }
 ]);
