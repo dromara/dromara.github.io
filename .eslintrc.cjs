@@ -17,6 +17,10 @@ module.exports = {
     semi: ["error", "always"],
     quotes: ["error", "double"],
     "@typescript-eslint/semi": "off",
-    "@typescript-eslint/quotes": ["error", "double"]
+    "@typescript-eslint/quotes": ["error", "double"],
+    "@typescript-eslint/explicit-function-return-type": "off",
+    "@typescript-eslint/no-explicit-any": ["off"],
+    "@typescript-eslint/strict-boolean-expressions": 0,
+    "@typescript-eslint/prefer-nullish-coalescing": 0
   }
 };

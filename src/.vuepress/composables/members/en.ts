@@ -440,6 +440,18 @@ export const enMembersOption: MembersOption = {
           name: "Ge Zu Ao",
           photo: "/assets/img/members/gezuao.webp",
           desc: "LiteFlow Committer"
+        },
+        {
+          role: "Member",
+          name: "Yao Kai",
+          photo: "/assets/img/members/yaokai.webp",
+          desc: "Dynamic-Tp Committer"
+        },
+        {
+          role: "Member",
+          name: "Dong Feng",
+          photo: "/assets/img/members/dongfeng.webp",
+          desc: "Sms4j Committer"
         }
       ]
     }
