@@ -452,6 +452,12 @@ export const zhMembersOption: MembersOption = {
           name: "东风",
           photo: "/assets/img/members/dongfeng.webp",
           desc: "Sms4j Committer"
+        },
+        {
+          role: "成员",
+          name: "淞筱",
+          photo: "/assets/img/members/sonxiao.webp",
+          desc: "Hertzbeat Committer"
         }
       ]
     }
