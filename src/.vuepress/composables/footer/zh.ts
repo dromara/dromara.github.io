@@ -7,5 +7,6 @@ export const zhFooterOption: FooterOption = {
   BLOG: "博客",
   DOCUMENT: "文档",
   WECHAT: "微信公众号",
-  KNOWLEDGE_PLANET: "知识星球"
+  KNOWLEDGE_PLANET: "知识星球",
+  DONATE: "支持dromara开源社区"
 };

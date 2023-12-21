@@ -186,13 +186,13 @@ function formatDate (inputDate: string): string {
 function extractPathFromURL (url: string): string | null {
   const match = url.match(/\/([^/]+\.html)$/);
 
-  return match?.[1] || null;
+  return match?.[1] ?? null;
 }
 
 // 跳转到博客详情
 function goBlogDetail (url: string): void {
   location.href = url;
-};
+}
 </script>
 
 <style scoped lang="scss">

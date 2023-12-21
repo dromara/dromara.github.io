@@ -7,5 +7,6 @@ export const enFooterOption: FooterOption = {
   BLOG: "Blog",
   DOCUMENT: "Document",
   WECHAT: "Wechat Official Account",
-  KNOWLEDGE_PLANET: "Knowledge Planet"
+  KNOWLEDGE_PLANET: "Knowledge Planet",
+  DONATE: "Donate dromara"
 };
