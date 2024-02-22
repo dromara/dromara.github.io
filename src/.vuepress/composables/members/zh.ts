@@ -82,6 +82,12 @@ export const zhMembersOption: MembersOption = {
           name: "石鸣",
           photo: "/assets/img/members/shiming.webp",
           desc: "MaxKey 作者"
+        },
+        {
+          role: "TOC成员",
+          name: "鲁强",
+          photo: "/assets/img/members/qianglu.webp",
+          desc: "Cubic 作者"
         }
       ]
     },
