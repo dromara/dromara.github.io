@@ -76,6 +76,12 @@ export const enMembersOption: MembersOption = {
           name: "Nuoyan",
           photo: "/assets/img/members/nuoyan.webp",
           desc: "Member of Apache Shenyu PMC, technical leader of a parking industry company, passionate about open source!"
+        },
+        {
+          role: "TOC Member",
+          name: "Qiang Lu",
+          photo: "/assets/img/members/qianglu.webp",
+          desc: "Author of Cubic"
         }
       ]
     },
