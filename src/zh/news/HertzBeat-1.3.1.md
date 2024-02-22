@@ -1,9 +1,9 @@
 ---
-title: 开源实时监控 HertzBeat v1.3.2 发布, 更稳定更易用
+title: 50 天 36 位小伙伴的贡献，开源实时监控工具 HertzBeat v1.3.1 发布
 author: tom
 tag:
   - HertzBeat
-date: 2023-07-05
+date: 2023-05-08
 cover: /assets/img/news/HertzBeat-1.4.0-1.png
 head:
   - - meta
