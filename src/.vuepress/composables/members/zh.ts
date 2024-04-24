@@ -102,6 +102,12 @@ export const zhMembersOption: MembersOption = {
         },
         {
           role: "委员会成员",
+          name: "刘陈阳",
+          photo: "/assets/img/acbox-liu.jpg",
+          desc: "Newcar作者，BugDuck开源团队创始人"
+        },
+        {
+          role: "委员会成员",
           name: "冰河",
           photo: "/assets/img/members/binghe.webp",
           desc: "互联网技术专家、TVP腾讯云最具价值专家、多家互联网公司技术顾问。致力于分布式系统、微服务、数据库和大数据技术研究，拥有丰富的架构和研发经验。著有《深入理解高并发编程：核心原理与案例实战》、《深入理解高并发编程：JDK核心技术》、《深入理解分布式事务：原理与实战》等多本畅享书；“冰河技术”公众号作者。"
