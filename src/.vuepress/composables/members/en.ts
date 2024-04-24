@@ -213,6 +213,12 @@ export const enMembersOption: MembersOption = {
           name: "zyplayer",
           photo: "/assets/img/members/zyplayer.webp",
           desc: "Author of zyplayer-doc"
+        },
+        {
+          role: "Committee Member",
+          name: "Don Tang",
+          photo: "/assets/img/members/tangzhenchao.webp",
+          desc: "Coordinate spring city Jinan, open source enthusiasts. Author of mybatis-plus-ext and AutoTable"
         }
       ]
     },

@@ -213,6 +213,12 @@ export const zhMembersOption: MembersOption = {
           name: "暮光：城中城",
           photo: "/assets/img/members/zyplayer.webp",
           desc: "zyplayer-doc 作者"
+        },
+        {
+          role: "委员会成员",
+          name: "唐振超",
+          photo: "/assets/img/members/tangzhenchao.webp",
+          desc: "坐标泉城济南，开源爱好者。mybatis-plus-ext 作者，AutoTable 作者"
         }
       ]
     },
