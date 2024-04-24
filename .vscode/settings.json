@@ -10,7 +10,7 @@
   },
   // 为ESLint启用“保存时自动修复”，并且仍然具有格式和快速修复功能
   "editor.codeActionsOnSave": {
-    "source.fixAll": true,
-    "source.fixAll.eslint": true
+    "source.fixAll": "explicit",
+    "source.fixAll.eslint": "explicit"
   }
 }

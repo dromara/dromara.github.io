@@ -96,6 +96,12 @@ export const enMembersOption: MembersOption = {
         },
         {
           role: "Committee Member",
+          name: "Acbox Liu (Acbox Sky)",
+          photo: "/assets/img/acbox-liu.jpg",
+          desc: "The author of Newcar, and the creator of BugDuck Open Soruce Team."
+        },
+        {
+          role: "Committee Member",
           name: "Binghe",
           photo: "/assets/img/members/binghe.webp",
           desc: "Internet technology expert, TVP Tencent Cloud Most Valuable Expert, and technical consultant for multiple companies. Specialized in distributed systems, microservices, and big data with extensive R&D experience. Author of key books and creator of 'Binghe Technology' WeChat account."
