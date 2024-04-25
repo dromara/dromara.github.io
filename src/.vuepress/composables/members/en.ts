@@ -97,7 +97,7 @@ export const enMembersOption: MembersOption = {
         {
           role: "Committee Member",
           name: "Acbox Liu (Acbox Sky)",
-          photo: "/assets/img/acbox-liu.jpg",
+          photo: "/assets/img/members/acbox-liu.webp",
           desc: "The author of Newcar, and the creator of BugDuck Open Soruce Team."
         },
         {

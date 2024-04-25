@@ -103,7 +103,7 @@ export const zhMembersOption: MembersOption = {
         {
           role: "委员会成员",
           name: "刘陈阳",
-          photo: "/assets/img/acbox-liu.jpg",
+          photo: "/assets/img/members/acbox-liu.webp",
           desc: "Newcar作者，BugDuck开源团队创始人"
         },
         {
