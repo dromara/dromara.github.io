@@ -21,7 +21,7 @@ export const enMembersOption: MembersOption = {
           role: "Secretary General",
           name: "Gong Chao",
           photo: "/assets/img/members/tom.webp",
-          desc: "Founder of Dromara HertzBeat & TanCloud, open source enthusiast, initiator of multiple open source projects including HertzBeat, Sureness, Bootshiro, Issues-Translate-Action, etc. Currently working full-time on open source real-time monitoring with HertzBeat and TanCloud cloud services, hoping to do open source work happily while enjoying bread and singing songs."
+          desc: "An open source enthusiast and practitioner, hoping to work on open source while eating bread and singing songs."
         },
         {
           role: "Assistant Secretary General",

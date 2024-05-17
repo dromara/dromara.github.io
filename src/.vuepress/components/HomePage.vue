@@ -22,7 +22,6 @@ import "swiper/css/pagination";
 
 const gvpProjects = [
   "hutool",
-  "hertzbeat",
   "Sa-Token",
   "LiteFlow",
   "Jpom",
@@ -37,7 +36,8 @@ const gvpProjects = [
   "northstar",
   "CloudEon",
   "koalas-rpc",
-  "Raincat"
+  "Raincat",
+  "dy-java"
 ];
 const totalStars = 204.7; // 来源于gitee总star数与github各仓库star数之和，需手动更新
 

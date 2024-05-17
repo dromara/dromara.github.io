@@ -75,7 +75,7 @@ export const useProjectsData = () => {
     },
     {
       groupName: projectLocale.value.OPERATIONS_AND_MAINTENANCE_CONTROL,
-      projects: ["Jpom", "hertzbeat", "cubic", "TestHub", "athena"]
+      projects: ["Jpom", "cubic", "TestHub", "athena"]
     },
     {
       groupName: projectLocale.value.DISTRIBUTED_LOG,
@@ -675,30 +675,6 @@ export const useProjectsData = () => {
   <img src="https://img.shields.io/docker/pulls/jpomdocker/jpom.svg" alt="docker pull">
   </a>
           `
-        },
-        {
-          name: "hertzbeat",
-          website: "https://hertzbeat.com/",
-          description: projectLocale.value.HERTZBEAT_DESC,
-          sponsor: "tomsun28",
-          date: "2022.02",
-          link: `
-  <a href="https%3A%2F%2Fhub.docker.com%2Frepository%2Fdocker%2Ftancloud%2Fhertzbeat%2Fgeneral"><img src="https://img.shields.io/docker/pulls/tancloud/hertzbeat?style=%20for-the-badge&amp;logo=docker&amp;label=DockerHub%20Download" alt="Docker Pulls"></a>
-  <a href="https%3A%2F%2Fartifacthub.io%2Fpackages%2Fsearch%3Frepo%3Dhertzbeat"><img src="https://img.shields.io/endpoint?url=https://artifacthub.io/badge/repository/hertzbeat" alt="Artifact Hub"></a>
-  <a href="https%3A%2F%2Fdiscord.gg%2FFb6M73htGr"><img src="https://img.shields.io/badge/chat-on%20discord-brightgreen" alt="discord"></a>
-  <a href="https%3A%2F%2Fgitter.im%2Fhertzbeat%2Fcommunity%3Futm_source%3Dbadge%26utm_medium%3Dbadge%26utm_campaign%3Dpr-badge"><img src="https://badges.gitter.im/hertzbeat/community.svg" alt="Gitter"></a>
-  <a href="https%3A%2F%2Fjq.qq.com%2F%3F_wv%3D1027%26k%3DaVIVB2K9"><img src="https://img.shields.io/badge/qq-236915833-orange" alt="QQ"></a>
-  <img src="https://cdn.jsdelivr.net/gh/dromara/hertzbeat@gh-pages/img/badge/web-monitor.svg" alt="hertzbeat">
-  <img src="https://cdn.jsdelivr.net/gh/dromara/hertzbeat@gh-pages/img/badge/ping-connect.svg" alt="hertzbeat">
-  <img src="https://cdn.jsdelivr.net/gh/dromara/hertzbeat@gh-pages/img/badge/port-available.svg" alt="hertzbeat">
-  <img src="https://cdn.jsdelivr.net/gh/dromara/hertzbeat@gh-pages/img/badge/database-monitor.svg" alt="hertzbeat">
-  <img src="https://cdn.jsdelivr.net/gh/dromara/hertzbeat@gh-pages/img/badge/os-monitor.svg" alt="hertzbeat">
-  <img src="https://img.shields.io/badge/monitor-cloud%20native-brightgreen" alt="hertzbeat">
-  <img src="https://img.shields.io/badge/monitor-middleware-blueviolet" alt="hertzbeat">
-  <img src="https://img.shields.io/badge/monitor-network-red" alt="hertzbeat">
-  <img src="https://cdn.jsdelivr.net/gh/dromara/hertzbeat@gh-pages/img/badge/custom-monitor.svg" alt="hertzbeat">
-  <img src="https://cdn.jsdelivr.net/gh/dromara/hertzbeat@gh-pages/img/badge/alert.svg" alt="hertzbeat">
-  `
         },
         {
           name: "cubic",
