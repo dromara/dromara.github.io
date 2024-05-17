@@ -53,7 +53,6 @@ export const zhProjectsOption: ProjectsOption = {
 
   OPERATIONS_AND_MAINTENANCE_CONTROL: "运维管控",
   JPOM_DESC: "简而轻的低侵入式在线构建、自动部署、日常运维、项目监控软件",
-  HERTZBEAT_DESC: "易用友好的高性能监控告警系统",
   CUBIC_DESC: "无侵入分布式监控，致力于应用级监控的工具",
   ATHENA_DESC: "metrics 字节码工具",
 

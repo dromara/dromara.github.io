@@ -382,39 +382,6 @@ const animData = {
       ])
     },
     {
-      widthStr: "8vw",
-      backgroundColorStr: "",
-      backgroundImageStr: "url('/assets/img/logo-animation/hertzbeat.webp')",
-      topStr: "",
-      rightStr: "calc(50% - 11vw)",
-      bottomStr: "calc(50% - 18vw)",
-      leftStr: "",
-      className: "e-square",
-      parentClassName: "effect-box",
-      opacity: 0.67,
-      opacityAnimMap: new Map([
-        [0, 0.67],
-        [1, 1]
-      ]),
-      transform: {
-        translate3d: { x: 0, y: 0, z: 0 }
-      },
-      transformAnimMap: new Map([
-        [
-          0,
-          {
-            translate3d: { x: 0, y: 0, z: 0 }
-          }
-        ],
-        [
-          1,
-          {
-            translate3d: { x: 0, y: 0, z: 1600 }
-          }
-        ]
-      ])
-    },
-    {
       widthStr: "6vw",
       backgroundColorStr: "",
       backgroundImageStr: "url('/assets/img/logo-animation/soul.webp')",

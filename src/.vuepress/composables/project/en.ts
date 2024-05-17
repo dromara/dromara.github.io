@@ -64,7 +64,6 @@ export const enProjectsOption: ProjectsOption = {
 
   OPERATIONS_AND_MAINTENANCE_CONTROL: "Operations and Maintenance Control",
   JPOM_DESC: "Simple & Low-intrusion project management platform",
-  HERTZBEAT_DESC: "Friendly apm - monitor and alarm system.",
   CUBIC_DESC: "Distributed monitoring system",
   ATHENA_DESC: "Metrics bytecode tool",
 

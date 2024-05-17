@@ -21,7 +21,7 @@ export const zhMembersOption: MembersOption = {
           role: "秘书长",
           name: "巩超",
           photo: "/assets/img/members/tom.webp",
-          desc: "Dromara HertzBeat & TanCloud 创始人，开源爱好者，发起多个开源项目 HertzBeat, Sureness, Bootshiro, Issues-Translate-Action 等。目前在全职做开源实时监控 HertzBeat 以及基于她的云服务 TanCloud，希望能开心的边做着开源，边吃着面包边唱着歌。"
+          desc: "开源爱好与实践者，希望边做着开源边吃着面包边唱着歌。"
         },
         {
           role: "秘书长助理",

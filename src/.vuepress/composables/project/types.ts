@@ -46,7 +46,6 @@ export interface ProjectsOption {
 
   OPERATIONS_AND_MAINTENANCE_CONTROL: string
   JPOM_DESC: string
-  HERTZBEAT_DESC: string
   CUBIC_DESC: string
   ATHENA_DESC: string
 
