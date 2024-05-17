@@ -23,7 +23,6 @@
     "eslint-plugin-n": "^16.2.0",
     "eslint-plugin-promise": "^6.1.1",
     "eslint-plugin-vue": "^9.18.1",
-    "node-sass": "^9.0.0",
     "sass-loader": "^13.3.2",
     "swiper": "^11.0.3",
     "style-loader": "^3.3.3",
