@@ -82,7 +82,7 @@ Join the Knowledge Planet
 
 [xiaoyu@dromara.org](mailto:xiaoyu%40dromara.org)
 
- <img src="/assets/img/donation.png" height="240">
+ <img src="/assets/img/donation.webp" height="240">
 
 **Dromara** community promises that all received sponsorship and support funds will be fully disclosed, and subsequent funds will only be used for **Dromara** community operational expenses. For sponsoring anything, you can contact **xiaoyu@dromara.org**. Current sponsors are (for sponsors without a displayed name, default: Anonymous):
 

@@ -84,7 +84,7 @@ dromara 社区组织始终抱有积极开放宽容的态度，如果捐赠项目
 
 [xiaoyu@dromara.org](mailto:xiaoyu%40dromara.org)
 
- <img src="/assets/img/donation.png" height="240">
+ <img src="/assets/img/donation.webp" height="240">
 
 **Dromara** 社区承诺将收到的所有赞助支持资金完全公开化，且后续资金用途仅限于 **Dromara** 社区运营支出。赞助任何事情，可以联系 **<xiaoyu@dromara.org>** 目前赞助商有(没有显示名称的赞助者，默认：无名)：
 
