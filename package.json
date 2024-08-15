@@ -1,7 +1,7 @@
 {
   "name": "dromara",
   "version": "2.0.0",
-  "description": "A project of vuepress-theme-hope",
+  "description": "dromara official website from vuepress-theme-hope",
   "license": "MIT",
   "type": "module",
   "scripts": {
