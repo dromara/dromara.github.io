@@ -39,7 +39,7 @@ const gvpProjects = [
   "Raincat",
   "dy-java"
 ];
-const totalStars = 204.7; // 来源于gitee总star数与github各仓库star数之和，需手动更新
+const totalStars = 293.7; // 来源于gitee总star数与github各仓库star数之和，需手动更新
 
 const allPagesFrontmatter = siteData.value.frontmatter;
 
