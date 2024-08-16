@@ -4,7 +4,7 @@ author: zyplayer
 tag:
   - zyplayer-doc
 date: 2023-10-16
-cover: https://zyplayer.oss-cn-beijing.aliyuncs.com/doc/public/logo.png
+cover: /assets/img/logo/zyplayer-doc.webp
 head:
   - - meta
     - name: News
