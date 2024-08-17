@@ -44,6 +44,6 @@ jobs:
         uses: JamesIves/github-pages-deploy-action@v4
         if: github.event_name == 'push' && github.ref == 'refs/heads/master'
         with:
-          # This is the branch where the docs are deployed to
+          # This is the branch where the docs are deployed to .
           branch: gh-pages
           folder: src/.vuepress/dist
