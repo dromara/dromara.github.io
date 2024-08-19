@@ -198,11 +198,11 @@ With these annotations, developers can easily define and manage the structure of
 
 ## CRUD Module Introduction
 
-The CRUD module is the basic set of operations used to process data in an application, namely Create, Read, Update, and Delete. In this module, we encapsulate the CRUD operations that interact with the Milvus database through the abstract class 'BaseMilvusMapper<T>', providing a 1 type of safe and easy-to-use interface.
+The CRUD module is the basic set of operations used to process data in an application, namely Create, Read, Update, and Delete. In this module, we encapsulate the CRUD operations that interact with the Milvus database through the abstract class 'BaseMilvusMapper(T)', providing a 1 type of safe and easy-to-use interface.
 
-### Abstract class 'BaseMilvusMapper'<T>'
+### Abstract class 'BaseMilvusMapper'(T)'
 
-'BaseMilvusMapper<T>'is an abstract class that implements the 'IAMService' interface and defines a series of methods for manipulating the Milvus database. This class is the base class for all the Mapper classes that interact with the Milvus database.
+'BaseMilvusMapper(T)'is an abstract class that implements the 'IAMService' interface and defines a series of methods for manipulating the Milvus database. This class is the base class for all the Mapper classes that interact with the Milvus database.
 
 ### Abstract method 'getClient()'
 
@@ -211,22 +211,22 @@ The CRUD module is the basic set of operations used to process data in an applic
 
 ### Method 'queryWrapper()'
 
-* **Function**: Creates and returns a'LambdaQueryWrapper <T>'instance for building query operations.
+* **Function**: Creates and returns a'LambdaQueryWrapper (T)'instance for building query operations.
 
 
 ### Method 'deleteWrapper()'
 
-* **Function**: Creates and returns a 'LambdaDeleteWrapper<T>'instance to build a delete operation.
+* **Function**: Creates and returns a 'LambdaDeleteWrapper(T)'instance to build a delete operation.
 
 
 ### Method 'updateWrapper()'
 
-* **Function**: Create and return a'LambdaUpdateWrapper <T>'instance for building update operations.
+* **Function**: Create and return a'LambdaUpdateWrapper (T)'instance for building update operations.
 
 
 ### Method 'insertWrapper()'
 
-* **Function**: Creates and returns a'LambdaInsertWrapper <T>'instance to build the insert operation.
+* **Function**: Creates and returns a'LambdaInsertWrapper (T)'instance to build the insert operation.
 
 
 ### Method 'getById(Serializable ... ids)'
@@ -235,7 +235,7 @@ The CRUD module is the basic set of operations used to process data in an applic
 
 * **Parameters**:'ids'-A serializable list of IDs.
 
-* **Return**:'MilvusResp<List<MilvusResult<T >>> '-Response containing query results.
+* **Return**:'MilvusResp<List<MilvusResult(T)>> '-Response containing query results.
 
 
 ### Method 'removeById(Serializable ... ids)'
@@ -244,7 +244,7 @@ The CRUD module is the basic set of operations used to process data in an applic
 
 * **Parameters**:'ids'-A serializable list of IDs.
 
-* **Return**:'MilvusResp<DeleteResp>'-the response of the delete operation.
+* **Return**:'MilvusResp(DeleteResp)'-the response of the delete operation.
 
 
 ### Method 'updateById(T ... entity)'
@@ -253,7 +253,7 @@ The CRUD module is the basic set of operations used to process data in an applic
 
 * **Parameters**:'entity'-a list of entity objects.
 
-* **Return**:'MilvusResp<UpsertResp>'-the response of the update operation.
+* **Return**:'MilvusResp(UpsertResp)'-the response of the update operation.
 
 
 ### Method 'insert(T ... entity)'
@@ -262,7 +262,7 @@ The CRUD module is the basic set of operations used to process data in an applic
 
 * **Parameters**:'entity'-a list of entity objects.
 
-* **Return**:'MilvusResp<InsertResp>'-the response of the insert operation.
+* **Return**:'MilvusResp(InsertResp)'-the response of the insert operation.
 
 
 ### Method 'lambda(Wrapper<W, T> wrapper)'
@@ -297,7 +297,7 @@ The CRUD module is the basic set of operations used to process data in an applic
 
 * **Annotation-driven**: Use the '@ MilvusCollection' annotation to automatically obtain the collection name to reduce hard coding.
 
-Through the 'BaseMilvusMapper<T>'class, developers can easily interact with the Milvus database, improve development efficiency and reduce error rates.
+Through the 'BaseMilvusMapper(T)'class, developers can easily interact with the Milvus database, improve development efficiency and reduce error rates.
 
 ## IAMService interface module introduction
 
@@ -455,7 +455,7 @@ The 'IAMService' interface module is the foundation for building a secure, relia
 
 ## Conditional constructor
 
-The condition constructor module is an abstract base class 'ConditionBuilder<T>'for dynamically building query conditions'. It provides a rich set of methods to generate a variety of query conditions, thereby simplifying the construction of database queries.
+The condition constructor module is an abstract base class 'ConditionBuilder(T)'for dynamically building query conditions'. It provides a rich set of methods to generate a variety of query conditions, thereby simplifying the construction of database queries.
 
 ### Functional Overview
 
@@ -667,7 +667,7 @@ public class ApplicationRunnerTest implements ApplicationRunner {
         //id查询
         MilvusResp<List<MilvusResult<Face>>> query3 = mapper.getById(1L);log.info("query--getById---{}", JSONObject.toJSONString(query3));
         //删除
-        MilvusResp<DeleteResp> remove = mapper.removeById(1L);log.info("remove--{}", JSONObject.toJSONString(remove));
+        MilvusResp(DeleteResp) remove = mapper.removeById(1L);log.info("remove--{}", JSONObject.toJSONString(remove));
         //查询
         MilvusResp<List<MilvusResult<Face>>> query4 = mapper.getById(1L);log.info("query--{}", JSONObject.toJSONString(query4));
 
