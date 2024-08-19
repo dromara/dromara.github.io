@@ -8,25 +8,25 @@ head:
     - name: News
 ---
 
-# MilvusPlus: Vector Database Enhanced Operation Library
+# MilvusPlus：Vector Database Enhanced Operations Library
 
-## Project Introduction
+## Project Profile
 
-! [](/assets/img/news/MilvusPlus-0.jpg)
+![](/assets/img/news/MilvusPlus-0.png)
 
 MilvusPlus
 
 >>🔥🔥🔥MilvusPlus (MP for short) is a Milvus operation tool designed to simplify the interaction with Milvus vector database, provide developers with intuitive API similar to MyBatis-Plus annotation and method calling style, and improve efficiency.
 
-## Features
+## Characteristics
 
 * **No intrusion**: only do enhancement without change, the introduction of it will not affect the existing project, as smooth as silk
 
 * **Small loss**: Basic CURD will be automatically injected when starting, with basically no loss in performance and direct object-oriented operation
 
-* * * Powerful CRUD operation **: Universal MilvusMapper, CRUD operation can be realized only through a small amount of configuration, and more powerful condition constructor to meet various use requirements
+* **Powerful CRUD operation **: Universal MilvusMapper, CRUD operation can be realized only through a small amount of configuration, and more powerful condition constructor to meet various use requirements
 
-* * * Support Lambda call **: Use Lambda expressions to easily write various query conditions without worrying about incorrect field writing.
+* **Support Lambda call **: Use Lambda expressions to easily write various query conditions without worrying about incorrect field writing.
 
 * **Support automatic primary key generation**: Perfect solution to primary key problem
 
@@ -39,9 +39,9 @@ MilvusPlus
 **Easy to scale**: Core design focuses on extensibility.
 
 **Type safety**: Reduce errors with Java type safety.
+    
 
-
-## Quick start
+## Quick Start
 
 Custom extension support:
 
@@ -53,7 +53,7 @@ Custom extension support:
 </dependency>
 ```
 
-Spring Application Support：
+Spring application support:
 
 ```
 <dependency>
@@ -63,7 +63,7 @@ Spring Application Support：
 </dependency>
 ```
 
-Solon Application Support：
+Solon application support:
 
 ```
 <dependency>
@@ -73,7 +73,7 @@ Solon Application Support：
 </dependency>
 ```
 
-## Configuration file
+## Profile
 
 ```
 milvus:
@@ -93,7 +93,7 @@ milvus:
 * 'enable': A Boolean value that indicates whether the Milvus module should be enabled.
 
 * 'packages': These packages contain Java classes for custom annotations.
-
+  
 
 ## Application Scenarios
 
@@ -106,13 +106,13 @@ milvus:
 * **Natural Language Processing**: Convert text to vectors and perform semantic search.
 
 **Bioinformatics**: Analyze and compare biological sequences, such as protein and genomic data.
-
+    
 
 ## Custom annotation details
 
 Automating Milvus database integration with custom annotations provides the following significant benefits:
 
-* * * * Simplify the development process * *: directly declare the database structure in the code through annotations, instead of manually creating collections, attributes, indexes, and partitions. The project is automatically built when it is started, reducing the need to manually write Milvus API calls.
+* * **Simplify the development process **: directly declare the database structure in the code through annotations, instead of manually creating collections, attributes, indexes, and partitions. The project is automatically built when it is started, reducing the need to manually write Milvus API calls.
 
 * **Improve development efficiency**: The annotation-driven approach makes the creation and management of the database structure faster and speeds up development.
 
@@ -121,7 +121,7 @@ Automating Milvus database integration with custom annotations provides the foll
 * **Reduce errors**: Automating the creation of the database structure reduces the possibility of human error and improves the stability of the system.
 
 * **Easy to maintain**: The use of annotations makes changes to the database structure more centralized and clear, facilitating later maintenance and upgrades.
-
+  
 
 ### @ ExtraParam Annotation
 
@@ -184,6 +184,7 @@ Automating Milvus database integration with custom annotations provides the foll
 
 * 'extraParams()': extra parameter, defined using the 'ExtraParam' annotation.
 
+
 ### @ MilvusPartition Annotation
 
 **Purpose**: Defines the partition of the Milvus collection.
@@ -191,7 +192,7 @@ Automating Milvus database integration with custom annotations provides the foll
 * **Properties * *:
 
 * 'name()': an array of names of partitions.
-
+  
 
 With these annotations, developers can easily define and manage the structure of the Milvus database, achieving the goal of automatically building the required database structure at the start of the project.
 
@@ -199,7 +200,7 @@ With these annotations, developers can easily define and manage the structure of
 
 The CRUD module is the basic set of operations used to process data in an application, namely Create, Read, Update, and Delete. In this module, we encapsulate the CRUD operations that interact with the Milvus database through the abstract class 'BaseMilvusMapper<T>', providing a 1 type of safe and easy-to-use interface.
 
-### Abstract class 'BaseMilvusMapper<T>'
+### Abstract class 'BaseMilvusMapper'<T>'
 
 'BaseMilvusMapper<T>'is an abstract class that implements the 'IAMService' interface and defines a series of methods for manipulating the Milvus database. This class is the base class for all the Mapper classes that interact with the Milvus database.
 
@@ -296,7 +297,6 @@ The CRUD module is the basic set of operations used to process data in an applic
 
 * **Annotation-driven**: Use the '@ MilvusCollection' annotation to automatically obtain the collection name to reduce hard coding.
 
-
 Through the 'BaseMilvusMapper<T>'class, developers can easily interact with the Milvus database, improve development efficiency and reduce error rates.
 
 ## IAMService interface module introduction
@@ -372,7 +372,6 @@ The 'IAMService' interface module provides a complete set of Identity and Access
 
 * 'objectName'-the name of the object to which the permission applies.
 
-
 ### Default method 'grantRole(String roleName, String userName)'
 
 * **Function**: grants the user a specific role.
@@ -437,7 +436,7 @@ The 'IAMService' interface module provides a complete set of Identity and Access
 * 'password'-the current password of the user.
 
 * 'newPassword'-new password for the user.
-
+  
 
 ### Advantages
 
@@ -521,15 +520,15 @@ The condition constructor module is an abstract base class 'ConditionBuilder<T>'
 ### Abstract Methods
 
 * 'buildFilters': the specific filter string construction logic that needs to be implemented by the subclass.
+  
 
+### Use Example
 
-### Use example
-
-'''
-ConditionBuilder<MyEntity> builder = new ConditionBuilder<>();
-builder.eq("name", "John").gt("age", 18).and(new ConditionBuilder<MyEntity>().like("email", "example.com"));
-String filters = builder.buildFilters();
-'''
+```
+ConditionBuilder<MyEntity> builder = new ConditionBuilder<>();
+builder.eq("name", "John").gt("age", 18).and(new ConditionBuilder<MyEntity>().like("email", "example.com"));
+String filters = builder.buildFilters();
+```
 
 ## Detailed explanation of index and measurement types
 
@@ -575,9 +574,9 @@ String filters = builder.buildFilters();
 **HAMMING**: Hamming distance for binary vectors.
 
 * **JACCARD**: Jakard similarity coefficient, suitable for set similarity calculation.
+  
 
-
-## Use cases
+## Use Case
 
 The following is an example of a vector search using MilvusPlus:
 
@@ -676,6 +675,6 @@ public class ApplicationRunnerTest implements ApplicationRunner {
 }
 ```
 
-## Welcome to praise the project!!
+## Welcome to praise the project！！
 
 **https://gitee.com/dromara/MilvusPlus**

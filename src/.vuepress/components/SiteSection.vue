@@ -6,32 +6,20 @@
         <p class="description">{{ option.DESC }}</p>
       </div>
     </div>
-    <div
-      class="wwads-cn wwads-horizontal"
-      data-id="127"
-      style="max-width: 500px"
-    ></div>
+    <div class="wwads-cn wwads-horizontal" data-id="127" style="max-width: 500px"></div>
   </div>
   <main class="news-activity-blog-main">
     <h2 class="tag">{{ langMapping === "中文" ? "标签" : "Tag" }}</h2>
     <div class="buttons">
       <div v-for="item in TAGS" :key="item">
-        <button
-          :class="{ selected: currentTag === item, 'tag-button': true }"
-          @click="currentTag = item"
-        >
+        <button :class="{ selected: currentTag === item, 'tag-button': true }" @click="currentTag = item">
           {{ item }}
         </button>
       </div>
     </div>
     <template v-if="filteredSectionDetail.length">
       <div class="cards">
-        <div
-          v-for="obj in filteredSectionDetail"
-          :key="obj.title"
-          class="card"
-          @click="goBlogDetail(obj.url)"
-        >
+        <div v-for="obj in filteredSectionDetail" :key="obj.title" class="card" @click="goBlogDetail(obj.url)">
           <div class="tag-items">
             <div v-for="tag in obj.tag" :key="tag" class="tag-item">
               #{{ tag }}
@@ -142,7 +130,8 @@ const TAGS = [
   "LiteFlow",
   "MaxKey",
   "hmily",
-  "Soul"
+  "Soul",
+  "EasyAI"
 ];
 
 const LANG_MAPPING: LangMapping = {
@@ -204,6 +193,7 @@ function goBlogDetail (url: string): void {
     padding-left: 16rem;
   }
 }
+
 .news-activity-blog-container {
   height: 422px;
   min-width: 200px;
@@ -236,8 +226,10 @@ function goBlogDetail (url: string): void {
     line-height: 28px;
   }
 }
+
 .news-activity-blog-main {
   padding: 80px 2vw;
+
   @media (min-width: 1440px) {
     padding-left: 16rem;
   }
@@ -310,6 +302,7 @@ function goBlogDetail (url: string): void {
     gap: 16px;
     cursor: pointer;
   }
+
   .cover {
     height: 190px;
     align-self: stretch;
