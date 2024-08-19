@@ -1,6 +1,8 @@
 ---
 title: TestHub 自动化测试工具加入 Dromara 社区
 author: 失败女神
+tag:
+  - TestHub
 date: 2023-08-29
 cover: /assets/img/news/TestHub-0-cover.png
 head:

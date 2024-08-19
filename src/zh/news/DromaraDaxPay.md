@@ -153,7 +153,7 @@ public class SimplePayOrderTest {
 
   
 
-![](/assets/img/news/Dromara-DaxPay-0.jpg)
+![](/assets/img/news/Dromara-DaxPay-0.png)
 
   
 
@@ -167,7 +167,7 @@ public class SimplePayOrderTest {
 
   
 
-![](/assets/img/news/Dromara-DaxPay-1.jpg)
+![](/assets/img/news/Dromara-DaxPay-1.png)
 
   
 
@@ -179,7 +179,7 @@ public class SimplePayOrderTest {
 
 QQ群号: 939414255
 
-![](/assets/img/news/Dromara-DaxPay-2.jpg)
+![](/assets/img/news/Dromara-DaxPay-2.png)
 
   
 
@@ -195,4 +195,4 @@ Dromara开源社区目前拥有10+GVP项目，总star数量超过十万，构建
 
 **欢迎大家来到知识星球和我互动**
 
-![](/assets/img/news/DromaraDaxPay-3.png)
+![](/assets/img/news/Dromara-DaxPay-3.png)

@@ -42,7 +42,7 @@ EasyAi has no dependencies, it is a native Java artificial intelligence algorith
 
 * Using EasyAi to realize the visual kernel of image settlement vending machine
 
-![](/assets/img/news/easyAI-1.1.9-1.jpg)
+![](/assets/img/news/easyAI-1.1.9-1.jfif)
 
 ### sayOrder artificial intelligence customer service
 
@@ -118,4 +118,4 @@ Dromara open source community currently has 10 GVP projects, with a total number
 
 **Welcome to the knowledge planet and I interact * *
 
-![](/assets/img/news/easyAI-1.1.9-7.png)
+![](/assets/img/news/easyAI-1.1.9-7.webp)

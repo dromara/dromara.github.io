@@ -59,6 +59,6 @@ new Widget({
 
 因为Newcar团队的高中生占了80%，开学后无法连续长时间维护项目，所以发布此条公告，希望能找到人来长期维护。
 
-![](/assets/img/news/Newcar-2.0.0-1.jpg)
+![](/assets/img/news/Newcar-2.0.0-1.jfif)
 
-![](/assets/img/news/Newcar-2.0.0-2.jpg)
+![](/assets/img/news/Newcar-2.0.0-2.jfif)

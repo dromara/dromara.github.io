@@ -141,4 +141,4 @@ Dromara开源社区目前拥有10+GVP项目，总star数量超过十万，构建
 
 **欢迎大家来到知识星球和我互动**
 
-![](/assets/img/news/warm-flow-1.2.0-2.png)
+![](/assets/img/qrcode_zsxq.webp)

@@ -2,13 +2,13 @@
 title: Dante Cloud The first microservice in China that supports the integration of blocking and reactive styles has been released.  
 author: Dante Cloud
 date: 2024-05-28
-cover: /assets/img/news/DanteCloud-0.png
+cover: /assets/img/news/Dante-Cloud-3.1.3.0-cover.png
 head:
   - - meta
     - name: News
 ---
 
-**![](/assets/img/news/DanteCloud-0.png)**
+![](/assets/img/news/Dante-Cloud-3.1.3.0-cover.png)
 
   
 
@@ -171,4 +171,4 @@ Dromara open source community currently has 10 GVP projects, with a total number
 
 **Welcome to the knowledge planet and I interact**
 
-![](/assets/img/news/DanteCloud-1.png)
+![](/assets/img/news/DanteCloud-1.webp)

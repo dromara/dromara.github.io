@@ -1,6 +1,8 @@
 ---
 title: Automated testing tools released TestHub V1.0.4
 author: testhub
+tag:
+  - TestHub
 date: 2024-04-15
 cover: /assets/img/news/TestHub-1.0.4-0.png
 head:
@@ -28,7 +30,7 @@ TestHub is the 1 automated testing tool based on process orchestration. was born
 
 > installation package: https://url37.ctfile.com/d/42659137-60695737-5e2d86?p=3710 (access password: 3710)
 
-! [](/assets/img/news/TestHub-1.0.4-1.jpg)
+! [](/assets/img/news/TestHub-1.0.4-1.jfif)
 
 ## Update content 1.0.4
 
@@ -62,7 +64,7 @@ The author came from a back-end background and was barely able to write with the
 
 There are three colors of fonts in Tabs: default color, red and green. Different colors identify different content states and are used to prompt whether the page data is consistent with the server-side data. Default color: saved, indicating that the data at the front end is consistent with the data saved at the back end. Red: draft not tracked, Changes to be corresponding to git status committed green: edited draft, Changes not Staged for commit corresponding to git status
 
-! [](/assets/img/news/TestHub-1.0.4-2.jpg)
+![](/assets/img/news/TestHub-1.0.4-2.jfif)
 
 ### Category Tree Usage
 
@@ -70,17 +72,17 @@ This category tree uses a new tree component support: search function, multiple 
 
 Search function
 
-! [](/assets/img/news/TestHub-1.0.4-3.jpg)
+![](/assets/img/news/TestHub-1.0.4-3.jfif)
 
 Powerful drag-and-drop functionality
 
-! [](/assets/img/news/TestHub-1.0.4-4.jpg)
+![](/assets/img/news/TestHub-1.0.4-4.jfif)
 
 ## Restful API Tools
 
-! [](/assets/img/news/TestHub-1.0.4-5.png)
+![](/assets/img/news/TestHub-1.0.4-5.png)
 
-! [](/assets/img/news/TestHub-1.0.4-6.png)
+![](/assets/img/news/TestHub-1.0.4-6.png)
 
 ## About the treasure chest
 
@@ -156,7 +158,7 @@ However, it should be noted that not all users have the ability to access the In
 * Add my personal WeChat remarks TestHub invite you to join the group
 
 
-! [](/assets/img/news/TestHub-1.0.4-7.jpg)
+![](/assets/img/news/TestHub-1.0.4-7.jfif)
 
 About Dromara
 
@@ -168,4 +170,4 @@ Dromara open source community currently has 10 GVP projects, with a total number
 
 **Welcome to the knowledge planet and I interact * *
 
-! [](/assets/img/news/TestHub-1.0.4-8.png)
+! [](/assets/img/qrcode_zsxq.webp)

@@ -272,9 +272,9 @@ List<Draft2<String, Integer>> list2 = easyEntityQuery.queryable(SysUser.clas
     
 *   第三步选择需要返回的结构化数据
     
-    ![](/assets/img/news/EasyQuery-1.jpg)
+    ![](/assets/img/news/EasyQuery-1.jfif)
     
-    ![](/assets/img/news/EasyQuery-2.jpg)
+    ![](/assets/img/news/EasyQuery-2.jfif)
     
 
   

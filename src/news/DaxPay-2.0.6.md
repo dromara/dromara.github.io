@@ -2,7 +2,7 @@
 title: DaxPay v2.0.6 Release:Refactoring Simplified, Light and Starting Again
 author: DaxPay
 date: 2024-05-17
-cover: /assets/img/news/DaxPay-2.0.6-0.png
+cover: /assets/img/news/DaxPay-2.0.6-0.jfif
 head:
   - - meta
     - name: News
@@ -12,7 +12,7 @@ head:
 
 'DaxPay' is an open source payment gateway system owned by 'Dromara Open Source Community', which has been connected to Alipay, WeChat payment and cloud flash payment related interfaces. Independent deployment, provides interfaces for business systems to call, does not affect the original system.
 
-## 源码地址
+## Source code address
 
 | Project | GITEE | GITHUB |
 | --- | --- | --- |
@@ -166,31 +166,31 @@ Mobile Cashier Address: https://daxpay.demo.bootx.cn/h5/#/cashier/uniCashier
 
 ### PC Cashier
 
-![](/assets/img/news/DaxPay-2.0.6-0.jpg)
+![](/assets/img/news/DaxPay-2.0.6-0.jfif)
 
   
 
 ### Cockpit
 
-![](/assets/img/news/DaxPay-2.0.6-1.jpg)
+![](/assets/img/news/DaxPay-2.0.6-1.jfif)
 
   
 
 ### Payment Order
 
-![](/assets/img/news/DaxPay-2.0.6-2.jpg)
+![](/assets/img/news/DaxPay-2.0.6-2.jfif)
 
   
 
 ### Order Details
 
-![](/assets/img/news/DaxPay-2.0.6-3.jpg)
+![](/assets/img/news/DaxPay-2.0.6-3.jfif)
 
   
 
 ### Dimension Group
 
-![](/assets/img/news/DaxPay-2.0.6-4.jpg)
+![](/assets/img/news/DaxPay-2.0.6-4.jfif)
 
   
 
@@ -200,13 +200,13 @@ A person's ability is always limited, very welcome everyone to communicate and g
 
 ### QQ communication group
 
-![](/assets/img/news/DaxPay-2.0.6-5.jpg)
+![](/assets/img/news/DaxPay-2.0.6-5.jfif)
 
-![](/assets/img/news/DaxPay-2.0.6-6.jpg)
+![](/assets/img/news/DaxPay-2.0.6-6.jfif)
 
 ### WeChat Sweep Code Plus Small Assistant Pull Group
 
-![](/assets/img/news/DaxPay-2.0.6-7.jpg)
+![](/assets/img/news/DaxPay-2.0.6-7.jfif)
 
 About Dromara
 
@@ -218,4 +218,4 @@ Dromara open source community currently has 10 GVP projects, with a total number
 
 **Welcome to the knowledge planet and I interact * *
 
-![](/assets/img/news/DaxPay-2.0.6-8.png)
+![](/assets/img/news/DaxPay-2.0.6-8.webp)

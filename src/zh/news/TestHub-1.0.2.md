@@ -1,6 +1,8 @@
 ---
 title: 自动化测试工具：TestHub V1.0.2版本发布
 author: TestHub
+tag:
+  - TestHub
 date: 2023-10-31
 cover: /assets/img/news/TestHub-1.0.2-1.jpg
 head:

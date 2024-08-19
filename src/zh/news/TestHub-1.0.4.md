@@ -1,6 +1,8 @@
 ---
 title: 自动化测试工具 TestHub V1.0.4 版本发布
 author: testhub
+tag:
+  - TestHub
 date: 2024-04-15
 cover: /assets/img/news/TestHub-1.0.4-0.png
 head:
@@ -28,7 +30,7 @@ TestHub 是一款基于流程编排的自动化测试工具。是为了解决在
 
 > 安装包：https://url37.ctfile.com/d/42659137-60695737-5e2d86?p=3710 (访问密码: 3710)
 
-![](/assets/img/news/TestHub-1.0.4-1.jpg)
+![](/assets/img/news/TestHub-1.0.4-1.jfif)
 
 ## 更新内容 1.0.4
 
@@ -62,7 +64,7 @@ TestHub 是一款基于流程编排的自动化测试工具。是为了解决在
 
 Tabs 中字体三种颜色：默认色、红色、绿色，不同颜色标识不同的内容状态，用于提示页面数据与服务器端数据是否一致 默认色：已保存 ，表示前端的数据与后端保存的数据一致 红色：未跟踪草稿，对应 git status 的 Changes to be committed 绿色：已编辑草稿，对应 git status 的 Changes not staged for commit
 
-![](/assets/img/news/TestHub-1.0.4-2.jpg)
+![](/assets/img/news/TestHub-1.0.4-2.jfif)
 
 ### 类目树使用
 
@@ -70,11 +72,11 @@ Tabs 中字体三种颜色：默认色、红色、绿色，不同颜色标识不
 
 搜索功能
 
-![](/assets/img/news/TestHub-1.0.4-3.jpg)
+![](/assets/img/news/TestHub-1.0.4-3.jfif)
 
 强大的拖放功能
 
-![](/assets/img/news/TestHub-1.0.4-4.jpg)
+![](/assets/img/news/TestHub-1.0.4-4.jfif)
 
 ## Restful API 工具
 
@@ -156,7 +158,7 @@ Tabs 中字体三种颜色：默认色、红色、绿色，不同颜色标识不
 *   加我个人微信备注 TestHub 邀请您入群
     
 
-![](/assets/img/news/TestHub-1.0.4-7.jpg)
+![](/assets/img/news/TestHub-1.0.4-7.jfif)
 
 关于 Dromara
 
@@ -168,4 +170,4 @@ Dromara开源社区目前拥有10+GVP项目，总star数量超过十万，构建
 
 **欢迎大家来到知识星球和我互动**
 
-![](/assets/img/news/TestHub-1.0.4-8.png)
+![](/assets/img/qrcode_zsxq.webp)

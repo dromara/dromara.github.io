@@ -43,7 +43,7 @@ head:
 *   对图像中的字符进行识别与定位
     
 
-![](/assets/img/news/EasyAI-1.1.8-1.jpg)
+![](/assets/img/news/EasyAI-1.1.8-1.jfif)
 
 ### 自然语言SayOrder自主生成订单及客服问答基本流程演示
 
@@ -113,4 +113,4 @@ Dromara开源社区目前拥有10+GVP项目，总star数量超过十万，构建
 
 **欢迎大家来到知识星球和我互动**
 
-![](/assets/img/news/EasyAI-1.1.8-7.png)
+![](/assets/img/news/EasyAI-1.1.8-7.webp)

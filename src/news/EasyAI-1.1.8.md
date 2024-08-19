@@ -43,7 +43,7 @@ head:
 * Recognition and positioning of characters in images
 
 
-! [](/assets/img/news/EasyAI-1.1.8-1.jpg)
+! [](/assets/img/news/EasyAI-1.1.8-1.jfif)
 
 ### Natural Language SayOrder Generates Orders and Customer Service Questions and Answers Basic Process Demonstration
 
@@ -113,4 +113,4 @@ Dromara open source community currently has 10 GVP projects, with a total number
 
 **Welcome to the knowledge planet and I interact * *
 
-![](/assets/img/news/EasyAI-1.1.8-7.png)
+![](/assets/img/news/EasyAI-1.1.8-7.webp)

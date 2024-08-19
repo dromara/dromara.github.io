@@ -269,9 +269,9 @@ So we use the easy-query plug-in here to quickly build a structured DTO response
 
 * Step 3 Select the structured data to be returned
 
-! [](/assets/img/news/EasyQuery-1.jpg)
+! [](/assets/img/news/EasyQuery-1.jfif)
 
-! [](/assets/img/news/EasyQuery-2.jpg)
+! [](/assets/img/news/EasyQuery-2.jfif)
 
 
 

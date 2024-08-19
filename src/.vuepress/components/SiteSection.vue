@@ -131,7 +131,8 @@ const TAGS = [
   "MaxKey",
   "hmily",
   "Soul",
-  "EasyAI"
+  "EasyAI",
+  "TestHub"
 ];
 
 const LANG_MAPPING: LangMapping = {

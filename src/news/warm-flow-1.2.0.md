@@ -10,7 +10,7 @@ head:
 
 ## warm-flow1.2.0 major updates
 
-! [](/assets/img/news/warm-flow-1.2.0-0.png)
+![](/assets/img/news/warm-flow-1.2.0-0.png)
 
 This version has been greatly changed, bringing the long-awaited countersign, ticket signing, transfer, oracle and pg database adaptation, etc., and making corresponding code refactoring. Also due to the large changes, if problems are found, issue can be submitted in time. If it can help solve bug and pr, thank you very much. The continuous improvement of warm-flow cannot be separated from everyone. (Thanks to warm organization members, Tirion Fordring | Liang Trabecular | Vanlin | Zhen, and those who participated in pr)
 
@@ -141,4 +141,4 @@ Dromara open source community currently has 10 GVP projects, with a total number
 
 **Welcome to the knowledge planet and I interact * *
 
-! [](/assets/img/news/warm-flow-1.2.0-2.png)
+![](/assets/img/qrcode_zsxq.webp)

@@ -58,6 +58,6 @@ scalable: true
 ## Announcement
 
 Because the Newcar team has 80% of high school students and cannot maintain the project for a long time after school starts, this announcement is issued in the hope of finding someone to maintain it for a long time.
-![](/assets/img/news/Newcar-2.0.0-1.jpg)
+![](/assets/img/news/Newcar-2.0.0-1.jfif)
 
-![](/assets/img/news/Newcar-2.0.0-2.jpg)
+![](/assets/img/news/Newcar-2.0.0-2.jfif)

@@ -6,7 +6,7 @@ import VueViewer from "v-viewer";
 import "viewerjs/dist/viewer.css";
 
 export default defineClientConfig({
-  enhance({ app }) {
+  enhance ({ app }) {
     app.component("GiteeRepo", GiteeRepo);
     app.use(VueViewer);
   }

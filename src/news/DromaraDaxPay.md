@@ -2,7 +2,7 @@
 title: Welcome to the new open source payment gateway，Dromara DaxPay
 author: 喵呀
 date: 2024-02-26
-cover: /assets/img/news/DromaraDaxPay-0.png
+cover: /assets/img/news/Dromara-DaxPay-0.png
 head:
   - - meta
     - name: News
@@ -150,7 +150,7 @@ Address: https://daxpay.server.bootx.cn/doc.html account number: daxpay password
 
   
 
-![](/assets/img/news/DromaraDaxPay-0.jpg)
+![](/assets/img/news/Dromara-DaxPay-0.png)
 
   
 
@@ -164,7 +164,7 @@ Mobile Cashier Address: https://daxpay.demo.bootx.cn/h5/#/cashier/uniCashier
 
   
 
-![](/assets/img/news/DromaraDaxPay-1.jpg)
+![](/assets/img/news/Dromara-DaxPay-1.png)
 
   
 
@@ -176,7 +176,7 @@ A person's ability is always limited, very welcome everyone to communicate and g
 
 QQ group number: 939414255
 
-![](/assets/img/news/DromaraDaxPay-2.jpg)
+![](/assets/img/news/Dromara-DaxPay-2.png)
 
   
 
@@ -192,4 +192,4 @@ Dromara open source community currently has 10 GVP projects, with a total number
 
 **Welcome to the knowledge planet and I interact * *
 
-![](/assets/img/news/DromaraDaxPay-3.png)
+![](/assets/img/news/Dromara-DaxPay-3.png)

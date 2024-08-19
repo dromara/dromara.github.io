@@ -2,13 +2,13 @@
 title: Dante Cloud 国内首个支持阻塞式和响应式融合的微服务发布
 author: Dante Cloud
 date: 2024-05-28
-cover: /assets/img/news/DanteCloud-0.png
+cover: /assets/img/news/Dante-Cloud-3.1.3.0-cover.png
 head:
   - - meta
     - name: 新闻
 ---
 
-**![](/assets/img/news/DanteCloud-0.png)**
+![](/assets/img/news/Dante-Cloud-3.1.3.0-cover.png)
 
   
 
@@ -175,4 +175,4 @@ Dromara开源社区目前拥有10+GVP项目，总star数量超过十万，构建
 
 **欢迎大家来到知识星球和我互动**
 
-![](/assets/img/news/DanteCloud-1.png)
+![](/assets/img/news/DanteCloud-1.webp)

@@ -69,6 +69,11 @@ pnpm start
 pnpm lint
 ```
 
+- 更新文档可使用以下命令检查格式
+```console
+npm run docs:build
+```
+
 ## 贡献
 
 - 创建新分支
