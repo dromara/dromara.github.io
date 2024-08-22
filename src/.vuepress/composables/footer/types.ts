@@ -7,4 +7,5 @@ export interface FooterOption {
   WECHAT: string
   KNOWLEDGE_PLANET: string
   DONATE: string
+  Email: string
 }
