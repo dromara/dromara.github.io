@@ -42,6 +42,7 @@ export const useProjectsData = () => {
         "forest",
         "northstar",
         "dynamic-tp",
+        "easyAi",
         "zyplayer-doc",
         "x-easypdf",
         "image-combiner",
@@ -49,9 +50,16 @@ export const useProjectsData = () => {
         "sms4j",
         "Neutrino-Proxy",
         "X-File-Storage",
+        "skyeye-oa",
+        "dbswitch",
+        "warm-flow",
         "gobrs-async",
         "payment-spring-boot",
+        "orion-visor",
         "stream-query",
+        "DyJava",
+        "easy-query",
+        "mybatis-plus-ext",
         "redisfront",
         "fast-request",
         "Binlog4j",
@@ -581,6 +589,126 @@ export const useProjectsData = () => {
           <a href="https://gitee.com/dromara/zyplayer-doc"><img src="https://gitee.com/dromara/zyplayer-doc/badge/star.svg"></a>
   <a href="https://gitee.com/dromara/zyplayer-doc/members"><img src="https://gitee.com/dromara/zyplayer-doc/badge/fork.svg"></a>
           `
+        },
+        {
+          name: "orion-visor",
+          website: "https://gitee.com/dromara/orion-visor",
+          description: projectLocale.value.ORION_VISOR,
+          sponsor: "李佳航（lijiahangmax）",
+          date: "2024.03",
+          link: `<a
+       href="https://app.codacy.com/gh/lijiahangmax/orion-visor/dashboard?utm_source=gh&utm_medium=referral&utm_content=&utm_campaign=Badge_grade">
+      <img src="https://app.codacy.com/project/badge/Grade/49eaab3a9a474af3b87e1d21ffec71c4" alt="quality" />
+    </a>
+    <a
+       href="https://www.apache.org/licenses/LICENSE-2.0">
+      <img src="https://img.shields.io/github/license/lijiahangmax/orion-visor" alt="License" />
+    </a>
+    <a
+       href="https://github.com/dromara/orion-visor/releases">
+      <img src="https://img.shields.io/github/v/release/lijiahangmax/orion-visor" alt="release" />
+    </a>
+    <a
+       href="https://gitee.com/dromara/orion-visor/stargazers">
+      <img src="https://gitee.com/dromara/orion-visor/badge/star.svg?theme=gvp" alt="star" />
+    </a>
+    <a 
+       href="https://gitee.com/dromara/orion-visor/members">
+      <img src="https://gitee.com/dromara/orion-visor/badge/fork.svg?theme=gvp" alt="fork" />
+    </a>
+    <a 
+       href="https://github.com/dromara/orion-visor">
+      <img src="https://img.shields.io/github/stars/lijiahangmax/orion-visor" alt="star" />
+    </a>
+    <a 
+       href="https://github.com/dromara/orion-visor">
+      <img src="https://img.shields.io/github/forks/lijiahangmax/orion-visor" alt="star" />
+    </a>`
+        },
+        {
+          name: "DyJava",
+          website: "https://gitee.com/dromara/dy-java",
+          description: projectLocale.value.DYJAVA,
+          sponsor: "danmo（sxwdmjy）",
+          date: "2024.04",
+          link: `<a href="https://gitee.com/dromara/dy-java">
+      <img src="https://gitee.com/dromara/dy-java/badge/star.svg" alt="Gitee Stars">
+  </a>`
+        },
+        {
+          name: "warm-flow",
+          website: "http://warm-flow.cn",
+          description: projectLocale.value.WARM_FLOW,
+          sponsor: "晓华（min290）",
+          date: "2023.12",
+          link: `<a href="https://gitee.com/dromara/warm-flow">
+      <img src="https://gitee.com/dromara/warm-flow/badge/star.svg" alt="Gitee Stars">
+  </a>`
+        },
+        {
+          name: "dbswitch",
+          website: "https://gitee.com/dromara/dbswitch",
+          description: projectLocale.value.DBSWITCH,
+          sponsor: "inrgihc（inrgihc）",
+          date: "2020.12",
+          link: `<a href="https://gitee.com/dromara/dbswitch">
+      <img src="https://gitee.com/dromara/dbswitch/badge/star.svg" alt="Gitee Stars">
+  </a>`
+        },
+        {
+          name: "skyeye-oa",
+          website: "https://gitee.com/dromara/skyeye",
+          description: projectLocale.value.SKYEYE_OA,
+          sponsor: "智能制造云办公（doc_wei01_admin）",
+          date: "2022.08",
+          link: `<a href="https://gitee.com/dromara/skyeye">
+      <img src="https://gitee.com/dromara/skyeye/badge/star.svg" alt="Gitee Stars">
+  </a>`
+        },
+        {
+          name: "easyAi",
+          website: "https://gitee.com/dromara/easyAi",
+          description: projectLocale.value.EASYAI,
+          sponsor: "唯一解（ldp_dpsmax）",
+          date: "2024.05",
+          link: `<a href="https://gitee.com/dromara/easyAi">
+      <img src="https://gitee.com/dromara/easyAi/badge/star.svg" alt="Gitee Stars">
+  </a>`
+        },
+        {
+          name: "mybatis-plus-ext",
+          website: "https://gitee.com/dromara/mybatis-plus-ext",
+          description: projectLocale.value.MYBATIS_PLUS_EXT,
+          sponsor: "唐振超（tangzc）",
+          date: "2021.08",
+          link: `<a href="https://gitee.com/dromara/mybatis-plus-ext">
+      <img src="https://gitee.com/dromara/mybatis-plus-ext/badge/star.svg" alt="Gitee Stars">
+      </a>`
+        },
+        {
+          name: "easy-query",
+          website: "https://gitee.com/dromara/easy-query",
+          description: projectLocale.value.EASY_QUERY,
+          sponsor: "薛家明（xuejm）",
+          date: "2023.07",
+          link: `<a href="https://gitee.com/dromara/easy-query">
+      <img src="https://gitee.com/dromara/easy-query/badge/star.svg" alt="Gitee Stars">
+      </a>
+      <a target="_blank" href="https://central.sonatype.com/search?q=easy-query">
+        <img src="https://img.shields.io/maven-central/v/com.easy-query/easy-query-all?label=Maven%20Central" alt="Maven" />
+    </a>
+    <a target="_blank" href="https://www.apache.org/licenses/LICENSE-2.0.txt">
+		<img src="https://img.shields.io/:license-Apache2-blue.svg" alt="Apache 2" />
+	</a>
+    <a target="_blank" href="https://www.oracle.com/java/technologies/javase/javase-jdk8-downloads.html">
+		<img src="https://img.shields.io/badge/JDK-8-green.svg" alt="jdk-8" />
+	</a>
+    <a target="_blank" href="https://www.oracle.com/java/technologies/javase/jdk11-archive-downloads.html">
+		<img src="https://img.shields.io/badge/JDK-11-green.svg" alt="jdk-11" />
+	</a>
+    <a target="_blank" href="https://www.oracle.com/java/technologies/javase/jdk17-archive-downloads.html">
+		<img src="https://img.shields.io/badge/JDK-17-green.svg" alt="jdk-17" />
+	</a>`
         }
       ]
     },
@@ -645,7 +773,7 @@ export const useProjectsData = () => {
       projects: [
         {
           name: "Jpom",
-          website: "https://jpom.io/",
+          website: "https://jpom.top/",
           description: projectLocale.value.JPOM_DESC,
           sponsor: "蒋小小（bwcx-jzy）",
           date: "2021.03",

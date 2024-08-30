@@ -32,6 +32,15 @@ export const zhProjectsOption: ProjectsOption = {
   X_EASYPDF_DESC: "一个用搭积木的方式构建pdf的框架（基于pdfbox）",
   GOBRS_ASYNC_DESC:
     "一款功能强大、配置灵活、带有全链路异常回调、内存优化、异常状态管理于一身的高性能异步编排框架",
+  DYJAVA:"DyJava是一款功能强大的抖音Java开发工具包（SDK），支持抖音各个应用OpenAPI快速调用，包括但不限于移动/网站应用、抖音开放平台、抖店和抖音小程序等" ,
+  ORION_VISOR:"一款高颜值、现代化的智能运维&轻量堡垒机平台。",
+  WARM_FLOW:"国产工作流引擎,其特点简洁轻量但又不简单，五脏俱全，组件独立，可扩展，可满足中小项目的组件.解决flowable和activities复杂、学习成本高和集成难等痛点。",
+  DBSWITCH:"异构数据库迁移同步(搬家)工具",
+  SKYEYE_OA:"智能制造一体化，采用Springboot + winUI的低代码平台开发模式",
+  EASYAI:"国内人气最高的Java人工智能算法框架(java版pytorch)。它可以Maven一键丝滑引入我们的Java项目，无需任何额外的环境配置与依赖，做到开箱即用",
+  MYBATIS_PLUS_EXT:"mybatis-plus框架的拓展包，在框架原有基础上做了进一步的轻度封装",
+  EASY_QUERY:"一款java下面支持强类型、轻量级、高性能的ORM",
+
   OPEN_GITEYE_API_DESC:
     "专为开源作者设计的数据图表服务工具类站点，提供了包括Star趋势图、贡献者列表、Gitee指数等数据图表服务。",
   BINLOG4J_DESC: "基于 Java 轻量级的 Mysql Binlog 客户端。",

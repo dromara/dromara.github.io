@@ -37,9 +37,13 @@ const gvpProjects = [
   "CloudEon",
   "koalas-rpc",
   "Raincat",
-  "dy-java"
+  "dy-java",
+  "orion-visor",
+  "EasyAi",
+  "MilvusPlus",
+  "easy-es"
 ];
-const totalStars = 293.7; // 来源于gitee总star数与github各仓库star数之和，需手动更新
+const totalStars = 305.5; // 来源于gitee总star数与github各仓库star数之和，需手动更新
 
 const allPagesFrontmatter = siteData.value.frontmatter;
 
