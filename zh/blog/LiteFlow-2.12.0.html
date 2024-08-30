@@ -1,0 +1,202 @@
+<!doctype html>
+<html lang="zh-CN" data-theme="light">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="generator" content="VuePress 2.0.0-beta.67" />
+    <meta name="theme" content="VuePress Theme Hope" />
+    <meta name="博客"><meta property="og:url" content="https://vuepress-theme-hope-docs-demo.netlify.app/zh/blog/LiteFlow-2.12.0.html"><meta property="og:title" content="决策路由特性来袭，LiteFlow大版本2.12.0发布，Make your code amaing！"><meta property="og:description" content="LiteFlow是一个开源编排式规则引擎，能够让你的系统逻辑任意编排，可选用脚本书写逻辑，支持多达7种脚本语言，支持丰富的第三方存储的支持，所有的逻辑和规则均可热变更。设计系统和重构系统的神器。 LiteFlow是Gitee的高star项目，截止到发此文章的时候，Gitee star接近6k大关，Github则拥有2.6Kstar。 同时LiteFlo..."><meta property="og:type" content="article"><meta property="og:image" content="https://vuepress-theme-hope-docs-demo.netlify.app/assets/img/blog/LiteFlow-2.12.0-0.png"><meta property="og:locale" content="zh-CN"><meta property="og:updated_time" content="2024-08-29T01:43:50.000Z"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:image:alt" content="决策路由特性来袭，LiteFlow大版本2.12.0发布，Make your code amaing！"><meta property="article:author" content="铂赛东"><meta property="article:published_time" content="2024-04-16T00:00:00.000Z"><meta property="article:modified_time" content="2024-08-29T01:43:50.000Z"><script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"决策路由特性来袭，LiteFlow大版本2.12.0发布，Make your code amaing！","image":["https://vuepress-theme-hope-docs-demo.netlify.app/assets/img/blog/LiteFlow-2.12.0-0.png"],"datePublished":"2024-04-16T00:00:00.000Z","dateModified":"2024-08-29T01:43:50.000Z","author":[{"@type":"Person","name":"铂赛东"}]}</script><meta http-equiv="Cache-Control" content="max-age=3600, must-revalidate"><meta name="description" content="Non-profit organization where open-source enthusiasts gather."><script src="https://cdn.wwads.cn/js/makemoney.js" async></script><title>决策路由特性来袭，LiteFlow大版本2.12.0发布，Make your code amaing！</title>
+    <style>
+      :root {
+        --bg-color: #fff;
+      }
+
+      html[data-theme="dark"] {
+        --bg-color: #1d1e1f;
+      }
+
+      html,
+      body {
+        background: var(--bg-color);
+      }
+    </style>
+    <script>
+      const userMode = localStorage.getItem("vuepress-theme-hope-scheme");
+      const systemDarkMode =
+        window.matchMedia &&
+        window.matchMedia("(prefers-color-scheme: dark)").matches;
+
+      if (userMode === "dark" || (userMode !== "light" && systemDarkMode)) {
+        document.documentElement.setAttribute("data-theme", "dark");
+      }
+    </script>
+    <link rel="preload" href="/assets/style-fd897764.css" as="style"><link rel="stylesheet" href="/assets/style-fd897764.css">
+    <link rel="modulepreload" href="/assets/app-b3220ba4.js"><link rel="modulepreload" href="/assets/LiteFlow-2.12.0.html-244c71d2.js"><link rel="modulepreload" href="/assets/LiteFlow-2.12.0.html-2916d056.js">
+  </head>
+  <body>
+    <div id="app"><!--[--><!--[--><!--[--><span tabindex="-1"></span><a href="#main-content" class="vp-skip-link sr-only">跳至主要內容</a><!--]--><!--[--><div class="theme-container no-sidebar has-toc"><!--[--><header id="navbar" class="vp-navbar"><div class="vp-navbar-start"><button type="button" class="vp-toggle-sidebar-button" title="Toggle Sidebar"><span class="icon"></span></button><!--[--><!----><!--]--><!--[--><a class="vp-link vp-brand vp-brand" href="/zh/"><img class="vp-nav-logo" src="/logo.svg" alt><!----><!----></a><!--]--><!--[--><!----><!--]--></div><div class="vp-navbar-center"><!--[--><!----><!--]--><!--[--><nav class="vp-nav-links"><div class="nav-item hide-in-mobile"><a aria-label="项目" class="vp-link nav-link nav-link" href="/zh/projects/"><!---->项目<!----></a></div><div class="nav-item hide-in-mobile"><a aria-label="成员" class="vp-link nav-link nav-link" href="/zh/members/"><!---->成员<!----></a></div><div class="nav-item hide-in-mobile"><a aria-label="新闻" class="vp-link nav-link nav-link" href="/zh/news/"><!---->新闻<!----></a></div><div class="nav-item hide-in-mobile"><a aria-label="博客" class="vp-link nav-link active nav-link active" href="/zh/blog/"><!---->博客<!----></a></div><div class="nav-item hide-in-mobile"><a aria-label="活动" class="vp-link nav-link nav-link" href="/zh/activity/"><!---->活动<!----></a></div><div class="nav-item hide-in-mobile"><a aria-label="捐赠" class="vp-link nav-link nav-link" href="/zh/donation/"><!---->捐赠<!----></a></div><div class="nav-item hide-in-mobile"><a aria-label="关于" class="vp-link nav-link nav-link" href="/zh/about/"><!---->关于<!----></a></div></nav><!--]--><!--[--><!----><!--]--></div><div class="vp-navbar-end"><!--[--><!----><!--]--><!--[--><div class="nav-item"><div class="dropdown-wrapper i18n-dropdown"><button type="button" class="dropdown-title" aria-label="选择语言"><!--[--><svg xmlns="http://www.w3.org/2000/svg" class="icon i18n-icon" viewBox="0 0 1024 1024" fill="currentColor" aria-label="i18n icon" style="width:1rem;height:1rem;vertical-align:middle;"><path d="M379.392 460.8 494.08 575.488l-42.496 102.4L307.2 532.48 138.24 701.44l-71.68-72.704L234.496 460.8l-45.056-45.056c-27.136-27.136-51.2-66.56-66.56-108.544h112.64c7.68 14.336 16.896 27.136 26.112 35.84l45.568 46.08 45.056-45.056C382.976 312.32 409.6 247.808 409.6 204.8H0V102.4h256V0h102.4v102.4h256v102.4H512c0 70.144-37.888 161.28-87.04 210.944L378.88 460.8zM576 870.4 512 1024H409.6l256-614.4H768l256 614.4H921.6l-64-153.6H576zM618.496 768h196.608L716.8 532.48 618.496 768z"></path></svg><!--]--><span class="arrow"></span><ul class="nav-dropdown"><li class="dropdown-item"><a aria-label="English" class="vp-link nav-link nav-link" href="/"><!---->English<!----></a></li><li class="dropdown-item"><a aria-label="简体中文" class="vp-link nav-link active nav-link active" href="/zh/blog/LiteFlow-2.12.0.html"><!---->简体中文<!----></a></li></ul></button></div></div><a class="vp-repo-link" href="https://gitee.com/dromara" target="_blank" rel="noopener noreferrer" aria-label="Gitee"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" t="1695538305440" class="icon" viewBox="0 0 1024 1024" version="1.1" p-id="1444" style="width:1.25rem;height:1.25rem;vertical-align:middle;"><path d="M512 1024C229.222 1024 0 794.778 0 512S229.222 0 512 0s512 229.222 512 512-229.222 512-512 512z m259.149-568.883h-290.74a25.293 25.293 0 0 0-25.292 25.293l-0.026 63.206c0 13.952 11.315 25.293 25.267 25.293h177.024c13.978 0 25.293 11.315 25.293 25.267v12.646a75.853 75.853 0 0 1-75.853 75.853h-240.23a25.293 25.293 0 0 1-25.267-25.293V417.203a75.853 75.853 0 0 1 75.827-75.853h353.946a25.293 25.293 0 0 0 25.267-25.292l0.077-63.207a25.293 25.293 0 0 0-25.268-25.293H417.152a189.62 189.62 0 0 0-189.62 189.645V771.15c0 13.977 11.316 25.293 25.294 25.293h372.94a170.65 170.65 0 0 0 170.65-170.65V480.384a25.293 25.293 0 0 0-25.293-25.267z" fill="#C71D23" p-id="1445"></path></svg></a><div class="nav-item vp-repo"><a class="vp-repo-link" href="https://github.com/dromara" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><svg xmlns="http://www.w3.org/2000/svg" class="icon github-icon" viewBox="0 0 1024 1024" fill="currentColor" aria-label="github icon" style="width:1.25rem;height:1.25rem;vertical-align:middle;"><path d="M511.957 21.333C241.024 21.333 21.333 240.981 21.333 512c0 216.832 140.544 400.725 335.574 465.664 24.49 4.395 32.256-10.07 32.256-23.083 0-11.69.256-44.245 0-85.205-136.448 29.61-164.736-64.64-164.736-64.64-22.315-56.704-54.4-71.765-54.4-71.765-44.587-30.464 3.285-29.824 3.285-29.824 49.195 3.413 75.179 50.517 75.179 50.517 43.776 75.008 114.816 53.333 142.762 40.79 4.523-31.66 17.152-53.377 31.19-65.537-108.971-12.458-223.488-54.485-223.488-242.602 0-53.547 19.114-97.323 50.517-131.67-5.035-12.33-21.93-62.293 4.779-129.834 0 0 41.258-13.184 134.912 50.346a469.803 469.803 0 0 1 122.88-16.554c41.642.213 83.626 5.632 122.88 16.554 93.653-63.488 134.784-50.346 134.784-50.346 26.752 67.541 9.898 117.504 4.864 129.834 31.402 34.347 50.474 78.123 50.474 131.67 0 188.586-114.73 230.016-224.042 242.09 17.578 15.232 33.578 44.672 33.578 90.454v135.85c0 13.142 7.936 27.606 32.854 22.87C862.25 912.597 1002.667 728.747 1002.667 512c0-271.019-219.648-490.667-490.71-490.667z"></path></svg></a></div><!----><!--[--><button type="button" class="search-pro-button" role="search" aria-label="搜索"><svg xmlns="http://www.w3.org/2000/svg" class="icon search-icon" viewBox="0 0 1024 1024" fill="currentColor" aria-label="search icon"><path d="M192 480a256 256 0 1 1 512 0 256 256 0 0 1-512 0m631.776 362.496-143.2-143.168A318.464 318.464 0 0 0 768 480c0-176.736-143.264-320-320-320S128 303.264 128 480s143.264 320 320 320a318.016 318.016 0 0 0 184.16-58.592l146.336 146.368c12.512 12.48 32.768 12.48 45.28 0 12.48-12.512 12.48-32.768 0-45.28"></path></svg><div class="search-pro-placeholder">搜索</div><div class="search-pro-key-hints"><kbd class="search-pro-key">Ctrl</kbd><kbd class="search-pro-key">K</kbd></div></button><!--]--><!--]--><!--[--><!----><!--]--><button type="button" class="vp-toggle-navbar-button" aria-label="Toggle Navbar" aria-expanded="false" aria-controls="nav-screen"><span><span class="vp-top"></span><span class="vp-middle"></span><span class="vp-bottom"></span></span></button></div></header><!----><!--]--><!----><div class="toggle-sidebar-wrapper"><span class="arrow start"></span></div><aside id="sidebar" class="vp-sidebar"><!--[--><!----><!--]--><ul class="vp-sidebar-links"></ul><!--[--><!----><!--]--></aside><!--[--><main id="main-content" class="vp-page"><!--[--><!----><img class="page-cover" src="/assets/img/blog/LiteFlow-2.12.0-0.png" alt="决策路由特性来袭，LiteFlow大版本2.12.0发布，Make your code amaing！" no-view><nav class="vp-breadcrumb disable"></nav><div class="vp-page-title"><h1><!---->决策路由特性来袭，LiteFlow大版本2.12.0发布，Make your code amaing！</h1><div class="page-info"><span class="page-author-info" aria-label="作者🖊" data-balloon-pos="down"><svg xmlns="http://www.w3.org/2000/svg" class="icon author-icon" viewBox="0 0 1024 1024" fill="currentColor" aria-label="author icon"><path d="M649.6 633.6c86.4-48 147.2-144 147.2-249.6 0-160-128-288-288-288s-288 128-288 288c0 108.8 57.6 201.6 147.2 249.6-121.6 48-214.4 153.6-240 288-3.2 9.6 0 19.2 6.4 25.6 3.2 9.6 12.8 12.8 22.4 12.8h704c9.6 0 19.2-3.2 25.6-12.8 6.4-6.4 9.6-16 6.4-25.6-25.6-134.4-121.6-240-243.2-288z"></path></svg><span><span class="page-author-item">铂赛东</span></span><span property="author" content="铂赛东"></span></span><!----><span class="page-date-info" aria-label="写作日期📅" data-balloon-pos="down"><svg xmlns="http://www.w3.org/2000/svg" class="icon calendar-icon" viewBox="0 0 1024 1024" fill="currentColor" aria-label="calendar icon"><path d="M716.4 110.137c0-18.753-14.72-33.473-33.472-33.473-18.753 0-33.473 14.72-33.473 33.473v33.473h66.993v-33.473zm-334.87 0c0-18.753-14.72-33.473-33.473-33.473s-33.52 14.72-33.52 33.473v33.473h66.993v-33.473zm468.81 33.52H716.4v100.465c0 18.753-14.72 33.473-33.472 33.473a33.145 33.145 0 01-33.473-33.473V143.657H381.53v100.465c0 18.753-14.72 33.473-33.473 33.473a33.145 33.145 0 01-33.473-33.473V143.657H180.6A134.314 134.314 0 0046.66 277.595v535.756A134.314 134.314 0 00180.6 947.289h669.74a134.36 134.36 0 00133.94-133.938V277.595a134.314 134.314 0 00-133.94-133.938zm33.473 267.877H147.126a33.145 33.145 0 01-33.473-33.473c0-18.752 14.72-33.473 33.473-33.473h736.687c18.752 0 33.472 14.72 33.472 33.473a33.145 33.145 0 01-33.472 33.473z"></path></svg><span><!----></span><meta property="datePublished" content="2024-04-16T00:00:00.000Z"></span><!----><span class="page-reading-time-info" aria-label="阅读时间⌛" data-balloon-pos="down"><svg xmlns="http://www.w3.org/2000/svg" class="icon timer-icon" viewBox="0 0 1024 1024" fill="currentColor" aria-label="timer icon"><path d="M799.387 122.15c4.402-2.978 7.38-7.897 7.38-13.463v-1.165c0-8.933-7.38-16.312-16.312-16.312H256.33c-8.933 0-16.311 7.38-16.311 16.312v1.165c0 5.825 2.977 10.874 7.637 13.592 4.143 194.44 97.22 354.963 220.201 392.763-122.204 37.542-214.893 196.511-220.2 389.397-4.661 5.049-7.638 11.651-7.638 19.03v5.825h566.49v-5.825c0-7.379-2.849-13.981-7.509-18.9-5.049-193.016-97.867-351.985-220.2-389.527 123.24-37.67 216.446-198.453 220.588-392.892zM531.16 450.445v352.632c117.674 1.553 211.787 40.778 211.787 88.676H304.097c0-48.286 95.149-87.382 213.728-88.676V450.445c-93.077-3.107-167.901-81.297-167.901-177.093 0-8.803 6.99-15.793 15.793-15.793 8.803 0 15.794 6.99 15.794 15.793 0 80.261 63.69 145.635 142.01 145.635s142.011-65.374 142.011-145.635c0-8.803 6.99-15.793 15.794-15.793s15.793 6.99 15.793 15.793c0 95.019-73.789 172.82-165.96 177.093z"></path></svg><span>大约 10 分钟</span><meta property="timeRequired" content="PT10M"></span><!----><!----></div><hr></div><div class="toc-place-holder"><aside id="toc"><!--[--><!----><!--]--><div class="toc-header">此页内容<button type="button" class="print-button" title="打印"><svg xmlns="http://www.w3.org/2000/svg" class="icon print-icon" viewBox="0 0 1024 1024" fill="currentColor" aria-label="print icon"><path d="M819.2 364.8h-44.8V128c0-17.067-14.933-32-32-32H281.6c-17.067 0-32 14.933-32 32v236.8h-44.8C145.067 364.8 96 413.867 96 473.6v192c0 59.733 49.067 108.8 108.8 108.8h44.8V896c0 17.067 14.933 32 32 32h460.8c17.067 0 32-14.933 32-32V774.4h44.8c59.733 0 108.8-49.067 108.8-108.8v-192c0-59.733-49.067-108.8-108.8-108.8zM313.6 160h396.8v204.8H313.6V160zm396.8 704H313.6V620.8h396.8V864zM864 665.6c0 25.6-19.2 44.8-44.8 44.8h-44.8V588.8c0-17.067-14.933-32-32-32H281.6c-17.067 0-32 14.933-32 32v121.6h-44.8c-25.6 0-44.8-19.2-44.8-44.8v-192c0-25.6 19.2-44.8 44.8-44.8h614.4c25.6 0 44.8 19.2 44.8 44.8v192z"></path></svg></button></div><div class="toc-wrapper"><ul class="toc-list"><!--[--><li class="toc-item"><a class="vp-link toc-link level2 toc-link level2" href="/#前言">前言</a></li><!----><!--]--><!--[--><li class="toc-item"><a class="vp-link toc-link level2 toc-link level2" href="/#决策路由">决策路由</a></li><!----><!--]--><!--[--><li class="toc-item"><a class="vp-link toc-link level2 toc-link level2" href="/#布尔组件">布尔组件</a></li><!----><!--]--><!--[--><li class="toc-item"><a class="vp-link toc-link level2 toc-link level2" href="/#允许启动不检查节点存在性">允许启动不检查节点存在性</a></li><!----><!--]--><!--[--><li class="toc-item"><a class="vp-link toc-link level2 toc-link level2" href="/#重写了python脚本引擎">重写了python脚本引擎</a></li><!----><!--]--><!--[--><li class="toc-item"><a class="vp-link toc-link level2 toc-link level2" href="/#声明式组件的大一统">声明式组件的大一统</a></li><!----><!--]--><!--[--><li class="toc-item"><a class="vp-link toc-link level2 toc-link level2" href="/#上下文提供别名获取方式">上下文提供别名获取方式</a></li><!----><!--]--><!--[--><li class="toc-item"><a class="vp-link toc-link level2 toc-link level2" href="/#el层面提供retry关键字">EL层面提供retry关键字</a></li><!----><!--]--><!--[--><li class="toc-item"><a class="vp-link toc-link level2 toc-link level2" href="/#新增验证-卸载脚本特性">新增验证/卸载脚本特性</a></li><!----><!--]--><!--[--><li class="toc-item"><a class="vp-link toc-link level2 toc-link level2" href="/#提供查看一个规则下的所有node">提供查看一个规则下的所有Node</a></li><!----><!--]--><!--[--><li class="toc-item"><a class="vp-link toc-link level2 toc-link level2" href="/#对某一个规则-脚本进行启停操作">对某一个规则/脚本进行启停操作</a></li><!----><!--]--><!--[--><li class="toc-item"><a class="vp-link toc-link level2 toc-link level2" href="/#完整的更新列表">完整的更新列表</a></li><!----><!--]--><!--[--><li class="toc-item"><a class="vp-link toc-link level2 toc-link level2" href="/#吸纳团队成员">吸纳团队成员</a></li><!----><!--]--><!--[--><li class="toc-item"><a class="vp-link toc-link level2 toc-link level2" href="/#lf-club">LF CLUB</a></li><!----><!--]--></ul><div class="toc-marker" style="top:-1.7rem;"></div></div><!--[--><!----><!--]--></aside></div><!----><div class="theme-hope-content"><figure><img src="/assets/img/blog/LiteFlow-2.12.0-0.png" alt="" tabindex="0"><figcaption></figcaption></figure><p><strong>LiteFlow是一个开源编排式规则引擎，能够让你的系统逻辑任意编排，可选用脚本书写逻辑，支持多达7种脚本语言，支持丰富的第三方存储的支持，所有的逻辑和规则均可热变更。设计系统和重构系统的神器。</strong></p><p>LiteFlow是Gitee的高star项目，截止到发此文章的时候，Gitee star接近6k大关，Github则拥有2.6Kstar。</p><p>同时LiteFlow也是国内优秀的社区驱动型开源项目，开源3年多，目前已经被各大一线公司应用在核心系统上，据不完全统计，国内将近千余家公司都在使用。特性以及支持度都非常好。社区人数超过5000人。测试用例将近1800个，质量有保障。</p><p>如果你是第一次知道这个项目，可以去官网或相关的主页进行了解：</p><blockquote><p>项目官网:</p><p>https://liteflow.cc</p><p>gitee托管仓库：</p><p>https://gitee.com/dromara/liteFlow</p><p>github托管仓库：</p><p>https://github.com/dromara/liteflow</p></blockquote><p>以下文章LiteFlow简称为LF。</p><h2 id="前言" tabindex="-1"><a class="header-anchor" href="#前言" aria-hidden="true">#</a> 前言</h2><p>距离上次版本已经过去3个月了，这次我们带来了v2.12.0的超大版本更新。这个版本本来准备3月底发布的，中间跳过两次票，一切只为了版本的更加稳定。让各位开发者久等了。</p><p>今年能明显感觉使用LF的小伙伴越来越多了，社区的人数也是节节攀升，每天的咨询不断。相信有不少人都在等这个版本，这个版本带来了19个issue的更新，其中包含着非常多的大特性更新，同时也有稳定性的更新和社区反映的一些bug修复。</p><p>这三个月中我和LF团队的小伙伴都在为这个版本而努力，新版本官网也做了一些改变。变更了首页的动态效果，现在变得更加简洁了。现在的背景的动图更加贴合LF的组件这个意图，思路来自于七巧板。感谢森阳的倾心设计。</p><figure><img src="/assets/img/blog/LiteFlow-2.12.0-1.png" alt="" tabindex="0"><figcaption></figcaption></figure><figure><img src="/assets/img/blog/LiteFlow-2.12.0-2.png" alt="" tabindex="0"><figcaption></figcaption></figure><p>同时v2.12.0更换了slogan，这个版本的slogan为：Make your code amazing。我们希望使用了LF能帮助开发者把他们的代码变得更加灵巧且令人惊叹。</p><p>接下来我们来了解下v2.12.0有哪些重头戏吧！</p><h2 id="决策路由" tabindex="-1"><a class="header-anchor" href="#决策路由" aria-hidden="true">#</a> 决策路由</h2><p>决策路由是v2.12.0的版本特性。LF带来了规则的全新用法，即执行时不指定具体规则ID，通过对决策路由EL的判断，来动态该执行哪些规则，并且匹配以及执行的过程中都是全并行态的。为此LF引入了<code>&lt;route&gt;</code>标签：</p><div class="language-text line-numbers-mode" data-ext="text"><pre class="language-text"><code>&lt;chain name=&quot;chain1&quot;&gt;
+    &lt;route&gt;
+        AND(r1, r2, r3)
+    &lt;/route&gt;
+    &lt;body&gt;
+        THEN(a, b, c);
+    &lt;/body&gt;
+&lt;/chain&gt;
+
+&lt;chain name=&quot;chain2&quot;&gt;
+    &lt;route&gt;
+        AND(OR(r4, r5), NOT(r3))
+    &lt;/route&gt;
+    &lt;body&gt;
+        SWITCH(x).TO(d, e, f);
+    &lt;/body&gt;
+&lt;/chain&gt;
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>在决策体中的EL只能用与或非表达式，组件只能用布尔表达式。具体如何使用大家请参考官网文档中的<code>决策路由</code>。</p><h2 id="布尔组件" tabindex="-1"><a class="header-anchor" href="#布尔组件" aria-hidden="true">#</a> 布尔组件</h2><p>v2.12.0并不是一个兼容版本，最主要的原因就是新增了布尔组件的概念。</p><p>我们在新版本中去除了<code>NodeIfComponent</code>，<code>NodeWhileComponent</code>，<code>NodeBreakComponent</code> 三个组件形态，统一变成了布尔组件<code>NodeBooleanComponent</code>。换句话说，布尔组件能用在IF，WHILE，BREAK三种表达式中。</p><div class="language-text line-numbers-mode" data-ext="text"><pre class="language-text"><code>@LiteflowComponent(&quot;x&quot;)
+public class ECmp extends NodeBooleanComponent {
+    @Override
+    public boolean processBoolean() throws Exception {
+        // do your biz
+        return true;
+    }
+}
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>大家如果升级新版本，需要替换以上三种组件为布尔组件，替换下超类就可以了，这个过程不会耽误大家太多时间。为此我们准备了<code>2.12.0升级指南</code>，里面有非常详细的升级指南，这份指南可以在官网找到。</p><h2 id="允许启动不检查节点存在性" tabindex="-1"><a class="header-anchor" href="#允许启动不检查节点存在性" aria-hidden="true">#</a> 允许启动不检查节点存在性</h2><p>社区里有很多小伙伴反映过现在强制性启动检查节点存在性让他们的协作开发受到了一些阻碍。为此LF新版提供了一个全局参数：</p><div class="language-text line-numbers-mode" data-ext="text"><pre class="language-text"><code>parse-mode=PARSE_ONE_ON_FIRST_EXEC
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><p>这个<code>parse-mode</code>取代了以前的<code>parse-on-start</code> 。这个参数有三种值：</p><table><thead><tr><th>设置值</th><th>含义</th></tr></thead><tbody><tr><td>PARSE_ALL_ON_START</td><td>启动时解析所有的规则，不配置默认就是这个值</td></tr><tr><td>PARSE_ALL_ON_FIRST_EXEC</td><td>启动时不解析规则，但是第一次执行任意规则时，解析所有的</td></tr><tr><td>PARSE_ONE_ON_FIRST_EXEC</td><td>启动时不解析规则，但是第一次执行相关规则时，只解析对应的规则</td></tr></tbody></table><p>关于这部分的详细解释，请看官网文档中的<code>元数据管理 -&gt; 启动不检查规则</code>。</p><h2 id="重写了python脚本引擎" tabindex="-1"><a class="header-anchor" href="#重写了python脚本引擎" aria-hidden="true">#</a> 重写了python脚本引擎</h2><p>LF提供了python脚本支持，但是一直以来这个解析引擎就是存在一些问题的，可能是社区里面的人用python引擎的人不多吧，所以这个问题一直没有被暴露出来。既然有人用，既然出现了问题。那么我们就有必要修复这个问题。</p><p>为此，我们推翻了之前python解析引擎的实现方式，重新写了一版，解决了python脚本不能正常返回的情况。</p><h2 id="声明式组件的大一统" tabindex="-1"><a class="header-anchor" href="#声明式组件的大一统" aria-hidden="true">#</a> 声明式组件的大一统</h2><p>其实这个特性早在2.11.4中就已经实现了，严格意义上不算新版本的特性。但是由于作了兼容，所以在2.11.X的文档上并没有加以说明。</p><p>之前LF分类声明式和方法级别声明式，并且类声明式在声明上比方法级别声明式多了一个<code>@LiteflowCmpDefine</code> 标注，曾经有一个小伙伴表示这个有点多余，而且有点割裂感。</p><p>所以LF在新的声明式中可以不要这个标注。基本上类级别声明式和方法级别声明式就统一了，你在一个类中定义一个组件，那就是类级别声明式，定义多个组件就是方法级别声明式。当然以前那种定义方式仍然有效。LF进行了兼容。</p><p>这是类级别声明式：</p><div class="language-text line-numbers-mode" data-ext="text"><pre class="language-text"><code>@LiteflowComponent(&quot;a&quot;)
+public class ACmp{
+  
+    @LiteflowMethod(LiteFlowMethodEnum.PROCESS, nodeType = NodeTypeEnum.COMMON)
+    public void processAcmp(NodeComponent bindCmp) {
+        System.out.println(&quot;ACmp executed!&quot;);
+    }
+}
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>这是方法级别声明式：</p><div class="language-text line-numbers-mode" data-ext="text"><pre class="language-text"><code>@LiteflowComponent
+public class CmpConfig {
+
+    //普通组件的定义
+    @LiteflowMethod(value = LiteFlowMethodEnum.PROCESS, nodeId = &quot;a&quot;, nodeName = &quot;A组件&quot;)
+    public void processA(NodeComponent bindCmp) {
+        ...
+    }
+
+    //SWITCH组件的定义
+    @LiteflowMethod(value = LiteFlowMethodEnum.PROCESS_SWITCH, nodeId = &quot;b&quot;, nodeName = &quot;B组件&quot;, nodeType = NodeTypeEnum.SWITCH)
+    public String processB(NodeComponent bindCmp) {
+        ...
+    }
+    
+    //布尔组件的定义
+    @LiteflowMethod(value = LiteFlowMethodEnum.PROCESS_BOOLEAN, nodeId = &quot;c&quot;, nodeName = &quot;C组件&quot;, nodeType = NodeTypeEnum.BOOLEAN)
+    public boolean processC(NodeComponent bindCmp) {
+        ...
+    }
+}
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><h2 id="上下文提供别名获取方式" tabindex="-1"><a class="header-anchor" href="#上下文提供别名获取方式" aria-hidden="true">#</a> 上下文提供别名获取方式</h2><p>上下文的获取，相信大家都知道是通过<code>this.getContextBean</code>或者是<code>this.getFirstContextBean</code>来获取。但是这些获取方式都是通过class来进行获取的，如果传入两个相同class的上下文，就会有问题了。</p><p>LF在新版本推出了根据别名获取的方式，想要定义一个上下文的别名，很简单，只需要通过<code>@ContextBean</code>注解进行标注：</p><div class="language-text line-numbers-mode" data-ext="text"><pre class="language-text"><code>@ContextBean(&quot;anyName&quot;)
+public class YourContext {
+    ...
+}
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>获取的时候，LF提供了一个新的获取方式：</p><div class="language-text line-numbers-mode" data-ext="text"><pre class="language-text"><code>@Component(&quot;a&quot;)
+public class ACmp extends NodeComponent {
+
+    @Override
+    public void process() {
+        TestContext context = this.getContextBean(&quot;anyName&quot;);
+        ...
+    }
+}
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>这个特性能解决相同类作为上下文的场景。</p><h2 id="el层面提供retry关键字" tabindex="-1"><a class="header-anchor" href="#el层面提供retry关键字" aria-hidden="true">#</a> EL层面提供retry关键字</h2><p>LF之前提供重试特性，但是重试特性是通过<code>@LiteflowRetry</code>标注来提供的。这个标注在类上，并没有办法在规则EL中得以体现。在新版本中，我们提供了基于EL层面的<code>retry</code>关键字，并且把重试这种特性作用于了任意表达式上，而不再是只作用于组件上。</p><div class="language-text line-numbers-mode" data-ext="text"><pre class="language-text"><code>&lt;chain id=&quot;chain1&quot;&gt;
+    THEN(a, b.retry(3));
+&lt;/chain&gt;
+
+&lt;chain id=&quot;chain2&quot;&gt;
+    THEN(a, b).retry(3);
+&lt;/chain&gt;
+
+&lt;chain id=&quot;chain3&quot;&gt;
+    FOR(c).DO(a).retry(3);
+&lt;/chain&gt;
+
+&lt;chain id=&quot;chain4&quot;&gt;
+    exp = SWITCH(x).to(m,n,p);
+    IF(f, exp.retry(3), b);
+&lt;/chain&gt;
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p>关于<code>retry</code>关键字的用法详细请参考官网文档中的<code>高级特性 -&gt; EL中的重试</code>。</p><h2 id="新增验证-卸载脚本特性" tabindex="-1"><a class="header-anchor" href="#新增验证-卸载脚本特性" aria-hidden="true">#</a> 新增验证/卸载脚本特性</h2><p>在新版本中，我们提供了一个验证脚本和卸载脚本的api。具体用法如下：</p><div class="language-text line-numbers-mode" data-ext="text"><pre class="language-text"><code>boolean isValid = ScriptValidator.validate(script);
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><p>卸载脚本的用法如下：</p><div class="language-text line-numbers-mode" data-ext="text"><pre class="language-text"><code>FlowBus.unloadScriptNode(String nodeId);
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><h2 id="提供查看一个规则下的所有node" tabindex="-1"><a class="header-anchor" href="#提供查看一个规则下的所有node" aria-hidden="true">#</a> 提供查看一个规则下的所有Node</h2><p>新版中，我们还提供了一个api，用来查看chain下的所有node：</p><div class="language-text line-numbers-mode" data-ext="text"><pre class="language-text"><code>List&lt;Node&gt; nodeList = FlowBus.getNodesByChainId(&quot;chain1&quot;);
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div></div></div><h2 id="对某一个规则-脚本进行启停操作" tabindex="-1"><a class="header-anchor" href="#对某一个规则-脚本进行启停操作" aria-hidden="true">#</a> 对某一个规则/脚本进行启停操作</h2><p>在数据中，其实LF早就支持了规则和脚本层面的enable，但是在其他存储插件中，我们之前并未支持。</p><p>新版中我们也进行了支持，由于很多存储插件诸如zk，etcd，redis，apollo这种规则/脚本都是KV结构，我们在key的结构上作了一定的修改。</p><p>规则key的完整形态为：<code>规则ID[:是否启用]</code>。</p><p>脚本key的完整形态为：<code>脚本组件ID:脚本类型[:脚本名称:脚本语言:是否启用]</code>。</p><p>其中方括号内的为可选值。</p><p>具体这部分的详细解释请参考官方文档中的<code>规则以及配置源</code>这一章。</p><h2 id="完整的更新列表" tabindex="-1"><a class="header-anchor" href="#完整的更新列表" aria-hidden="true">#</a> 完整的更新列表</h2><div class="language-text line-numbers-mode" data-ext="text"><pre class="language-text"><code>特性 #I96A33 为LF增加决策表特性
+
+https://gitee.com/dromara/liteFlow/issues/I96A33
+
+特性 #I9DQDU 允许对不存在的组件增加全局参数
+
+https://gitee.com/dromara/liteFlow/issues/I9DQDU
+
+特性 #I9050W 为每一个上下文提供一个名字，使用时可以根据名字来获取
+
+https://gitee.com/dromara/liteFlow/issues/I9050W
+
+特性 #I8PL2M EL语句里可以设置重试次数，类似于EL中的超时时间
+
+https://gitee.com/dromara/liteFlow/issues/I8PL2M
+
+特性 #I61D1N 规则层面增加一个enable的选项，可以禁用规则
+
+https://gitee.com/dromara/liteFlow/issues/I61D1N
+
+特性 #I8YNCB 查看某一个chainId下的所有node
+
+https://gitee.com/dromara/liteFlow/issues/I8YNCB
+
+特性 #I8HDIA 新增一个验证脚本的方法
+
+https://gitee.com/dromara/liteFlow/issues/I8HDIA
+
+增强 #I8SMQB BREAK、IF、WHILE组件统一变成布尔组件
+
+https://gitee.com/dromara/liteFlow/issues/I8SMQB
+
+增强 #I8MW6Q 没有脚本（node）加载后没有提供卸载的方法，可能造成脚本一直占用内存
+
+https://gitee.com/dromara/liteFlow/issues/I8MW6Q
+
+增强 #I905AD 优化注解的获取速度，优化性能
+
+https://gitee.com/dromara/liteFlow/issues/I905AD
+
+增强 #I95XTD python脚本无法写return脚本
+
+https://gitee.com/dromara/liteFlow/issues/I95XTD
+
+增强 #I90IRR 设置超时maxWaitSenconds之后，超时的组件仍旧执行会报出NPE的问题
+
+https://gitee.com/dromara/liteFlow/issues/I90IRR
+
+增强 #I9F2HP 链路继承中的占位符换成双括弧
+
+https://gitee.com/dromara/liteFlow/issues/I9F2HP
+
+增强 #I98L0S 现版本需要依赖jackson2.16，缺少toPrettyString方法
+
+https://gitee.com/dromara/liteFlow/issues/I98L0S
+
+增强 #I97Y7Y 2.11.4.2版本中ComponentScanner初始化失败，建议重写BeanPostProcessor#postProcessBeforeInitialization
+
+https://gitee.com/dromara/liteFlow/issues/I97Y7Y
+
+增强 #I91AUT 对于诸如isContinueOnError或isAccess这样的方法，期望能够提供set形式的调用
+
+https://gitee.com/dromara/liteFlow/issues/I91AUT
+
+修复 #I932V4 组件降级，在寻找降级组件时，仍应该去查找下有没有对应的组件
+
+https://gitee.com/dromara/liteFlow/issues/I932V4
+
+修复 #I8YDGE 在迭代循环组件中，无法获取子流程传递的请求参数
+
+https://gitee.com/dromara/liteFlow/issues/I8YDGE
+
+修复 #I8Y0X4 并行循环中有可能导致的ConditionStack的并发问题
+
+https://gitee.com/dromara/liteFlow/issues/I8Y0X4
+</code></pre><div class="line-numbers" aria-hidden="true"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><h2 id="吸纳团队成员" tabindex="-1"><a class="header-anchor" href="#吸纳团队成员" aria-hidden="true">#</a> 吸纳团队成员</h2><p>目前LF成员一共有11个人，我们也希望吸纳更多的开发者加入到开源团队之中。如果想加入开源团队，&quot;投名状&quot;为3个PR，成功通过作者的审核并被合入主干才能有资格。如果是学生朋友，则完成作者指定分派的课题并成功合入主干即为通过。</p><h2 id="lf-club" tabindex="-1"><a class="header-anchor" href="#lf-club" aria-hidden="true">#</a> LF CLUB</h2><p>LF CLUB是由作者创办的高级付费社区。</p><p>LF CLUB能帮助到所有LiteFlow框架的使用者，以及想使用LiteFlow的潜在开发者。</p><p>除了给会员提供最及时最详细的咨询服务，目前在连载的白话文解析LF系列已经更新11篇，这个系列会是50篇以上的系列。并且全部都是独家内容。不会在其他平台上进行发布。</p><p>除此之外，还会推出其他高并发解析，Java spring使用高级技巧等系列以及LF相关进程，新特性的介绍等等。</p><p>基本上每2到3天会更新一次。如果有兴趣的小伙伴，可以扫以下二维码看介绍。</p><figure><img src="/assets/img/blog/LiteFlow-2.12.0-3.png" alt="" tabindex="0"><figcaption></figcaption></figure></div><!----><footer class="page-meta"><!----><div class="meta-item git-info"><div class="update-time"><span class="label">上次编辑于: </span><!----></div><div class="contributors"><span class="label">贡献者: </span><!--[--><!--[--><span class="contributor" title="email: itanxy@126.com">itanxyu</span><!--]--><!--]--></div></div></footer><!----><!----><!----><!--]--></main><!--]--><footer class="page-footer" data-v-0ba8c0e3><!----><div class="copyright" data-v-0ba8c0e3><p data-v-0ba8c0e3> Copyright ©2018-2024 <a href="/" data-v-0ba8c0e3>@dromara. org. All Rights Reserved</a></p></div></footer></div><!--]--><!--]--><!----><!----><!--]--></div>
+    <script type="module" src="/assets/app-b3220ba4.js" defer></script>
+  </body>
+</html>
