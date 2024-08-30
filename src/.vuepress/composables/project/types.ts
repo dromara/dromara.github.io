@@ -36,7 +36,14 @@ export interface ProjectsOption {
   EASYAI:string
   MYBATIS_PLUS_EXT:string
   EASY_QUERY:string
-  
+  TIANAI_CAPTCHA:string
+  DAX_PAY:string
+  MYFLY_GO:string
+  MILVUSPLUS:string
+  NEWCAR:string
+  UJCMS:string
+  SAYORDER:string
+  AKALI:string
   BINLOG4J_DESC: string
   SMS4J_DESC: string
   STREAM_QUERY_DESC: string

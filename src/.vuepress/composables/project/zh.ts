@@ -40,7 +40,14 @@ export const zhProjectsOption: ProjectsOption = {
   EASYAI:"国内人气最高的Java人工智能算法框架(java版pytorch)。它可以Maven一键丝滑引入我们的Java项目，无需任何额外的环境配置与依赖，做到开箱即用",
   MYBATIS_PLUS_EXT:"mybatis-plus框架的拓展包，在框架原有基础上做了进一步的轻度封装",
   EASY_QUERY:"一款java下面支持强类型、轻量级、高性能的ORM",
-
+  TIANAI_CAPTCHA:"可能是java界最好的开源行为验证码, [滑块验证码、点选验证码、行为验证码、旋转验证码，滑动验证码]",
+  DAX_PAY:"DaxPay是一款免费开源的支付系统，支持支付宝、微信、云闪付等通道",
+  MYFLY_GO:"web 版 linux(终端[终端回放] 文件 脚本 进程 计划任务)、数据库（mysql postgres oracle sqlserver 达梦 高斯 sqlite）、redis(单机 哨兵 集群)、mongo 等集工单流程审批于一体的统一管理操作平台",
+  MILVUSPLUS:"使用MyBatisPlus的方式，优雅的操作向量数据库 Milvus，同时支持spring和solon",
+  NEWCAR:"基于CanvasKit-WASM的现代化动画引擎",
+  UJCMS:"支持无头CMS，支持自定义字段及字段可视化设计。可免费用于商业网站",
+  SAYORDER:"该项目是基于easyAi引擎的JAVA高性能，低成本，轻量级智能客服",
+  AKALI:"Akali(阿卡丽)，轻量级本地化热点检测/降级框架，10秒钟即可接入使用！大流量下的神器",
   OPEN_GITEYE_API_DESC:
     "专为开源作者设计的数据图表服务工具类站点，提供了包括Star趋势图、贡献者列表、Gitee指数等数据图表服务。",
   BINLOG4J_DESC: "基于 Java 轻量级的 Mysql Binlog 客户端。",
