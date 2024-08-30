@@ -645,7 +645,7 @@ export const useProjectsData = () => {
       projects: [
         {
           name: "Jpom",
-          website: "https://jpom.io/",
+          website: "https://jpom.top/",
           description: projectLocale.value.JPOM_DESC,
           sponsor: "蒋小小（bwcx-jzy）",
           date: "2021.03",
