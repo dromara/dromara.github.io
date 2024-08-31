@@ -237,7 +237,7 @@ FlowBus.unloadScriptNode(String nodeId);
 新版中，我们还提供了一个api，用来查看chain下的所有node：
 
 ```
-List<Node> nodeList = FlowBus.getNodesByChainId("chain1");
+List <Node> nodeList = FlowBus.getNodesByChainId("chain1");
 ```
 
 ## 对某一个规则/脚本进行启停操作
