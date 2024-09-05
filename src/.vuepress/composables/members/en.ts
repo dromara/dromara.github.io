@@ -476,6 +476,12 @@ export const enMembersOption: MembersOption = {
           name: "Son Xiao",
           photo: "/assets/img/members/sonxiao.webp",
           desc: "Hertzbeat Committer"
+        },
+        {
+          role: "Member",
+          name: "Xiao Hua",
+          photo: "/assets/img/members/xiaohua.webp",
+          desc: "Warm-Flow Committer"
         }
       ]
     }
