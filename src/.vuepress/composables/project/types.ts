@@ -51,6 +51,7 @@ export interface ProjectsOption {
   EASYTRANS_DESC: string
   NEUTRINO_PROXY_DESC: string
   TESTHUB_DESC: string
+  DOMAIN_ADMIN_DESC: string
   YFT_DESIGN_DESC: string
   ZYPLAYER_DOC_DESC: string
   X_FILE_STORAGE_DESC: string

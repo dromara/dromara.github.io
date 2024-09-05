@@ -219,6 +219,12 @@ export const zhMembersOption: MembersOption = {
           name: "唐振超",
           photo: "/assets/img/members/tangzhenchao.webp",
           desc: "坐标泉城济南，开源爱好者。mybatis-plus-ext 作者，AutoTable 作者"
+        },
+        {
+          role: "委员会成员",
+          name: "mouday",
+          photo: "/assets/img/members/mouday.webp",
+          desc: "Domain Admin作者"
         }
       ]
     },

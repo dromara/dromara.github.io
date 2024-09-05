@@ -95,7 +95,7 @@ export const useProjectsData = () => {
     },
     {
       groupName: projectLocale.value.OPERATIONS_AND_MAINTENANCE_CONTROL,
-      projects: ["Jpom", "cubic", "TestHub", "athena"]
+      projects: ["Jpom", "cubic", "TestHub", "athena", "domain-admin"]
     },
     {
       groupName: projectLocale.value.DISTRIBUTED_LOG,
@@ -961,6 +961,16 @@ export const useProjectsData = () => {
   <a href="https://gitee.com/failedgoddess/test-hub/stargazers"><img src="https://gitee.com/failedgoddess/test-hub/badge/star.svg?theme=gvp"></a>
   <a href="https://gitee.com/failedgoddess/test-hub/blob/master/LICENSE"><img src="https://img.shields.io/badge/license-Apache--2.0-green"></a>
   <a href="https://gitee.com/failedgoddess/test-hub"><img src="https://img.shields.io/badge/version-v1.0.0-blue"></a>
+  `
+        },
+        {
+          name: "domain-admin",
+          website: "https://domain-admin.cn/",
+          description: projectLocale.value.DOMAIN_ADMIN_DESC,
+          sponsor: "mouday",
+          date: "2024.08",
+          link: `
+  <img src="https://img.shields.io/github/stars/dromara/domain-admin.svg?logo=GitHub" alt="">
   `
         }
       ]
