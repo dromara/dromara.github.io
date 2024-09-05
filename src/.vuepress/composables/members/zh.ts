@@ -476,6 +476,12 @@ export const zhMembersOption: MembersOption = {
           name: "淞筱",
           photo: "/assets/img/members/sonxiao.webp",
           desc: "Hertzbeat Committer"
+        },
+        {
+          role: "成员",
+          name: "晓华",
+          photo: "/assets/img/members/xiaohua.webp",
+          desc: "Warm-Flow Committer"
         }
       ]
     }
