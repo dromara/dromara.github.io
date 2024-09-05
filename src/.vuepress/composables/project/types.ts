@@ -28,6 +28,22 @@ export interface ProjectsOption {
   X_EASYPDF_DESC: string
   GOBRS_ASYNC_DESC: string
   OPEN_GITEYE_API_DESC: string
+  DYJAVA: string
+  ORION_VISOR: string
+  WARM_FLOW:string
+  DBSWITCH:string
+  SKYEYE_OA:string
+  EASYAI:string
+  MYBATIS_PLUS_EXT:string
+  EASY_QUERY:string
+  TIANAI_CAPTCHA:string
+  DAX_PAY:string
+  MYFLY_GO:string
+  MILVUSPLUS:string
+  NEWCAR:string
+  UJCMS:string
+  SAYORDER:string
+  AKALI:string
   BINLOG4J_DESC: string
   SMS4J_DESC: string
   STREAM_QUERY_DESC: string
