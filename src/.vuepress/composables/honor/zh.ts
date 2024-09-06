@@ -17,6 +17,22 @@ export const zhHonorOption: HonorOption = {
     {
       desc: "2022年OSChina授予优秀开源技术团队",
       img: "/assets/img/about/OSC_Awards_Tech_Team.jpg"
+    },
+    {
+      desc: "2022年中国开源创新大赛优秀奖",
+      img: "/assets/img/about/Innovation_Excellence_Award.jpg"
+    },
+    {
+      desc: "2022年年度人气技术团队",
+      img: "/assets/img/about/Popular_Technical_Team.jpg"
+    },
+    {
+      desc: "2023年最活跃的开源组织",
+      img: "/assets/img/about/2023_Most_Active_Org.jpg"
+    },
+    {
+      desc: "2023年最受关注和喜爱的开源组织",
+      img: "/assets/img/about/Concerned_favorite_Org.jpg"
     }
   ],
   TIME_LINE: [

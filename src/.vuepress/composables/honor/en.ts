@@ -16,6 +16,22 @@ export const enHonorOption: HonorOption = {
     {
       desc: "2022 OSChina awarded Excellent Open Source Technology Team",
       img: "/assets/img/about/OSC_Awards_Tech_Team.jpg"
+    },
+    {
+      desc: "2022 Excellent Award in China Open Source Innovation Competition",
+      img: "/assets/img/about/Innovation_Excellence_Award.jpg"
+    },
+    {
+      desc: "2022 Annual Popularity Technology Team",
+      img: "/assets/img/about/Popular_Technical_Team.jpg"
+    },
+    {
+      desc: "2023 The most active open source organization",
+      img: "/assets/img/about/2023_Most_Active_Org.jpg"
+    },
+    {
+      desc: "2023 The most popular and beloved open source organization",
+      img: "/assets/img/about/Concerned_favorite_Org.jpg"
     }
   ],
   TIME_LINE: [
