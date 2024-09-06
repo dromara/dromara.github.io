@@ -64,7 +64,20 @@ export const enHonorOption: HonorOption = {
       year: "2023",
       items: [
         "Added 4 more top-level projects: RuoYi-Vue-Plus, sms4j, etc.",
-        "Brimming with energy, joined incubation for 9 projects"
+        "Brimming with energy, joined incubation for 9 projects",
+        "Won the 2022 China Open Source Community Health Case Award",
+        "Won the title of 2022 Popular Technology Team of the Year",
+        "Won the Excellence Award at the 2022 China Open Source Innovation Competition"
+      ]
+    },
+    {
+      year: "2024",
+      items: [
+        "The number of stars in the whole network exceeds 305.5k",
+        "21 GVP(Gitee Most Valuable Open Source) projects",
+        "The current total number of Gitee project repositories has reached 76",
+        "Awarded the most watched and loved open source organization of 2023",
+        "Most Active Open Source Organization in 2023"
       ]
     }
   ]
