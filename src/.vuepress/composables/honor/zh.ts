@@ -17,6 +17,22 @@ export const zhHonorOption: HonorOption = {
     {
       desc: "2022年OSChina授予优秀开源技术团队",
       img: "/assets/img/about/OSC_Awards_Tech_Team.jpg"
+    },
+    {
+      desc: "2022年中国开源创新大赛优秀奖",
+      img: "/assets/img/about/Innovation_Excellence_Award.jpg"
+    },
+    {
+      desc: "2022年年度人气技术团队",
+      img: "/assets/img/about/Popular_Technical_Team.jpg"
+    },
+    {
+      desc: "2023年最活跃的开源组织",
+      img: "/assets/img/about/2023_Most_Active_Org.jpg"
+    },
+    {
+      desc: "2023年最受关注和喜爱的开源组织",
+      img: "/assets/img/about/Concerned_favorite_Org.jpg"
     }
   ],
   TIME_LINE: [
@@ -46,7 +62,20 @@ export const zhHonorOption: HonorOption = {
       year: "2023",
       items: [
         "再添4个顶级项目：RuoYi-Vue-Plus、sms4j等",
-        "涌动活力，加入孵化项目9个"
+        "涌动活力，加入孵化项目9个",
+        "荣获2022年中国开源社区健康案例",
+        "荣获2022年中国开源创新大赛优秀奖",
+        "荣获2022年年度人气技术团队"
+      ]
+    },
+    {
+      year: "2024",
+      items: [
+        "全网star数超过305.5k",
+        "GVP（Gitee最具价值开源）项目达到21个",
+        "Gitee项目仓库目前总数已达76个",
+        "荣获2023年最受关注和喜爱的开源组织",
+        "荣获2023年最活跃的开源组织"
       ]
     }
   ]
