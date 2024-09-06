@@ -1,0 +1,1 @@
+import{S as _}from"./SiteSection-3bad8e0f.js";import{d as n,g as o,o as a,c,e as s,u as e,_ as l}from"./app-88e5f02c.js";const r=n({__name:"index.html",setup(i){const t=o();return(m,d)=>(a(),c("div",null,[s(e(_),{title:e(t).title},null,8,["title"])]))}});const f=l(r,[["__scopeId","data-v-0c74bcf7"],["__file","index.html.vue"]]);export{f as default};
