@@ -67,6 +67,7 @@ export const enProjectsOption: ProjectsOption = {
     "An open-source Java intranet penetration project based on netty.",
   TESTHUB_DESC:
     "TestHub is an automation testing tool based on workflow orchestration.",
+  DOMAIN_ADMIN_DESC: "Domain and SSL Cert monitor System.",
   YFT_DESIGN_DESC: "An open-source version of 'Creator Post' based on Canvas.",
   ZYPLAYER_DOC_DESC:
     "A knowledge base, note, and WIKI documentation management tool suitable for team and individual private deployment.",

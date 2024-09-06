@@ -57,6 +57,7 @@ export const zhProjectsOption: ProjectsOption = {
   EASYTRANS_DESC: "一个注解搞定数据翻译,减少30%SQL代码量。",
   NEUTRINO_PROXY_DESC: "一个基于netty的、开源的java内网穿透项目。",
   TESTHUB_DESC: "TestHub 是一款基于流程编排的自动化测试工具。",
+  DOMAIN_ADMIN_DESC: "域名SSL证书监测平台、SSL证书申请自动续签。",
   YFT_DESIGN_DESC: "基于Canvas的开源版“创客贴”。",
   ZYPLAYER_DOC_DESC:
     "一款适合团队和个人私有化部署使用的知识库、笔记、WIKI文档管理工具。",
