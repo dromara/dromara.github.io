@@ -225,6 +225,12 @@ export const zhMembersOption: MembersOption = {
           name: "mouday",
           photo: "/assets/img/members/mouday.webp",
           desc: "Domain Admin作者"
+        },
+        {
+          role: "委员会成员",
+          name: "xsx",
+          photo: "/assets/img/members/xsx.webp",
+          desc: "x-esypdf作者"
         }
       ]
     },
