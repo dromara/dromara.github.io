@@ -82,6 +82,12 @@ export const enMembersOption: MembersOption = {
           name: "Qiang Lu",
           photo: "/assets/img/members/qianglu.webp",
           desc: "Author of Cubic"
+        },
+        {
+          role: "TOC Member",
+          name: "mouday",
+          photo: "/assets/img/members/mouday.webp",
+          desc: "Author of Domain Admin"
         }
       ]
     },
