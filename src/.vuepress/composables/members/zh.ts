@@ -219,6 +219,12 @@ export const zhMembersOption: MembersOption = {
           name: "唐振超",
           photo: "/assets/img/members/tangzhenchao.webp",
           desc: "坐标泉城济南，开源爱好者。mybatis-plus-ext 作者，AutoTable 作者"
+        },
+        {
+          role: "委员会成员",
+          name: "晓华",
+          photo: "/assets/img/members/xiaohua.webp",
+          desc: "Warm-Flow 作者"
         }
       ]
     },
@@ -476,12 +482,6 @@ export const zhMembersOption: MembersOption = {
           name: "淞筱",
           photo: "/assets/img/members/sonxiao.webp",
           desc: "Hertzbeat Committer"
-        },
-        {
-          role: "成员",
-          name: "晓华",
-          photo: "/assets/img/members/xiaohua.webp",
-          desc: "Warm-Flow Committer"
         }
       ]
     }

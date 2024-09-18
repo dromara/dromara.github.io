@@ -219,6 +219,12 @@ export const enMembersOption: MembersOption = {
           name: "Don Tang",
           photo: "/assets/img/members/tangzhenchao.webp",
           desc: "Coordinate spring city Jinan, open source enthusiasts. Author of mybatis-plus-ext and AutoTable"
+        },
+        {
+          role: "Committee Member",
+          name: "Xiao Hua",
+          photo: "/assets/img/members/xiaohua.webp",
+          desc: "Author of Warm-Flow"
         }
       ]
     },
@@ -476,12 +482,6 @@ export const enMembersOption: MembersOption = {
           name: "Son Xiao",
           photo: "/assets/img/members/sonxiao.webp",
           desc: "Hertzbeat Committer"
-        },
-        {
-          role: "Member",
-          name: "Xiao Hua",
-          photo: "/assets/img/members/xiaohua.webp",
-          desc: "Warm-Flow Committer"
         }
       ]
     }
