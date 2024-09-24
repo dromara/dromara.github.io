@@ -494,6 +494,12 @@ export const enMembersOption: MembersOption = {
           name: "Xiao Hua",
           photo: "/assets/img/members/xiaohua.webp",
           desc: "Warm-Flow Committer"
+        },
+        {
+          role: "Member",
+          name: "Xue jia ming",
+          photo: "/assets/img/members/xuejiaming.webp",
+          desc: "Easy-Query Committer"
         }
       ]
     }

@@ -37,22 +37,36 @@ export const enProjectsOption: ProjectsOption = {
     "A framework for constructing PDFs in a building-block manner (based on PDFBox).",
   GOBRS_ASYNC_DESC:
     "A powerful, flexible-configured asynchronous orchestration framework with full link exception callback, memory optimization, and exception state management.",
-  DYJAVA:"DyJava is the 1 powerful tremolo Java development kit (SDK), which supports rapid calling of tremolo application OpenAPI, including but not limited to mobile/website applications, tremolo open platform, tremolo shop and tremolo applet, etc.",
-  ORION_VISOR:"1 high-value, modern intelligent operation and maintenance & lightweight bastion machine platform.",
-  WARM_FLOW:"Domestic workflow engine, its characteristics are simple and lightweight but not simple, complete, independent components, scalable, can meet the components of small and medium-sized projects. Address the pain points of complex flowable and activities, high learning costs and difficult integration.",
-  DBSWITCH:"Heterogeneous database migration synchronization (move) tool",
-  SKYEYE_OA:"Intelligent manufacturing integration, using winUI-Springboot low-code platform development model",
-  EASYAI:"The most popular Java artificial intelligence algorithm framework in China (Java version pytorch). It can be used out of the box without any additional environment configuration and dependencies, and can be used out of the box.",
-  MYBATIS_PLUS_EXT:"The expansion package of the mybatis-plus framework is further lightly encapsulated on the basis of the original framework",
-  EASY_QUERY:"Under the 1 java, strong type, lightweight, high-performance ORM is supported.",
-  TIANAI_CAPTCHA:"It may be the best open source behavior verification code in java, [slider verification code, click verification code, behavior verification code, rotation verification code, sliding verification code]",
-  DAX_PAY:"DaxPay is the 1 free and open source payment system, which supports channels such as Alipay, WeChat and Cloud Flash Payment.",
-  MYFLY_GO:"Web version linux (terminal [terminal playback] file script process planning task), database (mysql postgres oracle sqlserver Dameng Gauss sqlite), redis (single-machine sentry cluster), mongo and other unified management and operation platforms integrating work order process approval",
-  MILVUSPLUS:"Use the MyBatisPlus way, elegant operation vector database Milvus, support spring and solon at the same time",
-  NEWCAR:"Modernized CanvasKit-WASM-based animation engine",
-  UJCMS:"Supports headless CMS, custom fields and visual field design. Free for commercial websites",
-  SAYORDER:"The project is based on the easyAi engine JAVA high-performance, low-cost, lightweight intelligent customer service",
-  AKALI:"Akali (Akali), lightweight localization hotspot detection/degradation framework, can be accessed in 10 seconds! Artifact under large flow",
+  DYJAVA:
+    "DyJava is the 1 powerful tremolo Java development kit (SDK), which supports rapid calling of tremolo application OpenAPI, including but not limited to mobile/website applications, tremolo open platform, tremolo shop and tremolo applet, etc.",
+  ORION_VISOR:
+    "1 high-value, modern intelligent operation and maintenance & lightweight bastion machine platform.",
+  WARM_FLOW:
+    "Domestic workflow engine, its characteristics are simple and lightweight but not simple, complete, independent components, scalable, can meet the components of small and medium-sized projects. Address the pain points of complex flowable and activities, high learning costs and difficult integration.",
+  DBSWITCH: "Heterogeneous database migration synchronization (move) tool",
+  SKYEYE_OA:
+    "Intelligent manufacturing integration, using winUI-Springboot low-code platform development model",
+  EASYAI:
+    "The most popular Java artificial intelligence algorithm framework in China (Java version pytorch). It can be used out of the box without any additional environment configuration and dependencies, and can be used out of the box.",
+  MYBATIS_PLUS_EXT:
+    "The expansion package of the mybatis-plus framework is further lightly encapsulated on the basis of the original framework",
+  EASY_QUERY:
+    "Under the 1 java, strong type, lightweight, high-performance ORM is supported.",
+  TIANAI_CAPTCHA:
+    "It may be the best open source behavior verification code in java, [slider verification code, click verification code, behavior verification code, rotation verification code, sliding verification code]",
+  DAX_PAY:
+    "DaxPay is the 1 free and open source payment system, which supports channels such as Alipay, WeChat and Cloud Flash Payment.",
+  MYFLY_GO:
+    "Web version linux (terminal [terminal playback] file script process planning task), database (mysql postgres oracle sqlserver Dameng Gauss sqlite), redis (single-machine sentry cluster), mongo and other unified management and operation platforms integrating work order process approval",
+  MILVUSPLUS:
+    "Use the MyBatisPlus way, elegant operation vector database Milvus, support spring and solon at the same time",
+  NEWCAR: "Modernized CanvasKit-WASM-based animation engine",
+  UJCMS:
+    "Supports headless CMS, custom fields and visual field design. Free for commercial websites",
+  SAYORDER:
+    "The project is based on the easyAi engine JAVA high-performance, low-cost, lightweight intelligent customer service",
+  AKALI:
+    "Akali (Akali), lightweight localization hotspot detection/degradation framework, can be accessed in 10 seconds! Artifact under large flow",
   OPEN_GITEYE_API_DESC:
     "A data chart service tool designed specifically for open source authors, providing services including Star trend charts, contributor lists, and Gitee indexes.",
   BINLOG4J_DESC: "A lightweight Mysql Binlog client based on Java.",

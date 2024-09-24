@@ -494,6 +494,12 @@ export const zhMembersOption: MembersOption = {
           name: "晓华",
           photo: "/assets/img/members/xiaohua.webp",
           desc: "Warm-Flow Committer"
+        },
+        {
+          role: "成员",
+          name: "薛家明",
+          photo: "/assets/img/members/xuejiaming.webp",
+          desc: "Easy-Query Committer"
         }
       ]
     }
