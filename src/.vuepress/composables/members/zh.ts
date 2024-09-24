@@ -231,6 +231,12 @@ export const zhMembersOption: MembersOption = {
           name: "晓华",
           photo: "/assets/img/members/xiaohua.webp",
           desc: "Warm-Flow 作者"
+        },
+        {
+          role: "委员会成员",
+          name: "xsx",
+          photo: "/assets/img/members/xsx.webp",
+          desc: "x-esypdf作者"
         }
       ]
     },
@@ -488,6 +494,18 @@ export const zhMembersOption: MembersOption = {
           name: "淞筱",
           photo: "/assets/img/members/sonxiao.webp",
           desc: "Hertzbeat Committer"
+        },
+        {
+          role: "成员",
+          name: "晓华",
+          photo: "/assets/img/members/xiaohua.webp",
+          desc: "Warm-Flow Committer"
+        },
+        {
+          role: "成员",
+          name: "薛家明",
+          photo: "/assets/img/members/xuejiaming.webp",
+          desc: "Easy-Query Committer"
         }
       ]
     }
