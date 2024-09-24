@@ -227,6 +227,12 @@ export const enMembersOption: MembersOption = {
           desc: "Coordinate spring city Jinan, open source enthusiasts. Author of mybatis-plus-ext and AutoTable"
         },
         {
+          role: "Committee Member",
+          name: "Xiao Hua",
+          photo: "/assets/img/members/xiaohua.webp",
+          desc: "Author of Warm-Flow"
+        },
+        {
           role: "Member",
           name: "xsx",
           photo: "/assets/img/members/xsx.webp",
