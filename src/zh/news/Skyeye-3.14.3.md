@@ -1,6 +1,8 @@
 ---
 title: 智能制造 v3.14.3 发布
 author: 卫志强
+tag:
+  - Skyeye
 date: 2024-09-04
 cover: /assets/img/news/Skyeye-3.14.3-0.webp
 head:

@@ -132,7 +132,8 @@ const TAGS = [
   "hmily",
   "Soul",
   "EasyAI",
-  "TestHub"
+  "TestHub",
+  "Skyeye"
 
 ];
 

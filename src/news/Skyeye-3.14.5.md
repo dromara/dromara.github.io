@@ -1,6 +1,8 @@
 ---
 title: Skyeye Cloud Intelligent Manufacturing v3.14.5 Released, ERP Mall
 author: 资源站点
+tag:
+  - Skyeye
 date: 2024-09-18
 cover: /assets/img/news/Skyeye-3.14.5-0.webp
 head:

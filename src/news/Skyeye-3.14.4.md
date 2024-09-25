@@ -1,6 +1,8 @@
 ---
 title: Intelligent manufacturing v3.14.4 release, ERP mall
 author: 资源站点
+tag:
+  - Skyeye
 date: 2024-09-09
 cover: /assets/img/news/Skyeye-3.14.4-0.png
 head:
