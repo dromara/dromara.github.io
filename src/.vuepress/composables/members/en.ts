@@ -227,7 +227,7 @@ export const enMembersOption: MembersOption = {
           desc: "Coordinate spring city Jinan, open source enthusiasts. Author of mybatis-plus-ext and AutoTable"
         },
         {
-          role: "Committee Member",
+          role: "Member",
           name: "Xiao Hua",
           photo: "/assets/img/members/xiaohua.webp",
           desc: "Author of Warm-Flow"
@@ -496,10 +496,34 @@ export const enMembersOption: MembersOption = {
           desc: "Hertzbeat Committer"
         },
         {
-          role: "Member",
+          role: "Committee Member",
           name: "Xue jia ming",
           photo: "/assets/img/members/xuejiaming.webp",
           desc: "Easy-Query Committer"
+        },
+        {
+          role: "Committee Member",
+          name: "Tirion Fordring",
+          photo: "/assets/img/members/TirionFordring.webp",
+          desc: "Warm-Flow Committer"
+        },
+        {
+          role: "Committee Member",
+          name: "liuyq",
+          photo: "/assets/img/members/xiaohua.webp",
+          desc: "Warm-Flow Committer"
+        },
+        {
+          role: "Committee Member",
+          name: "Vanlin",
+          photo: "/assets/img/members/vanlin.webp",
+          desc: "Warm-Flow Committer"
+        },
+        {
+          role: "Committee Member",
+          name: "Zhen",
+          photo: "/assets/img/members/zhen.webp",
+          desc: "Warm-Flow Committer"
         }
       ]
     }

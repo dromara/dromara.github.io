@@ -500,6 +500,30 @@ export const zhMembersOption: MembersOption = {
           name: "薛家明",
           photo: "/assets/img/members/xuejiaming.webp",
           desc: "Easy-Query Committer"
+        },
+        {
+          role: "成员",
+          name: "夏日刚",
+          photo: "/assets/img/members/TirionFordring.webp",
+          desc: "Warm-Flow Committer"
+        },
+        {
+          role: "成员",
+          name: "梁小梁",
+          photo: "/assets/img/members/xiaohua.webp",
+          desc: "Warm-Flow Committer"
+        },
+        {
+          role: "成员",
+          name: "Vanlin",
+          photo: "/assets/img/members/vanlin.webp",
+          desc: "Warm-Flow Committer"
+        },
+        {
+          role: "成员",
+          name: "Zhen",
+          photo: "/assets/img/members/zhen.webp",
+          desc: "Warm-Flow Committer"
         }
       ]
     }
