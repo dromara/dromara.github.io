@@ -1,6 +1,8 @@
 ---
 title: 云智能制造平台 SkyEye 加入 Dromara 开源社区
 author: SkyEye
+tag:
+  - Skyeye
 date: 2024-08-27
 cover: /assets/img/news/SkyEye-0.jfif
 head:
