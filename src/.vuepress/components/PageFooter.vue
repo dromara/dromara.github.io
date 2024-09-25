@@ -27,7 +27,7 @@ const linkOption = computed(() => [
       }
     ]
   },
-  // 删除页脚的Documentary
+  // 删除页脚的Document
   // {
   //   title: footerLocale.value.DOCUMENT,
   //   links: [
