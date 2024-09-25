@@ -92,7 +92,7 @@ export const enMembersOption: MembersOption = {
       ]
     },
     {
-      header: "Committee Members",
+      header: "Organization Members",
       members: [
         {
           role: "Assistant Secretary-General",
@@ -101,109 +101,109 @@ export const enMembersOption: MembersOption = {
           desc: "Member of the Open Source Society, Assistant Secretary-General of the dromara open source community, miscellaneous tasks in the open-source community."
         },
         {
-          role: "Committee Member",
+          role: "Member",
           name: "Acbox Liu (Acbox Sky)",
           photo: "/assets/img/members/acbox-liu.webp",
           desc: "The author of Newcar, and the creator of BugDuck Open Soruce Team."
         },
         {
-          role: "Committee Member",
+          role: "Member",
           name: "Binghe",
           photo: "/assets/img/members/binghe.webp",
           desc: "Internet technology expert, TVP Tencent Cloud Most Valuable Expert, and technical consultant for multiple companies. Specialized in distributed systems, microservices, and big data with extensive R&D experience. Author of key books and creator of 'Binghe Technology' WeChat account."
         },
         {
-          role: "Committee Member",
+          role: "Member",
           name: "Crazy Lion Li",
           photo: "/assets/img/members/lion.webp",
           desc: "Author of RuoYi-Vue-Plus/RuoYi-Cloud-Plus"
         },
         {
-          role: "Committee Member",
+          role: "Member",
           name: "Yuyun Shize / Aoshi Guchen",
           photo: "/assets/img/members/aoshiguchen.webp",
           desc: "Author of Neutrino-Proxy"
         },
         {
-          role: "Committee Member",
+          role: "Member",
           name: "Wind Ruge",
           photo: "/assets/img/members/fengruge.webp",
           desc: "Author of Sms4j"
         },
         {
-          role: "Committee Member",
+          role: "Member",
           name: "Goddess of Failure",
           photo: "/assets/img/members/godness.webp",
           desc: "Author of Testhub"
         },
         {
-          role: "Committee Member",
+          role: "Member",
           name: "Lao Han",
           photo: "/assets/img/members/laohan.webp",
           desc: "Author of Easy-Es"
         },
         {
-          role: "Committee Member",
+          role: "Member",
           name: "Jiang Wei",
           photo: "/assets/img/members/vakinge.webp",
           desc: "Author of Mendmix, 15 years of experience in architecture within large-scale internet enterprises. Awarded as one of the top 10 practitioners at the 2021 Distributed Database Conference. Led the successful implementation of technology middle platforms for multiple large publicly listed companies, enabling their migration to the cloud."
         },
         {
-          role: "Committee Member",
+          role: "Member",
           name: "Running Noodles",
           photo: "/assets/img/members/miantiao.webp",
           desc: "Author of Goview"
         },
         {
-          role: "Committee Member",
+          role: "Member",
           name: "Wang Lei",
           photo: "/assets/img/members/wanglei.webp",
           desc: "Co-founder of Shaanxi Buddies Network Technology Co., Ltd., Author of Easy-Trans and FHS-Framework, Mybatis Plus Committer"
         },
         {
-          role: "Committee Member",
+          role: "Member",
           name: "Gao Shuaixing",
           photo: "/assets/img/members/gaoshuaixing.webp",
           desc: "Author of Electron-Egg"
         },
         {
-          role: "Committee Member",
+          role: "Member",
           name: "Zeming",
           photo: "/assets/img/members/zeming.webp",
           desc: "Author of open-source project Gobrs-Async, Middleware Architect specializing in concurrent programming and microservices component development, deep expertise in architectural design. If a system is suffering from poor performance, I wave my technical wand like a magician to make it faster and more powerful!"
         },
         {
-          role: "Committee Member",
+          role: "Member",
           name: "Zhou Zhou",
           photo: "/assets/img/members/zhouzhou.webp",
           desc: "Co-founder of j2eefast, Java Backend Architect with over 10 years of Java development experience, working in domains including banking, healthcare, and IoT."
         },
         {
-          role: "Committee Member",
+          role: "Member",
           name: "Tang Yuan",
           photo: "/assets/img/members/tangyuan.webp",
           desc: "Author of Hodor, passionate about research and development related to foundational components."
         },
         {
-          role: "Committee Member",
+          role: "Member",
           name: "Xu YanWu",
           photo: "/assets/img/members/xuyanwu.webp",
           desc: "Author of X File Storage"
         },
         {
-          role: "Committee Member",
+          role: "Member",
           name: "Long Zhengyu",
           photo: "/assets/img/members/longzhengyu.webp",
           desc: "The author of the open-source project WeMQ, the author of the open-source communication middleware Nmqs, engaged in fields such as the Internet of Things, and passionate about open-source."
         },
         {
-          role: "Committee Member",
+          role: "Member",
           name: "Kevin",
           photo: "/assets/img/members/Kevin.webp",
           desc: "Author of Northstar"
         },
         {
-          role: "Committee Member",
+          role: "Member",
           name: "yanhom",
           photo: "/assets/img/members/yanhom.webp",
           desc: "Author of Dynamic-Tp"
@@ -215,13 +215,13 @@ export const enMembersOption: MembersOption = {
           desc: "Author of MaxKey"
         },
         {
-          role: "Committee Member",
+          role: "Member",
           name: "zyplayer",
           photo: "/assets/img/members/zyplayer.webp",
           desc: "Author of zyplayer-doc"
         },
         {
-          role: "Committee Member",
+          role: "Member",
           name: "Don Tang",
           photo: "/assets/img/members/tangzhenchao.webp",
           desc: "Coordinate spring city Jinan, open source enthusiasts. Author of mybatis-plus-ext and AutoTable"
@@ -231,263 +231,275 @@ export const enMembersOption: MembersOption = {
           name: "Xiao Hua",
           photo: "/assets/img/members/xiaohua.webp",
           desc: "Author of Warm-Flow"
+        },
+        {
+          role: "Member",
+          name: "xsx",
+          photo: "/assets/img/members/xsx.webp",
+          desc: "Author of x-easypdf"
         }
       ]
     },
     {
-      header: "Organization Members",
+      header: "Committee Members",
       members: [
         {
-          role: "Member",
+          role: "Committee Member",
           name: "Handy",
           photo: "/assets/img/members/handy.webp",
           desc: "Hutool, Sms4j Committer"
         },
         {
-          role: "Member",
+          role: "Committee Member",
           name: "Zhang Zicheng",
           photo: "/assets/img/members/zhangzicheng.webp",
           desc: "Dynamic-Tp Committer"
         },
         {
-          role: "Member",
+          role: "Committee Member",
           name: "Createsequence",
           photo: "/assets/img/members/Createsequence.webp",
           desc: "Hutool Committer"
         },
         {
-          role: "Member",
+          role: "Committee Member",
           name: "Emptypoint",
           photo: "/assets/img/members/emptypoint.webp",
           desc: "Hutool Committer"
         },
         {
-          role: "Member",
+          role: "Committee Member",
           name: "Timothy Lau",
           photo: "/assets/img/members/xiaoyi.webp",
           desc: "Liteflow Committer, author of LiteFlowX (IDEA Plugin)"
         },
         {
-          role: "Member",
+          role: "Committee Member",
           name: "Liang Yun",
           photo: "/assets/img/members/liangyun.webp",
           desc: "Sa-Token Committer"
         },
         {
-          role: "Member",
+          role: "Committee Member",
           name: "AppleOfGray",
           photo: "/assets/img/members/AppleOfGray.webp",
           desc: "Sa-Token Committer"
         },
         {
-          role: "Member",
+          role: "Committee Member",
           name: "Michelle Chung",
           photo: "/assets/img/members/MichelleChung.webp",
           desc: "RuoYi-Vue-Plus/RuoYi-Cloud-Plus Committer"
         },
         {
-          role: "Member",
+          role: "Committee Member",
           name: "Hua Luo Mo",
           photo: "/assets/img/members/hualuomo.webp",
           desc: "Easy-Es Committer"
         },
         {
-          role: "Member",
+          role: "Committee Member",
           name: "Fabian",
           photo: "/assets/img/members/fabian.webp",
           desc: "Dynamic-Tp Committer"
         },
         {
-          role: "Member",
+          role: "Committee Member",
           name: "Zang Zang",
           photo: "/assets/img/members/zangzang.webp",
           desc: "Stream-Query Committer"
         },
         {
-          role: "Member",
+          role: "Committee Member",
           name: "Cason",
           photo: "/assets/img/members/Cason.webp",
           desc: "Stream-Query Committer"
         },
         {
-          role: "Member",
+          role: "Committee Member",
           name: "Charles7c",
           photo: "/assets/img/members/Charles7c.webp",
           desc: "Sms4j Committer"
         },
         {
-          role: "Member",
+          role: "Committee Member",
           name: "Rain",
           photo: "/assets/img/members/Rain.webp",
           desc: "LiteFlow Committer"
         },
         {
-          role: "Member",
+          role: "Committee Member",
           name: "Ricahrd",
           photo: "/assets/img/members/Ricahrd.webp",
           desc: "Sms4j Committer"
         },
         {
-          role: "Member",
+          role: "Committee Member",
           name: "Hua Cheng",
           photo: "/assets/img/members/huacheng.webp",
           desc: "HertzBeat Committer, major contributions include Zookeeper protocol compatibility, JVM protocol compatibility, tomcat server monitoring, MQ monitoring, ElasticSearch middleware monitoring adaptation, etc."
         },
         {
-          role: "Member",
+          role: "Committee Member",
           name: "Xiao Yan",
           photo: "/assets/img/members/xiaoyan.webp",
           desc: "Sms4j Committer"
         },
         {
-          role: "Member",
+          role: "Committee Member",
           name: "Xiao Ma",
           photo: "/assets/img/members/xiaoma.webp",
           desc: "Liteflow Committer"
         },
         {
-          role: "Member",
+          role: "Committee Member",
           name: "Redick01",
           photo: "/assets/img/members/Redick01.webp",
           desc: "Dynamic-Tp Committer"
         },
         {
-          role: "Member",
+          role: "Committee Member",
           name: "Cheng Kaitang",
           photo: "/assets/img/members/chengkaitang.webp",
           desc: "Liteflow Committer, major contributions include development of liteflow-sql plugin"
         },
         {
-          role: "Member",
+          role: "Committee Member",
           name: "Dale Lee",
           photo: "/assets/img/members/DaleLee.webp",
           desc: "Liteflow Committer, major contributions include timeout control for any component"
         },
         {
-          role: "Member",
+          role: "Committee Member",
           name: "Kam To Hung",
           photo: "/assets/img/members/KamToHung.webp",
           desc: "Dynamic-Tp/Stream-Query Committer"
         },
         {
-          role: "Member",
+          role: "Committee Member",
           name: "Xiao Zhang",
           photo: "/assets/img/members/xiaozhang.webp",
           desc: "Liteflow Committer, major contributions include circular asynchronous mode"
         },
         {
-          role: "Member",
+          role: "Committee Member",
           name: "Rainie",
           photo: "/assets/img/members/Rainie.webp",
           desc: "Liteflow Committer"
         },
         {
-          role: "Member",
+          role: "Committee Member",
           name: "Hotstrip",
           photo: "/assets/img/members/Hotstrip.webp",
           desc: "Jpom Committer"
         },
         {
-          role: "Member",
+          role: "Committee Member",
           name: "Xu Chang An",
           photo: "/assets/img/members/xuchangan.webp",
           desc: "Jpom Committer"
         },
         {
-          role: "Member",
+          role: "Committee Member",
           name: "Tiejia Xiao Bao",
           photo: "/assets/img/members/tiejiaxiaobao.webp",
           desc: "HertzBeat/Sms4j Committer"
         },
         {
-          role: "Member",
+          role: "Committee Member",
           name: "Bleachtred",
           photo: "/assets/img/members/bleachtred.webp",
           desc: "Sms4j Committer"
         },
         {
-          role: "Member",
+          role: "Committee Member",
           name: "Ceilzcx",
           photo: "/assets/img/members/Ceilzcx.webp",
           desc: "Hertzbeat Committer"
         },
         {
-          role: "Member",
+          role: "Committee Member",
           name: "Zend Wang",
           photo: "/assets/img/members/zendwang.webp",
           desc: "Liteflow Committer"
         },
         {
-          role: "Member",
+          role: "Committee Member",
           name: "Sh1yu",
           photo: "/assets/img/members/Sh1yu.webp",
           desc: "Zyplayer-Doc Committer"
         },
         {
-          role: "Member",
+          role: "Committee Member",
           name: "Frog Catcher",
           photo: "/assets/img/members/zhuawashi.webp",
           desc: "RuoYi-Vue-Plus Committer"
         },
         {
-          role: "Member",
+          role: "Committee Member",
           name: "Zhao Qingran",
           photo: "/assets/img/members/zhaoqingran.webp",
           desc: "Hertzbeat Committer"
         },
         {
-          role: "Member",
+          role: "Committee Member",
           name: "CHMing",
           photo: "/assets/img/members/CHMing.webp",
           desc: "Forest Committer"
         },
         {
-          role: "Member",
+          role: "Committee Member",
           name: "Yuyuan",
           photo: "/assets/img/members/yuyuan.webp",
           desc: "Hodor Committer"
         },
         {
-          role: "Member",
+          role: "Committee Member",
           name: "Superlit",
           photo: "/assets/img/members/Superlit.webp",
           desc: "Hodor Committer"
         },
         {
-          role: "Member",
+          role: "Committee Member",
           name: "Dazer007",
           photo: "/assets/img/members/Dazer007.webp",
           desc: "Hutool Committer"
         },
         {
-          role: "Member",
+          role: "Committee Member",
           name: "LuoYi",
           photo: "/assets/img/members/luoyi.webp",
           desc: "LiteFlow Committer"
         },
         {
-          role: "Member",
+          role: "Committee Member",
           name: "Ge Zu Ao",
           photo: "/assets/img/members/gezuao.webp",
           desc: "LiteFlow Committer"
         },
         {
-          role: "Member",
+          role: "Committee Member",
           name: "Yao Kai",
           photo: "/assets/img/members/yaokai.webp",
           desc: "Dynamic-Tp Committer"
         },
         {
-          role: "Member",
+          role: "Committee Member",
           name: "Dong Feng",
           photo: "/assets/img/members/dongfeng.webp",
           desc: "Sms4j Committer"
         },
         {
-          role: "Member",
+          role: "Committee Member",
           name: "Son Xiao",
           photo: "/assets/img/members/sonxiao.webp",
           desc: "Hertzbeat Committer"
+        },
+        {
+          role: "Member",
+          name: "Xue jia ming",
+          photo: "/assets/img/members/xuejiaming.webp",
+          desc: "Easy-Query Committer"
         }
       ]
     }
