@@ -1,7 +1,7 @@
 export interface FooterOption {
   RESOURCES: string
   INVOLVED: string
-  COMMUNITY: string
+  About: string
   BLOG: string
   DOCUMENT: string
   WECHAT: string
