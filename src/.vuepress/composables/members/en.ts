@@ -497,33 +497,15 @@ export const enMembersOption: MembersOption = {
         },
         {
           role: "Committee Member",
-          name: "Xue jia ming",
-          photo: "/assets/img/members/xuejiaming.webp",
-          desc: "Easy-Query Committer"
-        },
-        {
-          role: "Committee Member",
-          name: "Tirion Fordring",
-          photo: "/assets/img/members/TirionFordring.webp",
-          desc: "Warm-Flow Committer"
-        },
-        {
-          role: "Committee Member",
-          name: "liuyq",
+          name: "Xiao Hua",
           photo: "/assets/img/members/xiaohua.webp",
           desc: "Warm-Flow Committer"
         },
         {
-          role: "Committee Member",
-          name: "Vanlin",
-          photo: "/assets/img/members/vanlin.webp",
-          desc: "Warm-Flow Committer"
-        },
-        {
-          role: "Committee Member",
-          name: "Zhen",
-          photo: "/assets/img/members/zhen.webp",
-          desc: "Warm-Flow Committer"
+          role: "Member",
+          name: "Xue jia ming",
+          photo: "/assets/img/members/xuejiaming.webp",
+          desc: "Easy-Query Committer"
         }
       ]
     }
