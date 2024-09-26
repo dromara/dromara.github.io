@@ -19,14 +19,16 @@ const linkOption = computed(() => [
   {
     title: footerLocale.value.INVOLVED,
     links: [
-      { name: footerLocale.value.BLOG, 
-        href: "https://dromara.org/zh/blog" },
-        {
+      {
+        name: footerLocale.value.BLOG,
+        href: "https://dromara.org/zh/blog"
+      },
+      {
         name: footerLocale.value.About,
         href: "https://dromara.org/zh/about"
       }
     ]
-  },
+  }
   // 删除页脚的Document
   // {
   //   title: footerLocale.value.DOCUMENT,
