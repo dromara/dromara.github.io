@@ -3,7 +3,7 @@ import { type FooterOption } from "./types.js";
 export const zhFooterOption: FooterOption = {
   RESOURCES: "资源",
   INVOLVED: "参与进来",
-  COMMUNITY: "社区",
+  About: "关于我们",
   BLOG: "博客",
   DOCUMENT: "文档",
   WECHAT: "微信公众号",

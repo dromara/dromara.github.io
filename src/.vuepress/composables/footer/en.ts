@@ -3,7 +3,7 @@ import { type FooterOption } from "./types.js";
 export const enFooterOption: FooterOption = {
   RESOURCES: "Resources",
   INVOLVED: "Get Involved",
-  COMMUNITY: "Community",
+  About: "About Us",
   BLOG: "Blog",
   DOCUMENT: "Document",
   WECHAT: "Media Platform",

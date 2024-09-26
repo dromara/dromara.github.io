@@ -19,30 +19,32 @@ const linkOption = computed(() => [
   {
     title: footerLocale.value.INVOLVED,
     links: [
-      {
-        name: footerLocale.value.COMMUNITY,
-        href: "https://dromara.org/zh/community"
-      },
-      { name: footerLocale.value.BLOG, href: "https://dromara.org/zh/blog" }
-    ]
-  },
-  {
-    title: footerLocale.value.DOCUMENT,
-    links: [
-      {
-        name: "Hmily",
-        href: "https://gitee.com/dromara/hmily"
-      },
-      {
-        name: "Raincat",
-        href: "https://gitee.com/dromara/Raincat"
-      },
-      {
-        name: "Myth",
-        href: "https://gitee.com/dromara/myth"
+      { name: footerLocale.value.BLOG, 
+        href: "https://dromara.org/zh/blog" },
+        {
+        name: footerLocale.value.About,
+        href: "https://dromara.org/zh/about"
       }
     ]
-  }
+  },
+  // 删除页脚的Document
+  // {
+  //   title: footerLocale.value.DOCUMENT,
+  //   links: [
+  //     {
+  //       name: "Hmily",
+  //       href: "https://gitee.com/dromara/hmily"
+  //     },
+  //     {
+  //       name: "Raincat",
+  //       href: "https://gitee.com/dromara/Raincat"
+  //     },
+  //     {
+  //       name: "Myth",
+  //       href: "https://gitee.com/dromara/myth"
+  //     }
+  //   ]
+  // }
 ]);
 
 const qrcodeOption = computed(() => [
@@ -97,8 +99,8 @@ const qrcodeOption = computed(() => [
             </svg>
             <p class="qrcode-desc">{{ item.title }}</p>
           </a>
-          <a v-if="item.title === footerLocale.Email" class="qrcode-desc" href="mailto:549477611@qq.com">
-            <p class="mail">549477611@qq.com</p>
+          <a v-if="item.title === footerLocale.Email" class="qrcode-desc" href="mailto:xiaoyu@dromara.org">
+            <p class="mail">xiaoyu@dromara.org</p>
             <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" t="1722434866328"
               class="icon" viewBox="0 0 1024 1024" version="1.1" p-id="5233" width="100" height="100">
               <path
