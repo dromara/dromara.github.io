@@ -24,10 +24,10 @@ export const enMembersOption: MembersOption = {
           desc: "An open source enthusiast and practitioner, hoping to work on open source while eating bread and singing songs."
         },
         {
-          role: "Assistant Secretary General",
+          role: "Deputy Secretary General",
           name: "A Chao",
           photo: "/assets/img/members/achao.webp",
-          desc: "00s full-stack developer, author of Stream-Query, Hutool Committer, Mybatis-Plus Committer"
+          desc: "00s full-stack developer, Cover Person of Gitee 33rd, author of Stream-Query, Apache StreamPark Committer, Apache ShenYu Committer, Hutool Committer, Mybatis-Plus Committer"
         },
         {
           role: "TOC Member",

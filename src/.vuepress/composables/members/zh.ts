@@ -24,10 +24,10 @@ export const zhMembersOption: MembersOption = {
           desc: "开源爱好与实践者，希望边做着开源边吃着面包边唱着歌。"
         },
         {
-          role: "秘书长助理",
+          role: "副秘书长",
           name: "阿超",
           photo: "/assets/img/members/achao.webp",
-          desc: "00后全栈开发，Stream-Query 作者，Hutool Committer、Mybatis-Plus Committer"
+          desc: "00后全栈开发，Gitee第33期封面人物，Stream-Query 作者，Apache StreamPark Committer、Apache ShenYu Committer、Hutool Committer、Mybatis-Plus Committer"
         },
         {
           role: "TOC成员",
