@@ -10,7 +10,7 @@ export default defineClientConfig({
     app.component("GiteeRepo", GiteeRepo);
     app.use(VueViewer);
     router.beforeEach((to, from, next) => {
-      if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+      if (this.window.location.hostname === 'localhost' || this.window.location.hostname === '127.0.0.1') {
         next();
         return;
       }
