@@ -41,7 +41,8 @@ const gvpProjects = [
   "orion-visor",
   "EasyAi",
   "MilvusPlus",
-  "easy-es"
+  "easy-es",
+  "carbon"
 ];
 const totalStars = 305.5; // 来源于gitee总star数与github各仓库star数之和，需手动更新
 

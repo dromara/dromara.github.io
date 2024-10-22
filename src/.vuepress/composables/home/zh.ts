@@ -66,6 +66,11 @@ export const zhHomeOption: HomeOption = {
       name: "fast-request",
       description: "IDEA版postman",
       url: "https://dromara.org/fast-request"
+    },
+    {
+      name: "carbon",
+      description: "一个轻量级、语义化、对开发者友好的 golang 时间处理库",
+      url: "https://github.com/dromara/carbon"
     }
   ],
   COMMUNITY: "社区动态",
