@@ -128,7 +128,7 @@ const qrcodeOption = computed(() => [
     </div>
     <div class="copyright">
       <p>
-        Copyright &copy;2018-{{ new Date().getFullYear() }}&nbsp;<a href="/">@dromara. org. All Rights Reserved</a><a id="footer-bt" href="" target="_blank">test</a>
+        Copyright &copy;2018-{{ new Date().getFullYear() }}&nbsp;<a href="/">@dromara. org. All Rights Reserved</a><a id="footer-bt" href="" target="_blank"></a>
       </p>
     </div>
 
