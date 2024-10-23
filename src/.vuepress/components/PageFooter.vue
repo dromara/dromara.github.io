@@ -8,7 +8,7 @@ import { useFooterLocale } from "../composables/index.js";
 const frontmatter = usePageFrontmatter<ThemeHopePageFrontmatter>();
 const footerLocale = useFooterLocale();
 
-const webCn = ref(self.location.host == 'dromara.org.cn');
+const webCn = ref(window.location.host == 'dromara.org.cn');
 
 const linkOption = computed(() => [
   {
