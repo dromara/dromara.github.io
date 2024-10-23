@@ -124,5 +124,6 @@ export const enProjectsOption: ProjectsOption = {
 
   DISTRIBUTED_SCHEDULING: "Distributed Scheduling",
   HODOR_DESC: "Distributed scheduling framework",
-  DISJOB_DESC: "A distributed task scheduling framework."
+  DISJOB_DESC: "A distributed task scheduling framework.",
+  CARBON_DESC: "A simple, semantic and developer-friendly golang package for time."
 };
