@@ -1,15 +1,21 @@
 <script setup lang="ts">
-import { computed, ref } from "vue";
+
+import { computed, onMounted } from "vue";
 import { usePageFrontmatter } from "@vuepress/client";
 import { type ThemeHopePageFrontmatter } from "vuepress-theme-hope/client";
 
 import { useFooterLocale } from "../composables/index.js";
-
+let webCn: Boolean = false;
 const frontmatter = usePageFrontmatter<ThemeHopePageFrontmatter>();
 const footerLocale = useFooterLocale();
 
-const webCn = ref(window.location.host == 'dromara.org.cn');
-
+onMounted(() => {
+  webCn = document.location.host.includes("dromara.org.cn");
+  const element = document.getElementById("footer-bt");
+  if (element) {
+    element.innerText = webCn ? " | 京ICP备2024091971号" : "";
+  }
+})
 const linkOption = computed(() => [
   {
     title: footerLocale.value.RESOURCES,
@@ -122,7 +128,7 @@ const qrcodeOption = computed(() => [
     </div>
     <div class="copyright">
       <p>
-        Copyright &copy;2018-{{ new Date().getFullYear() }}&nbsp;<a href="/">@dromara. org. All Rights Reserved</a><a v-if="webCn" href="" target="_blank"> | 京ICP备2024091971号</a>
+        Copyright &copy;2018-{{ new Date().getFullYear() }}&nbsp;<a href="/">@dromara. org. All Rights Reserved</a><a id="footer-bt" href="" target="_blank">test</a>
       </p>
     </div>
 
