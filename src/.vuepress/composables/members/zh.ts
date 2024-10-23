@@ -237,6 +237,12 @@ export const zhMembersOption: MembersOption = {
           name: "xsx",
           photo: "/assets/img/members/xsx.webp",
           desc: "x-esypdf作者"
+        },
+        {
+          role: "委员会成员",
+          name: "勾国印",
+          photo: "/assets/img/members/gouguoyin.webp",
+          desc: "坐标北京，开源爱好者，carbon 作者；性别男，爱好女；非著名北漂挨踢男、程序猿，伪文艺2B青年，资深屌丝；据说爱美女，爱网络，爱旅游，各种控，各种宅，不纠结会死星人，不折腾会死星人。此人纯属虚构，如有雷同，纯属被抄袭…… "
         }
       ]
     },

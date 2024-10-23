@@ -23,6 +23,7 @@ export const noImageProject = [
   "ujcms",
   "mayfly-go",
   "skyeye-oa",
+  "carbon",
   "warm-flow"
 ];
 
@@ -78,7 +79,8 @@ export const useProjectsData = () => {
         "MilvusPlus",
         "open-giteye-api",
         "newcar",
-        "jinx"
+        "jinx",
+        "carbon"
       ]
     },
     {
@@ -709,18 +711,10 @@ export const useProjectsData = () => {
       <a target="_blank" href="https://central.sonatype.com/search?q=easy-query">
         <img src="https://img.shields.io/maven-central/v/com.easy-query/easy-query-all?label=Maven%20Central" alt="Maven" />
     </a>
-    <a target="_blank" href="https://www.apache.org/licenses/LICENSE-2.0.txt">
-		<img src="https://img.shields.io/:license-Apache2-blue.svg" alt="Apache 2" />
-	</a>
-    <a target="_blank" href="https://www.oracle.com/java/technologies/javase/javase-jdk8-downloads.html">
-		<img src="https://img.shields.io/badge/JDK-8-green.svg" alt="jdk-8" />
-	</a>
-    <a target="_blank" href="https://www.oracle.com/java/technologies/javase/jdk11-archive-downloads.html">
-		<img src="https://img.shields.io/badge/JDK-11-green.svg" alt="jdk-11" />
-	</a>
-    <a target="_blank" href="https://www.oracle.com/java/technologies/javase/jdk17-archive-downloads.html">
-		<img src="https://img.shields.io/badge/JDK-17-green.svg" alt="jdk-17" />
-	</a>`
+    <a target="_blank" href="https://www.apache.org/licenses/LICENSE-2.0.txt"><img src="https://img.shields.io/:license-Apache2-blue.svg" alt="Apache 2" /></a>
+    <a target="_blank" href="https://www.oracle.com/java/technologies/javase/javase-jdk8-downloads.html"><img src="https://img.shields.io/badge/JDK-8-green.svg" alt="jdk-8" /></a>
+    <a target="_blank" href="https://www.oracle.com/java/technologies/javase/jdk11-archive-downloads.html"><img src="https://img.shields.io/badge/JDK-11-green.svg" alt="jdk-11" /></a>
+    <a target="_blank" href="https://www.oracle.com/java/technologies/javase/jdk17-archive-downloads.html"><img src="https://img.shields.io/badge/JDK-17-green.svg" alt="jdk-17" /></a>`
         },
         {
           name: "tianai-captcha",
@@ -831,6 +825,23 @@ export const useProjectsData = () => {
       <img src="https://gitee.com/dromara/Akali/badge/star.svg" alt="Gitee Stars">
       </a>
       `
+        },
+        {
+          name: "carbon",
+          website: "https://gitee.com/dromara/carbon",
+          description: projectLocale.value.CARBON_DESC,
+          sponsor: "勾国印（gouguoyin）",
+          date: "2024.10",
+          link: `
+
+<a href='https://gitee.com/dromara/carbon/stargazers'><img src='https://gitee.com/dromara/carbon/badge/star.svg?theme=gvp' alt='star'></img></a>
+  <a href="https://github.com/dromara/carbon"><img src="https://img.shields.io/github/stars/dromara/carbon.svg?style=social&amp;label=Stars" alt="GitHub"></a>
+<a target="_blank" href="https://github.com/dromara/carbon/releases">
+  <img src="https://img.shields.io/github/release/dromara/carbon.svg">
+</a>
+<a target="_blank" href="https://github.com/dromara/carbon/blob/master/LICENSE">
+  <img src="https://img.shields.io/github/license/dromara/carbon">
+</a>`
         }
       ]
     },

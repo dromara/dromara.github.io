@@ -66,6 +66,11 @@ export const enHomeOption: HomeOption = {
       name: "fast-request",
       description: "IDEA's postman.",
       url: "https://dromara.org/fast-request"
+    },
+    {
+      name: "carbon",
+      description: "A simple, semantic and developer-friendly golang package for time.",
+      url: "https://github.com/dromara/carbon"
     }
   ],
   COMMUNITY: "Community",
