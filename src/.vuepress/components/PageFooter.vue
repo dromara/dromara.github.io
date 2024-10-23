@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed } from "vue";
+import { computed, ref } from "vue";
 import { usePageFrontmatter } from "@vuepress/client";
 import { type ThemeHopePageFrontmatter } from "vuepress-theme-hope/client";
 
@@ -7,6 +7,8 @@ import { useFooterLocale } from "../composables/index.js";
 
 const frontmatter = usePageFrontmatter<ThemeHopePageFrontmatter>();
 const footerLocale = useFooterLocale();
+
+const webCn = ref(self.location.host == 'dromara.org.cn');
 
 const linkOption = computed(() => [
   {
@@ -120,7 +122,7 @@ const qrcodeOption = computed(() => [
     </div>
     <div class="copyright">
       <p>
-        Copyright &copy;2018-{{ new Date().getFullYear() }}&nbsp;<a href="/">@dromara. org. All Rights Reserved</a>
+        Copyright &copy;2018-{{ new Date().getFullYear() }}&nbsp;<a href="/">@dromara. org. All Rights Reserved</a><a v-if="webCn" href="" target="_blank"> | 京ICP备2024091971号</a>
       </p>
     </div>
 
