@@ -1,7 +1,18 @@
 <script setup lang="ts">
 import { useMembersLocale } from "../composables/index.js";
+import { onMounted } from "vue";
 
 const memberLocale = useMembersLocale();
+
+let webCn: Boolean = false;
+
+onMounted(() => {
+  webCn = document.location.host.includes("dromara.org.cn");
+  const orgAds = document.getElementById("wwadsadsorg");
+  if (orgAds) {
+    orgAds.innerHTML = webCn ? '<div class="wwads-cn wwads-horizontal" data-id="339" style="max-width:350px"></div>' : '<div class="wwads-cn wwads-horizontal" data-id="127" style="max-width: 500px"></div>';
+  }
+});
 </script>
 
 <template>
@@ -14,11 +25,7 @@ const memberLocale = useMembersLocale();
         </p>
       </div>
     </div>
-    <div
-      class="wwads-cn wwads-horizontal"
-      data-id="127"
-      style="max-width: 500px"
-    />
+    <div id="wwadsadsorg" style="max-width: 500px"></div>
     <main class="member-main">
       <div class="member-banner">
         <h2 class="title">{{ memberLocale.TOC_MEMBER_TITLE }}</h2>

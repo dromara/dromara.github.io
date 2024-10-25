@@ -6,6 +6,7 @@ import {
   noImageProject,
   useProjectsData
 } from "../composables/index.js";
+import { onMounted } from "vue";
 
 const { projectLocale, projectItems } = useProjectsData();
 
@@ -13,6 +14,15 @@ const convertToUpperCamelCase = (name: string): string =>
   name
     .replace(/-([a-z])/g, (letter: string) => letter.toUpperCase())
     .replace(/^([a-z])/, (letter: string) => letter.toUpperCase());
+
+let webCn: Boolean = false;
+onMounted(() => {
+  webCn = document.location.host.includes("dromara.org.cn");
+  const orgAds = document.getElementById("wwadsadsorg");
+  if (orgAds) {
+    orgAds.innerHTML = webCn ? '<div class="wwads-cn wwads-horizontal" data-id="339" style="max-width:350px"></div>' : '<div class="wwads-cn wwads-horizontal" data-id="127" style="max-width: 500px"></div>';
+  }
+});
 </script>
 
 <template>
@@ -25,11 +35,7 @@ const convertToUpperCamelCase = (name: string): string =>
         </p>
       </div>
     </div>
-    <div
-      class="wwads-cn wwads-horizontal"
-      data-id="127"
-      style="max-width: 500px"
-    ></div>
+    <div id="wwadsadsorg" style="max-width: 500px"></div>
   </div>
   <main class="project-main">
     <div

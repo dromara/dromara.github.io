@@ -6,7 +6,7 @@
         <p class="description">{{ option.DESC }}</p>
       </div>
     </div>
-    <div class="wwads-cn wwads-horizontal" data-id="127" style="max-width: 500px"></div>
+    <div id="wwadsadsorg" style="max-width: 500px"></div>
   </div>
   <main class="news-activity-blog-main">
     <h2 class="tag">{{ langMapping === "中文" ? "标签" : "Tag" }}</h2>
@@ -46,7 +46,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, reactive, watchEffect, computed } from "vue";
+import { ref, reactive, watchEffect, computed, onMounted } from "vue";
 import {
   type ActivityOption,
   type GroupedSectionPage,
@@ -67,6 +67,16 @@ const props = defineProps({ title: String });
 
 let option: ActivityOption = reactive({
   DESC: ""
+});
+
+let webCn: Boolean = false;
+
+onMounted(() => {
+  webCn = document.location.host.includes("dromara.org.cn");
+  const orgAds = document.getElementById("wwadsadsorg");
+  if (orgAds) {
+    orgAds.innerHTML = webCn ? '<div class="wwads-cn wwads-horizontal" data-id="339" style="max-width:350px"></div>' : '<div class="wwads-cn wwads-horizontal" data-id="127" style="max-width: 500px"></div>';
+  }
 });
 
 const currentTag = ref("All");
