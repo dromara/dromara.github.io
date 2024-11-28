@@ -237,6 +237,12 @@ export const enMembersOption: MembersOption = {
           name: "xsx",
           photo: "/assets/img/members/xsx.webp",
           desc: "Author of x-easypdf"
+        },
+        {
+          role: "Member",
+          name: "xgc",
+          photo: "/assets/img/members/xgc.webp",
+          desc: "Open Source Enthusiast, Java Backend Architect, Author of MilvusPlus, Author of JavaVision, Author of easy-flv "
         }
       ]
     },
