@@ -15,7 +15,7 @@ export const enMembersOption: MembersOption = {
   },
   MEMBERS_ITEM: [
     {
-      header: "",
+      header: "Secretariat",
       members: [
         {
           role: "Secretary General",
@@ -29,6 +29,29 @@ export const enMembersOption: MembersOption = {
           photo: "/assets/img/members/achao.webp",
           desc: "00s full-stack developer, Cover Person of Gitee 33rd, author of Stream-Query, Apache StreamPark Committer, Apache ShenYu Committer, Hutool Committer, Mybatis-Plus Committer"
         },
+        {
+          role: "Deputy Secretary General",
+          name: "moremind",
+          photo: "/assets/img/members/hefengen.webp",
+          desc: "Member of the Apache ShenYu Project Management Committee (PMC), an enthusiast of open source and technology, embracing open source and daring to practice."
+        },
+        {
+          role: "Deputy Secretary General",
+          name: "Don Tang",
+          photo: "/assets/img/members/tangzhenchao.webp",
+          desc: "Coordinate spring city Jinan, open source enthusiasts. Author of mybatis-plus-ext and AutoTable"
+        },
+        {
+          role: "Assistant Secretary-General",
+          name: "Li Nan",
+          photo: "/assets/img/members/linan.webp",
+          desc: "Member of the Open Source Society, Assistant Secretary-General of the dromara open source community, miscellaneous tasks in the open-source community."
+        },
+      ]
+    },
+    {
+      header: "TOC members",
+      members: [
         {
           role: "TOC Member",
           name: "Chen Bin",
@@ -94,12 +117,6 @@ export const enMembersOption: MembersOption = {
     {
       header: "Organization Members",
       members: [
-        {
-          role: "Assistant Secretary-General",
-          name: "Li Nan",
-          photo: "/assets/img/members/linan.webp",
-          desc: "Member of the Open Source Society, Assistant Secretary-General of the dromara open source community, miscellaneous tasks in the open-source community."
-        },
         {
           role: "Member",
           name: "Acbox Liu (Acbox Sky)",
@@ -219,12 +236,6 @@ export const enMembersOption: MembersOption = {
           name: "zyplayer",
           photo: "/assets/img/members/zyplayer.webp",
           desc: "Author of zyplayer-doc"
-        },
-        {
-          role: "Member",
-          name: "Don Tang",
-          photo: "/assets/img/members/tangzhenchao.webp",
-          desc: "Coordinate spring city Jinan, open source enthusiasts. Author of mybatis-plus-ext and AutoTable"
         },
         {
           role: "Member",
