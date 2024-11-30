@@ -15,7 +15,7 @@ export const zhMembersOption: MembersOption = {
   },
   MEMBERS_ITEM: [
     {
-      header: "",
+      header: "秘书处",
       members: [
         {
           role: "秘书长",
@@ -29,6 +29,29 @@ export const zhMembersOption: MembersOption = {
           photo: "/assets/img/members/achao.webp",
           desc: "00后全栈开发，Gitee第33期封面人物，Stream-Query 作者，Apache StreamPark Committer、Apache ShenYu Committer、Hutool Committer、Mybatis-Plus Committer"
         },
+        {
+          role: "副秘书长",
+          name: "何凤恩",
+          photo: "/assets/img/members/hefengen.webp",
+          desc: "Apache ShenYu PMC member, 开源与技术爱好者，拥抱开源，敢于实践。"
+        },
+        {
+          role: "副秘书长",
+          name: "唐振超",
+          photo: "/assets/img/members/tangzhenchao.webp",
+          desc: "坐标泉城济南，开源爱好者。mybatis-plus-ext 作者，AutoTable 作者"
+        },
+        {
+          role: "秘书长助理",
+          name: "李楠",
+          photo: "/assets/img/members/linan.webp",
+          desc: "开源社成员、dromara开源社区秘书长助理，开源社区打杂"
+        },
+      ]
+    },
+    {
+      header: "技术委员会成员",
+      members: [
         {
           role: "TOC成员",
           name: "陈斌",
@@ -94,12 +117,6 @@ export const zhMembersOption: MembersOption = {
     {
       header: "委员会成员",
       members: [
-        {
-          role: "秘书长助理",
-          name: "李楠",
-          photo: "/assets/img/members/linan.webp",
-          desc: "开源社成员、dromara开源社区秘书长助理，开源社区打杂"
-        },
         {
           role: "委员会成员",
           name: "刘陈阳",
@@ -216,12 +233,6 @@ export const zhMembersOption: MembersOption = {
         },
         {
           role: "委员会成员",
-          name: "唐振超",
-          photo: "/assets/img/members/tangzhenchao.webp",
-          desc: "坐标泉城济南，开源爱好者。mybatis-plus-ext 作者，AutoTable 作者"
-        },
-        {
-          role: "委员会成员",
           name: "mouday",
           photo: "/assets/img/members/mouday.webp",
           desc: "Domain Admin作者"
@@ -243,6 +254,12 @@ export const zhMembersOption: MembersOption = {
           name: "勾国印",
           photo: "/assets/img/members/gouguoyin.webp",
           desc: "坐标北京，开源爱好者，carbon 作者；性别男，爱好女；非著名北漂挨踢男、程序猿，伪文艺2B青年，资深屌丝；据说爱美女，爱网络，爱旅游，各种控，各种宅，不纠结会死星人，不折腾会死星人。此人纯属虚构，如有雷同，纯属被抄袭…… "
+        },
+        {
+          role: "委员会成员",
+          name: "熊国超",
+          photo: "/assets/img/members/xgc.webp",
+          desc: "开源爱好者，Java后端架构师，MilvusPlus 作者,JavaVision作者，easy-flv作者 "
         }
       ]
     },
