@@ -4,7 +4,7 @@ export const enMembersOption: MembersOption = {
   MEMBERS: "Members",
   DESCRIPTION:
     "Dromara community members, from diverse backgrounds, include authors, experts, and developers. They work together to boost open source and invigorate the community's future.",
-  TOC_MEMBER_TITLE: "TOC Members",
+  FUNDER_TITLE: "Funder",
   COMMITTEE_TITLE: "Committee Members",
   COMMITTER_TITLE: "Organization Members",
   FOUNDER: {

@@ -4,7 +4,7 @@ export const zhMembersOption: MembersOption = {
   MEMBERS: "成员",
   DESCRIPTION:
     "Dromara开源社区汇集了开源项目创作者、技术专家、开发者和热心于开源与技术的伙伴们。成员们互相支持和协作，共同推动开源技术前行，为社区注入活力。",
-  TOC_MEMBER_TITLE: "TOC成员",
+  FUNDER_TITLE: "创始人",
   COMMITTEE_TITLE: "委员会成员",
   COMMITTER_TITLE: "组织成员",
   FOUNDER: {
