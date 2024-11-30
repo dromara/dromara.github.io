@@ -33,6 +33,10 @@ export const zhHonorOption: HonorOption = {
     {
       desc: "2023年最受关注和喜爱的开源组织",
       img: "/assets/img/about/Concerned_favorite_Org.jpg"
+    },
+    {
+      desc: "2024中国互联网发展创新与投资大赛(开源)",
+      img: "/assets/img/about/2024-China-Internet-Development-Innovation.jpg"
     }
   ],
   TIME_LINE: [
@@ -75,7 +79,8 @@ export const zhHonorOption: HonorOption = {
         "GVP（Gitee最具价值开源）项目达到21个",
         "Gitee项目仓库目前总数已达76个",
         "荣获2023年最受关注和喜爱的开源组织",
-        "荣获2023年最活跃的开源组织"
+        "荣获2023年最活跃的开源组织",
+        "2024中国互联网发展创新与投资大赛(开源)-二等奖"
       ]
     }
   ]

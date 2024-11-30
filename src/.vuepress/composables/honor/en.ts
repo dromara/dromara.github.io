@@ -32,6 +32,10 @@ export const enHonorOption: HonorOption = {
     {
       desc: "2023 The most popular and beloved open source organization",
       img: "/assets/img/about/Concerned_favorite_Org.jpg"
+    },
+    {
+      desc: "2024 China Internet Development Innovation and Investment Competition (Open Source)",
+      img: "/assets/img/about/2024-China-Internet-Development-Innovation.jpg"
     }
   ],
   TIME_LINE: [
@@ -77,7 +81,8 @@ export const enHonorOption: HonorOption = {
         "21 GVP(Gitee Most Valuable Open Source) projects",
         "The current total number of Gitee project repositories has reached 76",
         "Awarded the most watched and loved open source organization of 2023",
-        "Most Active Open Source Organization in 2023"
+        "Most Active Open Source Organization in 2023",
+        "The Second Prize of the 2024 China Internet Development Innovation and Investment Competition (Open Source)"
       ]
     }
   ]
