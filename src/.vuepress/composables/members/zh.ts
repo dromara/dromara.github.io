@@ -15,7 +15,7 @@ export const zhMembersOption: MembersOption = {
   },
   MEMBERS_ITEM: [
     {
-      header: "",
+      header: "秘书处",
       members: [
         {
           role: "秘书长",
@@ -29,6 +29,29 @@ export const zhMembersOption: MembersOption = {
           photo: "/assets/img/members/achao.webp",
           desc: "00后全栈开发，Gitee第33期封面人物，Stream-Query 作者，Apache StreamPark Committer、Apache ShenYu Committer、Hutool Committer、Mybatis-Plus Committer"
         },
+        {
+          role: "副秘书长",
+          name: "何凤恩",
+          photo: "/assets/img/members/hefengen.webp",
+          desc: "Apache ShenYu PMC member, 开源与技术爱好者，拥抱开源，敢于实践。"
+        },
+        {
+          role: "副秘书长",
+          name: "唐振超",
+          photo: "/assets/img/members/tangzhenchao.webp",
+          desc: "坐标泉城济南，开源爱好者。mybatis-plus-ext 作者，AutoTable 作者"
+        },
+        {
+          role: "秘书长助理",
+          name: "李楠",
+          photo: "/assets/img/members/linan.webp",
+          desc: "开源社成员、dromara开源社区秘书长助理，开源社区打杂"
+        },
+      ]
+    },
+    {
+      header: "技术委员会成员",
+      members: [
         {
           role: "TOC成员",
           name: "陈斌",
@@ -94,12 +117,6 @@ export const zhMembersOption: MembersOption = {
     {
       header: "委员会成员",
       members: [
-        {
-          role: "秘书长助理",
-          name: "李楠",
-          photo: "/assets/img/members/linan.webp",
-          desc: "开源社成员、dromara开源社区秘书长助理，开源社区打杂"
-        },
         {
           role: "委员会成员",
           name: "刘陈阳",
@@ -213,12 +230,6 @@ export const zhMembersOption: MembersOption = {
           name: "暮光：城中城",
           photo: "/assets/img/members/zyplayer.webp",
           desc: "zyplayer-doc 作者"
-        },
-        {
-          role: "委员会成员",
-          name: "唐振超",
-          photo: "/assets/img/members/tangzhenchao.webp",
-          desc: "坐标泉城济南，开源爱好者。mybatis-plus-ext 作者，AutoTable 作者"
         },
         {
           role: "委员会成员",
