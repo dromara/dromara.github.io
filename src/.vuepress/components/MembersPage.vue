@@ -28,7 +28,7 @@ onMounted(() => {
     <div id="wwadsadsorg" style="max-width: 500px"></div>
     <main class="member-main">
       <div class="member-banner">
-        <h2 class="title">{{ memberLocale.TOC_MEMBER_TITLE }}</h2>
+        <h2 class="title">{{ memberLocale.FUNDER_TITLE }}</h2>
         <div class="founder">
           <img class="photo" src="/assets/img/members/xiaoyu.webp" alt="" />
           <div class="info">
