@@ -2,14 +2,18 @@ import { getDirname, path } from "@vuepress/utils";
 import { defineUserConfig } from "vuepress";
 import { hopeTheme } from "vuepress-theme-hope";
 import { searchProPlugin } from "vuepress-plugin-search-pro";
+import { viteBundler } from '@vuepress/bundler-vite'
 
 import { enNavbar, zhNavbar } from "./navbar/index.js";
 import { getAllFrontmatter } from "./getAllFrontmatter.js";
+
+import { redirectPlugin } from "@vuepress/plugin-redirect";
 
 // eslint-disable-next-line @typescript-eslint/naming-convention
 const __dirname = getDirname(import.meta.url);
 
 export default defineUserConfig({
+  bundler: viteBundler(),
   base: "/",
   head: [
     [
@@ -95,6 +99,10 @@ export default defineUserConfig({
     searchProPlugin({
       // index all content
       indexContent: true
+    }),
+    redirectPlugin({
+      locales: true,
+      autoLocale: true
     }),
     getAllFrontmatter
   ],

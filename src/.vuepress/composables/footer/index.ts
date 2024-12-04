@@ -1,4 +1,4 @@
-import { useLocaleConfig } from "vuepress-shared/client";
+import { useLocaleConfig } from '@vuepress/helper';
 
 import { enFooterOption } from "./en.js";
 import { zhFooterOption } from "./zh.js";

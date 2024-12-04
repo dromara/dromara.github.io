@@ -1,4 +1,4 @@
-import { useLocaleConfig } from "vuepress-shared/client";
+import { useLocaleConfig } from '@vuepress/helper';
 
 import { enHomeOption } from "./en.js";
 import { zhHomeOption } from "./zh.js";
