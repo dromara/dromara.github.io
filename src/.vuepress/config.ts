@@ -115,5 +115,6 @@ export default defineUserConfig({
     "@SiteSection": path.resolve(__dirname, "./components/SiteSection.vue")
   },
 
+
   shouldPrefetch: false
 });
