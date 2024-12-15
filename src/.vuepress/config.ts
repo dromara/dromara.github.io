@@ -1,7 +1,8 @@
-import { getDirname, path } from "@vuepress/utils";
+import { getDirname, path } from "vuepress/utils";
 import { defineUserConfig } from "vuepress";
 import { hopeTheme } from "vuepress-theme-hope";
 import { searchProPlugin } from "vuepress-plugin-search-pro";
+import { viteBundler } from "@vuepress/bundler-vite";
 
 import { enNavbar, zhNavbar } from "./navbar/index.js";
 import { getAllFrontmatter } from "./getAllFrontmatter.js";
@@ -10,6 +11,10 @@ import { getAllFrontmatter } from "./getAllFrontmatter.js";
 const __dirname = getDirname(import.meta.url);
 
 export default defineUserConfig({
+  bundler: viteBundler({
+    viteOptions: {},
+    vuePluginOptions: {}
+  }),
   base: "/",
   head: [
     [
@@ -114,7 +119,6 @@ export default defineUserConfig({
     "@HonorComp": path.resolve(__dirname, "./components/HonorComp.vue"),
     "@SiteSection": path.resolve(__dirname, "./components/SiteSection.vue")
   },
-
 
   shouldPrefetch: false
 });

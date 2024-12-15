@@ -8,7 +8,7 @@ lastUpdated: false
 
 <script setup lang="ts">
 import SiteSection from "@SiteSection";
-import {  usePageFrontmatter } from "@vuepress/client";
+import {  usePageFrontmatter } from "vuepress/client";
 import type { ThemeHopePageFrontmatter } from "vuepress-theme-hope";
 import { ref, onBeforeMount } from "vue";
 
