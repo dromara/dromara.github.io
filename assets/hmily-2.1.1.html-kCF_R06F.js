@@ -1,0 +1,139 @@
+import{_ as n}from"./hmily-framework-Dvtg7o25.js";import{_ as a,c as i,a as e,o as l}from"./app-BmgeuuSW.js";const p={};function c(r,s){return l(),i("div",null,s[0]||(s[0]=[e('<p>感谢朋友们一路以来的支持，让大家久等了。在这一个版本中，我们团队重构了整个项目，合理的划分功能模块，新增配置中心，调整底层存储结构，解决疑难 bug，以及其他新功能的支持，也吸收了更多开源社区的优秀人才的加入。</p><h2 id="架构全景图" tabindex="-1"><a class="header-anchor" href="#架构全景图"><span>架构全景图</span></a></h2><p><img src="'+n+`" alt="架构全景图"></p><h3 id="功能" tabindex="-1"><a class="header-anchor" href="#功能"><span>功能</span></a></h3><ul><li>高可靠性 ：支持分布式场景下，事务异常回滚，超时异常恢复，防止事务悬挂。</li><li>易用性 ：提供零侵入性式的 Spring-Boot, Spring-Namespace 快速与业务系统集成。</li><li>高性能 ：去中心化设计，与业务系统完全融合，天然支持集群部署。</li><li>可观测性 ：Metrics 多项指标性能监控，以及 admin 管理后台 UI 展示。</li><li>多种 RPC ：支持 Dubbo, SpringCloud,Montan ,sofa-rpc 等知名 RPC 框架。</li><li>日志存储 ：支持 mysql, oracle, mongodb, redis, zookeeper 等方式。</li><li>复杂场景 ：支持 RPC 嵌套调用事务。</li></ul><h3 id="重构部分" tabindex="-1"><a class="header-anchor" href="#重构部分"><span>重构部分</span></a></h3><ul><li><p><strong>在模块划分上：</strong></p><ul><li>抽离出开箱即用的 SPI 自定义模块。</li><li>定义事务日志多种存储方式的 SPI 模块。</li><li>定义事务日志多种序列化方式的 SPI 模块。</li><li>新增配置中心，支持各种主流的配置中心（nacos，apollo,zookeeper 等），并支持配置的动态刷新。</li><li>新增 metrics 模块，用来监控运行时候的各种信息。</li><li>抽离出核心的事务执行模块。</li><li>抽离出多种 RPC 支持模块。</li><li>抽离出 spring 与 spring boot 支持模块。</li></ul></li><li><p><strong>在依赖包版本上：</strong></p><ul><li>guava 升级到 29.0</li><li>curator 升级到 5.1.0</li></ul></li><li><p><strong>在代码质量上：</strong></p><ul><li>严格的 check-style 代码检查，秉承优雅，简单易懂原则（talk is cheap ,show you code）。</li></ul></li><li><p><strong>在开放性上：</strong></p><ul><li>社区奉行简单，快乐，和谐基本原则</li></ul></li><li><p><strong>在目标上：</strong></p><ul><li>打造一款高可用，高性能，简单易用金融级的分布式事务解决方案。</li></ul></li></ul><h3 id="解决疑难-bug" tabindex="-1"><a class="header-anchor" href="#解决疑难-bug"><span>解决疑难 bug：</span></a></h3><ul><li><code>dubbo</code>框架不支持注解方式的使用（spring-boot-starter-dubbo)。</li><li><code>motan</code>框架不支持注解方式的使用。</li><li><code>spring-cloud</code>用户如果使用 feign 与 hystrix 整合 hmily 时候的线程切换问题。</li><li>极端情况下事务日志序列化异常。</li><li>try 阶段超时异常，导致事务悬挂 bug。</li><li>confirm 与 cancel 阶段异常时候，事务未能正确恢复 bug。</li><li>在事务日志存储上，支持同步与异步 2 种模式，供用户选择。</li></ul><h3 id="用户使用与升级指南" tabindex="-1"><a class="header-anchor" href="#用户使用与升级指南"><span>用户使用与升级指南</span></a></h3><p>对于 hmily 用户来说，只需三个步骤，即可解决 RPC 服务调用之间的柔性事务</p><ul><li>引用 hmily 对各种 rpc 支持的 jar 包。</li><li>添加 hmily 配置。</li><li>在 rpc 接口方法上添加 @Hmily 注解。</li></ul><p><strong>依赖的变更</strong></p><p>用户依赖的方式没有更改，只需要将版本升级到 2.1.0。下面举 dubbo 微服务列子</p><p><strong>dubbo rpc 微服务</strong></p><ul><li>dubbo 接口服务依赖</li></ul><div class="language- line-numbers-mode" data-highlighter="shiki" data-ext="" data-title="" style="--shiki-light:#383A42;--shiki-dark:#abb2bf;--shiki-light-bg:#FAFAFA;--shiki-dark-bg:#282c34;"><pre class="shiki shiki-themes one-light one-dark-pro vp-code"><code><span class="line"><span>     &lt;dependency&gt;</span></span>
+<span class="line"><span>          &lt;groupId&gt;org.dromara&lt;/groupId&gt;</span></span>
+<span class="line"><span>          &lt;artifactId&gt;hmily-annotation&lt;/artifactId&gt;</span></span>
+<span class="line"><span>          &lt;version&gt;2.1.0&lt;/version&gt;</span></span>
+<span class="line"><span>      &lt;/dependency&gt;</span></span></code></pre><div class="line-numbers" aria-hidden="true" style="counter-reset:line-number 0;"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><ul><li>dubbo 服务提供者依赖（&lt;2.7）</li></ul><div class="language- line-numbers-mode" data-highlighter="shiki" data-ext="" data-title="" style="--shiki-light:#383A42;--shiki-dark:#abb2bf;--shiki-light-bg:#FAFAFA;--shiki-dark-bg:#282c34;"><pre class="shiki shiki-themes one-light one-dark-pro vp-code"><code><span class="line"><span>       &lt;dependency&gt;</span></span>
+<span class="line"><span>            &lt;groupId&gt;org.dromara&lt;/groupId&gt;</span></span>
+<span class="line"><span>            &lt;artifactId&gt;hmily-dubbo&lt;/artifactId&gt;</span></span>
+<span class="line"><span>           &lt;version&gt;2.1.0&lt;/version&gt;</span></span>
+<span class="line"><span>        &lt;/dependency&gt;</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    or</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>      &lt;dependency&gt;</span></span>
+<span class="line"><span>            &lt;groupId&gt;org.dromara&lt;/groupId&gt;</span></span>
+<span class="line"><span>            &lt;artifactId&gt;hmily-spring-boot-starter-dubbo&lt;/artifactId&gt;</span></span>
+<span class="line"><span>           &lt;version&gt;2.1.0&lt;/version&gt;</span></span>
+<span class="line"><span>        &lt;/dependency&gt;</span></span></code></pre><div class="line-numbers" aria-hidden="true" style="counter-reset:line-number 0;"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p><strong>hmily 配置的变更</strong></p><p>在新版 2.1.0 中，新增了 hmily-config 模块，支持本地与注册中心模式。用户首先需要在项目<code>resouce</code>文件下新建一个名称为<code>hmily.yml</code>的文件。默认路径为项目的 <code>resource</code>目录下，也可以使用 <code>-Dhmily.conf</code> 指定，也可以把配置放在 <code>user.dir</code> 目录下。优先级别 <code>-Dhmily.conf</code> &gt; <code>user.dir</code> &gt;<code>resource</code>。文件格式如下（一部分，以下是配置成本地模式):</p><div class="language- line-numbers-mode" data-highlighter="shiki" data-ext="" data-title="" style="--shiki-light:#383A42;--shiki-dark:#abb2bf;--shiki-light-bg:#FAFAFA;--shiki-dark-bg:#282c34;"><pre class="shiki shiki-themes one-light one-dark-pro vp-code"><code><span class="line"><span>  server:</span></span>
+<span class="line"><span>    configMode: local</span></span>
+<span class="line"><span>    appName: account-dubbo</span></span>
+<span class="line"><span>  #  如果server.configMode eq local 的时候才会读取到这里的配置信息.</span></span>
+<span class="line"><span>  config:</span></span>
+<span class="line"><span>    appName: account-dubbo</span></span>
+<span class="line"><span>    serializer: kryo</span></span>
+<span class="line"><span>    contextTransmittalMode: threadLocal</span></span>
+<span class="line"><span>    scheduledThreadMax: 16</span></span>
+<span class="line"><span>    scheduledRecoveryDelay: 60</span></span>
+<span class="line"><span>    scheduledCleanDelay: 60</span></span>
+<span class="line"><span>    scheduledPhyDeletedDelay: 600</span></span>
+<span class="line"><span>    scheduledInitDelay: 30</span></span>
+<span class="line"><span>    recoverDelayTime: 60</span></span>
+<span class="line"><span>    cleanDelayTime: 180</span></span>
+<span class="line"><span>    limit: 200</span></span>
+<span class="line"><span>    retryMax: 10</span></span>
+<span class="line"><span>    bufferSize: 8192</span></span>
+<span class="line"><span>    consumerThreads: 16</span></span>
+<span class="line"><span>    asyncRepository: true</span></span>
+<span class="line"><span>    autoSql: true</span></span>
+<span class="line"><span>    phyDeleted: true</span></span>
+<span class="line"><span>    storeDays: 3</span></span>
+<span class="line"><span>    repository: mysql</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>repository:</span></span>
+<span class="line"><span>  database:</span></span>
+<span class="line"><span>    driverClassName: com.mysql.jdbc.Driver</span></span>
+<span class="line"><span>    url : jdbc:mysql://127.0.0.1:3306/hmily?useUnicode=true&amp;characterEncoding=utf8</span></span>
+<span class="line"><span>    username: root</span></span>
+<span class="line"><span>    password:</span></span>
+<span class="line"><span>    maxActive: 20</span></span>
+<span class="line"><span>    minIdle: 10</span></span>
+<span class="line"><span>    connectionTimeout: 30000</span></span>
+<span class="line"><span>    idleTimeout: 600000</span></span>
+<span class="line"><span>    maxLifetime: 1800000</span></span></code></pre><div class="line-numbers" aria-hidden="true" style="counter-reset:line-number 0;"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p><strong>如果你想将配置文件放在<code>Nacos</code>配置中心：</strong></p><ul><li>第一步：</li></ul><div class="language- line-numbers-mode" data-highlighter="shiki" data-ext="" data-title="" style="--shiki-light:#383A42;--shiki-dark:#abb2bf;--shiki-light-bg:#FAFAFA;--shiki-dark-bg:#282c34;"><pre class="shiki shiki-themes one-light one-dark-pro vp-code"><code><span class="line"><span>hmily:</span></span>
+<span class="line"><span>  server:</span></span>
+<span class="line"><span>    configMode: nacos</span></span>
+<span class="line"><span>    appName: xxxxx</span></span>
+<span class="line"><span>  #  如果server.configMode eq local 的时候才会读取到这里的配置信息.</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>remote:</span></span>
+<span class="line"><span>  nacos:</span></span>
+<span class="line"><span>    server: 192.168.3.22:8848</span></span>
+<span class="line"><span>    dataId: hmily.properties</span></span>
+<span class="line"><span>    group: DEFAULT_GROUP</span></span>
+<span class="line"><span>    timeoutMs: 6000</span></span>
+<span class="line"><span>    fileExtension: yml</span></span>
+<span class="line"><span>    passive: true</span></span></code></pre><div class="line-numbers" aria-hidden="true" style="counter-reset:line-number 0;"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><ul><li>第二步：将 hmily 的配置，放在 nacos 配置中心上</li></ul><p><strong>如果你想将配置文件放在<code>Apollo</code>配置中心：</strong></p><ul><li>第一步:</li></ul><div class="language- line-numbers-mode" data-highlighter="shiki" data-ext="" data-title="" style="--shiki-light:#383A42;--shiki-dark:#abb2bf;--shiki-light-bg:#FAFAFA;--shiki-dark-bg:#282c34;"><pre class="shiki shiki-themes one-light one-dark-pro vp-code"><code><span class="line"><span>hmily:</span></span>
+<span class="line"><span>  server:</span></span>
+<span class="line"><span>    configMode: apollo</span></span>
+<span class="line"><span>    appName: xxxx</span></span>
+<span class="line"><span>  #  如果server.configMode eq local 的时候才会读取到这里的配置信息.</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>remote:</span></span>
+<span class="line"><span>  apollo:</span></span>
+<span class="line"><span>    appId: hmily-xxxxx</span></span>
+<span class="line"><span>    configService: http://192.168.3.22:8080</span></span>
+<span class="line"><span>    namespace: byin_hmily</span></span>
+<span class="line"><span>    secret:</span></span>
+<span class="line"><span>    fileExtension: yml</span></span>
+<span class="line"><span>    passive: true</span></span>
+<span class="line"><span>    env: dev</span></span>
+<span class="line"><span>    meta: http://192.168.3.22:8080</span></span></code></pre><div class="line-numbers" aria-hidden="true" style="counter-reset:line-number 0;"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><ul><li>第二步：将 hmily 的配置，放在 apollo 配置中心上</li></ul><p>还有其他的配置方式以及配置内容的详解，请参考：https://dromara.org/zh-cn/docs/hmily/config.html</p><p><strong>注解方式的使用的变更</strong></p><p>在之前的版本中，rpc 接口与实现都只需要添加 <code>@Hmily</code> 注解, 现在需要进行变更，在 rpc 接口方法上是添加 <code>@Hmily</code>,用来标识这是一个 hmily 分布式事务的接口方法， 在接口的方法实现上则需要添加 <code>@HmilyTCC</code>，然后指定 <code>confirm</code> 与 <code>cancel</code>方法名称.</p><p><strong>举例（dubbo 中 say 方法需要参与分布式事务):</strong></p><div class="language- line-numbers-mode" data-highlighter="shiki" data-ext="" data-title="" style="--shiki-light:#383A42;--shiki-dark:#abb2bf;--shiki-light-bg:#FAFAFA;--shiki-dark-bg:#282c34;"><pre class="shiki shiki-themes one-light one-dark-pro vp-code"><code><span class="line"><span>public interface HelloService {</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    @Hmily</span></span>
+<span class="line"><span>    void say(String hello);</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>public class HelloServiceImpl implements HelloService  {</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    @HmilyTCC(confirmMethod = &quot;sayConfrim&quot;, cancelMethod = &quot;sayCancel&quot;)</span></span>
+<span class="line"><span>    public void say(String hello) {</span></span>
+<span class="line"><span>         System.out.println(&quot;hello world&quot;);</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    public void sayConfrim(String hello) {</span></span>
+<span class="line"><span>         System.out.println(&quot; confirm hello world&quot;);</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    public void sayCancel(String hello) {</span></span>
+<span class="line"><span>         System.out.println(&quot; cancel hello world&quot;);</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span>}</span></span></code></pre><div class="line-numbers" aria-hidden="true" style="counter-reset:line-number 0;"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p><strong>举例(springcloud 中 say 方法需要参与分布式事务):</strong></p><ul><li>spring-cloud 服务调用方 FeignClient 中</li></ul><div class="language- line-numbers-mode" data-highlighter="shiki" data-ext="" data-title="" style="--shiki-light:#383A42;--shiki-dark:#abb2bf;--shiki-light-bg:#FAFAFA;--shiki-dark-bg:#282c34;"><pre class="shiki shiki-themes one-light one-dark-pro vp-code"><code><span class="line"><span>@FeignClient(value = &quot;helle-service&quot;)</span></span>
+<span class="line"><span>public interface HelloService {</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    @Hmily</span></span>
+<span class="line"><span>    @RequestMapping(&quot;/helle-service/sayHello&quot;)</span></span>
+<span class="line"><span>    void say(String hello);</span></span>
+<span class="line"><span>}</span></span></code></pre><div class="line-numbers" aria-hidden="true" style="counter-reset:line-number 0;"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><ul><li>spring-cloud 服务提供方</li></ul><div class="language- line-numbers-mode" data-highlighter="shiki" data-ext="" data-title="" style="--shiki-light:#383A42;--shiki-dark:#abb2bf;--shiki-light-bg:#FAFAFA;--shiki-dark-bg:#282c34;"><pre class="shiki shiki-themes one-light one-dark-pro vp-code"><code><span class="line"><span>@RestController</span></span>
+<span class="line"><span>public class HelloController {</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    private final HelloService helloService ;</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    @Autowired</span></span>
+<span class="line"><span>    public AccountController(HelloService helloService) {</span></span>
+<span class="line"><span>        this.helloService= helloService;</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    @RequestMapping(&quot;/sayHello&quot;)</span></span>
+<span class="line"><span>    public void payment(String hello) {</span></span>
+<span class="line"><span>        return helloService.say(hello);</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span>public interface HelloService {</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    void say(String hello);</span></span>
+<span class="line"><span>}</span></span>
+<span class="line"><span>public class HelloServiceImpl implements HelloService  {</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    @HmilyTCC(confirmMethod = &quot;sayConfrim&quot;, cancelMethod = &quot;sayCancel&quot;)</span></span>
+<span class="line"><span>    public void say(String hello) {</span></span>
+<span class="line"><span>         System.out.println(&quot;hello world&quot;);</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    public void sayConfrim(String hello) {</span></span>
+<span class="line"><span>         System.out.println(&quot; confirm hello world&quot;);</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>    public void sayCancel(String hello) {</span></span>
+<span class="line"><span>         System.out.println(&quot; cancel hello world&quot;);</span></span>
+<span class="line"><span>    }</span></span>
+<span class="line"><span>}</span></span></code></pre><div class="line-numbers" aria-hidden="true" style="counter-reset:line-number 0;"><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div><div class="line-number"></div></div></div><p><strong>事务日志存储结构的更改</strong></p><p>在使用上，用户使用或者升级不用关心，框架会默认初始化好。</p><h2 id="下一个版本" tabindex="-1"><a class="header-anchor" href="#下一个版本"><span>下一个版本</span></a></h2><ul><li>因为调整了架构，在其他模式的支持上将会变得更加容易，在下一个版本，将会发布 TAC 模式（try-auto-cancel）使用此模式，将大大简化框架的使用程度，开发者不需要关心 confirm 以及 cancel 方法的开发，对老系统的改造提供了更好的兼容性，不用担心额外的开发任务，一切就交给 hmily 吧。</li><li>将对 brpc 用户进行支持。</li><li>将对 tars-rpc 用户进行支持。</li></ul><h2 id="社区共建" tabindex="-1"><a class="header-anchor" href="#社区共建"><span>社区共建</span></a></h2><p>我们秉承<code>和谐快乐</code>，<code>代码至上</code> 的原则，如果你有想法，愿意和我们一起成长，一起贡献，快来加入我们吧！</p><ul><li>github：https://github.com/dromara/hmily</li><li>gitee：https://gitee.com/dromara/hmily</li><li>qq 群: 162614487</li></ul>`,47)]))}const o=a(p,[["render",c],["__file","hmily-2.1.1.html.vue"]]),m=JSON.parse('{"path":"/zh/news/hmily-2.1.1.html","title":"时隔一年，dromara团队发布全新架构Hmily分布式事务的2.1.1版本","lang":"zh-CN","frontmatter":{"title":"时隔一年，dromara团队发布全新架构Hmily分布式事务的2.1.1版本","author":"xiaoyu","date":"2020-09-28T00:00:00.000Z","tag":["hmily"],"cover":"/assets/img/architecture/hmily-framework.png","head":[["meta",{"name":"新闻"}],["link",{"rel":"alternate","hreflang":"en-us","href":"https://vuepress-theme-hope-docs-demo.netlify.app/news/hmily-2.1.1.html"}],["meta",{"property":"og:url","content":"https://vuepress-theme-hope-docs-demo.netlify.app/zh/news/hmily-2.1.1.html"}],["meta",{"property":"og:title","content":"时隔一年，dromara团队发布全新架构Hmily分布式事务的2.1.1版本"}],["meta",{"property":"og:description","content":"感谢朋友们一路以来的支持，让大家久等了。在这一个版本中，我们团队重构了整个项目，合理的划分功能模块，新增配置中心，调整底层存储结构，解决疑难 bug，以及其他新功能的支持，也吸收了更多开源社区的优秀人才的加入。 架构全景图 架构全景图 功能 高可靠性 ：支持分布式场景下，事务异常回滚，超时异常恢复，防止事务悬挂。 易用性 ：提供零侵入性式的 Sprin..."}],["meta",{"property":"og:type","content":"article"}],["meta",{"property":"og:image","content":"https://vuepress-theme-hope-docs-demo.netlify.app/assets/img/architecture/hmily-framework.png"}],["meta",{"property":"og:locale","content":"zh-CN"}],["meta",{"property":"og:locale:alternate","content":"en-US"}],["meta",{"property":"og:updated_time","content":"2023-09-04T07:29:42.000Z"}],["meta",{"name":"twitter:card","content":"summary_large_image"}],["meta",{"name":"twitter:image:src","content":"https://vuepress-theme-hope-docs-demo.netlify.app/assets/img/architecture/hmily-framework.png"}],["meta",{"name":"twitter:image:alt","content":"时隔一年，dromara团队发布全新架构Hmily分布式事务的2.1.1版本"}],["meta",{"property":"article:author","content":"xiaoyu"}],["meta",{"property":"article:tag","content":"hmily"}],["meta",{"property":"article:published_time","content":"2020-09-28T00:00:00.000Z"}],["meta",{"property":"article:modified_time","content":"2023-09-04T07:29:42.000Z"}],["script",{"type":"application/ld+json"},"{\\"@context\\":\\"https://schema.org\\",\\"@type\\":\\"Article\\",\\"headline\\":\\"时隔一年，dromara团队发布全新架构Hmily分布式事务的2.1.1版本\\",\\"image\\":[\\"https://vuepress-theme-hope-docs-demo.netlify.app/assets/img/architecture/hmily-framework.png\\"],\\"datePublished\\":\\"2020-09-28T00:00:00.000Z\\",\\"dateModified\\":\\"2023-09-04T07:29:42.000Z\\",\\"author\\":[{\\"@type\\":\\"Person\\",\\"name\\":\\"xiaoyu\\"}]}"]],"description":"感谢朋友们一路以来的支持，让大家久等了。在这一个版本中，我们团队重构了整个项目，合理的划分功能模块，新增配置中心，调整底层存储结构，解决疑难 bug，以及其他新功能的支持，也吸收了更多开源社区的优秀人才的加入。 架构全景图 架构全景图 功能 高可靠性 ：支持分布式场景下，事务异常回滚，超时异常恢复，防止事务悬挂。 易用性 ：提供零侵入性式的 Sprin..."},"headers":[{"level":2,"title":"架构全景图","slug":"架构全景图","link":"#架构全景图","children":[{"level":3,"title":"功能","slug":"功能","link":"#功能","children":[]},{"level":3,"title":"重构部分","slug":"重构部分","link":"#重构部分","children":[]},{"level":3,"title":"解决疑难 bug：","slug":"解决疑难-bug","link":"#解决疑难-bug","children":[]},{"level":3,"title":"用户使用与升级指南","slug":"用户使用与升级指南","link":"#用户使用与升级指南","children":[]}]},{"level":2,"title":"下一个版本","slug":"下一个版本","link":"#下一个版本","children":[]},{"level":2,"title":"社区共建","slug":"社区共建","link":"#社区共建","children":[]}],"git":{"createdTime":1611572224000,"updatedTime":1693812582000,"contributors":[{"name":"Cicici-Shi","username":"Cicici-Shi","email":"94002846+Cicici-Shi@users.noreply.github.com","commits":1,"url":"https://github.com/Cicici-Shi"},{"name":"Cici","username":"Cici","email":"1901177100@qq.com","commits":1,"url":"https://github.com/Cici"},{"name":"fengzhenbing","username":"fengzhenbing","email":"fengzhenbing98@126.com","commits":2,"url":"https://github.com/fengzhenbing"},{"name":"dengliming","username":"dengliming","email":"liming.d.pro@gmail.com","commits":2,"url":"https://github.com/dengliming"},{"name":"MingHao Li","username":"MingHao Li","email":"lmhlmhtju@163.com","commits":1,"url":"https://github.com/MingHao Li"},{"name":"nuo-promise","username":"nuo-promise","email":"46160170+nuo-promise@users.noreply.github.com","commits":1,"url":"https://github.com/nuo-promise"}]},"readingTime":{"minutes":5.68,"words":1703},"filePathRelative":"zh/news/hmily-2.1.1.md","localizedDate":"2020年9月28日","autoDesc":true,"excerpt":"<p>感谢朋友们一路以来的支持，让大家久等了。在这一个版本中，我们团队重构了整个项目，合理的划分功能模块，新增配置中心，调整底层存储结构，解决疑难 bug，以及其他新功能的支持，也吸收了更多开源社区的优秀人才的加入。</p>\\n<h2>架构全景图</h2>\\n<p><img src=\\"/assets/img/architecture/hmily-framework.png\\" alt=\\"架构全景图\\"></p>\\n<h3>功能</h3>\\n<ul>\\n<li>高可靠性 ：支持分布式场景下，事务异常回滚，超时异常恢复，防止事务悬挂。</li>\\n<li>易用性 ：提供零侵入性式的 Spring-Boot, Spring-Namespace 快速与业务系统集成。</li>\\n<li>高性能 ：去中心化设计，与业务系统完全融合，天然支持集群部署。</li>\\n<li>可观测性 ：Metrics 多项指标性能监控，以及 admin 管理后台 UI 展示。</li>\\n<li>多种 RPC ：支持 Dubbo, SpringCloud,Montan ,sofa-rpc 等知名 RPC 框架。</li>\\n<li>日志存储 ：支持 mysql, oracle, mongodb, redis, zookeeper 等方式。</li>\\n<li>复杂场景 ：支持 RPC 嵌套调用事务。</li>\\n</ul>"}');export{o as comp,m as data};
