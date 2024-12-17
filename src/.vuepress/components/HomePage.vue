@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { computed, onMounted, reactive, ref } from "vue";
-import { siteData, useRouteLocale } from "@vuepress/client";
+import { useClientData, useRouteLocale } from "vuepress/client";
 import {
   EffectCoverflow,
   Navigation,
@@ -19,6 +19,8 @@ import "swiper/css";
 import "swiper/css/effect-coverflow";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
+
+const { siteData } = useClientData();
 
 const gvpProjects = [
   "hutool",

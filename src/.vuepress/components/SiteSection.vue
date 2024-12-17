@@ -12,14 +12,22 @@
     <h2 class="tag">{{ langMapping === "中文" ? "标签" : "Tag" }}</h2>
     <div class="buttons">
       <div v-for="item in TAGS" :key="item">
-        <button :class="{ selected: currentTag === item, 'tag-button': true }" @click="currentTag = item">
+        <button
+          :class="{ selected: currentTag === item, 'tag-button': true }"
+          @click="currentTag = item"
+        >
           {{ item }}
         </button>
       </div>
     </div>
     <template v-if="filteredSectionDetail.length">
       <div class="cards">
-        <div v-for="obj in filteredSectionDetail" :key="obj.title" class="card" @click="goBlogDetail(obj.url)">
+        <div
+          v-for="obj in filteredSectionDetail"
+          :key="obj.title"
+          class="card"
+          @click="goBlogDetail(obj.url)"
+        >
           <div class="tag-items">
             <div v-for="tag in obj.tag" :key="tag" class="tag-item">
               #{{ tag }}
@@ -59,7 +67,8 @@ import {
   zhNewsOption
 } from "../composables/index.js";
 
-import { siteData } from "@vuepress/client";
+import { useClientData } from "vuepress/client";
+const { siteData } = useClientData();
 
 const allPagesFrontmatter = siteData.value.frontmatter;
 
@@ -69,13 +78,15 @@ let option: ActivityOption = reactive({
   DESC: ""
 });
 
-let webCn: Boolean = false;
+let webCn: boolean = false;
 
 onMounted(() => {
   webCn = document.location.host.includes("dromara.org.cn");
   const orgAds = document.getElementById("wwadsadsorg");
   if (orgAds) {
-    orgAds.innerHTML = webCn ? '<div class="wwads-cn wwads-horizontal" data-id="339" style="max-width:350px"></div>' : '<div class="wwads-cn wwads-horizontal" data-id="127" style="max-width: 500px"></div>';
+    orgAds.innerHTML = webCn
+      ? "<div class=\"wwads-cn wwads-horizontal\" data-id=\"339\" style=\"max-width:350px\"></div>"
+      : "<div class=\"wwads-cn wwads-horizontal\" data-id=\"127\" style=\"max-width: 500px\"></div>";
   }
 });
 
@@ -144,7 +155,6 @@ const TAGS = [
   "EasyAI",
   "TestHub",
   "Skyeye"
-
 ];
 
 const LANG_MAPPING: LangMapping = {

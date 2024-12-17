@@ -15,12 +15,12 @@ const convertToUpperCamelCase = (name: string): string =>
     .replace(/-([a-z])/g, (letter: string) => letter.toUpperCase())
     .replace(/^([a-z])/, (letter: string) => letter.toUpperCase());
 
-let webCn: Boolean = false;
+let webCn: boolean = false;
 onMounted(() => {
   webCn = document.location.host.includes("dromara.org.cn");
   const orgAds = document.getElementById("wwadsadsorg");
   if (orgAds) {
-    orgAds.innerHTML = webCn ? '<div class="wwads-cn wwads-horizontal" data-id="339" style="max-width:350px"></div>' : '<div class="wwads-cn wwads-horizontal" data-id="127" style="max-width: 500px"></div>';
+    orgAds.innerHTML = webCn ? "<div class=\"wwads-cn wwads-horizontal\" data-id=\"339\" style=\"max-width:350px\"></div>" : "<div class=\"wwads-cn wwads-horizontal\" data-id=\"127\" style=\"max-width: 500px\"></div>";
   }
 });
 </script>
