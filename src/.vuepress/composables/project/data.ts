@@ -47,6 +47,7 @@ export const useProjectsData = () => {
         "forest",
         "northstar",
         "dynamic-tp",
+        "fast-request",
         "easyAi",
         "tianai-captcha",
         "zyplayer-doc",
@@ -249,6 +250,23 @@ export const useProjectsData = () => {
   `
         },
         {
+          name: "fast-request",
+          website: "https://api-buddy.cn",
+          description: projectLocale.value.FAST_REQUEST_DESC,
+          sponsor: "kings",
+          date: "2021.12",
+          link: `<a href="https%3A%2F%2Fjoin.slack.com%2Ft%2Frestfulfastrequest%2Fshared_invite%2Fzt-1we57vum8-TALhTHI2uNmPF2bx1NDyWw"><img src="https://img.shields.io/static/v1?label=Slack&amp;message=Restful-Fast-Request&amp;logo=slack&amp;color=38B580" alt="Slack"></a>
+  <a href="https://github.com/dromara/fast-request" target="_blank">
+    <img src="https://img.shields.io/github/stars/dromara/fast-request.svg?style=social" alt="github star"/>
+  </a>
+  <a href="https%3A%2F%2Ftwitter.com%2FFastRequest666"><img src="https://img.shields.io/static/v1?label=Twitter&amp;message=FastRequest666&amp;logo=twitter&amp;color=FC8D34" alt="twitter"></a>
+  <a href="https%3A%2F%2Fplugins.jetbrains.com%2Fplugin%2F16988"><img src="https://img.shields.io/badge/plugin-Restful_Fast_Request-x.svg?logo=IntelliJ%20IDEA" alt="Jetbrains Plugins"></a>
+  <img src="https://img.shields.io/jetbrains/plugin/v/16988?logo=IntelliJ%20IDEA" alt="Version">
+  <img src="https://img.shields.io/jetbrains/plugin/d/16988?color=FE2857" alt="Downloads">
+  <a href="https%3A%2F%2Ffastrequest.slack.com"><img src="https://img.shields.io/badge/Slack-%23Fast--Request-DD1265?logo=Slack" alt="Slack"></a>
+  <a href="https%3A%2F%2Fwww.oscs1024.com%2Fproject%2Fdromara%2Ffast-request%3Fref%3Dbadge_small"><img src="https://www.oscs1024.com/platform/badge/dromara/fast-request.svg?size=small" alt="OSCS Status"></a>`
+        },
+        {
           name: "dynamic-tp",
           website: "https://juejin.cn/column/7053801521502224392",
           description: projectLocale.value.DYNAMIC_TP_DESC,
@@ -398,21 +416,6 @@ export const useProjectsData = () => {
   <a href="https%3A%2F%2Fgithub.com%2Fdromara%2Feasy-es%2Fnetwork%2Fmembers"><img src="https://img.shields.io/github/forks/dromara/easy-es?style=flat-square&amp;logo=GitHub"></a>
   <a href="https%3A%2F%2Fgithub.com%2Fdromara%2Feasy-es%2Fblob%2Fmaster%2FLICENSE"><img src="https://img.shields.io/github/license/dromara/easy-es.svg?style=flat-square"></a>
   `
-        },
-        {
-          name: "fast-request",
-          website: "https://dromara.org/fast-request",
-          description: projectLocale.value.FAST_REQUEST_DESC,
-          sponsor: "kings",
-          date: "2021.12",
-          link: `<a href="https%3A%2F%2Fjoin.slack.com%2Ft%2Frestfulfastrequest%2Fshared_invite%2Fzt-1we57vum8-TALhTHI2uNmPF2bx1NDyWw"><img src="https://img.shields.io/static/v1?label=Slack&amp;message=Restful-Fast-Request&amp;logo=slack&amp;color=38B580" alt="Slack"></a>
-  <a href="https%3A%2F%2Ftwitter.com%2FFastRequest666"><img src="https://img.shields.io/static/v1?label=Twitter&amp;message=FastRequest666&amp;logo=twitter&amp;color=FC8D34" alt="twitter"></a>
-  <a href="https%3A%2F%2Fplugins.jetbrains.com%2Fplugin%2F16988"><img src="https://img.shields.io/badge/plugin-Restful_Fast_Request-x.svg?logo=IntelliJ%20IDEA" alt="Jetbrains Plugins"></a>
-  <img src="https://img.shields.io/jetbrains/plugin/v/16988?logo=IntelliJ%20IDEA" alt="Version">
-  <img src="https://img.shields.io/jetbrains/plugin/d/16988?color=FE2857" alt="Downloads">
-  <img src="https://img.shields.io/github/license/dromara/fast-request?color=087CFA" alt="GitHub">
-  <a href="https%3A%2F%2Ffastrequest.slack.com"><img src="https://img.shields.io/badge/Slack-%23Fast--Request-DD1265?logo=Slack" alt="Slack"></a>
-  <a href="https%3A%2F%2Fwww.oscs1024.com%2Fproject%2Fdromara%2Ffast-request%3Fref%3Dbadge_small"><img src="https://www.oscs1024.com/platform/badge/dromara/fast-request.svg?size=small" alt="OSCS Status"></a>`
         },
         {
           name: "redisfront",

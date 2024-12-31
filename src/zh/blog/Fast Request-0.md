@@ -5,7 +5,7 @@ date: 2024-05-15
 cover: /assets/img/blog/Fast Request-0-1.webp
 head:
   - - meta
-    - name: 博客
+    - name: 新闻ç
 ---
 
 **Fast Request** 是一个类似于 Postman 的 IDEA 插件。它是一个强大的 Restful API 工具包插件，可以根据已有的方法帮助您快速、自动生成 URL 和 Params。
