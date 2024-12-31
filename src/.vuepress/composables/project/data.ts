@@ -253,7 +253,7 @@ export const useProjectsData = () => {
           name: "fast-request",
           website: "https://api-buddy.cn",
           description: projectLocale.value.FAST_REQUEST_DESC,
-          sponsor: "kings",
+          sponsor: "Kings",
           date: "2021.12",
           link: `<a href="https%3A%2F%2Fjoin.slack.com%2Ft%2Frestfulfastrequest%2Fshared_invite%2Fzt-1we57vum8-TALhTHI2uNmPF2bx1NDyWw"><img src="https://img.shields.io/static/v1?label=Slack&amp;message=Restful-Fast-Request&amp;logo=slack&amp;color=38B580" alt="Slack"></a>
   <a href="https://github.com/dromara/fast-request" target="_blank">
