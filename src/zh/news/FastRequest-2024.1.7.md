@@ -3,6 +3,8 @@ title: 函数支持，Fast Request 2024.1.7 发布
 author: Fast Request
 date: 2024-09-24
 cover: https://api-buddy.cn/img/rfr.svg
+tag:
+  - fastRequest
 head:
   - - meta
     - name: 新闻

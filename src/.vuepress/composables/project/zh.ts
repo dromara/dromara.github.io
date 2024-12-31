@@ -27,7 +27,7 @@ export const zhProjectsOption: ProjectsOption = {
   ELECTRON_EGG_DESC: "一个入门简单、跨平台、企业级桌面软件开发框架",
   NORTHSTAR_DESC: "量化交易平台",
   EASY_TRANS_DESC: "一个注解搞定数据翻译,减少30%SQL代码量",
-  FAST_REQUEST_DESC: "基于jetbrains intellij idea的postman插件",
+  FAST_REQUEST_DESC: "为简化 API 调试而生",
   REDISFRONT_DESC: "一款开源跨平台Redis 桌面客户端工具",
   X_EASYPDF_DESC: "一个用搭积木的方式构建pdf的框架（基于pdfbox）",
   GOBRS_ASYNC_DESC:

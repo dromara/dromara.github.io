@@ -64,8 +64,8 @@ export const zhHomeOption: HomeOption = {
     },
     {
       name: "fast-request",
-      description: "IDEA版postman",
-      url: "https://dromara.org/fast-request"
+      description: "IDEA版postman,为简化 API 调试而生",
+      url: "https://api-buddy.cn"
     },
     {
       name: "carbon",
