@@ -30,8 +30,7 @@ export const enProjectsOption: ProjectsOption = {
     "A simple, cross-platform, enterprise-level desktop software development framework.",
   NORTHSTAR_DESC: "Quantitative Trading Platform",
   EASY_TRANS_DESC: "Data translation with an annotation.Write 30% less code",
-  FAST_REQUEST_DESC:
-    "A plugin in jetbrain intellij idea that looks like Postman.",
+  FAST_REQUEST_DESC: "Born to simplify debugging APIs",
   REDISFRONT_DESC: "An open-source cross-platform Redis GUI.",
   X_EASYPDF_DESC:
     "A framework for constructing PDFs in a building-block manner (based on PDFBox).",

@@ -65,7 +65,7 @@ export const enHomeOption: HomeOption = {
     {
       name: "fast-request",
       description: "IDEA's postman.",
-      url: "https://dromara.org/fast-request"
+      url: "https://api-buddy.cn"
     },
     {
       name: "carbon",
