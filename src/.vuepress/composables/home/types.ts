@@ -24,6 +24,7 @@ interface CommunityItem {
 export interface HomeOption {
   QUICK_START: string
   DESCRIPTION: string
+  INCUBATOR: string
   FEATURES: Feature[]
   STARS_OVERALL: string
   DATA_SOURCE: string
