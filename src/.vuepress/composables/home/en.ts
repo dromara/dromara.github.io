@@ -3,6 +3,7 @@ import { type HomeOption } from "./types.js";
 export const enHomeOption: HomeOption = {
   QUICK_START: "Quick Start",
   DESCRIPTION: "A non-profit organization where open-source enthusiasts gather",
+  INCUBATOR: "Incubator",
   FEATURES: [
     {
       name: "open",

@@ -192,11 +192,17 @@ function jumpTo (url: string): void {
               <RouterLink to="./projects/" class="banner-action primary">{{
                 homeLocale.QUICK_START
               }}</RouterLink>
-              <a href="https://gitee.com/dromara" class="banner-action"
-                >Gitee</a
+              <a href="https://incubator.dromara.org/" class="banner-action"
+              >{{ homeLocale.INCUBATOR }}</a
               >
               <a href="https://github.com/dromara" class="banner-action"
                 >GitHub</a
+              >
+              <a href="https://gitee.com/dromara" class="banner-action"
+              >Gitee</a
+              >
+              <a href="https://gitcode.com/dromara" class="banner-action"
+              >GitCode</a
               >
             </p>
           </div>
