@@ -1,0 +1,1 @@
+const s="/assets/img/news/Mayfly-Go-1.10.0-0.jpg",a="/assets/img/news/Mayfly-Go-1.10.0-1.png",o="/assets/img/news/Mayfly-Go-1.10.0-2.png",t="/assets/img/news/Mayfly-Go-1.10.0-3.png",n="/assets/img/news/Mayfly-Go-1.10.0-4.png";export{s as _,a,o as b,t as c,n as d};
